@@ -11,7 +11,13 @@ export function Work({ index }: { index?: string }) {
   if (initiatives.length === 0) return null;
 
   return (
-    <Section index={index} indexLabel="Work" aria-labelledby="work-heading">
+    <Section
+      index={index}
+      indexLabel="Work"
+      accent="blue"
+      separator="editorial"
+      aria-labelledby="work-heading"
+    >
       <Container>
         <SectionHeading
           id="work-heading"
@@ -31,7 +37,7 @@ export function Work({ index }: { index?: string }) {
                   <div className="lg:col-span-3">
                     <span
                       aria-hidden="true"
-                      className="font-display text-sm text-accent-warm"
+                      className="font-display text-sm text-highlight transition-colors"
                     >
                       {String(i + 1).padStart(2, "0")}
                     </span>

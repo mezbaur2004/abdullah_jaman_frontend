@@ -4,6 +4,7 @@ import { Container } from "./Container";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { SectionSeparator } from "@/components/ui/SectionSeparator";
 import { cn } from "@/lib/cn";
+import type { Accent } from "@/lib/accent";
 
 type Tone = "base" | "soft" | "raised" | "accent" | "inverse";
 
@@ -21,6 +22,14 @@ type SectionProps = {
    * happens to change.
    */
   divider?: boolean;
+  /**
+   * The section's accent, carried by its separator and its index marker.
+   * Passed in by the page rather than chosen here: rhythm is a property of the
+   * sequence, and a section cannot see the sequence it is in.
+   */
+  accent?: Accent;
+  /** Which separator the boundary above this section uses. */
+  separator?: "line" | "editorial" | "minimal";
   /** Two-digit marker shown above the heading, e.g. "03". */
   index?: string;
   /** Rendered beside the index, naming the section in the page's sequence. */
@@ -73,6 +82,8 @@ export function Section({
   tone = "base",
   spacing = "default",
   divider = true,
+  accent = "blue",
+  separator = "line",
   index,
   indexLabel,
   ...aria
@@ -83,12 +94,20 @@ export function Section({
   return (
     <section id={id} className={cn(tones[tone], className)} {...aria}>
       {divider ? (
-        <SectionSeparator tone={inverse ? "inverse" : "base"} />
+        <SectionSeparator
+          variant={separator}
+          accent={accent}
+          tone={inverse ? "inverse" : "base"}
+        />
       ) : null}
 
       {index ? (
         <Container className={rhythm.marker}>
-          <Eyebrow tone={inverse ? "inverse" : "base"} index={index}>
+          <Eyebrow
+            tone={inverse ? "inverse" : "base"}
+            accent={accent}
+            index={index}
+          >
             {indexLabel}
           </Eyebrow>
         </Container>

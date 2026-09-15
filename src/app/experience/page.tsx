@@ -50,6 +50,8 @@ export default function ExperiencePage() {
                     as="article"
                     padding="lg"
                     hover={role.href ? "lift" : "quiet"}
+                    accent="blue"
+                    accentEdge="left"
                   >
                     {/* One column throughout: the meta row is a footer under a
                         rule rather than a side column, so it cannot drift out
@@ -115,7 +117,9 @@ export default function ExperiencePage() {
                           <dt className="text-eyebrow font-medium uppercase text-content-subtle">
                             Location
                           </dt>
-                          <dd className="mt-1.5 text-content">{role.location}</dd>
+                          <dd className="mt-1.5 text-content transition-colors group-hover/card:text-accent">
+                            {role.location}
+                          </dd>
                         </div>
                       ) : null}
                       {role.period ? (
@@ -123,7 +127,12 @@ export default function ExperiencePage() {
                           <dt className="text-eyebrow font-medium uppercase text-content-subtle">
                             Period
                           </dt>
-                          <dd className="mt-1.5 text-content">{role.period}</dd>
+                          {/* The dated line is what a reader scans an
+                              experience list for, so it is what takes the
+                              accent when the card is under the cursor. */}
+                          <dd className="mt-1.5 text-content transition-colors group-hover/card:text-accent">
+                            {role.period}
+                          </dd>
                         </div>
                       ) : null}
                     </dl>
@@ -142,11 +151,19 @@ export default function ExperiencePage() {
       </Section>
 
       {initiatives.length > 0 ? (
-        <Section tone="soft" index="02" indexLabel="Initiatives" aria-labelledby="initiatives-heading">
+        <Section
+          tone="soft"
+          index="02"
+          indexLabel="Initiatives"
+          accent="red"
+          separator="editorial"
+          aria-labelledby="initiatives-heading"
+        >
           <Container>
             <SectionHeading
               id="initiatives-heading"
               title="Programmes and projects."
+              accent="red"
             />
 
             <ul className="mt-14 grid gap-px border-t border-line lg:mt-16 lg:grid-cols-2">

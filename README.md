@@ -22,7 +22,7 @@ static site. No database, no authentication, no CMS and no admin panel in v1.
 | Styling | Tailwind CSS v4 (CSS-first `@theme` config) |
 | Animation | Framer Motion (`motion`), in one component only |
 | Theming | Light and dark, system default, no dependency |
-| Palette | Forest primary, brass secondary, on warm paper / green-black |
+| Palette | Navy-led blue, with yellow and red as rationed accents |
 | Icons | `lucide-react` |
 | Images | `next/image` |
 
@@ -103,8 +103,8 @@ reason the content layer exists.
 `src/app/globals.css` holds three layers, and components only ever touch the
 third:
 
-1. **Palette** — raw values (`--paper*`, `--night-*`, `--forest-*`, `--brass-*`,
-   `--ink-*`). Referenced by nothing outside this file.
+1. **Palette** — raw values (`--paper*`, `--night-*`, `--blue-*`, `--yellow-*`,
+   `--red-*`, `--slate-*`). Referenced by nothing outside this file.
 2. **Semantic tokens** — `--surface`, `--content`, `--accent`, `--line`,
    `--action` and friends, defined once per theme.
 3. **Tailwind theme** — `@theme inline` maps those to utilities, so a component
@@ -117,27 +117,36 @@ re-resolve when the theme flips.
 
 ### Colour
 
-Two hues carry the brand, and they have separate jobs.
+Blue is the identity, and it is not a co-equal of the other two. Deep navy,
+institutional blue and bright blue fill the buttons, the dark bands, the
+headings, every interactive accent and most of the rules. **Yellow and red
+exist to give the page a pulse, not a palette** — the discipline that keeps
+this from reading as a primary-colour school poster is that neither is ever
+structural. No heading, no body copy, no button and no surface is either of
+them.
 
-**Forest** is the primary. It fills the buttons, the dark contact band and
-footer, the hero plate, the tinted section band, the icon frames and every
-interactive accent — so a reader can tell what is clickable by colour alone.
-**Brass** is the secondary, and is rationed to one standing job: enumeration.
-Section numerals and years are brass; nothing else is. The two never compete
-for the same role, which is what keeps a two-colour page from looking busy.
+**Each accent is declared twice, and the distinction is load-bearing.** The
+`-solid` value is the real, saturated colour, used only for blocks and rules a
+few pixels across, where contrast rules do not apply because nothing has to be
+read off it. The plain value is the version dark enough to set type in —
+`#F4C430` on white is a 1.8:1 ratio and illegible, so text never uses it.
 
-The neutrals are mixed toward forest rather than left cold, so a grey rule
-beside a forest heading still reads as part of one family. The same applies to
-the shadows, which carry a little of the hue instead of neutral black — that is
-what stops a raised white card from looking grey against warm paper.
+`src/lib/accent.ts` holds the one table mapping `blue | yellow | red` to
+classes, and every component that takes an `accent` reads from it. None of them
+names a colour itself, so a section, its separator, its eyebrow and its cards
+cannot end up disagreeing.
 
-Light runs warm paper over deep forest; dark runs green-black over light teal.
-Both are checked with axe at 1440px and 390px; `--surface-accent` is the
-tightest ratio on the page and still clears AA.
+**Rhythm is a property of the sequence**, so the accent is passed down by the
+page rather than chosen by the component — a section cannot see the sequence it
+is in. The homepage runs blue, yellow, blue, red, yellow. Within a section,
+`cardAccent()` alternates a group's cards with blue rather than cycling all
+three: a grid where every card is a different colour has no accent, only
+stripes.
 
-- **Type** — Fraunces (display serif) and Inter (sans), both self-hosted through
-  `next/font/google`, so there are no external font requests at runtime. Display
-  sizes are fluid `clamp()` values, set as `text-display-*`.
+The neutrals are slate mixed toward blue so no grey reads cold beside the navy,
+and the shadows carry the hue rather than neutral black — that is what stops a
+raised white card from looking grey against a blue-white ground.
+
 ### Motion
 
 One system, defined once under *Motion* in `globals.css`, and nothing on the
@@ -207,6 +216,12 @@ label cannot drift apart in size, tracking, colour or rule length.
 ### Light and dark
 
 Three states: **system** (the default), light, and dark. No dependency.
+
+Dark is a designed navy system rather than an inversion: navy grounds, cards a
+lighter navy, blue-grey borders, and blue that stays legible without being
+turned up into neon. Yellow keeps its saturated value there — it reads
+beautifully on navy — while red lightens, because the light-mode red is too
+dark to hold against a dark ground.
 
 `ThemeSelector` shows all three at once and puts each one click away. It is
 built as a radio group rather than three buttons, because that is what it is —

@@ -13,7 +13,13 @@ export function Gallery({ index }: { index?: string }) {
   if (gallery.length === 0) return null;
 
   return (
-    <Section index={index} indexLabel="Gallery" aria-labelledby="gallery-heading">
+    <Section
+      index={index}
+      indexLabel="Gallery"
+      accent="blue"
+      separator="minimal"
+      aria-labelledby="gallery-heading"
+    >
       <Container>
         <SectionHeading
           id="gallery-heading"

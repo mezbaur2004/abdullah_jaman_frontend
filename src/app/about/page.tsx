@@ -9,6 +9,7 @@ import { Card } from "@/components/ui/Card";
 import { Figure } from "@/components/ui/Figure";
 import { IconChip } from "@/components/ui/IconChip";
 import { ListRow } from "@/components/ui/ListRow";
+import { cardAccent } from "@/lib/accent";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import {
@@ -92,12 +93,19 @@ export default function AboutPage() {
         </Container>
       </Section>
 
-      <Section tone="accent" index="02" indexLabel="Institutions" aria-labelledby="about-roles-heading">
+      <Section
+        tone="accent"
+        index="02"
+        indexLabel="Institutions"
+        accent="yellow"
+        aria-labelledby="about-roles-heading"
+      >
         <Container>
           <SectionHeading
             id="about-roles-heading"
             title="Institutions."
             lede="The institutions he currently leads, in Dhaka, Bangladesh."
+            accent="yellow"
           />
 
           <ul className="mt-14 grid gap-5 lg:mt-16 lg:grid-cols-2 lg:gap-6">
@@ -108,6 +116,7 @@ export default function AboutPage() {
                     as="article"
                     padding="lg"
                     hover={organization.href ? "lift" : "quiet"}
+                    accent={cardAccent("yellow", i)}
                     className="flex h-full flex-col"
                   >
                     <div className="flex items-start justify-between gap-5">
@@ -165,7 +174,13 @@ export default function AboutPage() {
       </Section>
 
       {education.length > 0 ? (
-        <Section index="03" indexLabel="Education" aria-labelledby="about-education-heading">
+        <Section
+          index="03"
+          indexLabel="Education"
+          accent="blue"
+          separator="minimal"
+          aria-labelledby="about-education-heading"
+        >
           <Container>
             <SectionHeading
               id="about-education-heading"

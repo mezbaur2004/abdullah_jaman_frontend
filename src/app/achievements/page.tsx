@@ -8,6 +8,7 @@ import { Section } from "@/components/layout/Section";
 import { Card } from "@/components/ui/Card";
 import { IconChip } from "@/components/ui/IconChip";
 import { ListRow } from "@/components/ui/ListRow";
+import { cardAccent } from "@/lib/accent";
 import { PendingNote } from "@/components/ui/PendingNote";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -60,6 +61,8 @@ export default function AchievementsPage() {
                     as="article"
                     padding="lg"
                     hover="quiet"
+                    accent={cardAccent("blue", i)}
+                    accentEdge="left"
                     className="flex h-full flex-col"
                   >
                     <div className="flex items-start justify-between gap-5">
@@ -121,11 +124,18 @@ export default function AchievementsPage() {
       </Section>
 
       {awards.length > 0 ? (
-        <Section tone="soft" index="02" indexLabel="Recognition" aria-labelledby="awards-page-heading">
+        <Section
+          tone="soft"
+          index="02"
+          indexLabel="Recognition"
+          accent="red"
+          aria-labelledby="awards-page-heading"
+        >
           <Container>
             <SectionHeading
               id="awards-page-heading"
               title="Awards and honours."
+              accent="red"
             />
 
             <ul className="mt-14 border-t border-line lg:mt-16">
@@ -133,7 +143,7 @@ export default function AchievementsPage() {
                 <ListRow key={award.title}>
                   <Reveal step={i}>
                     <article className="grid gap-3 py-8 pl-5 transition-[padding] group-hover/row:pl-7 sm:grid-cols-12 sm:items-baseline sm:gap-8">
-                      <p className="font-display text-lg text-accent-warm sm:col-span-2">
+                      <p className="font-display text-lg text-content-subtle transition-colors group-hover/row:text-accent sm:col-span-2">
                         {award.year}
                       </p>
                       <div className="sm:col-span-6">
@@ -159,7 +169,13 @@ export default function AchievementsPage() {
       ) : null}
 
       {milestones.length > 0 ? (
-        <Section index="03" indexLabel="Timeline" aria-labelledby="milestones-heading">
+        <Section
+          index="03"
+          indexLabel="Timeline"
+          accent="blue"
+          separator="minimal"
+          aria-labelledby="milestones-heading"
+        >
           <Container>
             <SectionHeading
               id="milestones-heading"
@@ -171,7 +187,7 @@ export default function AchievementsPage() {
                 <li key={milestone.year} className="group/row">
                   <Reveal step={i}>
                     <div className="grid gap-4 sm:grid-cols-12 sm:gap-8">
-                      <p className="font-display text-lg text-accent-warm sm:col-span-2">
+                      <p className="font-display text-lg text-content-subtle transition-colors group-hover/row:text-accent sm:col-span-2">
                         {milestone.year}
                       </p>
                       <div className="relative pb-10 sm:col-span-10 sm:border-l sm:border-line sm:pl-10">

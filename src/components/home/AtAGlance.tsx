@@ -10,6 +10,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { atAGlance } from "@/content/profile";
 import type { GlanceIcon } from "@/content/types";
 import { cn } from "@/lib/cn";
+import { cardAccent } from "@/lib/accent";
 
 /** Content stores an icon key, not a component, so it stays serialisable. */
 const icons: Record<GlanceIcon, LucideIcon> = {
@@ -31,12 +32,14 @@ export function AtAGlance({ index }: { index?: string }) {
       tone="accent"
       index={index}
       indexLabel="At a glance"
+      accent="yellow"
       aria-labelledby="glance-heading"
     >
       <Container>
         <SectionHeading
           id="glance-heading"
           title="The work, in short."
+          accent="yellow"
           lede="Where he works, what he leads, and where he studied — nothing beyond what is confirmed."
         />
 
@@ -54,6 +57,7 @@ export function AtAGlance({ index }: { index?: string }) {
                     // Quiet, not lift: these cards go nowhere, and a card that
                     // rises under the cursor is making an offer it cannot keep.
                     hover="quiet"
+                    accent={featured ? "yellow" : cardAccent("yellow", i)}
                     sweep={featured}
                     className="flex h-full flex-col"
                   >
@@ -68,7 +72,7 @@ export function AtAGlance({ index }: { index?: string }) {
                           "font-display text-sm transition-colors",
                           featured
                             ? "text-accent-on-inverse"
-                            : "text-content-subtle group-hover/card:text-accent-warm",
+                            : "text-content-subtle group-hover/card:text-accent",
                         )}
                       >
                         {String(i + 1).padStart(2, "0")}

@@ -22,11 +22,11 @@ const plates = [
     file: "panel-hero.jpg",
     w: 1200,
     h: 1500,
-    // Forest, matching the brand palette in src/app/globals.css. A neutral
-    // grey plate beside a forest page reads as a missing asset.
-    from: "#12403a",
-    to: "#061d1a",
-    glow: "#4bb9ab",
+    // Navy, matching the brand palette in src/app/globals.css. A plate in the
+    // wrong hue beside a blue page reads as a missing asset, not a design.
+    from: "#0a3d7a",
+    to: "#04162e",
+    glow: "#2b82d9",
     gx: "62%",
     gy: "26%",
   },

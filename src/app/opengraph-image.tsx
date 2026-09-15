@@ -30,20 +30,20 @@ export default async function OpenGraphImage() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          backgroundColor: "#07312d",
-          color: "#faf9f6",
+          backgroundColor: "#082b59",
+          color: "#f4f8fd",
           padding: "72px 80px",
           fontFamily: "Fraunces",
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
-          <div style={{ width: 56, height: 2, backgroundColor: "#7fcfc4" }} />
+          <div style={{ width: 56, height: 2, backgroundColor: "#f4c430" }} />
           <div
             style={{
               fontSize: 22,
               letterSpacing: "0.18em",
               textTransform: "uppercase",
-              color: "#7fcfc4",
+              color: "#f4c430",
             }}
           >
             Educationist
@@ -59,7 +59,7 @@ export default async function OpenGraphImage() {
               marginTop: 28,
               fontSize: 36,
               lineHeight: 1.3,
-              color: "#b9cbc6",
+              color: "#c3def7",
               maxWidth: 940,
             }}
           >
@@ -72,8 +72,8 @@ export default async function OpenGraphImage() {
             display: "flex",
             gap: 40,
             fontSize: 22,
-            color: "#9db1ac",
-            borderTop: "1px solid rgba(250,249,246,0.18)",
+            color: "#8fc2f0",
+            borderTop: "1px solid rgba(244,248,253,0.20)",
             paddingTop: 28,
           }}
         >

@@ -31,8 +31,8 @@ export function IconChip({
         "inline-flex shrink-0 items-center justify-center rounded-chip border transition-colors",
         size === "md" ? "size-11" : "size-9",
         inverse
-          ? "border-line-inverse bg-on-inverse/10 text-accent-on-inverse group-hover/card:border-accent-on-inverse/45"
-          : "border-line-accent bg-accent-soft text-accent group-hover/card:border-accent/55 group-hover/card:text-accent-strong",
+          ? "border-line-inverse bg-on-inverse/10 text-accent-on-inverse group-hover/card:border-accent-on-inverse/50"
+          : "border-line-accent bg-accent-soft text-accent group-hover/card:border-accent/60 group-hover/card:text-accent-strong",
         className,
       )}
     >

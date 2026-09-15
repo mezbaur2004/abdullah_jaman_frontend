@@ -11,6 +11,8 @@ export function AboutTeaser({ index }: { index?: string }) {
       tone="soft"
       index={index}
       indexLabel="About"
+      accent="blue"
+      separator="minimal"
       aria-labelledby="about-teaser-heading"
     >
       <Container>

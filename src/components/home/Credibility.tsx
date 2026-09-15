@@ -7,6 +7,7 @@ import { IconChip } from "@/components/ui/IconChip";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { education, organizations } from "@/content/profile";
+import { cardAccent } from "@/lib/accent";
 
 export function Credibility({ index }: { index?: string }) {
   if (organizations.length === 0) return null;
@@ -15,6 +16,7 @@ export function Credibility({ index }: { index?: string }) {
     <Section
       index={index}
       indexLabel="Institutions"
+      accent="blue"
       aria-labelledby="credibility-heading"
     >
       <Container>
@@ -22,6 +24,7 @@ export function Credibility({ index }: { index?: string }) {
           id="credibility-heading"
           title="Where he leads."
           lede="The institutions he leads, in Dhaka, Bangladesh."
+          accent="blue"
         />
 
         <ul className="mt-14 grid gap-5 lg:mt-16 lg:grid-cols-2 lg:gap-6">
@@ -34,6 +37,7 @@ export function Credibility({ index }: { index?: string }) {
                   // A card that links somewhere lifts; one that does not
                   // acknowledges the cursor without promising a destination.
                   hover={organization.href ? "lift" : "quiet"}
+                  accent={cardAccent("blue", i)}
                   className="flex h-full flex-col"
                 >
                   <div className="flex items-start justify-between gap-5">

@@ -11,6 +11,7 @@ export function ContactCta({ index }: { index?: string }) {
       tone="inverse"
       index={index}
       indexLabel="Contact"
+      accent="yellow"
       aria-labelledby="contact-cta-heading"
     >
       <Container>
