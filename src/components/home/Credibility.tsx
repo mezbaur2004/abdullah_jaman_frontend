@@ -27,17 +27,19 @@ export function Credibility({ index }: { index?: string }) {
         <ul className="mt-14 grid gap-5 lg:mt-16 lg:grid-cols-2 lg:gap-6">
           {organizations.map((organization, i) => (
             <li key={organization.name}>
-              <Reveal delay={i * 0.06} className="h-full">
+              <Reveal step={i} className="h-full">
                 <Card
                   as="article"
                   padding="lg"
-                  interactive={Boolean(organization.href)}
+                  // A card that links somewhere lifts; one that does not
+                  // acknowledges the cursor without promising a destination.
+                  hover={organization.href ? "lift" : "quiet"}
                   className="flex h-full flex-col"
                 >
                   <div className="flex items-start justify-between gap-5">
                     <IconChip icon={Building2} />
                     {organization.shortName ? (
-                      <span className="rounded-full border border-line px-3 py-1 text-eyebrow font-medium uppercase text-content-subtle">
+                      <span className="rounded-full border border-line px-3 py-1 text-eyebrow font-medium uppercase text-content-subtle transition-colors group-hover/card:border-line-accent group-hover/card:text-accent">
                         {organization.shortName}
                       </span>
                     ) : null}
@@ -49,13 +51,15 @@ export function Credibility({ index }: { index?: string }) {
                         href={organization.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="group inline-flex items-start gap-2 transition-colors duration-300 ease-editorial hover:text-accent"
+                        // Stretched over the card, so the whole surface is the
+                        // click target the hover has been promising.
+                        className="inline-flex items-start gap-2 transition-colors after:absolute after:inset-0 after:content-[''] group-hover/card:text-accent"
                       >
                         {organization.name}
                         <ArrowUpRight
                           aria-hidden="true"
                           strokeWidth={1.5}
-                          className="mt-2 size-5 shrink-0 transition-transform duration-300 ease-editorial group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                          className="mt-2 size-5 shrink-0 transition-transform group-hover/card:-translate-y-0.5 group-hover/card:translate-x-0.5"
                         />
                         <span className="sr-only">(opens in a new tab)</span>
                       </a>
@@ -92,8 +96,8 @@ export function Credibility({ index }: { index?: string }) {
         </ul>
 
         {education.length > 0 ? (
-          <Reveal delay={0.14}>
-            <Card tone="soft" padding="lg" className="mt-5 lg:mt-6">
+          <Reveal step={organizations.length}>
+            <Card tone="soft" hover="quiet" padding="lg" className="mt-5 lg:mt-6">
               <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:gap-7">
                 <IconChip icon={GraduationCap} />
                 <div>

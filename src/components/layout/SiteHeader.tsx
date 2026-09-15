@@ -13,7 +13,7 @@ import { Menu, X } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 
 import { Container } from "./Container";
-import { ThemeToggle } from "@/components/ui/ThemeToggle";
+import { ThemeSelector } from "@/components/ui/ThemeSelector";
 import { primaryNav, site } from "@/content/site";
 import { cn } from "@/lib/cn";
 
@@ -71,10 +71,10 @@ export function SiteHeader() {
           : "border-b border-transparent",
       )}
     >
-      <Container className="flex h-20 items-center justify-between gap-8 lg:h-24">
+      <Container className="flex h-20 items-center justify-between gap-4 sm:gap-8 lg:h-24">
         <Link
           href="/"
-          className="font-display text-lg tracking-[-0.015em] text-content lg:text-xl"
+          className="whitespace-nowrap font-display text-base tracking-[-0.015em] text-content sm:text-lg lg:text-xl"
         >
           {site.shortName}
         </Link>
@@ -87,8 +87,8 @@ export function SiteHeader() {
                   href={item.href}
                   aria-current={isCurrent(item.href) ? "page" : undefined}
                   className={cn(
-                    "relative text-sm transition-colors duration-300 ease-editorial",
-                    "after:absolute after:-bottom-1.5 after:left-0 after:h-px after:bg-accent after:transition-all after:duration-300 after:ease-editorial after:content-['']",
+                    "relative text-sm transition-colors",
+                    "after:absolute after:-bottom-1.5 after:left-0 after:h-px after:bg-accent after:transition-all after:content-['']",
                     isCurrent(item.href)
                       ? "text-content after:w-full"
                       : "text-content-subtle after:w-0 hover:text-content hover:after:w-full",
@@ -101,11 +101,11 @@ export function SiteHeader() {
           </ul>
         </nav>
 
-        <div className="flex items-center gap-3">
-          <ThemeToggle />
+        <div className="flex items-center gap-2 sm:gap-3">
+          <ThemeSelector />
           <Link
             href="/contact"
-            className="hidden rounded-full bg-action px-6 py-3 text-sm font-medium text-on-action transition-colors duration-300 ease-editorial hover:bg-action-hover lg:inline-flex"
+            className="hidden rounded-full bg-action px-6 py-3 text-sm font-medium text-on-action transition-colors hover:bg-action-hover lg:inline-flex"
           >
             Get in touch
           </Link>
@@ -115,7 +115,7 @@ export function SiteHeader() {
             onClick={() => setMenu({ open: !menuOpen, route: pathname })}
             aria-expanded={menuOpen}
             aria-controls="mobile-navigation"
-            className="-mr-2 inline-flex size-11 items-center justify-center text-content lg:hidden"
+            className="-mr-2 inline-flex size-10 items-center justify-center text-content sm:size-11 lg:hidden"
           >
             <span className="sr-only">
               {menuOpen ? "Close menu" : "Open menu"}

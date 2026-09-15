@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Building2 } from "lucide-react";
+import { ArrowUpRight, Building2 } from "lucide-react";
 
 import { ContactCta } from "@/components/home/ContactCta";
 import { Container } from "@/components/layout/Container";
@@ -46,7 +46,11 @@ export default function ExperiencePage() {
             {roles.map((role) => (
               <li key={role.slug}>
                 <Reveal>
-                  <Card as="article" padding="lg">
+                  <Card
+                    as="article"
+                    padding="lg"
+                    hover={role.href ? "lift" : "quiet"}
+                  >
                     {/* One column throughout: the meta row is a footer under a
                         rule rather than a side column, so it cannot drift out
                         of alignment with a heading of unpredictable height. */}
@@ -59,9 +63,17 @@ export default function ExperiencePage() {
                               href={role.href}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="transition-colors duration-300 ease-editorial hover:text-accent"
+                              className="inline-flex items-start gap-2 transition-colors after:absolute after:inset-0 after:content-[''] group-hover/card:text-accent"
                             >
                               {role.organization}
+                              {/* The visible cue that the lift is promising a
+                                  destination. Without it the card moves and
+                                  says nothing about why. */}
+                              <ArrowUpRight
+                                aria-hidden="true"
+                                strokeWidth={1.5}
+                                className="mt-2 size-5 shrink-0 transition-transform group-hover/card:-translate-y-0.5 group-hover/card:translate-x-0.5"
+                              />
                               <span className="sr-only"> (opens in a new tab)</span>
                             </a>
                           ) : (
@@ -122,7 +134,7 @@ export default function ExperiencePage() {
           </ol>
 
           {experiencePending ? (
-            <Reveal delay={0.06}>
+            <Reveal step={roles.length}>
               <PendingNote className="mt-12">{experiencePending}</PendingNote>
             </Reveal>
           ) : null}
@@ -141,14 +153,14 @@ export default function ExperiencePage() {
               {initiatives.map((initiative, i) => (
                 <li
                   key={initiative.slug}
-                  className="border-b border-line lg:odd:pr-12 lg:even:border-l lg:even:pl-12"
+                  className="group/row border-b border-line lg:odd:pr-12 lg:even:border-l lg:even:pl-12"
                 >
-                  <Reveal delay={(i % 2) * 0.06}>
+                  <Reveal step={i % 2}>
                     <article className="py-10 lg:py-12">
                       <p className="text-eyebrow font-medium uppercase text-content-subtle">
                         {initiative.category}
                       </p>
-                      <h3 className="mt-4 text-display-md text-content">
+                      <h3 className="mt-4 text-display-md text-content transition-colors group-hover/row:text-accent">
                         {initiative.title}
                       </h3>
                       <p className="mt-5 leading-relaxed text-content-muted">

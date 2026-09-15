@@ -30,11 +30,12 @@ export function Gallery({ index }: { index?: string }) {
                 key={entry.image.src}
                 className={isWide ? "lg:col-span-7" : "lg:col-span-5"}
               >
-                <Reveal delay={i * 0.05}>
+                <Reveal step={i}>
                   <Figure
                     image={entry.image}
                     caption={entry.caption}
                     ratio={isWide ? "4 / 3" : "3 / 4"}
+                    zoom
                     sizes="(min-width: 1024px) 45vw, (min-width: 640px) 48vw, 90vw"
                   />
                 </Reveal>

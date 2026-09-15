@@ -187,6 +187,40 @@
 }
 
 /* ---------------------------------------------------------------------------
+   Motion
+   The whole site's animation system, in one place. Every hover, entrance and
+   transition on the site resolves to these values — nothing hard-codes its own
+   duration, distance or easing, which is what stops twelve components drifting
+   into twelve slightly different animations.
+
+   Two easings, because entrances and hovers are doing different jobs. An
+   entrance travels a visible distance and wants a decisive settle, so it uses
+   a strong ease-out. A hover moves a few pixels under the cursor and wants to
+   feel attached to it, so it uses a gentler curve with no hint of overshoot.
+--------------------------------------------------------------------------- */
+:root {
+  /* Named apart from the Tailwind-facing `--ease-*` tokens below on purpose.
+     Giving both the same name makes the theme block emit
+     `--ease-editorial: var(--ease-editorial)`, which only resolves because the
+     raw declaration happens to come later in the bundle — one import-order
+     change away from silently breaking every easing on the site. */
+  --motion-editorial: cubic-bezier(0.22, 1, 0.36, 1);
+  --motion-hover: cubic-bezier(0.33, 0.8, 0.4, 1);
+
+  --duration-hover: 260ms;
+  --duration-reveal: 640ms;
+
+  /* Entrance travel, and the gap between staggered siblings. */
+  --reveal-rise: 18px;
+  --reveal-stagger: 70ms;
+
+  /* Hover intensity. Small on purpose: the lift should register as depth, not
+     as the card jumping away from the cursor. */
+  --hover-lift: -3px;
+  --hover-zoom: 1.045;
+}
+
+/* ---------------------------------------------------------------------------
    Theme
    `@theme inline` so utilities compile to `var(--surface)` rather than to a
    second indirection — the token has to re-resolve when the theme flips.
@@ -252,7 +286,14 @@
   --text-eyebrow--line-height: 1;
   --text-eyebrow--letter-spacing: 0.19em;
 
-  --ease-editorial: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-editorial: var(--motion-editorial);
+  --ease-hover: var(--motion-hover);
+
+  /* Tailwind's transition defaults, so a bare `transition-colors` anywhere on
+     the site already carries the system's duration and easing. Components do
+     not restate them. */
+  --default-transition-duration: var(--duration-hover);
+  --default-transition-timing-function: var(--motion-hover);
 
   --shadow-panel: var(--shadow-panel);
   --shadow-card: var(--shadow-card);
@@ -345,10 +386,14 @@
 @layer components {
   .reveal {
     opacity: 0;
-    transform: translateY(16px);
+    transform: translateY(var(--reveal-rise));
     transition:
-      opacity 0.6s var(--ease-editorial),
-      transform 0.6s var(--ease-editorial);
+      opacity var(--duration-reveal) var(--ease-editorial),
+      transform var(--duration-reveal) var(--ease-editorial);
+    /* Stagger comes from the sibling's index, multiplied by one shared gap, so
+       a row of four cards is spaced by the same rhythm everywhere on the site.
+       `Reveal` caps the step, so a long list never waits seconds to appear. */
+    transition-delay: calc(var(--reveal-step, 0) * var(--reveal-stagger));
     will-change: opacity, transform;
   }
 
@@ -358,11 +403,70 @@
     will-change: auto;
   }
 
+  /* ---------------------------------------------------------------------
+     Section separator
+     An asymmetric editorial rule rather than a full-width hairline: solid at
+     the left margin, where the section's index sits, and dissolving to the
+     right. It reads as the start of something rather than as a box edge, and
+     it keeps the eye on the left column where every heading begins.
+  --------------------------------------------------------------------- */
+  .section-rule {
+    height: 1px;
+    background-image: linear-gradient(
+      to right,
+      var(--line-strong) 0%,
+      var(--line) 32%,
+      transparent 80%
+    );
+  }
+
+  .section-rule-inverse {
+    background-image: linear-gradient(
+      to right,
+      var(--line-inverse) 0%,
+      color-mix(in oklab, var(--line-inverse) 55%, transparent) 32%,
+      transparent 80%
+    );
+  }
+
+  /* ---------------------------------------------------------------------
+     Light sweep
+     A single band of light crossing the surface once per hover. Reserved for
+     the dark cards, where there is enough contrast for it to read as sheen
+     rather than as a flash. Masked to the card's own radius by the card's
+     `overflow-hidden`.
+  --------------------------------------------------------------------- */
+  .sweep::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image: linear-gradient(
+      105deg,
+      transparent 38%,
+      color-mix(in oklab, var(--on-inverse) 7%, transparent) 50%,
+      transparent 62%
+    );
+    transform: translateX(-100%);
+    transition: transform 900ms var(--ease-editorial);
+  }
+
+  .sweep:hover::after {
+    transform: translateX(100%);
+  }
+
+  /* Motion is decoration here, so it is the first thing to go. Every entrance
+     resolves instantly and every hover keeps its colour change but drops its
+     movement — the interface stays legible and nothing is hidden. */
   @media (prefers-reduced-motion: reduce) {
     .reveal {
       opacity: 1;
       transform: none;
       transition: none;
+    }
+
+    .sweep::after {
+      display: none;
     }
   }
 }

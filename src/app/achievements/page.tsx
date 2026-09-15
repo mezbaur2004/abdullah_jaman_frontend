@@ -7,6 +7,7 @@ import { PageHeader } from "@/components/layout/PageHeader";
 import { Section } from "@/components/layout/Section";
 import { Card } from "@/components/ui/Card";
 import { IconChip } from "@/components/ui/IconChip";
+import { ListRow } from "@/components/ui/ListRow";
 import { PendingNote } from "@/components/ui/PendingNote";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -54,12 +55,17 @@ export default function AchievementsPage() {
           <ul className="mt-14 grid gap-5 lg:mt-16 lg:grid-cols-2 lg:gap-6">
             {organizations.map((organization, i) => (
               <li key={organization.name}>
-                <Reveal delay={i * 0.06} className="h-full">
-                  <Card as="article" padding="lg" className="flex h-full flex-col">
+                <Reveal step={i} className="h-full">
+                  <Card
+                    as="article"
+                    padding="lg"
+                    hover="quiet"
+                    className="flex h-full flex-col"
+                  >
                     <div className="flex items-start justify-between gap-5">
                       <IconChip icon={Building2} />
                       {organization.shortName ? (
-                        <span className="rounded-full border border-line-accent bg-accent-soft px-3 py-1 text-eyebrow font-medium uppercase text-accent">
+                        <span className="rounded-full border border-line-accent bg-accent-soft px-3 py-1 text-eyebrow font-medium uppercase text-accent transition-colors group-hover/card:border-accent/55 group-hover/card:text-accent-strong">
                           {organization.shortName}
                         </span>
                       ) : null}
@@ -86,7 +92,7 @@ export default function AchievementsPage() {
               {statistics.map((statistic, i) => (
                 <Reveal
                   key={statistic.label}
-                  delay={i * 0.06}
+                  step={i}
                   className="border-t border-line pt-6"
                 >
                   <dt className="sr-only">{statistic.label}</dt>
@@ -107,7 +113,7 @@ export default function AchievementsPage() {
           ) : null}
 
           {achievementsPending ? (
-            <Reveal delay={0.12}>
+            <Reveal step={organizations.length}>
               <PendingNote className="mt-14">{achievementsPending}</PendingNote>
             </Reveal>
           ) : null}
@@ -124,14 +130,14 @@ export default function AchievementsPage() {
 
             <ul className="mt-14 border-t border-line lg:mt-16">
               {awards.map((award, i) => (
-                <li key={award.title} className="border-b border-line">
-                  <Reveal delay={i * 0.04}>
-                    <article className="grid gap-3 py-8 sm:grid-cols-12 sm:items-baseline sm:gap-8">
+                <ListRow key={award.title}>
+                  <Reveal step={i}>
+                    <article className="grid gap-3 py-8 pl-5 transition-[padding] group-hover/row:pl-7 sm:grid-cols-12 sm:items-baseline sm:gap-8">
                       <p className="font-display text-lg text-accent-warm sm:col-span-2">
                         {award.year}
                       </p>
                       <div className="sm:col-span-6">
-                        <h3 className="font-display text-xl leading-snug text-content">
+                        <h3 className="font-display text-xl leading-snug text-content transition-colors group-hover/row:text-accent">
                           {award.title}
                         </h3>
                         {award.description ? (
@@ -140,12 +146,12 @@ export default function AchievementsPage() {
                           </p>
                         ) : null}
                       </div>
-                      <p className="text-sm text-content-subtle sm:col-span-4 sm:text-right">
+                      <p className="text-sm text-content-subtle transition-colors group-hover/row:text-content-muted sm:col-span-4 sm:text-right">
                         {award.issuer}
                       </p>
                     </article>
                   </Reveal>
-                </li>
+                </ListRow>
               ))}
             </ul>
           </Container>
@@ -162,8 +168,8 @@ export default function AchievementsPage() {
 
             <ol className="mt-14 lg:mt-16">
               {milestones.map((milestone, i) => (
-                <li key={milestone.year}>
-                  <Reveal delay={i * 0.04}>
+                <li key={milestone.year} className="group/row">
+                  <Reveal step={i}>
                     <div className="grid gap-4 sm:grid-cols-12 sm:gap-8">
                       <p className="font-display text-lg text-accent-warm sm:col-span-2">
                         {milestone.year}
@@ -171,9 +177,9 @@ export default function AchievementsPage() {
                       <div className="relative pb-10 sm:col-span-10 sm:border-l sm:border-line sm:pl-10">
                         <span
                           aria-hidden="true"
-                          className="absolute -left-[3px] top-2.5 hidden size-1.5 rounded-full bg-accent sm:block"
+                          className="absolute -left-[3px] top-2.5 hidden size-1.5 rounded-full bg-accent transition-transform group-hover/row:scale-150 sm:block"
                         />
-                        <h3 className="font-display text-xl leading-snug text-content">
+                        <h3 className="font-display text-xl leading-snug text-content transition-colors group-hover/row:text-accent">
                           {milestone.title}
                         </h3>
                         <p className="mt-3 max-w-xl text-sm leading-relaxed text-content-muted">

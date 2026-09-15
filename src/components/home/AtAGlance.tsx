@@ -47,10 +47,14 @@ export function AtAGlance({ index }: { index?: string }) {
 
             return (
               <li key={item.label}>
-                <Reveal delay={i * 0.06} className="h-full">
+                <Reveal step={i} className="h-full">
                   <Card
                     as="article"
                     tone={featured ? "feature" : "raised"}
+                    // Quiet, not lift: these cards go nowhere, and a card that
+                    // rises under the cursor is making an offer it cannot keep.
+                    hover="quiet"
+                    sweep={featured}
                     className="flex h-full flex-col"
                   >
                     <div className="flex items-start justify-between gap-4">
@@ -61,10 +65,10 @@ export function AtAGlance({ index }: { index?: string }) {
                       <span
                         aria-hidden="true"
                         className={cn(
-                          "font-display text-sm",
+                          "font-display text-sm transition-colors",
                           featured
                             ? "text-accent-on-inverse"
-                            : "text-content-subtle",
+                            : "text-content-subtle group-hover/card:text-accent-warm",
                         )}
                       >
                         {String(i + 1).padStart(2, "0")}

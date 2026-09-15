@@ -42,8 +42,8 @@ export default function ContactPage() {
               <ul className="mt-10 grid gap-5">
                 {contactChannels.map((channel, i) => (
                   <li key={channel.label}>
-                    <Reveal delay={i * 0.05}>
-                      <Card padding="lg">
+                    <Reveal step={i}>
+                      <Card hover="quiet" padding="lg">
                         <h2 className="font-display text-2xl leading-snug text-content">
                           {channel.label}
                         </h2>
@@ -59,7 +59,7 @@ export default function ContactPage() {
 
             <div className="lg:col-span-5">
               <Reveal>
-                <Card padding="lg">
+                <Card hover="quiet" padding="lg">
                   <h2 className="font-display text-display-md text-content">
                     Direct
                   </h2>
@@ -78,7 +78,7 @@ export default function ContactPage() {
                         <dd className="mt-2.5 pl-[1.625rem]">
                           <a
                             href={`mailto:${site.email}`}
-                            className="break-all border-b border-line-strong pb-0.5 text-content transition-colors duration-300 ease-editorial hover:border-content"
+                            className="break-all border-b border-line-strong pb-0.5 text-content transition-colors hover:border-content"
                           >
                             {site.email}
                           </a>
@@ -152,7 +152,7 @@ export default function ContactPage() {
                               href={link.href}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="text-sm text-content-muted transition-colors duration-300 ease-editorial hover:text-content"
+                              className="text-sm text-content-muted transition-colors hover:text-content"
                             >
                               {link.label}
                             </a>

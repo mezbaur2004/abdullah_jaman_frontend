@@ -1,15 +1,19 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import type { ReactNode } from "react";
+import type { CSSProperties, ReactNode } from "react";
 
 import { cn } from "@/lib/cn";
 
 type RevealProps = {
   children: ReactNode;
   className?: string;
-  /** Seconds. Used sparingly to stagger siblings in a grid. */
-  delay?: number;
+  /**
+   * Position among staggered siblings — pass the map index. The delay itself
+   * comes from `--reveal-stagger` in globals.css, so every staggered group on
+   * the site runs to the same rhythm and no component picks its own number.
+   */
+  step?: number;
 };
 
 /**
@@ -25,13 +29,27 @@ type RevealProps = {
 const ROOT_MARGIN = "999999px 0px -12% 0px";
 
 /**
+ * Past this many siblings the stagger stops accumulating. Without a cap a list
+ * of twenty would leave the last item waiting well over a second after the
+ * first — which stops reading as a sequence and starts reading as lag.
+ */
+const MAX_STEP = 5;
+
+/**
  * A single, quiet entrance: a short rise and fade, once, on first view.
  *
- * Content that starts at `opacity: 0` has to be provably impossible to strand.
- * Three cases would otherwise do it, and each has a guard here: landing below
- * the element on load (the mount check), jumping past it mid-session (the root
- * margin above), and JavaScript never arriving at all (the no-script stylesheet
- * in the root layout, keyed off `data-reveal`).
+ * This is deliberately CSS and an observer rather than Framer Motion, which is
+ * installed and used elsewhere. The entrance has to survive three things
+ * Framer cannot help with: it must be correct before hydration, it must cost
+ * nothing per scroll frame, and it must be impossible to strand content at
+ * `opacity: 0`. Framer is kept for the one place it earns its weight — the
+ * mobile menu's exit animation, which has no CSS equivalent.
+ *
+ * Content that starts invisible has to be provably impossible to strand. Three
+ * cases would otherwise do it, and each has a guard here: landing below the
+ * element on load (the mount check), jumping past it mid-session (the root
+ * margin above), and JavaScript never arriving at all (the no-script
+ * stylesheet in the root layout, keyed off `data-reveal`).
  *
  * The revealed flag is written straight to the DOM rather than held in state.
  * It is presentation only — nothing renders from it — so a state round trip
@@ -40,7 +58,7 @@ const ROOT_MARGIN = "999999px 0px -12% 0px";
  * The content is always in the DOM — only opacity and transform move — so
  * crawlers and assistive technology see the full page regardless.
  */
-export function Reveal({ children, className, delay = 0 }: RevealProps) {
+export function Reveal({ children, className, step = 0 }: RevealProps) {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -72,12 +90,16 @@ export function Reveal({ children, className, delay = 0 }: RevealProps) {
     return () => observer.disconnect();
   }, []);
 
+  const clamped = Math.min(Math.max(step, 0), MAX_STEP);
+
   return (
     <div
       ref={ref}
       data-reveal=""
       className={cn("reveal", className)}
-      style={delay ? { transitionDelay: `${delay}s` } : undefined}
+      style={
+        clamped ? ({ "--reveal-step": clamped } as CSSProperties) : undefined
+      }
     >
       {children}
     </div>

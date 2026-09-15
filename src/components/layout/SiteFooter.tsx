@@ -24,7 +24,7 @@ export function SiteFooter() {
             {site.email ? (
               <a
                 href={`mailto:${site.email}`}
-                className="mt-7 inline-block border-b border-line-inverse pb-1 text-sm text-on-inverse transition-colors duration-300 ease-editorial hover:border-on-inverse"
+                className="mt-7 inline-block border-b border-line-inverse pb-1 text-sm text-on-inverse transition-colors hover:border-on-inverse"
               >
                 {site.email}
               </a>
@@ -41,7 +41,7 @@ export function SiteFooter() {
                   <li key={item.href}>
                     <Link
                       href={item.href}
-                      className="text-sm text-on-inverse-muted transition-colors duration-300 ease-editorial hover:text-on-inverse"
+                      className="text-sm text-on-inverse-muted transition-colors hover:text-on-inverse"
                     >
                       {item.label}
                     </Link>
@@ -62,7 +62,7 @@ export function SiteFooter() {
                         href={item.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-sm text-on-inverse-muted transition-colors duration-300 ease-editorial hover:text-on-inverse"
+                        className="text-sm text-on-inverse-muted transition-colors hover:text-on-inverse"
                       >
                         {item.label}
                       </a>

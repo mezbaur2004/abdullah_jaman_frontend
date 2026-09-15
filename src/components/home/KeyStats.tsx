@@ -30,7 +30,7 @@ export function KeyStats({ index }: { index?: string }) {
           {statistics.map((statistic, i) => (
             <Reveal
               key={statistic.label}
-              delay={i * 0.06}
+              step={i}
               className="border-t border-line-inverse pt-6"
             >
               <dt className="sr-only">{statistic.label}</dt>

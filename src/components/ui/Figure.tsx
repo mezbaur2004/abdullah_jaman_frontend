@@ -14,6 +14,12 @@ type FigureProps = {
   /** CSS aspect-ratio value, e.g. "4 / 5". Defaults to the asset's own ratio. */
   ratio?: string;
   rounded?: boolean;
+  /**
+   * Pushes the image in slightly on hover, cropped by the frame. The move is
+   * small on purpose: a photograph that leaps is a carousel effect, while a
+   * few per cent reads as the image settling under the cursor.
+   */
+  zoom?: boolean;
 };
 
 /**
@@ -32,14 +38,18 @@ export function Figure({
   className,
   ratio,
   rounded = false,
+  zoom = false,
 }: FigureProps) {
   const decorative = image.alt === "";
 
   const frame = (
     <div
       className={cn(
-        "relative overflow-hidden border border-line bg-surface-soft",
+        "relative overflow-hidden border border-line bg-surface-soft transition-colors",
         rounded && "rounded-sm",
+        // Its own group, so a standalone figure zooms on its own hover; the
+        // card group is honoured too, for a figure sitting inside a card.
+        zoom && "group/figure hover:border-line-accent",
       )}
       style={{ aspectRatio: ratio ?? `${image.width} / ${image.height}` }}
       {...(decorative ? { "aria-hidden": true } : {})}
@@ -50,7 +60,11 @@ export function Figure({
         fill
         sizes={sizes}
         priority={priority}
-        className="object-cover"
+        className={cn(
+          "object-cover",
+          zoom &&
+            "transition-transform duration-500 ease-hover group-hover/figure:scale-[var(--hover-zoom)] group-hover/card:scale-[var(--hover-zoom)]",
+        )}
         style={image.position ? { objectPosition: image.position } : undefined}
       />
     </div>
