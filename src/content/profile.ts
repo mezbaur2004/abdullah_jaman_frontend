@@ -1,4 +1,9 @@
-import type { EducationEntry, ImageAsset, Organization } from "./types";
+import type {
+  EducationEntry,
+  GlanceItem,
+  ImageAsset,
+  Organization,
+} from "./types";
 import { site } from "./site";
 
 /**
@@ -31,21 +36,22 @@ export const heroPanel: ImageAsset = {
 };
 
 export const hero = {
-  eyebrow: site.role,
-  /** VERIFIED — both roles, stated plainly. */
+  eyebrow: site.positioning,
+  /** The institutions, named — not a count of how many were founded. */
   headline: "Wheaton International School & Guidance International School",
   lede: site.description,
   primaryCta: { label: "About Abdullah", href: "/about" },
   secondaryCta: { label: "Get in touch", href: "/contact" },
 } as const;
 
-/** VERIFIED — role and institutions confirmed; WIS website confirmed. */
+/** VERIFIED — roles, campus counts and the WIS website are all confirmed. */
 export const organizations: Organization[] = [
   {
     name: "Wheaton International School",
     shortName: "WIS",
     role: "Founder & Principal",
     location: "Dhaka, Bangladesh",
+    campuses: 3,
     href: "https://wheaton.edu.bd",
   },
   {
@@ -53,8 +59,14 @@ export const organizations: Organization[] = [
     shortName: "GIS",
     role: "Founder & Principal",
     location: "Dhaka, Bangladesh",
+    campuses: 3,
   },
 ];
+
+export const totalCampuses = organizations.reduce(
+  (sum, organization) => sum + (organization.campuses ?? 0),
+  0,
+);
 
 /**
  * VERIFIED — the association with Cambridge is confirmed. The degree, subject
@@ -67,9 +79,40 @@ export const education: EducationEntry[] = [
   },
 ];
 
+/**
+ * The at-a-glance strip. Every value is verified, which is why this section
+ * can carry real numbers where the statistics band still cannot.
+ */
+export const atAGlance: GlanceItem[] = [
+  {
+    icon: "campus",
+    label: "Campuses",
+    value: String(totalCampuses),
+    detail: "Three at Wheaton, three at Guidance",
+  },
+  {
+    icon: "role",
+    label: "Role",
+    value: "Principal",
+    detail: "Academic and institutional leadership",
+  },
+  {
+    icon: "location",
+    label: "Based in",
+    value: "Dhaka",
+    detail: "Bangladesh",
+  },
+  {
+    icon: "education",
+    label: "Education",
+    value: "Cambridge",
+    detail: "University of Cambridge",
+  },
+];
+
 export const aboutTeaser = {
   eyebrow: "About",
-  headline: "Education leader and institutional founder.",
+  headline: "Leading two international schools across six campuses.",
   /** VERIFIED — the approved positioning statement, unembellished. */
   body: [site.description],
   cta: { label: "More about Abdullah", href: "/about" },
@@ -86,8 +129,12 @@ export const aboutPage = {
    */
   sections: [] as Array<{ heading: string; body: string[] }>,
   facts: [
-    { label: "Role", value: "Founder & Principal" },
-    { label: "Institutions", value: "Wheaton International School, Guidance International School" },
+    { label: "Position", value: "Founder & Principal" },
+    {
+      label: "Institutions",
+      value: "Wheaton International School, Guidance International School",
+    },
+    { label: "Campuses", value: `${totalCampuses} across both institutions` },
     { label: "Based in", value: site.location },
     { label: "Education", value: "University of Cambridge" },
   ],

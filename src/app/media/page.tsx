@@ -38,15 +38,15 @@ export default function MediaPage() {
           />
 
           {mediaItems.length > 0 ? (
-            <div className="mt-14 border-t border-line lg:mt-16">
+            <ul className="mt-14 grid gap-5 lg:mt-16">
               {mediaItems.map((item, i) => (
-                <div key={item.title} className="border-b border-line">
+                <li key={item.title}>
                   <Reveal delay={Math.min(i, 3) * 0.04}>
                     <MediaEntry item={item} />
                   </Reveal>
-                </div>
+                </li>
               ))}
-            </div>
+            </ul>
           ) : null}
 
           <Reveal delay={0.06}>
@@ -63,15 +63,15 @@ export default function MediaPage() {
               title="Published writing."
             />
 
-            <div className="mt-14 border-t border-line lg:mt-16">
+            <ul className="mt-14 grid gap-5 lg:mt-16">
               {publications.map((item, i) => (
-                <div key={item.title} className="border-b border-line">
+                <li key={item.title}>
                   <Reveal delay={Math.min(i, 3) * 0.04}>
                     <MediaEntry item={item} />
                   </Reveal>
-                </div>
+                </li>
               ))}
-            </div>
+            </ul>
           </Container>
         </Section>
       ) : null}

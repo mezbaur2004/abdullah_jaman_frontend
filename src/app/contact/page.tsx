@@ -5,6 +5,7 @@ import { Container } from "@/components/layout/Container";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { Section } from "@/components/layout/Section";
 import { Button } from "@/components/ui/Button";
+import { Card } from "@/components/ui/Card";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { PendingNote } from "@/components/ui/PendingNote";
 import { Reveal } from "@/components/ui/Reveal";
@@ -38,18 +39,18 @@ export default function ContactPage() {
                 <Eyebrow>What to write about</Eyebrow>
               </Reveal>
 
-              <ul className="mt-10 border-t border-line">
+              <ul className="mt-10 grid gap-5">
                 {contactChannels.map((channel, i) => (
-                  <li key={channel.label} className="border-b border-line">
+                  <li key={channel.label}>
                     <Reveal delay={i * 0.05}>
-                      <div className="py-8">
+                      <Card padding="lg">
                         <h2 className="font-display text-2xl leading-snug text-content">
                           {channel.label}
                         </h2>
                         <p className="mt-3 max-w-xl leading-relaxed text-content-muted">
                           {channel.description}
                         </p>
-                      </div>
+                      </Card>
                     </Reveal>
                   </li>
                 ))}
@@ -58,7 +59,7 @@ export default function ContactPage() {
 
             <div className="lg:col-span-5">
               <Reveal>
-                <div className="border border-line bg-surface-raised p-8 shadow-panel sm:p-10">
+                <Card padding="lg">
                   <h2 className="font-display text-display-md text-content">
                     Direct
                   </h2>
@@ -160,7 +161,7 @@ export default function ContactPage() {
                       </ul>
                     </div>
                   ) : null}
-                </div>
+                </Card>
               </Reveal>
             </div>
           </div>

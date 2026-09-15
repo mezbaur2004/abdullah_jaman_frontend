@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 
 import { AboutTeaser } from "@/components/home/AboutTeaser";
+import { AtAGlance } from "@/components/home/AtAGlance";
 import { Awards } from "@/components/home/Awards";
 import { ContactCta } from "@/components/home/ContactCta";
 import { Credibility } from "@/components/home/Credibility";
@@ -13,13 +14,13 @@ import { awards, statistics } from "@/content/achievements";
 import { initiatives } from "@/content/experience";
 import { gallery } from "@/content/gallery";
 import { mediaItems } from "@/content/media";
-import { organizations } from "@/content/profile";
+import { atAGlance, organizations } from "@/content/profile";
 
 /**
  * Most of the dataset is still being collected, so several sections have
  * nothing to show and remove themselves. Numbering them here — rather than
  * hard-coding "01" through "09" into each one — keeps the sequence contiguous
- * as sections appear: with only three present the reader sees 01, 02, 03, not
+ * as sections appear: with four present the reader sees 01 to 04, not
  * 01, 04, 09. Each component still guards itself; this list decides the count.
  */
 const sections: Array<{ key: string; show: boolean; render: (index: string) => ReactNode }> = [
@@ -27,6 +28,11 @@ const sections: Array<{ key: string; show: boolean; render: (index: string) => R
     key: "credibility",
     show: organizations.length > 0,
     render: (index) => <Credibility index={index} />,
+  },
+  {
+    key: "glance",
+    show: atAGlance.length > 0,
+    render: (index) => <AtAGlance index={index} />,
   },
   { key: "about", show: true, render: (index) => <AboutTeaser index={index} /> },
   {

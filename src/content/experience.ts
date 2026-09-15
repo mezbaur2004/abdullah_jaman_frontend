@@ -29,8 +29,8 @@ export const roles: Role[] = [
 
 export const experienceIntro = {
   eyebrow: "Experience",
-  headline: "Founder and Principal of two Dhaka schools.",
-  lede: "Abdullah Jaman founded and leads Wheaton International School and Guidance International School.",
+  headline: "Leadership across two institutions.",
+  lede: "Abdullah Jaman leads Wheaton International School and Guidance International School, across six campuses in Dhaka.",
 } as const;
 
 /**

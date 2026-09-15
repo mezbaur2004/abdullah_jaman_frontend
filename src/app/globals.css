@@ -68,6 +68,9 @@
   --on-action-inverse: var(--ink-900);
 
   --shadow-panel: 0 1px 2px rgb(11 13 16 / 0.04), 0 8px 24px -12px rgb(11 13 16 / 0.12);
+  --shadow-card: 0 1px 2px rgb(11 13 16 / 0.04), 0 4px 16px -8px rgb(11 13 16 / 0.1);
+  --shadow-card-hover: 0 2px 4px rgb(11 13 16 / 0.05),
+    0 14px 32px -14px rgb(11 13 16 / 0.18);
 }
 
 /* Dark, by system preference — unless the reader has explicitly chosen light. */
@@ -99,6 +102,9 @@
     --on-action-inverse: var(--ink-900);
 
     --shadow-panel: 0 1px 2px rgb(0 0 0 / 0.4), 0 8px 24px -12px rgb(0 0 0 / 0.6);
+    --shadow-card: 0 1px 2px rgb(0 0 0 / 0.5), 0 4px 16px -8px rgb(0 0 0 / 0.6);
+    --shadow-card-hover: 0 2px 6px rgb(0 0 0 / 0.6),
+      0 16px 34px -14px rgb(0 0 0 / 0.8);
   }
 }
 
@@ -131,6 +137,9 @@
   --on-action-inverse: var(--ink-900);
 
   --shadow-panel: 0 1px 2px rgb(0 0 0 / 0.4), 0 8px 24px -12px rgb(0 0 0 / 0.6);
+  --shadow-card: 0 1px 2px rgb(0 0 0 / 0.5), 0 4px 16px -8px rgb(0 0 0 / 0.6);
+  --shadow-card-hover: 0 2px 6px rgb(0 0 0 / 0.6),
+    0 16px 34px -14px rgb(0 0 0 / 0.8);
 }
 
 /* ---------------------------------------------------------------------------
@@ -197,6 +206,11 @@
   --ease-editorial: cubic-bezier(0.22, 1, 0.36, 1);
 
   --shadow-panel: var(--shadow-panel);
+  --shadow-card: var(--shadow-card);
+  --shadow-card-hover: var(--shadow-card-hover);
+
+  --radius-card: 0.875rem;
+  --radius-chip: 0.75rem;
 
   /* Mount entrance for above-the-fold content. Pure CSS, so it also plays
      when JavaScript has not hydrated yet and never hides the hero. */

@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
+import { Building2 } from "lucide-react";
 
 import { ContactCta } from "@/components/home/ContactCta";
 import { Container } from "@/components/layout/Container";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { Section } from "@/components/layout/Section";
+import { Card } from "@/components/ui/Card";
+import { IconChip } from "@/components/ui/IconChip";
 import { PendingNote } from "@/components/ui/PendingNote";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -13,7 +16,13 @@ import {
   initiatives,
   roles,
 } from "@/content/experience";
+import { organizations } from "@/content/profile";
 import { pageMetadata } from "@/lib/seo";
+
+/** Campus counts live on the organization, not the role, so look them up. */
+function campusesFor(organization: string) {
+  return organizations.find((o) => o.name === organization)?.campuses;
+}
 
 export const metadata: Metadata = pageMetadata({
   title: "Experience",
@@ -38,67 +47,90 @@ export default function ExperiencePage() {
             title="Current roles."
           />
 
-          <ol className="mt-14 border-t border-line lg:mt-16">
+          <ol className="mt-14 grid gap-5 lg:mt-16 lg:gap-6">
             {roles.map((role) => (
-              <li key={role.slug} className="border-b border-line">
+              <li key={role.slug}>
                 <Reveal>
-                  <article className="grid gap-6 py-10 lg:grid-cols-12 lg:gap-12 lg:py-14">
-                    <header className="lg:col-span-5">
-                      <h3 className="text-display-md text-content">
-                        {role.href ? (
-                          <a
-                            href={role.href}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="transition-colors duration-300 ease-editorial hover:text-accent"
-                          >
-                            {role.organization}
-                            <span className="sr-only"> (opens in a new tab)</span>
-                          </a>
-                        ) : (
-                          role.organization
-                        )}
-                      </h3>
-                      <p className="mt-3 text-sm font-medium text-accent">
-                        {role.title}
-                      </p>
-                    </header>
-
-                    <div className="lg:col-span-7">
-                      <p className="flex flex-wrap items-center gap-x-3 gap-y-1 text-eyebrow font-medium uppercase text-content-subtle">
-                        {role.period ? <span>{role.period}</span> : null}
-                        {role.period && role.location ? (
-                          <span aria-hidden="true" className="text-line-strong">
-                            /
-                          </span>
-                        ) : null}
-                        {role.location ? <span>{role.location}</span> : null}
-                      </p>
-
-                      {role.summary ? (
-                        <p className="mt-5 max-w-2xl text-lede text-content-muted">
-                          {role.summary}
-                        </p>
-                      ) : null}
-
-                      {role.highlights && role.highlights.length > 0 ? (
-                        <ul className="mt-8 flex flex-col gap-4">
-                          {role.highlights.map((highlight) => (
-                            <li
-                              key={highlight}
-                              className="flex max-w-2xl gap-4 text-sm leading-relaxed text-content-muted"
+                  <Card as="article" padding="lg">
+                    {/* One column throughout: the meta row is a footer under a
+                        rule rather than a side column, so it cannot drift out
+                        of alignment with a heading of unpredictable height. */}
+                    <div className="flex flex-col gap-6 sm:flex-row sm:items-start sm:gap-8">
+                      <IconChip icon={Building2} className="sm:mt-1" />
+                      <div className="min-w-0 flex-1">
+                        <h3 className="text-display-md text-content">
+                          {role.href ? (
+                            <a
+                              href={role.href}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="transition-colors duration-300 ease-editorial hover:text-accent"
                             >
-                              <span
-                                aria-hidden="true"
-                                className="mt-2.5 h-px w-4 shrink-0 bg-accent"
-                              />
-                              {highlight}
-                            </li>
-                          ))}
-                        </ul>
-                      ) : null}
+                              {role.organization}
+                              <span className="sr-only"> (opens in a new tab)</span>
+                            </a>
+                          ) : (
+                            role.organization
+                          )}
+                        </h3>
+                        <p className="mt-3 text-sm font-medium text-accent">
+                          {role.title}
+                        </p>
+
+                        {role.summary ? (
+                          <p className="mt-6 max-w-2xl text-lede text-content-muted">
+                            {role.summary}
+                          </p>
+                        ) : null}
+
+                        {role.highlights && role.highlights.length > 0 ? (
+                          <ul className="mt-7 flex flex-col gap-4">
+                            {role.highlights.map((highlight) => (
+                              <li
+                                key={highlight}
+                                className="flex max-w-2xl gap-4 text-sm leading-relaxed text-content-muted"
+                              >
+                                <span
+                                  aria-hidden="true"
+                                  className="mt-2.5 h-px w-4 shrink-0 bg-accent"
+                                />
+                                {highlight}
+                              </li>
+                            ))}
+                          </ul>
+                        ) : null}
+                      </div>
                     </div>
-                  </article>
+
+                    <dl className="mt-8 flex flex-wrap gap-x-12 gap-y-5 border-t border-line pt-7">
+                      {campusesFor(role.organization) ? (
+                        <div>
+                          <dt className="text-eyebrow font-medium uppercase text-content-subtle">
+                            Campuses
+                          </dt>
+                          <dd className="mt-1.5 font-display text-2xl text-content">
+                            {campusesFor(role.organization)}
+                          </dd>
+                        </div>
+                      ) : null}
+                      {role.location ? (
+                        <div>
+                          <dt className="text-eyebrow font-medium uppercase text-content-subtle">
+                            Location
+                          </dt>
+                          <dd className="mt-1.5 text-content">{role.location}</dd>
+                        </div>
+                      ) : null}
+                      {role.period ? (
+                        <div>
+                          <dt className="text-eyebrow font-medium uppercase text-content-subtle">
+                            Period
+                          </dt>
+                          <dd className="mt-1.5 text-content">{role.period}</dd>
+                        </div>
+                      ) : null}
+                    </dl>
+                  </Card>
                 </Reveal>
               </li>
             ))}

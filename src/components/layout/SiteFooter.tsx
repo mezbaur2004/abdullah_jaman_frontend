@@ -19,8 +19,7 @@ export function SiteFooter() {
           <div className="max-w-md">
             <p className="font-display text-display-md">{site.name}</p>
             <p className="mt-4 text-sm leading-relaxed text-on-inverse-muted">
-              {site.role} — Wheaton International School &amp; Guidance
-              International School
+              {site.tagline}
             </p>
             {site.email ? (
               <a

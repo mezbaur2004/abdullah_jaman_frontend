@@ -11,9 +11,9 @@ import type { Award, Statistic } from "./types";
 
 export const achievementsIntro = {
   eyebrow: "Achievements",
-  headline: "Founding and leading two schools.",
-  /** VERIFIED — founding both institutions is established; nothing more is. */
-  lede: "Abdullah Jaman founded Wheaton International School and Guidance International School in Dhaka, and serves as Principal of both.",
+  headline: "Institutions under his leadership.",
+  /** VERIFIED — the institutions, the roles and the campus counts. */
+  lede: "Wheaton International School and Guidance International School operate across six campuses in Dhaka, with Abdullah Jaman as Principal of both.",
 } as const;
 
 /** TO COLLECT — measurable results, student and community impact. */
