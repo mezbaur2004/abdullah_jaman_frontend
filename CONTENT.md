@@ -1,79 +1,104 @@
-# Content to replace before launch
+# Content dataset
 
-Every word on the site is placeholder copy written to exercise the layout.
-None of it has been checked with Abdullah Jaman. This is the checklist.
+The site renders **verified information only**. Everything else is recorded but
+not published.
 
-All of it lives in `src/content/` — no copy is hard-coded in a component.
+Three states are kept strictly apart, and the code enforces the distinction:
 
-## Priority 1 — factually wrong until confirmed
-
-These are specific claims. They are currently invented and **must not ship**.
-
-| File | What to fix |
-| --- | --- |
-| `achievements.ts` | `awards` — all four titles, issuing bodies and years are invented. The issuers are generic descriptions ("Regional Schools Association"), not real organizations. Replace with real awards or delete the array. |
-| `achievements.ts` | `milestones` — the years 2018/2020/2022/2024 are guesses. |
-| `achievements.ts` | `statistics` — "3", "15+", "100+", "2" are illustrative. |
-| `media.ts` | `mediaItems` — all six are invented. Outlet names are generic categories, not real publications. No `href` is set on any of them, so nothing links anywhere misleading. Add the real title, outlet, date and live URL, or delete the array. |
-| `experience.ts` | `roles` — every `period` says "Present". Add real start dates. `location` is assumed to be Dhaka. |
-| `profile.ts` | `testimonials` — the single entry is placeholder text attributed to "Placeholder Name". **Delete it or replace it with a real, cleared quote.** It is not currently rendered anywhere, but it will be if a testimonials section is added. |
-
-## Priority 2 — site configuration
-
-| File | Field | Currently | Needs |
-| --- | --- | --- | --- |
-| `site.ts` | `url` | `https://abdullahjaman.com` | The real domain. Canonical URLs, Open Graph, the sitemap and robots.txt all derive from this. |
-| `site.ts` | `email` | `developers.pedagoacademy@gmail.com` | The address enquiries should actually reach. This is currently a developer address, not a public contact. |
-| `site.ts` | `phone` | empty | A number, or leave empty (nothing renders). |
-| `site.ts` | `location` | `Dhaka, Bangladesh` | Confirm. |
-| `site.ts` | `socialLinks` | Bare `linkedin.com` etc. | Real profile URLs, or delete the entries. |
-
-## Priority 3 — narrative copy
-
-Written in the intended voice, but it is an outsider's guess at the story.
-Read it as a draft and rewrite in Abdullah Jaman's own words.
-
-- `profile.ts` — `hero.headline`, `hero.lede`, `aboutTeaser`, `aboutPage`
-  (three sections plus the facts sidebar), `organizations` summaries.
-- `experience.ts` — `roles[].summary` and `highlights`, all four `initiatives`.
-- `contact.ts` — `contactIntro`, `contactChannels`, `contactCta`.
-- `achievements.ts` — `achievementsIntro`.
-- `media.ts` — `mediaIntro`.
-
-## Priority 4 — photography
-
-`public/images/` holds generated abstract placeholder plates. They are
-deliberately not stock photography and carry no text, so they read as art
-direction rather than as broken images — but they are not photographs of
-Abdullah Jaman.
-
-| Path | Used by | Ratio |
+| State | Where it lives | Rendered? |
 | --- | --- | --- |
-| `portrait-hero.jpg` | Homepage hero | 4:5 portrait |
-| `portrait-about.jpg` | About teaser and About page | 4:5 portrait |
-| `gallery-01.jpg` | Homepage gallery | 4:3 landscape |
-| `gallery-02.jpg` | Homepage gallery | 3:4 portrait |
-| `gallery-03.jpg` | Homepage gallery | 3:4 portrait |
-| `gallery-04.jpg` | Homepage gallery | 4:3 landscape |
+| **Verified** | `src/content/*.ts` | Yes |
+| **Awaiting confirmation** | `src/content/status.ts` → `openQuestions` | No |
+| **To collect** | `src/content/status.ts` → `contentGaps` | No |
 
-Drop real files in at the same paths and update `width`/`height` in
-`profile.ts` and `gallery.ts`. Images are cropped by a CSS ratio box, so other
-dimensions will not break the layout.
+The register is also viewable as a page at **`/content-status`** — noindex,
+disallowed in `robots.txt`, and not linked from the site.
 
-Also update every `alt` string to describe the real photograph. The current alt
-text describes a picture that does not exist yet.
+## Verified
 
-Set `gallery` to `[]` in `gallery.ts` to hide the gallery section entirely.
+| Fact | Source |
+| --- | --- |
+| Name: Abdullah Jaman | Dataset |
+| Location: Dhaka, Bangladesh | Dataset |
+| Founder & Principal, Wheaton International School (WIS) | Dataset, LinkedIn, The Daily Star |
+| Founder & Principal, Guidance International School (GIS) | Dataset, LinkedIn, The Daily Star |
+| WIS website: https://wheaton.edu.bd | Dataset |
+| Association with the University of Cambridge | Dataset |
+| The Daily Star interview (live URL in `media.ts`) | Dataset |
 
-## How to check your work
+The approved positioning statement lives once, in `site.description`, and every
+page that needs it reads from there. **Do not make stronger claims than it
+does** without new source material.
+
+## Awaiting confirmation — not published
+
+- **The 2020–2023 date range.** Visible on LinkedIn, but there is no way to
+  attach it to a position, so no dates appear anywhere on the site.
+- **University of Cambridge.** The association is confirmed; the degree,
+  subject and dates are not. The site names the institution and nothing else.
+- **Pedago Academy.** The original project brief described Abdullah Jaman as
+  Managing Director of Pedago Academy, and the contact address supplied was a
+  Pedago Academy one. The verified dataset does not mention it and gives the
+  positioning as Founder & Principal of WIS and GIS only. **This needs a
+  decision** — is the role current, former, or not applicable? Nothing about it
+  is shown until then.
+- **LinkedIn activity.** Not enough detail to classify any of it as an
+  achievement, publication or milestone, so none of it is treated as content.
+
+## Empty on purpose
+
+These arrays are empty, and their sections remove themselves from the site as a
+result. Populating an array is all it takes to bring its section back.
+
+| File | Export | Section it controls |
+| --- | --- | --- |
+| `achievements.ts` | `statistics` | Homepage statistics band |
+| `achievements.ts` | `awards` | Awards, homepage and achievements page |
+| `achievements.ts` | `milestones` | Timeline on the achievements page |
+| `experience.ts` | `initiatives` | Professional work, homepage and experience page |
+| `gallery.ts` | `gallery` | Homepage photo gallery |
+| `media.ts` | `publications` | Publications on the media page |
+| `site.ts` | `socialLinks` | Social links in the footer and contact page |
+| `profile.ts` | `portrait` (`null`) | Every portrait slot |
+
+**Do not fill any of these with plausible-sounding placeholders.** An invented
+award or statistic on a personal-brand site is the single easiest thing to be
+caught out on, and it is why the previous draft of this content was removed.
+
+## Still to collect
+
+The full list is in `src/content/status.ts` (`contentGaps`) and renders at
+`/content-status`. Headline items:
+
+1. **A professional email.** `site.email` is empty, so every email link on the
+   site is hidden and the contact page falls back to the WIS website. This is
+   the single highest-value thing to supply.
+2. **The live domain.** `site.url` is a placeholder. Canonical URLs, Open
+   Graph, the sitemap and `robots.txt` all derive from it.
+3. **A photograph.** No portrait exists, so the hero and About page use an
+   abstract decorative panel — not a likeness, and marked decorative so screen
+   readers skip it. Set `portrait` in `profile.ts` and it is used everywhere
+   automatically.
+4. **Biography.** `aboutPage.sections` is empty; the About page currently shows
+   verified facts only. Add `{ heading, body[] }` entries and they render in
+   order.
+5. **Career history**, with dates and responsibilities, to fill out `roles`.
+
+## Pending notices
+
+Three short strings tell readers that a section is still being compiled, rather
+than leaving a bare gap:
+
+- `experience.ts` → `experiencePending`
+- `achievements.ts` → `achievementsPending`
+- `contact.ts` → `contactPending`
+
+Delete a string and its notice disappears with it.
+
+## Checking your work
 
 ```bash
 npm run lint && npm run typecheck && npm run build
 ```
 
-Then search for anything left behind:
-
-```bash
-grep -rn "PLACEHOLDER" src/content/
-grep -rn "Placeholder" src/content/
-```
+Then read `/content-status` in the running site to see what is still open.

@@ -1,24 +1,27 @@
 import type { Metadata } from "next";
-import { Mail, MapPin } from "lucide-react";
+import { Mail, MapPin, Phone } from "lucide-react";
 
 import { Container } from "@/components/layout/Container";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { Section } from "@/components/layout/Section";
 import { Button } from "@/components/ui/Button";
 import { Eyebrow } from "@/components/ui/Eyebrow";
+import { PendingNote } from "@/components/ui/PendingNote";
 import { Reveal } from "@/components/ui/Reveal";
-import { contactChannels, contactIntro } from "@/content/contact";
-import { site, socialLinks } from "@/content/site";
+import { contactChannels, contactIntro, contactPending } from "@/content/contact";
+import { institutionLinks, site, socialLinks } from "@/content/site";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
   title: "Contact",
   description:
-    "Get in touch with Abdullah Jaman about speaking invitations, academic partnerships, media requests and institutional advisory work.",
+    "Get in touch with Abdullah Jaman about speaking invitations, institutional enquiries and media requests.",
   path: "/contact",
 });
 
 export default function ContactPage() {
+  const hasDirectDetails = Boolean(site.email || site.phone);
+
   return (
     <>
       <PageHeader
@@ -27,7 +30,7 @@ export default function ContactPage() {
         lede={contactIntro.lede}
       />
 
-      <Section>
+      <Section divider={false} index="01" indexLabel="Enquiries">
         <Container>
           <div className="grid gap-16 lg:grid-cols-12 lg:gap-20">
             <div className="lg:col-span-7">
@@ -35,18 +38,15 @@ export default function ContactPage() {
                 <Eyebrow>What to write about</Eyebrow>
               </Reveal>
 
-              <ul className="mt-10 border-t border-ink-900/10">
-                {contactChannels.map((channel, index) => (
-                  <li
-                    key={channel.label}
-                    className="border-b border-ink-900/10"
-                  >
-                    <Reveal delay={index * 0.05}>
+              <ul className="mt-10 border-t border-line">
+                {contactChannels.map((channel, i) => (
+                  <li key={channel.label} className="border-b border-line">
+                    <Reveal delay={i * 0.05}>
                       <div className="py-8">
-                        <h2 className="font-display text-2xl leading-snug text-ink-900">
+                        <h2 className="font-display text-2xl leading-snug text-content">
                           {channel.label}
                         </h2>
-                        <p className="mt-3 max-w-xl leading-relaxed text-ink-600">
+                        <p className="mt-3 max-w-xl leading-relaxed text-content-muted">
                           {channel.description}
                         </p>
                       </div>
@@ -58,31 +58,26 @@ export default function ContactPage() {
 
             <div className="lg:col-span-5">
               <Reveal>
-                <div className="bg-paper-soft p-8 sm:p-10">
-                  <h2 className="font-display text-display-md text-ink-900">
+                <div className="border border-line bg-surface-raised p-8 shadow-panel sm:p-10">
+                  <h2 className="font-display text-display-md text-content">
                     Direct
                   </h2>
-                  <p className="mt-4 leading-relaxed text-ink-600">
-                    Every enquiry is read. Please include the institution, the
-                    dates you are working to, and what you would like Abdullah
-                    to do.
-                  </p>
 
-                  <dl className="mt-9 flex flex-col gap-7 border-t border-ink-900/10 pt-9">
+                  <dl className="mt-8 flex flex-col gap-7 border-t border-line pt-8">
                     {site.email ? (
                       <div>
-                        <dt className="flex items-center gap-2.5 text-eyebrow font-medium uppercase text-ink-500">
+                        <dt className="flex items-center gap-2.5 text-eyebrow font-medium uppercase text-content-subtle">
                           <Mail
                             aria-hidden="true"
                             strokeWidth={1.5}
-                            className="size-4 shrink-0 text-brass-600"
+                            className="size-4 shrink-0 text-accent"
                           />
                           Email
                         </dt>
                         <dd className="mt-2.5 pl-[1.625rem]">
                           <a
                             href={`mailto:${site.email}`}
-                            className="break-all border-b border-ink-900/25 pb-0.5 text-ink-900 transition-colors duration-300 ease-editorial hover:border-ink-900"
+                            className="break-all border-b border-line-strong pb-0.5 text-content transition-colors duration-300 ease-editorial hover:border-content"
                           >
                             {site.email}
                           </a>
@@ -90,34 +85,63 @@ export default function ContactPage() {
                       </div>
                     ) : null}
 
-                    {site.location ? (
+                    {site.phone ? (
                       <div>
-                        <dt className="flex items-center gap-2.5 text-eyebrow font-medium uppercase text-ink-500">
-                          <MapPin
+                        <dt className="flex items-center gap-2.5 text-eyebrow font-medium uppercase text-content-subtle">
+                          <Phone
                             aria-hidden="true"
                             strokeWidth={1.5}
-                            className="size-4 shrink-0 text-brass-600"
+                            className="size-4 shrink-0 text-accent"
                           />
-                          Based in
+                          Phone
                         </dt>
-                        <dd className="mt-2.5 pl-[1.625rem] text-ink-900">
-                          {site.location}
+                        <dd className="mt-2.5 pl-[1.625rem] text-content">
+                          {site.phone}
                         </dd>
                       </div>
                     ) : null}
+
+                    <div>
+                      <dt className="flex items-center gap-2.5 text-eyebrow font-medium uppercase text-content-subtle">
+                        <MapPin
+                          aria-hidden="true"
+                          strokeWidth={1.5}
+                          className="size-4 shrink-0 text-accent"
+                        />
+                        Based in
+                      </dt>
+                      <dd className="mt-2.5 pl-[1.625rem] text-content">
+                        {site.location}
+                      </dd>
+                    </div>
                   </dl>
 
-                  {site.email ? (
-                    <div className="mt-10">
+                  {/* While no personal address exists, the school's own site is
+                      the only honest route — so it is the primary action. */}
+                  {hasDirectDetails ? (
+                    <div className="mt-9">
                       <Button href={`mailto:${site.email}`}>
                         Write an email
                       </Button>
                     </div>
-                  ) : null}
+                  ) : (
+                    <>
+                      <PendingNote className="mt-9">
+                        {contactPending}
+                      </PendingNote>
+                      {institutionLinks[0] ? (
+                        <div className="mt-8">
+                          <Button href={institutionLinks[0].href}>
+                            Visit {institutionLinks[0].label}
+                          </Button>
+                        </div>
+                      ) : null}
+                    </>
+                  )}
 
                   {socialLinks.length > 0 ? (
-                    <div className="mt-10 border-t border-ink-900/10 pt-8">
-                      <h3 className="text-eyebrow font-medium uppercase text-ink-500">
+                    <div className="mt-10 border-t border-line pt-8">
+                      <h3 className="text-eyebrow font-medium uppercase text-content-subtle">
                         Elsewhere
                       </h3>
                       <ul className="mt-4 flex flex-wrap gap-x-6 gap-y-2">
@@ -127,7 +151,7 @@ export default function ContactPage() {
                               href={link.href}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="text-sm text-ink-600 transition-colors duration-300 ease-editorial hover:text-ink-900"
+                              className="text-sm text-content-muted transition-colors duration-300 ease-editorial hover:text-content"
                             >
                               {link.label}
                             </a>

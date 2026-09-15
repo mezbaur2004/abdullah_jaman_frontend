@@ -20,13 +20,13 @@ const base =
 
 const variants: Record<Variant, string> = {
   primary:
-    "rounded-full bg-ink-900 px-7 py-3.5 text-paper hover:bg-ink-700",
+    "rounded-full bg-action px-7 py-3.5 text-on-action hover:bg-action-hover",
   secondary:
-    "rounded-full border border-ink-900/20 px-7 py-3.5 text-ink-900 hover:border-ink-900/50 hover:bg-ink-900/[0.03]",
+    "rounded-full border border-line-strong px-7 py-3.5 text-content hover:border-content hover:bg-content/[0.04]",
+  // For use on the inverse band, where the fill has to read light in both themes.
   inverse:
-    "rounded-full bg-paper px-7 py-3.5 text-ink-900 hover:bg-brass-200",
-  quiet:
-    "border-b border-ink-900/25 pb-1 text-ink-900 hover:border-ink-900",
+    "rounded-full bg-action-inverse px-7 py-3.5 text-on-action-inverse hover:bg-action-inverse-hover",
+  quiet: "border-b border-line-strong pb-1 text-content hover:border-content",
 };
 
 function isExternal(href: string) {
@@ -73,6 +73,7 @@ export function Button({
         {...(isHttp ? { target: "_blank", rel: "noopener noreferrer" } : {})}
       >
         {content}
+        {isHttp ? <span className="sr-only">(opens in a new tab)</span> : null}
       </a>
     );
   }

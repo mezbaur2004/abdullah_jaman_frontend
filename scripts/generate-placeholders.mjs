@@ -1,12 +1,13 @@
 /**
- * Generates the neutral, art-directed placeholder plates in public/images so the
- * site renders as a finished piece before real photography exists.
+ * Generates the decorative plate in public/images.
  *
- * Deliberately abstract — no stock imagery and no text baked into the picture.
- * Replace the files with real photographs at the same paths and aspect ratios
- * and nothing in the app needs to change.
+ * No photograph of Abdullah Jaman has been supplied, so the hero uses an
+ * abstract panel instead of a stand-in portrait: it is not a likeness and
+ * makes no claim about anyone, and it carries an empty `alt` so assistive
+ * technology skips it. Once a real portrait exists, set `portrait` in
+ * src/content/profile.ts and the panel is replaced automatically.
  *
- *   node scripts/generate-placeholders.mjs
+ *   npm run placeholders
  */
 import { mkdir } from "node:fs/promises";
 import { dirname, join } from "node:path";
@@ -17,12 +18,16 @@ import sharp from "sharp";
 const outDir = join(dirname(fileURLToPath(import.meta.url)), "..", "public", "images");
 
 const plates = [
-  { file: "portrait-hero.jpg",  w: 1200, h: 1500, from: "#23262c", to: "#0c0e11", glow: "#6d7482", gx: "62%", gy: "26%" },
-  { file: "portrait-about.jpg", w: 1200, h: 1500, from: "#2a241a", to: "#100d09", glow: "#a98850", gx: "38%", gy: "30%" },
-  { file: "gallery-01.jpg",     w: 1400, h: 1050, from: "#1e2228", to: "#0b0d10", glow: "#8b939f", gx: "72%", gy: "34%" },
-  { file: "gallery-02.jpg",     w: 1050, h: 1400, from: "#d9d3c7", to: "#a9a192", glow: "#f3f1ec", gx: "40%", gy: "22%" },
-  { file: "gallery-03.jpg",     w: 1050, h: 1400, from: "#262a31", to: "#101318", glow: "#c6ab7c", gx: "55%", gy: "70%" },
-  { file: "gallery-04.jpg",     w: 1400, h: 1050, from: "#c9c2b4", to: "#8f8778", glow: "#faf9f6", gx: "66%", gy: "30%" },
+  {
+    file: "panel-hero.jpg",
+    w: 1200,
+    h: 1500,
+    from: "#23262c",
+    to: "#0c0e11",
+    glow: "#6d7482",
+    gx: "62%",
+    gy: "26%",
+  },
 ];
 
 const plate = ({ w, h, from, to, glow, gx, gy }) => `

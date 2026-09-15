@@ -13,6 +13,7 @@ import { Menu, X } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 
 import { Container } from "./Container";
+import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { primaryNav, site } from "@/content/site";
 import { cn } from "@/lib/cn";
 
@@ -32,8 +33,8 @@ export function SiteHeader() {
     [pathname],
   );
 
-  // A hairline and solid ground appear only once the page has moved, so the
-  // header sits invisibly on the hero at rest.
+  // A rule and solid ground appear only once the page has moved, so the header
+  // sits invisibly on the hero at rest.
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
     onScroll();
@@ -66,14 +67,14 @@ export function SiteHeader() {
       className={cn(
         "sticky top-0 z-50 transition-colors duration-500 ease-editorial",
         scrolled || menuOpen
-          ? "border-b border-ink-900/10 bg-paper"
-          : "border-b border-transparent bg-paper/0",
+          ? "border-b border-line bg-surface"
+          : "border-b border-transparent",
       )}
     >
       <Container className="flex h-20 items-center justify-between gap-8 lg:h-24">
         <Link
           href="/"
-          className="font-display text-lg tracking-[-0.015em] text-ink-900 lg:text-xl"
+          className="font-display text-lg tracking-[-0.015em] text-content lg:text-xl"
         >
           {site.shortName}
         </Link>
@@ -87,10 +88,10 @@ export function SiteHeader() {
                   aria-current={isCurrent(item.href) ? "page" : undefined}
                   className={cn(
                     "relative text-sm transition-colors duration-300 ease-editorial",
-                    "after:absolute after:-bottom-1.5 after:left-0 after:h-px after:bg-ink-900 after:transition-all after:duration-300 after:ease-editorial after:content-['']",
+                    "after:absolute after:-bottom-1.5 after:left-0 after:h-px after:bg-content after:transition-all after:duration-300 after:ease-editorial after:content-['']",
                     isCurrent(item.href)
-                      ? "text-ink-900 after:w-full"
-                      : "text-ink-500 after:w-0 hover:text-ink-900 hover:after:w-full",
+                      ? "text-content after:w-full"
+                      : "text-content-subtle after:w-0 hover:text-content hover:after:w-full",
                   )}
                 >
                   {item.label}
@@ -100,36 +101,37 @@ export function SiteHeader() {
           </ul>
         </nav>
 
-        <div className="hidden lg:block">
+        <div className="flex items-center gap-3">
+          <ThemeToggle />
           <Link
             href="/contact"
-            className="rounded-full bg-ink-900 px-6 py-3 text-sm font-medium text-paper transition-colors duration-300 ease-editorial hover:bg-ink-700"
+            className="hidden rounded-full bg-action px-6 py-3 text-sm font-medium text-on-action transition-colors duration-300 ease-editorial hover:bg-action-hover lg:inline-flex"
           >
-            Work with Abdullah
+            Get in touch
           </Link>
-        </div>
 
-        <button
-          type="button"
-          onClick={() => setMenu({ open: !menuOpen, route: pathname })}
-          aria-expanded={menuOpen}
-          aria-controls="mobile-navigation"
-          className="-mr-2 inline-flex size-11 items-center justify-center text-ink-900 lg:hidden"
-        >
-          <span className="sr-only">
-            {menuOpen ? "Close menu" : "Open menu"}
-          </span>
-          {menuOpen ? (
-            <X aria-hidden="true" strokeWidth={1.5} className="size-6" />
-          ) : (
-            <Menu aria-hidden="true" strokeWidth={1.5} className="size-6" />
-          )}
-        </button>
+          <button
+            type="button"
+            onClick={() => setMenu({ open: !menuOpen, route: pathname })}
+            aria-expanded={menuOpen}
+            aria-controls="mobile-navigation"
+            className="-mr-2 inline-flex size-11 items-center justify-center text-content lg:hidden"
+          >
+            <span className="sr-only">
+              {menuOpen ? "Close menu" : "Open menu"}
+            </span>
+            {menuOpen ? (
+              <X aria-hidden="true" strokeWidth={1.5} className="size-6" />
+            ) : (
+              <Menu aria-hidden="true" strokeWidth={1.5} className="size-6" />
+            )}
+          </button>
+        </div>
       </Container>
 
       {/* Framer Motion is loaded here and nowhere else: the overlay is the one
-          place an exit animation is worth shipping JavaScript for. `domAnimation`
-          plus `strict` keeps it to the DOM feature set. */}
+          place an exit animation is worth shipping JavaScript for.
+          `domAnimation` plus `strict` keeps it to the DOM feature set. */}
       <LazyMotion features={domAnimation} strict>
         <AnimatePresence>
           {menuOpen ? (
@@ -142,20 +144,20 @@ export function SiteHeader() {
                 prefersReducedMotion ? { opacity: 0 } : { opacity: 0, y: -8 }
               }
               transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
-              className="absolute inset-x-0 top-full h-[calc(100dvh-5rem)] overflow-y-auto border-t border-ink-900/10 bg-paper lg:hidden"
+              className="absolute inset-x-0 top-full h-[calc(100dvh-5rem)] overflow-y-auto border-t border-line bg-surface lg:hidden"
             >
               <Container as="nav" aria-label="Primary" className="py-10">
                 <ul className="flex flex-col">
                   {primaryNav.map((item) => (
-                    <li key={item.href} className="border-b border-ink-900/10">
+                    <li key={item.href} className="border-b border-line">
                       <Link
                         href={item.href}
                         aria-current={isCurrent(item.href) ? "page" : undefined}
                         className={cn(
                           "flex items-baseline justify-between py-5 font-display text-display-md",
                           isCurrent(item.href)
-                            ? "text-ink-900"
-                            : "text-ink-600",
+                            ? "text-content"
+                            : "text-content-muted",
                         )}
                       >
                         {item.label}
@@ -165,9 +167,9 @@ export function SiteHeader() {
                 </ul>
                 <Link
                   href="/contact"
-                  className="mt-10 inline-flex w-full items-center justify-center rounded-full bg-ink-900 px-7 py-4 text-sm font-medium text-paper"
+                  className="mt-10 inline-flex w-full items-center justify-center rounded-full bg-action px-7 py-4 text-sm font-medium text-on-action"
                 >
-                  Work with Abdullah
+                  Get in touch
                 </Link>
               </Container>
             </m.div>

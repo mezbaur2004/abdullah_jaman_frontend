@@ -1,104 +1,94 @@
-import type { ImageAsset, Organization, Testimonial } from "./types";
+import type { EducationEntry, ImageAsset, Organization } from "./types";
+import { site } from "./site";
 
 /**
- * PLACEHOLDER CONTENT — see CONTENT.md.
- * Narrative copy is written in the intended voice but has not been approved.
- * Portraits point at generated placeholder plates; drop real photography in at
- * the same paths and dimensions and nothing else needs to change.
+ * VERIFIED unless marked otherwise.
+ *
+ * Biography, career narrative and leadership philosophy are all still TO
+ * COLLECT. They are deliberately absent rather than approximated — the About
+ * page renders only what exists.
  */
 
-export const portrait: ImageAsset = {
-  src: "/images/portrait-hero.jpg",
-  alt: "Portrait of Abdullah Jaman",
-  width: 1200,
-  height: 1500,
-};
+/**
+ * TO COLLECT — no photograph of Abdullah Jaman has been supplied. Null keeps
+ * every portrait slot empty rather than captioning a stand-in as him.
+ *
+ * To add one: drop the file in public/images/ and set this to
+ * { src: "/images/portrait.jpg", alt: "Abdullah Jaman", width, height }.
+ */
+export const portrait: ImageAsset | null = null;
 
-export const portraitSecondary: ImageAsset = {
-  src: "/images/portrait-about.jpg",
-  alt: "Abdullah Jaman photographed at work",
+/**
+ * Decorative only. An abstract plate, not a photograph and not a likeness, so
+ * it makes no claim about anyone. The empty `alt` hides it from assistive
+ * technology. It gives the hero a visual anchor until a real portrait exists.
+ */
+export const heroPanel: ImageAsset = {
+  src: "/images/panel-hero.jpg",
+  alt: "",
   width: 1200,
   height: 1500,
 };
 
 export const hero = {
-  eyebrow: "Educationist & Institution Builder",
-  headline: "Building schools that outlast the people who start them.",
-  lede: "Abdullah Jaman has spent his career turning educational intent into institutions — designing the academic systems, teaching cultures and leadership structures that let a school keep its standards long after the founding team has moved on.",
-  primaryCta: { label: "Read the full story", href: "/about" },
+  eyebrow: site.role,
+  /** VERIFIED — both roles, stated plainly. */
+  headline: "Wheaton International School & Guidance International School",
+  lede: site.description,
+  primaryCta: { label: "About Abdullah", href: "/about" },
   secondaryCta: { label: "Get in touch", href: "/contact" },
 } as const;
 
+/** VERIFIED — role and institutions confirmed; WIS website confirmed. */
 export const organizations: Organization[] = [
   {
-    name: "Pedago Academy",
-    role: "Managing Director",
-    summary:
-      "An education venture building teaching capacity, curriculum design and academic leadership programmes.",
-  },
-  {
     name: "Wheaton International School",
-    role: "Founder & Managing Director",
-    summary:
-      "An international-curriculum school founded on a structured, inquiry-led academic model.",
+    shortName: "WIS",
+    role: "Founder & Principal",
+    location: "Dhaka, Bangladesh",
+    href: "https://wheaton.edu.bd",
   },
   {
     name: "Guidance International School",
-    role: "Principal",
-    summary:
-      "A school community focused on academic rigour paired with character and pastoral care.",
+    shortName: "GIS",
+    role: "Founder & Principal",
+    location: "Dhaka, Bangladesh",
+  },
+];
+
+/**
+ * VERIFIED — the association with Cambridge is confirmed. The degree, subject
+ * and dates are not, so no qualification is stated.
+ */
+export const education: EducationEntry[] = [
+  {
+    institution: "University of Cambridge",
+    note: "Programme and dates to be confirmed.",
   },
 ];
 
 export const aboutTeaser = {
   eyebrow: "About",
-  headline: "A career spent on the unglamorous half of education.",
-  body: [
-    "Most conversations about schools begin with buildings and end with results. The work in between — how a syllabus is sequenced, how a new teacher is coached through their first difficult term, how a leadership team makes decisions when nobody is watching — is where a school is actually made or lost.",
-    "That middle ground has been Abdullah Jaman's working life. As Managing Director of Pedago Academy and founding leader of Wheaton International School, he has built academic systems from first principles and stayed close enough to the classroom to know when they are failing.",
-  ],
+  headline: "Education leader and institutional founder.",
+  /** VERIFIED — the approved positioning statement, unembellished. */
+  body: [site.description],
   cta: { label: "More about Abdullah", href: "/about" },
 } as const;
 
 export const aboutPage = {
   eyebrow: "About",
   headline: "Abdullah Jaman",
-  lede: "Educationist, institution builder and school leader, working at the point where academic ambition meets the systems that have to deliver it.",
-  sections: [
-    {
-      heading: "The work",
-      body: [
-        "Abdullah Jaman builds and leads schools. That means curriculum architecture, teacher development, academic governance and the day-to-day judgement calls that decide whether a stated standard is a real one. He currently serves as Managing Director of Pedago Academy, Founder and Managing Director of Wheaton International School, and Principal of Guidance International School.",
-        "Across those roles the brief has been consistent: establish an academic model that is demanding but humane, build a teaching team capable of running it, and put enough structure around both that the institution does not depend on any single person — including him.",
-      ],
-    },
-    {
-      heading: "Approach",
-      body: [
-        "Start with the classroom and work outwards. Policy that has never survived contact with a Tuesday afternoon lesson is not policy, it is paperwork. Every system introduced is tested against whether it makes a teacher's job clearer and a student's learning more visible.",
-        "Measure what is uncomfortable to measure. Attendance and grades are easy. Whether students can defend an argument, whether a new teacher is genuinely improving, whether parents trust the school with a difficult conversation — those take more effort to see, and they are the ones that predict where an institution ends up.",
-      ],
-    },
-    {
-      heading: "Beyond the schools",
-      body: [
-        "Alongside institutional work, Abdullah Jaman writes and speaks on school leadership, teacher development and the practical realities of running an academic institution — sharing what has worked, and what has been expensive to learn.",
-      ],
-    },
-  ],
+  lede: site.description,
+  /**
+   * TO COLLECT — short bio, long bio, personal story, career journey and
+   * leadership philosophy. Add entries here and the About page renders them
+   * in order; while the array is empty the page shows only verified facts.
+   */
+  sections: [] as Array<{ heading: string; body: string[] }>,
   facts: [
-    { label: "Focus", value: "School leadership & academic systems" },
-    { label: "Based in", value: "Dhaka, Bangladesh" },
-    { label: "Currently", value: "Managing Director, Pedago Academy" },
-    { label: "Speaks on", value: "Curriculum design, teacher development" },
+    { label: "Role", value: "Founder & Principal" },
+    { label: "Institutions", value: "Wheaton International School, Guidance International School" },
+    { label: "Based in", value: site.location },
+    { label: "Education", value: "University of Cambridge" },
   ],
 } as const;
-
-export const testimonials: Testimonial[] = [
-  {
-    quote:
-      "He is unusually willing to sit in a classroom and watch before changing anything. By the time a decision is announced, it has already been argued against harder than anyone in the room could manage.",
-    name: "Placeholder Name",
-    title: "Head of Academics, placeholder institution",
-  },
-];

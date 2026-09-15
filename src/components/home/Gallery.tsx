@@ -6,25 +6,23 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { gallery } from "@/content/gallery";
 
 /**
- * Optional by design: empty the `gallery` array in the content layer and the
- * section removes itself rather than leaving a hole in the page.
+ * Optional by design: while `gallery` is empty the section removes itself
+ * rather than leaving a hole in the page.
  */
-export function Gallery() {
+export function Gallery({ index }: { index?: string }) {
   if (gallery.length === 0) return null;
 
   return (
-    <Section tone="soft" aria-labelledby="gallery-heading">
+    <Section index={index} indexLabel="Gallery" aria-labelledby="gallery-heading">
       <Container>
         <SectionHeading
           id="gallery-heading"
-          eyebrow="In practice"
-          title="On the ground."
-          lede="Faculty sessions, classroom observation and the conversations that decide how a school actually runs."
+          title="Photographs."
         />
 
         <ul className="mt-14 grid gap-5 sm:grid-cols-2 lg:mt-16 lg:grid-cols-12 lg:gap-6">
-          {gallery.map((entry, index) => {
-            // A deliberately uneven rhythm: two wide plates, two tall ones.
+          {gallery.map((entry, i) => {
+            // A deliberately uneven rhythm: wide and tall plates alternating.
             const isWide = entry.image.width >= entry.image.height;
 
             return (
@@ -32,7 +30,7 @@ export function Gallery() {
                 key={entry.image.src}
                 className={isWide ? "lg:col-span-7" : "lg:col-span-5"}
               >
-                <Reveal delay={index * 0.05}>
+                <Reveal delay={i * 0.05}>
                   <Figure
                     image={entry.image}
                     caption={entry.caption}

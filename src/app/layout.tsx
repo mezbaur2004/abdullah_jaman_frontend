@@ -5,6 +5,7 @@ import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { site } from "@/content/site";
 import { personJsonLd } from "@/lib/seo";
+import { themeInitScript } from "@/lib/theme";
 import "./globals.css";
 
 const inter = Inter({
@@ -31,13 +32,12 @@ export const metadata: Metadata = {
   creator: site.name,
   keywords: [
     "Abdullah Jaman",
-    "educationist",
-    "school leadership",
-    "Pedago Academy",
     "Wheaton International School",
     "Guidance International School",
-    "curriculum design",
-    "teacher development",
+    "WIS Dhaka",
+    "GIS Dhaka",
+    "school principal Dhaka",
+    "education leader Bangladesh",
   ],
   alternates: { canonical: "/" },
   openGraph: {
@@ -61,18 +61,26 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#faf9f6",
-  colorScheme: "light",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#faf9f6" },
+    { media: "(prefers-color-scheme: dark)", color: "#0e1013" },
+  ],
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
+    // The init script writes data-theme onto this element before React
+    // hydrates, so the server markup and the live DOM legitimately differ.
     <html
       lang="en"
       data-scroll-behavior="smooth"
+      suppressHydrationWarning
       className={`${inter.variable} ${fraunces.variable} h-full antialiased`}
     >
       <head>
+        {/* Blocking and first, so a saved theme is applied before first paint
+            and the page never flashes the wrong one. */}
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
         <script
           type="application/ld+json"
           // Serialised from a local object — no user input reaches this string.
@@ -83,10 +91,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <style>{`[data-reveal]{opacity:1!important;transform:none!important}`}</style>
         </noscript>
       </head>
-      <body className="flex min-h-full flex-col bg-paper">
+      <body className="flex min-h-full flex-col bg-surface">
         <a
           href="#main"
-          className="sr-only rounded-full focus:not-sr-only focus:absolute focus:left-6 focus:top-6 focus:z-[60] focus:bg-ink-900 focus:px-5 focus:py-3 focus:text-sm focus:text-paper"
+          className="sr-only rounded-full focus:not-sr-only focus:absolute focus:left-6 focus:top-6 focus:z-[60] focus:bg-action focus:px-5 focus:py-3 focus:text-sm focus:text-on-action"
         >
           Skip to content
         </a>

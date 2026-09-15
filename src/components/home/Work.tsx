@@ -5,15 +5,16 @@ import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { initiatives } from "@/content/experience";
 
-export function Work() {
+/** Hidden until initiatives are confirmed. */
+export function Work({ index }: { index?: string }) {
+  if (initiatives.length === 0) return null;
+
   return (
-    <Section aria-labelledby="work-heading">
+    <Section index={index} indexLabel="Work" aria-labelledby="work-heading">
       <Container>
         <SectionHeading
           id="work-heading"
-          eyebrow="Professional work"
-          title="Initiatives, and what they were built to fix."
-          lede="Each of these started as a problem somebody was living with — an unteachable syllabus, a teacher left to sink, a standard nobody could enforce."
+          title="Initiatives and programmes."
           aside={
             <Button href="/experience" variant="quiet">
               Full experience
@@ -21,28 +22,28 @@ export function Work() {
           }
         />
 
-        <ol className="mt-16 border-t border-ink-900/10 lg:mt-20">
-          {initiatives.map((initiative, index) => (
-            <li key={initiative.slug} className="border-b border-ink-900/10">
+        <ol className="mt-16 border-t border-line lg:mt-20">
+          {initiatives.map((initiative, i) => (
+            <li key={initiative.slug} className="border-b border-line">
               <Reveal>
                 <article className="grid gap-6 py-10 lg:grid-cols-12 lg:gap-12 lg:py-14">
                   <div className="lg:col-span-3">
                     <span
                       aria-hidden="true"
-                      className="font-display text-sm text-brass-500"
+                      className="font-display text-sm text-accent"
                     >
-                      {String(index + 1).padStart(2, "0")}
+                      {String(i + 1).padStart(2, "0")}
                     </span>
-                    <p className="mt-3 text-eyebrow font-medium uppercase text-ink-500">
+                    <p className="mt-3 text-eyebrow font-medium uppercase text-content-subtle">
                       {initiative.category}
                     </p>
                   </div>
 
                   <div className="lg:col-span-6">
-                    <h3 className="text-display-md text-ink-900">
+                    <h3 className="text-display-md text-content">
                       {initiative.title}
                     </h3>
-                    <p className="mt-4 max-w-xl leading-relaxed text-ink-600">
+                    <p className="mt-4 max-w-xl leading-relaxed text-content-muted">
                       {initiative.summary}
                     </p>
                   </div>
@@ -51,11 +52,11 @@ export function Work() {
                     {initiative.outcomes.map((outcome) => (
                       <li
                         key={outcome}
-                        className="flex gap-3 text-sm leading-relaxed text-ink-500"
+                        className="flex gap-3 text-sm leading-relaxed text-content-subtle"
                       >
                         <span
                           aria-hidden="true"
-                          className="mt-2 h-px w-3 shrink-0 bg-brass-400"
+                          className="mt-2 h-px w-3 shrink-0 bg-accent"
                         />
                         {outcome}
                       </li>

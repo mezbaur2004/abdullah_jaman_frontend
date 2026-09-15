@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
-import { site } from "@/content/site";
+import { education, organizations } from "@/content/profile";
+import { site, socialLinks } from "@/content/site";
 
 /**
  * The build-time card from `src/app/opengraph-image.tsx`, which Next serves at
@@ -13,7 +14,7 @@ const ogImage = {
   url: "/opengraph-image",
   width: 1200,
   height: 630,
-  alt: `${site.name} — ${site.tagline}`,
+  alt: `${site.name} — ${site.role}, Wheaton International School and Guidance International School`,
 };
 
 type PageMetaInput = {
@@ -21,6 +22,8 @@ type PageMetaInput = {
   description: string;
   /** Route path, e.g. "/about". Use "/" for the homepage. */
   path: string;
+  /** Keeps a page out of search results — used for the internal status page. */
+  noIndex?: boolean;
 };
 
 /**
@@ -31,6 +34,7 @@ export function pageMetadata({
   title,
   description,
   path,
+  noIndex = false,
 }: PageMetaInput): Metadata {
   const canonical = path === "/" ? "/" : path;
 
@@ -38,6 +42,7 @@ export function pageMetadata({
     title,
     description,
     alternates: { canonical },
+    ...(noIndex ? { robots: { index: false, follow: false } } : {}),
     openGraph: {
       type: "profile",
       siteName: site.name,
@@ -57,8 +62,10 @@ export function pageMetadata({
 }
 
 /**
- * schema.org Person markup. Search engines use this to connect the name to the
- * roles and organizations, which is most of the point of a personal-brand site.
+ * schema.org Person markup, built from the same verified content the pages
+ * render. Fields with nothing confirmed behind them are omitted rather than
+ * emitted empty — structured data asserting a blank email or a portrait that
+ * does not exist is worse than no structured data.
  */
 export function personJsonLd() {
   return {
@@ -66,19 +73,25 @@ export function personJsonLd() {
     "@type": "Person",
     name: site.name,
     url: site.url,
-    email: site.email ? `mailto:${site.email}` : undefined,
-    jobTitle: "Managing Director",
+    jobTitle: site.role,
     description: site.description,
-    image: `${site.url}/images/portrait-hero.jpg`,
+    ...(site.email ? { email: `mailto:${site.email}` } : {}),
     address: {
       "@type": "PostalAddress",
-      addressLocality: site.location,
+      addressLocality: "Dhaka",
+      addressCountry: "BD",
     },
-    worksFor: [
-      { "@type": "Organization", name: "Pedago Academy" },
-      { "@type": "EducationalOrganization", name: "Wheaton International School" },
-      { "@type": "EducationalOrganization", name: "Guidance International School" },
-    ],
-    sameAs: [] as string[],
+    worksFor: organizations.map((organization) => ({
+      "@type": "EducationalOrganization",
+      name: organization.name,
+      ...(organization.href ? { url: organization.href } : {}),
+    })),
+    alumniOf: education.map((entry) => ({
+      "@type": "EducationalOrganization",
+      name: entry.institution,
+    })),
+    ...(socialLinks.length > 0
+      ? { sameAs: socialLinks.map((link) => link.href) }
+      : {}),
   };
 }

@@ -18,8 +18,11 @@ type FigureProps = {
 
 /**
  * The single place next/image is configured. Images are cropped by a ratio box
- * rather than by their intrinsic size, so replacing a placeholder plate with a
- * real photograph of different dimensions never breaks a layout.
+ * rather than by their intrinsic size, so swapping in a photograph of
+ * different dimensions never breaks a layout.
+ *
+ * An empty `alt` marks the image decorative, and it is then hidden from
+ * assistive technology rather than announced as an unnamed image.
  */
 export function Figure({
   image,
@@ -30,13 +33,16 @@ export function Figure({
   ratio,
   rounded = false,
 }: FigureProps) {
+  const decorative = image.alt === "";
+
   const frame = (
     <div
       className={cn(
-        "relative overflow-hidden bg-paper-deep",
+        "relative overflow-hidden border border-line bg-surface-soft",
         rounded && "rounded-sm",
       )}
       style={{ aspectRatio: ratio ?? `${image.width} / ${image.height}` }}
+      {...(decorative ? { "aria-hidden": true } : {})}
     >
       <Image
         src={image.src}
@@ -57,7 +63,7 @@ export function Figure({
   return (
     <figure className={className}>
       {frame}
-      <figcaption className="mt-4 text-sm leading-relaxed text-ink-500">
+      <figcaption className="mt-4 text-sm leading-relaxed text-content-subtle">
         {caption}
       </figcaption>
     </figure>

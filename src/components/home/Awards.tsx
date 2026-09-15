@@ -5,13 +5,20 @@ import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { awards } from "@/content/achievements";
 
-export function Awards() {
+/** Hidden until awards are verified. */
+export function Awards({ index }: { index?: string }) {
+  if (awards.length === 0) return null;
+
   return (
-    <Section tone="soft" aria-labelledby="awards-heading">
+    <Section
+      tone="soft"
+      index={index}
+      indexLabel="Recognition"
+      aria-labelledby="awards-heading"
+    >
       <Container>
         <SectionHeading
           id="awards-heading"
-          eyebrow="Recognition"
           title="Awards and honours."
           aside={
             <Button href="/achievements" variant="quiet">
@@ -20,25 +27,25 @@ export function Awards() {
           }
         />
 
-        <ul className="mt-14 border-t border-ink-900/10 lg:mt-16">
-          {awards.map((award, index) => (
-            <li key={award.title} className="border-b border-ink-900/10">
-              <Reveal delay={index * 0.04}>
+        <ul className="mt-14 border-t border-line lg:mt-16">
+          {awards.map((award, i) => (
+            <li key={award.title} className="border-b border-line">
+              <Reveal delay={i * 0.04}>
                 <div className="grid gap-3 py-7 sm:grid-cols-12 sm:items-baseline sm:gap-8">
-                  <span className="font-display text-lg text-brass-600 sm:col-span-2">
+                  <span className="font-display text-lg text-accent sm:col-span-2">
                     {award.year}
                   </span>
                   <div className="sm:col-span-6">
-                    <h3 className="font-display text-xl leading-snug text-ink-900">
+                    <h3 className="font-display text-xl leading-snug text-content">
                       {award.title}
                     </h3>
                     {award.description ? (
-                      <p className="mt-2 max-w-md text-sm leading-relaxed text-ink-500">
+                      <p className="mt-2 max-w-md text-sm leading-relaxed text-content-subtle">
                         {award.description}
                       </p>
                     ) : null}
                   </div>
-                  <p className="text-sm text-ink-500 sm:col-span-4 sm:text-right">
+                  <p className="text-sm text-content-subtle sm:col-span-4 sm:text-right">
                     {award.issuer}
                   </p>
                 </div>

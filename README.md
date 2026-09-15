@@ -1,15 +1,17 @@
 # Abdullah Jaman — personal brand site
 
-A premium personal-brand portfolio for Abdullah Jaman: Managing Director of
-Pedago Academy, Founder and Managing Director of Wheaton International School,
-and Principal of Guidance International School.
+A premium personal-brand portfolio for Abdullah Jaman: Founder and Principal of
+Wheaton International School (WIS) and Guidance International School (GIS),
+Dhaka.
 
 Six pages — Home, About, Experience, Achievements, Media, Contact — built as a
 static site. No database, no authentication, no CMS and no admin panel in v1.
 
-> **All written content is placeholder copy.** Nothing on the site has been
-> verified with Abdullah Jaman. See [CONTENT.md](./CONTENT.md) for the full list
-> of what has to be replaced before launch.
+> **The site renders verified information only.** Where a fact has not been
+> confirmed, the section removes itself rather than showing an approximation.
+> What is verified, what is awaiting confirmation and what is still to be
+> collected are kept strictly apart — see [CONTENT.md](./CONTENT.md), or open
+> `/content-status` in the running site.
 
 ## Stack
 
@@ -19,6 +21,7 @@ static site. No database, no authentication, no CMS and no admin panel in v1.
 | Language | TypeScript, strict |
 | Styling | Tailwind CSS v4 (CSS-first `@theme` config) |
 | Animation | Framer Motion (`motion`), in one component only |
+| Theming | Light and dark, system default, no dependency |
 | Icons | `lucide-react` |
 | Images | `next/image` |
 
@@ -48,6 +51,7 @@ src/
 │   ├── page.tsx             Home — composes the sections below
 │   ├── opengraph-image.tsx  Social share card, generated at build time
 │   ├── icon.tsx             Favicon monogram, generated at build time
+│   ├── content-status/      Internal research register (noindex)
 │   ├── sitemap.ts           Derived from the nav, so it cannot drift
 │   └── robots.ts
 ├── components/
@@ -56,7 +60,7 @@ src/
 │   ├── home/                One file per homepage section
 │   └── media/               Shared media entry, used by home and /media
 ├── content/                 ← all copy and data lives here
-└── lib/                     cn(), metadata + JSON-LD helpers
+└── lib/                     cn(), theme init, metadata + JSON-LD helpers
 ```
 
 ## Editing content
@@ -66,17 +70,25 @@ src/
 
 | File | Controls |
 | --- | --- |
-| `site.ts` | Name, tagline, domain, email, location, navigation, social links |
-| `profile.ts` | Hero, organizations, about page, portraits |
+| `site.ts` | Name, role, domain, email, location, navigation, links |
+| `profile.ts` | Hero, organizations, education, about page, portrait |
 | `experience.ts` | Roles and initiatives |
 | `achievements.ts` | Statistics, awards, milestones |
-| `media.ts` | Press, publications and talks |
+| `media.ts` | Press and publications |
 | `gallery.ts` | Photo gallery |
 | `contact.ts` | Contact page and the closing call to action |
+| `status.ts` | The research register behind `/content-status` |
 
-Sections degrade gracefully: empty the `gallery` array and the gallery section
-removes itself; drop `site.email` and every email link disappears; omit a media
-item's `href` and it renders as plain text instead of a dead link.
+**Every collection is allowed to be empty, and most currently are.** That is
+load-bearing rather than incidental: an empty array renders as nothing, so a
+section with no verified content removes itself instead of being filled in.
+Drop `site.email` and every email link disappears; omit a media item's `href`
+and it renders as plain text rather than a dead link; set `portrait` to `null`
+and the portrait slots fall back to a decorative panel that is marked as such.
+
+The homepage numbers its own sections at render time rather than hard-coding
+them, so the sequence stays contiguous — with three sections present a reader
+sees 01, 02, 03, not 01, 04, 09.
 
 ### Adding a CMS later
 
@@ -87,16 +99,57 @@ reason the content layer exists.
 
 ## Design system
 
-Tokens are defined once in `src/app/globals.css` under Tailwind v4's `@theme`,
-and every component composes from them:
+`src/app/globals.css` holds three layers, and components only ever touch the
+third:
 
-- **Palette** — warm paper (`paper`), deep ink (`ink-*`) and a single brass
-  accent (`brass-*`). No gradients, no glassmorphism.
+1. **Palette** — raw values (`--paper`, `--ink-*`, `--brass-*`). Referenced by
+   nothing outside this file.
+2. **Semantic tokens** — `--surface`, `--content`, `--accent`, `--line`,
+   `--action` and friends, defined once per theme.
+3. **Tailwind theme** — `@theme inline` maps those to utilities, so a component
+   writes `bg-surface text-content border-line` and works in both themes with no
+   `dark:` variants anywhere.
+
+`@theme inline` matters: it compiles `bg-surface` to `var(--surface)` directly
+rather than through a second indirection, which is what lets the token
+re-resolve when the theme flips.
+
 - **Type** — Fraunces (display serif) and Inter (sans), both self-hosted through
   `next/font/google`, so there are no external font requests at runtime. Display
   sizes are fluid `clamp()` values, set as `text-display-*`.
 - **Motion** — one entrance: a short rise and fade on first view (`Reveal`).
   Everything honours `prefers-reduced-motion`.
+
+### Sections
+
+`<Section>` owns the page rhythm. Each one alternates surface tone, carries a
+rule along its top edge, and can take a two-digit `index` with a label — so
+boundaries read as boundaries rather than as a change of subject mid-scroll.
+The rule is on by default because two adjacent sections in the same tone would
+otherwise run together.
+
+### Light and dark
+
+Three states: **system** (the default), light, and dark. No dependency —
+roughly forty lines in total.
+
+- The system default needs no JavaScript at all. "System" means *no*
+  `data-theme` attribute on `<html>`, so the CSS falls through to
+  `prefers-color-scheme` and is correct even if scripting is off entirely.
+- An explicit choice writes `data-theme="light"` or `"dark"`. The dark rules are
+  declared twice — once under `prefers-color-scheme: dark` guarded by
+  `:root:not([data-theme="light"])`, once under `:root[data-theme="dark"]` — so
+  an explicit choice wins in **both** directions.
+- A small blocking inline script in `<head>` (`src/lib/theme.ts`) applies a
+  saved choice before first paint, so there is no flash of the wrong theme.
+  `<html>` carries `suppressHydrationWarning` because that script legitimately
+  mutates the attribute before React hydrates.
+- `ThemeToggle` reads the document through `useSyncExternalStore` rather than
+  syncing state in an effect, so there is no extra render and no hydration
+  mismatch. It cycles system → light → dark and keeps other tabs in step.
+- The `surface-inverse` band flips to a *raised dark* in dark mode rather than
+  to white — a full white band in a dark theme is a flashbang, and the point of
+  that band is contrast with its neighbours, not absolute lightness.
 
 ### Where the JavaScript goes
 
@@ -118,22 +171,16 @@ move — so crawlers and screen readers see the whole page.
 
 ## Images
 
-`public/images/` currently holds six generated placeholder plates — abstract,
-art-directed, no stock photography and no text baked in. Regenerate them with:
+No photograph of Abdullah Jaman has been supplied, so `public/images/` holds a
+single generated plate: `panel-hero.jpg`. It is abstract — not a likeness and
+not stock photography — and carries an empty `alt`, so it is decorative and
+assistive technology skips it. It gives the hero a visual anchor without
+captioning a stand-in as him. Regenerate with `npm run placeholders`.
 
-```bash
-node scripts/generate-placeholders.mjs
-```
-
-**To use real photography**, drop files in at the same paths and update the
-`width`/`height` in the content file. Components crop with a CSS ratio box
-rather than the intrinsic size, so different dimensions will not break layout.
-
-| Path | Used by | Ratio |
-| --- | --- | --- |
-| `portrait-hero.jpg` | Homepage hero | 4:5 |
-| `portrait-about.jpg` | About teaser and About page | 4:5 |
-| `gallery-01…04.jpg` | Homepage gallery | alternating 4:3 / 3:4 |
+**To use a real portrait**, drop the file in `public/images/` and set
+`portrait` in `src/content/profile.ts`. The hero and About page pick it up
+automatically. Components crop with a CSS ratio box rather than the intrinsic
+size, so any dimensions work.
 
 `assets/fonts/` holds one TTF used only for build-time OG image generation —
 see the README in that folder.
@@ -148,19 +195,25 @@ see the README in that folder.
 
 ## Accessibility
 
-Audited with axe-core across all six pages plus the 404, at 1440px and 390px:
-zero violations. Also verified: a skip link as the first tab stop, `aria-current`
-on the active nav item, `aria-expanded` and Escape-to-close on the mobile menu
-with body scroll locked while open, visible focus rings throughout, and no
-horizontal overflow at 320px.
+Audited with axe-core across all seven pages plus the 404, in **light and dark**
+at 1440px and 390px — 32 combinations, zero violations. Also verified: a skip
+link as the first tab stop, `aria-current` on the active nav item,
+`aria-expanded` and Escape-to-close on the mobile menu with body scroll locked
+while open, visible focus rings throughout, and no horizontal overflow at 320px
+through 1920px in either theme.
 
 ## Before launch
 
-1. Replace the placeholder content — see [CONTENT.md](./CONTENT.md).
-2. Set the real domain in `src/content/site.ts` (`site.url`). Canonical URLs,
-   Open Graph URLs, the sitemap and robots.txt all derive from it.
-3. Replace the placeholder images with real photography.
-4. Point the social links at real profiles, or remove them.
+1. Set a professional email in `src/content/site.ts` (`site.email`). It is
+   empty, so every email link is currently hidden and the contact page falls
+   back to the WIS website.
+2. Set the real domain (`site.url`). Canonical URLs, Open Graph URLs, the
+   sitemap and robots.txt all derive from it.
+3. Supply a portrait and set `portrait` in `src/content/profile.ts`.
+4. Work through the open questions at `/content-status` — in particular whether
+   the Pedago Academy role should appear at all.
+5. Add social profile URLs to `socialLinks`, or leave the array empty.
+6. Delete `src/app/content-status/` once the dataset is complete.
 
 ### Adding a contact form
 

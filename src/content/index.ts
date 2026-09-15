@@ -6,3 +6,4 @@ export * from "./achievements";
 export * from "./media";
 export * from "./gallery";
 export * from "./contact";
+export * from "./status";

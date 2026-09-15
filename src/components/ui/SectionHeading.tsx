@@ -9,7 +9,7 @@ type SectionHeadingProps = {
   lede?: string;
   /** A CTA or supporting note pinned to the right on wide screens. */
   aside?: ReactNode;
-  tone?: "ink" | "paper";
+  tone?: "base" | "inverse";
   align?: "start" | "center";
   className?: string;
   id?: string;
@@ -21,12 +21,14 @@ export function SectionHeading({
   title,
   lede,
   aside,
-  tone = "ink",
+  tone = "base",
   align = "start",
   className,
   id,
   as: Heading = "h2",
 }: SectionHeadingProps) {
+  const inverse = tone === "inverse";
+
   return (
     <div
       className={cn(
@@ -47,7 +49,7 @@ export function SectionHeading({
           id={id}
           className={cn(
             Heading === "h1" ? "text-display-xl" : "text-display-lg",
-            tone === "ink" ? "text-ink-900" : "text-paper",
+            inverse ? "text-on-inverse" : "text-content",
           )}
         >
           {title}
@@ -56,7 +58,7 @@ export function SectionHeading({
           <p
             className={cn(
               "max-w-2xl text-lede",
-              tone === "ink" ? "text-ink-600" : "text-ink-300",
+              inverse ? "text-on-inverse-muted" : "text-content-muted",
             )}
           >
             {lede}

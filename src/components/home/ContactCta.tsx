@@ -1,24 +1,27 @@
 import { Container } from "@/components/layout/Container";
 import { Section } from "@/components/layout/Section";
 import { Button } from "@/components/ui/Button";
-import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Reveal } from "@/components/ui/Reveal";
 import { contactCta } from "@/content/contact";
 import { site } from "@/content/site";
 
-export function ContactCta() {
+export function ContactCta({ index }: { index?: string }) {
   return (
-    <Section tone="ink" spacing="loose" aria-labelledby="contact-cta-heading">
+    <Section
+      tone="inverse"
+      index={index}
+      indexLabel="Contact"
+      aria-labelledby="contact-cta-heading"
+    >
       <Container>
         <Reveal className="max-w-3xl">
-          <Eyebrow tone="paper">{contactCta.eyebrow}</Eyebrow>
           <h2
             id="contact-cta-heading"
-            className="mt-8 text-display-xl text-paper"
+            className="text-display-xl text-on-inverse"
           >
             {contactCta.headline}
           </h2>
-          <p className="mt-7 max-w-xl text-lede text-ink-300">
+          <p className="mt-7 max-w-xl text-lede text-on-inverse-muted">
             {contactCta.lede}
           </p>
 
@@ -29,7 +32,7 @@ export function ContactCta() {
             {site.email ? (
               <a
                 href={`mailto:${site.email}`}
-                className="border-b border-paper/30 pb-1 text-sm text-paper transition-colors duration-300 ease-editorial hover:border-paper"
+                className="border-b border-line-inverse pb-1 text-sm text-on-inverse transition-colors duration-300 ease-editorial hover:border-on-inverse"
               >
                 {site.email}
               </a>

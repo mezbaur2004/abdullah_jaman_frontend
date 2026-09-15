@@ -1,24 +1,31 @@
 import Link from "next/link";
 
 import { Container } from "./Container";
-import { footerNav, site, socialLinks } from "@/content/site";
+import {
+  footerNav,
+  institutionLinks,
+  site,
+  socialLinks,
+} from "@/content/site";
 
 export function SiteFooter() {
   const year = new Date().getFullYear();
+  const elsewhere = [...socialLinks, ...institutionLinks];
 
   return (
-    <footer className="bg-ink-950 text-paper">
+    <footer className="border-t border-line-inverse bg-surface-inverse text-on-inverse">
       <Container className="py-16 lg:py-20">
         <div className="flex flex-col gap-14 lg:flex-row lg:justify-between lg:gap-20">
           <div className="max-w-md">
             <p className="font-display text-display-md">{site.name}</p>
-            <p className="mt-4 text-sm leading-relaxed text-ink-400">
-              {site.tagline}
+            <p className="mt-4 text-sm leading-relaxed text-on-inverse-muted">
+              {site.role} — Wheaton International School &amp; Guidance
+              International School
             </p>
             {site.email ? (
               <a
                 href={`mailto:${site.email}`}
-                className="mt-7 inline-block border-b border-paper/30 pb-1 text-sm text-paper transition-colors duration-300 ease-editorial hover:border-paper"
+                className="mt-7 inline-block border-b border-line-inverse pb-1 text-sm text-on-inverse transition-colors duration-300 ease-editorial hover:border-on-inverse"
               >
                 {site.email}
               </a>
@@ -27,7 +34,7 @@ export function SiteFooter() {
 
           <div className="grid grid-cols-2 gap-10 sm:gap-16">
             <nav aria-label="Footer">
-              <h2 className="font-sans text-eyebrow font-medium uppercase text-ink-400">
+              <h2 className="font-sans text-eyebrow font-medium uppercase text-on-inverse-muted">
                 Site
               </h2>
               <ul className="mt-5 flex flex-col gap-3">
@@ -35,7 +42,7 @@ export function SiteFooter() {
                   <li key={item.href}>
                     <Link
                       href={item.href}
-                      className="text-sm text-ink-300 transition-colors duration-300 ease-editorial hover:text-paper"
+                      className="text-sm text-on-inverse-muted transition-colors duration-300 ease-editorial hover:text-on-inverse"
                     >
                       {item.label}
                     </Link>
@@ -44,29 +51,31 @@ export function SiteFooter() {
               </ul>
             </nav>
 
-            <div>
-              <h2 className="font-sans text-eyebrow font-medium uppercase text-ink-400">
-                Elsewhere
-              </h2>
-              <ul className="mt-5 flex flex-col gap-3">
-                {socialLinks.map((item) => (
-                  <li key={item.label}>
-                    <a
-                      href={item.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-sm text-ink-300 transition-colors duration-300 ease-editorial hover:text-paper"
-                    >
-                      {item.label}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
+            {elsewhere.length > 0 ? (
+              <div>
+                <h2 className="font-sans text-eyebrow font-medium uppercase text-on-inverse-muted">
+                  Elsewhere
+                </h2>
+                <ul className="mt-5 flex flex-col gap-3">
+                  {elsewhere.map((item) => (
+                    <li key={item.href}>
+                      <a
+                        href={item.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-sm text-on-inverse-muted transition-colors duration-300 ease-editorial hover:text-on-inverse"
+                      >
+                        {item.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ) : null}
           </div>
         </div>
 
-        <div className="mt-16 flex flex-col gap-3 border-t border-paper/10 pt-8 text-xs text-ink-400 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-16 flex flex-col gap-3 border-t border-line-inverse pt-8 text-xs text-on-inverse-muted sm:flex-row sm:items-center sm:justify-between">
           <p>
             &copy; {year} {site.name}. All rights reserved.
           </p>

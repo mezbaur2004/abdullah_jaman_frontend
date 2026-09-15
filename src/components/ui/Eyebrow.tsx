@@ -3,23 +3,25 @@ import { cn } from "@/lib/cn";
 type EyebrowProps = {
   children: string;
   className?: string;
-  /** Matches the surrounding tone so the rule and label stay legible. */
-  tone?: "ink" | "paper";
+  /** "inverse" for the dark band, where the muted tokens flip. */
+  tone?: "base" | "inverse";
   id?: string;
 };
 
 export function Eyebrow({
   children,
   className,
-  tone = "ink",
+  tone = "base",
   id,
 }: EyebrowProps) {
+  const inverse = tone === "inverse";
+
   return (
     <p
       id={id}
       className={cn(
         "flex items-center gap-3 text-eyebrow font-medium uppercase",
-        tone === "ink" ? "text-ink-500" : "text-brass-300",
+        inverse ? "text-on-inverse-muted" : "text-content-subtle",
         className,
       )}
     >
@@ -27,7 +29,7 @@ export function Eyebrow({
         aria-hidden="true"
         className={cn(
           "h-px w-8 shrink-0",
-          tone === "ink" ? "bg-ink-300" : "bg-brass-300/50",
+          inverse ? "bg-line-inverse" : "bg-line-strong",
         )}
       />
       {children}

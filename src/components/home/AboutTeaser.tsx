@@ -1,37 +1,26 @@
 import { Container } from "@/components/layout/Container";
 import { Section } from "@/components/layout/Section";
 import { Button } from "@/components/ui/Button";
-import { Eyebrow } from "@/components/ui/Eyebrow";
-import { Figure } from "@/components/ui/Figure";
 import { Reveal } from "@/components/ui/Reveal";
-import { aboutTeaser, portraitSecondary } from "@/content/profile";
+import { aboutPage, aboutTeaser } from "@/content/profile";
 
-export function AboutTeaser() {
+export function AboutTeaser({ index }: { index?: string }) {
   return (
-    <Section aria-labelledby="about-teaser-heading">
+    <Section index={index} indexLabel="About" aria-labelledby="about-teaser-heading">
       <Container>
         <div className="grid gap-14 lg:grid-cols-12 lg:gap-20">
-          <Reveal className="lg:col-span-5">
-            <Figure
-              image={portraitSecondary}
-              ratio="4 / 5"
-              sizes="(min-width: 1024px) 38vw, (min-width: 640px) 70vw, 90vw"
-            />
-          </Reveal>
-
-          <div className="lg:col-span-7 lg:pt-6">
+          <div className="lg:col-span-7">
             <Reveal>
-              <Eyebrow>{aboutTeaser.eyebrow}</Eyebrow>
               <h2
                 id="about-teaser-heading"
-                className="mt-7 max-w-xl text-display-lg text-ink-900"
+                className="max-w-xl text-display-lg text-content"
               >
                 {aboutTeaser.headline}
               </h2>
             </Reveal>
 
             <Reveal delay={0.08}>
-              <div className="mt-8 flex max-w-xl flex-col gap-5 text-lede text-ink-600">
+              <div className="mt-8 flex max-w-xl flex-col gap-5 text-lede text-content-muted">
                 {aboutTeaser.body.map((paragraph) => (
                   <p key={paragraph.slice(0, 32)}>{paragraph}</p>
                 ))}
@@ -42,6 +31,21 @@ export function AboutTeaser() {
                   {aboutTeaser.cta.label}
                 </Button>
               </div>
+            </Reveal>
+          </div>
+
+          <div className="lg:col-span-5">
+            <Reveal delay={0.06}>
+              <dl className="border-t border-line">
+                {aboutPage.facts.map((fact) => (
+                  <div key={fact.label} className="border-b border-line py-5">
+                    <dt className="text-eyebrow font-medium uppercase text-content-subtle">
+                      {fact.label}
+                    </dt>
+                    <dd className="mt-2 text-content">{fact.value}</dd>
+                  </div>
+                ))}
+              </dl>
             </Reveal>
           </div>
         </div>

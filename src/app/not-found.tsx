@@ -6,10 +6,10 @@ export default function NotFound() {
   return (
     <Container className="flex min-h-[60vh] flex-col justify-center py-24">
       <Eyebrow>404</Eyebrow>
-      <h1 className="mt-7 max-w-2xl text-display-xl text-ink-900">
+      <h1 className="mt-7 max-w-2xl text-display-xl text-content">
         This page does not exist.
       </h1>
-      <p className="mt-7 max-w-lg text-lede text-ink-600">
+      <p className="mt-7 max-w-lg text-lede text-content-muted">
         The link may be out of date, or the page may have moved. The main
         sections of the site are all reachable from the navigation above.
       </p>
