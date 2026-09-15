@@ -138,8 +138,38 @@ tightest ratio on the page and still clears AA.
 - **Type** — Fraunces (display serif) and Inter (sans), both self-hosted through
   `next/font/google`, so there are no external font requests at runtime. Display
   sizes are fluid `clamp()` values, set as `text-display-*`.
-- **Motion** — one entrance: a short rise and fade on first view (`Reveal`).
-  Everything honours `prefers-reduced-motion`.
+### Motion
+
+One system, defined once under *Motion* in `globals.css`, and nothing on the
+site restates any of it: two easings, two durations, one entrance distance, one
+stagger gap, one lift height, one zoom factor.
+
+The easings are split because entrances and hovers do different jobs. An
+entrance travels a visible distance and wants a decisive settle, so it uses a
+strong ease-out. A hover moves three pixels under the cursor and wants to feel
+attached to it, so it uses a gentler curve with no hint of overshoot.
+
+Tailwind's `--default-transition-duration` and `--default-transition-timing-function`
+are pointed at those tokens, so a bare `transition-colors` anywhere already
+carries the system's values. That is the enforcement mechanism: components have
+nothing to restate, so they cannot drift.
+
+- **Entrances** — a short rise and fade on first view (`Reveal`). Staggered
+  siblings pass `step={i}`; the delay itself is `--reveal-stagger`, and the
+  component caps the step so a long list never waits seconds to finish.
+- **Hover** — `Card` exposes `lift` and `quiet`. The distinction is not
+  decorative: `lift` means *this card goes somewhere*, and is only used on
+  cards that are a link, where the movement is the affordance and the whole
+  surface is the click target. `quiet` cards acknowledge the cursor with colour
+  alone, because lifting a card that cannot be clicked promises something it
+  does not deliver. Both share the accent border, which is what makes the site's
+  cards read as one family.
+- **Rows** — `ListRow` is the list equivalent. Rows have no surface to raise, so
+  they draw a rule down their left edge instead, on the same axis as every
+  heading on the page.
+- **Reduced motion** — entrances resolve instantly, the light sweep is removed,
+  and hovers keep their colour change without the movement. Nothing is hidden
+  and nothing waits.
 
 ### Sections and cards
 
@@ -159,12 +189,41 @@ raised surface are what separate a card from the page in dark mode. The
 and in dark mode it is the accent border rather than the fill that carries it.
 
 `<IconChip>` frames an icon and is always `aria-hidden`; the label beside it
-carries the meaning.
+carries the meaning. It answers its card's hover rather than its own — the
+`group-hover/card` variants are inert without an ancestor `Card`, so the same
+chip works standing alone and brightens in step with the card around it.
+
+`<SectionSeparator>` marks every boundary. Deliberately not a full-width
+hairline: a symmetrical rule edge-to-edge reads as a box being closed, so this
+one is solid at the left margin and dissolves before it reaches the right,
+which reads as a new section opening. The small rotated mark sits exactly on
+the text column's left edge — the axis the section index, the heading and every
+paragraph begin on.
+
+`<Eyebrow>` is the single component behind every small label above a heading,
+numbered (`01 / INSTITUTIONS`) or not, so a section marker and a standalone
+label cannot drift apart in size, tracking, colour or rule length.
 
 ### Light and dark
 
-Three states: **system** (the default), light, and dark. No dependency —
-roughly forty lines in total.
+Three states: **system** (the default), light, and dark. No dependency.
+
+`ThemeSelector` shows all three at once and puts each one click away. It is
+built as a radio group rather than three buttons, because that is what it is —
+one setting with three mutually exclusive values — so a screen reader announces
+"Light, radio button, 1 of 3" and arrow keys move between options natively.
+System sits in the middle: the control reads as a spectrum, lightest to
+darkest, with "follow the device" as the neutral position between the two
+explicit choices.
+
+The active pill is one absolutely positioned element that slides, not three
+backgrounds fading in and out. Sliding is what makes the three read as
+positions on a single control rather than as separate lit-up buttons, and it is
+one transition instead of six.
+
+**System is the absence of the attribute, not a value of it.** That is what
+lets the CSS fall through to `prefers-color-scheme` on its own, and it is why
+the system default is correct even when the JavaScript never loads.
 
 - The system default needs no JavaScript at all. "System" means *no*
   `data-theme` attribute on `<html>`, so the CSS falls through to

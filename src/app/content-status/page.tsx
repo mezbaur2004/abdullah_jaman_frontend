@@ -50,7 +50,7 @@ export default function ContentStatusPage() {
                         href={source.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="group inline-flex items-start gap-1.5 transition-colors duration-300 ease-editorial hover:text-accent"
+                        className="group inline-flex items-start gap-1.5 transition-colors hover:text-accent"
                       >
                         {source.label}
                         <ArrowUpRight

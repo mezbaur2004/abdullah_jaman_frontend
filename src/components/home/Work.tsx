@@ -1,6 +1,7 @@
 import { Container } from "@/components/layout/Container";
 import { Section } from "@/components/layout/Section";
 import { Button } from "@/components/ui/Button";
+import { ListRow } from "@/components/ui/ListRow";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { initiatives } from "@/content/experience";
@@ -24,13 +25,13 @@ export function Work({ index }: { index?: string }) {
 
         <ol className="mt-16 border-t border-line lg:mt-20">
           {initiatives.map((initiative, i) => (
-            <li key={initiative.slug} className="border-b border-line">
+            <ListRow key={initiative.slug}>
               <Reveal>
-                <article className="grid gap-6 py-10 lg:grid-cols-12 lg:gap-12 lg:py-14">
+                <article className="grid gap-6 py-10 pl-5 transition-[padding] group-hover/row:pl-7 lg:grid-cols-12 lg:gap-12 lg:py-14">
                   <div className="lg:col-span-3">
                     <span
                       aria-hidden="true"
-                      className="font-display text-sm text-accent"
+                      className="font-display text-sm text-accent-warm"
                     >
                       {String(i + 1).padStart(2, "0")}
                     </span>
@@ -40,7 +41,7 @@ export function Work({ index }: { index?: string }) {
                   </div>
 
                   <div className="lg:col-span-6">
-                    <h3 className="text-display-md text-content">
+                    <h3 className="text-display-md text-content transition-colors group-hover/row:text-accent">
                       {initiative.title}
                     </h3>
                     <p className="mt-4 max-w-xl leading-relaxed text-content-muted">
@@ -64,7 +65,7 @@ export function Work({ index }: { index?: string }) {
                   </ul>
                 </article>
               </Reveal>
-            </li>
+            </ListRow>
           ))}
         </ol>
       </Container>

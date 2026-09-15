@@ -41,7 +41,7 @@ export default function MediaPage() {
             <ul className="mt-14 grid gap-5 lg:mt-16">
               {mediaItems.map((item, i) => (
                 <li key={item.title}>
-                  <Reveal delay={Math.min(i, 3) * 0.04}>
+                  <Reveal step={i}>
                     <MediaEntry item={item} />
                   </Reveal>
                 </li>
@@ -49,7 +49,7 @@ export default function MediaPage() {
             </ul>
           ) : null}
 
-          <Reveal delay={0.06}>
+          <Reveal step={1}>
             <PendingNote className="mt-12">{pending}</PendingNote>
           </Reveal>
         </Container>
@@ -66,7 +66,7 @@ export default function MediaPage() {
             <ul className="mt-14 grid gap-5 lg:mt-16">
               {publications.map((item, i) => (
                 <li key={item.title}>
-                  <Reveal delay={Math.min(i, 3) * 0.04}>
+                  <Reveal step={i}>
                     <MediaEntry item={item} />
                   </Reveal>
                 </li>

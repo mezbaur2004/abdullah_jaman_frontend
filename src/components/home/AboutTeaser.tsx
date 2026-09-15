@@ -25,7 +25,7 @@ export function AboutTeaser({ index }: { index?: string }) {
               </h2>
             </Reveal>
 
-            <Reveal delay={0.08}>
+            <Reveal step={1}>
               <div className="mt-8 flex max-w-xl flex-col gap-5 text-lede text-content-muted">
                 {aboutTeaser.body.map((paragraph) => (
                   <p key={paragraph.slice(0, 32)}>{paragraph}</p>
@@ -41,8 +41,8 @@ export function AboutTeaser({ index }: { index?: string }) {
           </div>
 
           <div className="lg:col-span-5">
-            <Reveal delay={0.06}>
-              <Card padding="lg">
+            <Reveal step={1}>
+              <Card hover="quiet" padding="lg">
                 <dl className="flex flex-col">
                   {aboutPage.facts.map((fact, i) => (
                     <div

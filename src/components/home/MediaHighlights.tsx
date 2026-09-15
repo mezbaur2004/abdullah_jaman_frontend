@@ -35,7 +35,7 @@ export function MediaHighlights({ index }: { index?: string }) {
         <ul className="mt-14 grid gap-5 lg:mt-16">
           {highlights.map((item, i) => (
             <li key={item.title}>
-              <Reveal delay={i * 0.05}>
+              <Reveal step={i}>
                 <MediaEntry item={item} />
               </Reveal>
             </li>

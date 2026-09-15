@@ -4,13 +4,25 @@ import { cn } from "@/lib/cn";
 
 type Tone = "raised" | "soft" | "accent" | "inverse" | "outline" | "feature";
 
+/**
+ * How the card answers the cursor.
+ *
+ * The distinction is not decorative. `lift` says *this card goes somewhere* —
+ * it is for cards that are a link or contain one, and the movement is the
+ * affordance. `quiet` is for cards that only hold information: they
+ * acknowledge the cursor with colour and nothing else, because lifting a card
+ * that cannot be clicked promises something the card does not deliver.
+ */
+type Hover = "none" | "lift" | "quiet";
+
 type CardProps = {
   children: ReactNode;
   className?: string;
   as?: ElementType;
   tone?: Tone;
-  /** Adds a hover lift. Only for cards that are themselves a link. */
-  interactive?: boolean;
+  hover?: Hover;
+  /** Adds the light sweep. Dark tones only — see `.sweep` in globals.css. */
+  sweep?: boolean;
   padding?: "none" | "sm" | "md" | "lg";
 };
 
@@ -34,6 +46,17 @@ const tones: Record<Tone, string> = {
     "border border-accent/45 bg-surface-inverse text-on-inverse shadow-card",
 };
 
+/**
+ * Both hovers change the border to the accent — that shared note is what makes
+ * the whole site's cards feel like one family. Only `lift` adds the movement
+ * and the deeper shadow.
+ */
+const hovers: Record<Hover, string> = {
+  none: "",
+  lift: "hover:-translate-y-[3px] hover:border-accent/55 hover:shadow-card-hover",
+  quiet: "hover:border-accent/40",
+};
+
 const paddings = {
   none: "",
   sm: "p-5",
@@ -46,17 +69,26 @@ export function Card({
   className,
   as: Tag = "div",
   tone = "raised",
-  interactive = false,
+  hover = "none",
+  sweep = false,
   padding = "md",
 }: CardProps) {
   return (
     <Tag
       className={cn(
-        "rounded-card",
+        // `group/card` is the hook every child effect hangs off — an arrow that
+        // travels, an icon frame that fills, an image that pushes in. They fire
+        // from anywhere on the card rather than only from the link itself,
+        // which is what makes the whole card feel like one target.
+        "group/card relative rounded-card",
+        // Duration and easing come from the Tailwind transition defaults, which
+        // are set once from the motion tokens in globals.css.
+        hover !== "none" &&
+          "transition-[transform,box-shadow,border-color,background-color]",
         tones[tone],
+        hovers[hover],
+        sweep && "overflow-hidden sweep",
         paddings[padding],
-        interactive &&
-          "transition-shadow duration-300 ease-editorial hover:shadow-card-hover",
         className,
       )}
     >

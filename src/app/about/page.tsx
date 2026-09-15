@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Building2 } from "lucide-react";
+import { ArrowUpRight, Building2 } from "lucide-react";
 
 import { ContactCta } from "@/components/home/ContactCta";
 import { Container } from "@/components/layout/Container";
@@ -8,6 +8,7 @@ import { Section } from "@/components/layout/Section";
 import { Card } from "@/components/ui/Card";
 import { Figure } from "@/components/ui/Figure";
 import { IconChip } from "@/components/ui/IconChip";
+import { ListRow } from "@/components/ui/ListRow";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import {
@@ -102,12 +103,17 @@ export default function AboutPage() {
           <ul className="mt-14 grid gap-5 lg:mt-16 lg:grid-cols-2 lg:gap-6">
             {organizations.map((organization, i) => (
               <li key={organization.name}>
-                <Reveal delay={i * 0.05} className="h-full">
-                  <Card as="article" padding="lg" className="flex h-full flex-col">
+                <Reveal step={i} className="h-full">
+                  <Card
+                    as="article"
+                    padding="lg"
+                    hover={organization.href ? "lift" : "quiet"}
+                    className="flex h-full flex-col"
+                  >
                     <div className="flex items-start justify-between gap-5">
                       <IconChip icon={Building2} />
                       {organization.shortName ? (
-                        <span className="rounded-full border border-line px-3 py-1 text-eyebrow font-medium uppercase text-content-subtle">
+                        <span className="rounded-full border border-line px-3 py-1 text-eyebrow font-medium uppercase text-content-subtle transition-colors group-hover/card:border-line-accent group-hover/card:text-accent">
                           {organization.shortName}
                         </span>
                       ) : null}
@@ -119,9 +125,14 @@ export default function AboutPage() {
                           href={organization.href}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="transition-colors duration-300 ease-editorial hover:text-accent"
+                          className="inline-flex items-start gap-2 transition-colors after:absolute after:inset-0 after:content-[''] group-hover/card:text-accent"
                         >
                           {organization.name}
+                          <ArrowUpRight
+                            aria-hidden="true"
+                            strokeWidth={1.5}
+                            className="mt-1 size-4 shrink-0 transition-transform group-hover/card:-translate-y-0.5 group-hover/card:translate-x-0.5"
+                          />
                           <span className="sr-only"> (opens in a new tab)</span>
                         </a>
                       ) : (
@@ -163,10 +174,10 @@ export default function AboutPage() {
 
             <ul className="mt-14 border-t border-line lg:mt-16">
               {education.map((entry) => (
-                <li key={entry.institution} className="border-b border-line">
+                <ListRow key={entry.institution}>
                   <Reveal>
-                    <div className="grid gap-3 py-8 sm:grid-cols-12 sm:gap-8">
-                      <h3 className="font-display text-xl text-content sm:col-span-6">
+                    <div className="grid gap-3 py-8 pl-5 transition-[padding] group-hover/row:pl-7 sm:grid-cols-12 sm:gap-8">
+                      <h3 className="font-display text-xl text-content transition-colors group-hover/row:text-accent sm:col-span-6">
                         {entry.institution}
                       </h3>
                       <div className="sm:col-span-6">
@@ -189,7 +200,7 @@ export default function AboutPage() {
                       </div>
                     </div>
                   </Reveal>
-                </li>
+                </ListRow>
               ))}
             </ul>
           </Container>

@@ -32,7 +32,7 @@ export function ContactCta({ index }: { index?: string }) {
             {site.email ? (
               <a
                 href={`mailto:${site.email}`}
-                className="border-b border-line-inverse pb-1 text-sm text-on-inverse transition-colors duration-300 ease-editorial hover:border-on-inverse"
+                className="border-b border-line-inverse pb-1 text-sm text-on-inverse transition-colors hover:border-on-inverse"
               >
                 {site.email}
               </a>

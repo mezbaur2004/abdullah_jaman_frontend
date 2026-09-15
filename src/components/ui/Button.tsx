@@ -16,7 +16,7 @@ type ButtonProps = {
 };
 
 const base =
-  "group inline-flex items-center justify-center gap-2.5 text-sm font-medium tracking-[0.01em] transition-colors duration-300 ease-editorial";
+  "group inline-flex items-center justify-center gap-2.5 text-sm font-medium tracking-[0.01em] transition-colors";
 
 const variants: Record<Variant, string> = {
   primary:
@@ -53,7 +53,7 @@ export function Button({
         aria-hidden="true"
         strokeWidth={1.5}
         className={cn(
-          "size-4 transition-transform duration-300 ease-editorial",
+          "size-4 transition-transform",
           external
             ? "group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
             : "group-hover:translate-x-1",
