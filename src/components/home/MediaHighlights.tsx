@@ -15,6 +15,8 @@ export function MediaHighlights({ index }: { index?: string }) {
     <Section
       index={index}
       indexLabel="Media"
+      accent="red"
+      separator="editorial"
       aria-labelledby="media-heading"
     >
       <Container>
@@ -22,6 +24,7 @@ export function MediaHighlights({ index }: { index?: string }) {
           id="media-heading"
           title={mediaIntro.headline}
           lede={mediaIntro.lede}
+          accent="red"
           aside={
             // Only worth a link out when the page holds more than is shown here.
             mediaItems.length > highlights.length ? (

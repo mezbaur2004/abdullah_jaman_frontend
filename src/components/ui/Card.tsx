@@ -1,6 +1,7 @@
 import type { ElementType, ReactNode } from "react";
 
 import { cn } from "@/lib/cn";
+import { accentMark, type Accent } from "@/lib/accent";
 
 type Tone = "raised" | "soft" | "accent" | "inverse" | "outline" | "feature";
 
@@ -21,6 +22,18 @@ type CardProps = {
   as?: ElementType;
   tone?: Tone;
   hover?: Hover;
+  /**
+   * Which accent this card's hover reveals. Blue is the default and should
+   * stay the common case; yellow and red are for a card that wants marking out
+   * within a group, not for every card in one.
+   */
+  accent?: Accent;
+  /**
+   * Which edge the accent line draws along. `left` suits a card read as a row
+   * — an experience entry, a role — where a vertical rule reads as a margin
+   * mark rather than as an underline.
+   */
+  accentEdge?: "top" | "left";
   /** Adds the light sweep. Dark tones only — see `.sweep` in globals.css. */
   sweep?: boolean;
   padding?: "none" | "sm" | "md" | "lg";
@@ -43,18 +56,18 @@ const tones: Record<Tone, string> = {
   // what carries it in dark mode, where `surface-inverse` sits too close to
   // `surface-raised` for the fill alone to register as a difference.
   feature:
-    "border border-accent/45 bg-surface-inverse text-on-inverse shadow-card",
+    "border border-accent/50 bg-surface-inverse text-on-inverse shadow-card",
 };
 
 /**
- * Both hovers change the border to the accent — that shared note is what makes
- * the whole site's cards feel like one family. Only `lift` adds the movement
- * and the deeper shadow.
+ * Both hovers bring the border to blue — that shared note is what makes the
+ * whole site's cards feel like one family, whichever accent a card carries.
+ * Only `lift` adds the movement and the deeper shadow.
  */
 const hovers: Record<Hover, string> = {
   none: "",
-  lift: "hover:-translate-y-[3px] hover:border-accent/55 hover:shadow-card-hover",
-  quiet: "hover:border-accent/40",
+  lift: "hover:-translate-y-1 hover:border-accent/60 hover:shadow-card-hover",
+  quiet: "hover:border-accent/45",
 };
 
 const paddings = {
@@ -70,9 +83,13 @@ export function Card({
   as: Tag = "div",
   tone = "raised",
   hover = "none",
+  accent = "blue",
+  accentEdge = "top",
   sweep = false,
   padding = "md",
 }: CardProps) {
+  const dark = tone === "inverse" || tone === "feature";
+
   return (
     <Tag
       className={cn(
@@ -92,6 +109,22 @@ export function Card({
         className,
       )}
     >
+      {/* The accent micro-line. It draws itself along the card's top edge on
+          hover, inside the border radius, and is the only place a card shows
+          its accent — a coloured border on every card at rest would turn a
+          grid into bunting. */}
+      {hover !== "none" ? (
+        <span
+          aria-hidden="true"
+          className={cn(
+            "absolute transition-transform",
+            accentEdge === "top"
+              ? "inset-x-0 top-0 h-0.5 origin-left scale-x-0 rounded-t-card group-hover/card:scale-x-100"
+              : "inset-y-0 left-0 w-0.5 origin-top scale-y-0 rounded-l-card group-hover/card:scale-y-100",
+            accentMark(accent, dark),
+          )}
+        />
+      ) : null}
       {children}
     </Tag>
   );

@@ -56,11 +56,19 @@ export default function MediaPage() {
       </Section>
 
       {publications.length > 0 ? (
-        <Section tone="soft" index="02" indexLabel="Publications" aria-labelledby="publications-heading">
+        <Section
+          tone="soft"
+          index="02"
+          indexLabel="Publications"
+          accent="yellow"
+          separator="editorial"
+          aria-labelledby="publications-heading"
+        >
           <Container>
             <SectionHeading
               id="publications-heading"
               title="Published writing."
+              accent="yellow"
             />
 
             <ul className="mt-14 grid gap-5 lg:mt-16">

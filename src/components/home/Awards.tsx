@@ -15,12 +15,14 @@ export function Awards({ index }: { index?: string }) {
       tone="soft"
       index={index}
       indexLabel="Recognition"
+      accent="red"
       aria-labelledby="awards-heading"
     >
       <Container>
         <SectionHeading
           id="awards-heading"
           title="Awards and honours."
+          accent="red"
           aside={
             <Button href="/achievements" variant="quiet">
               All achievements
@@ -33,7 +35,7 @@ export function Awards({ index }: { index?: string }) {
             <ListRow key={award.title}>
               <Reveal step={i}>
                 <div className="grid gap-3 py-7 pl-5 transition-[padding] group-hover/row:pl-7 sm:grid-cols-12 sm:items-baseline sm:gap-8">
-                  <span className="font-display text-lg text-accent-warm sm:col-span-2">
+                  <span className="font-display text-lg text-content-subtle transition-colors group-hover/row:text-accent sm:col-span-2">
                     {award.year}
                   </span>
                   <div className="sm:col-span-6">

@@ -6,11 +6,11 @@ import { PageHeader } from "@/components/layout/PageHeader";
 import { Section } from "@/components/layout/Section";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
-import { Eyebrow } from "@/components/ui/Eyebrow";
 import { PendingNote } from "@/components/ui/PendingNote";
 import { Reveal } from "@/components/ui/Reveal";
 import { contactChannels, contactIntro, contactPending } from "@/content/contact";
 import { institutionLinks, site, socialLinks } from "@/content/site";
+import { cardAccent } from "@/lib/accent";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
@@ -36,17 +36,23 @@ export default function ContactPage() {
           <div className="grid gap-16 lg:grid-cols-12 lg:gap-20">
             <div className="lg:col-span-7">
               <Reveal>
-                <Eyebrow>What to write about</Eyebrow>
+                <h2 className="font-display text-display-md text-content">
+                  What to write about
+                </h2>
               </Reveal>
 
               <ul className="mt-10 grid gap-5">
                 {contactChannels.map((channel, i) => (
                   <li key={channel.label}>
                     <Reveal step={i}>
-                      <Card hover="quiet" padding="lg">
-                        <h2 className="font-display text-2xl leading-snug text-content">
+                      <Card
+                        hover="quiet"
+                        accent={cardAccent("red", i)}
+                        padding="lg"
+                      >
+                        <h3 className="font-display text-2xl leading-snug text-content">
                           {channel.label}
-                        </h2>
+                        </h3>
                         <p className="mt-3 max-w-xl leading-relaxed text-content-muted">
                           {channel.description}
                         </p>

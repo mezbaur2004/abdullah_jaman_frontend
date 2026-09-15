@@ -93,7 +93,7 @@ export function ThemeSelector({ className }: { className?: string }) {
       role="radiogroup"
       aria-label="Colour theme"
       className={cn(
-        "relative inline-flex items-center rounded-full border border-line bg-surface-soft p-[3px]",
+        "relative inline-flex items-center rounded-full border border-line-accent bg-surface-soft p-[3px]",
         className,
       )}
     >
@@ -101,7 +101,7 @@ export function ThemeSelector({ className }: { className?: string }) {
           pill must not be reachable or readable on its own. */}
       <span
         aria-hidden="true"
-        className="absolute inset-y-[3px] left-[3px] w-[calc((100%-6px)/3)] rounded-full border border-line-accent bg-surface-raised shadow-card transition-transform"
+        className="absolute inset-y-[3px] left-[3px] w-[calc((100%-6px)/3)] rounded-full border border-accent/45 bg-accent-soft shadow-card transition-transform"
         style={{ transform: `translateX(${activeIndex * 100}%)` }}
       />
 
@@ -122,8 +122,8 @@ export function ThemeSelector({ className }: { className?: string }) {
             className={cn(
               "relative z-10 inline-flex size-7 items-center justify-center rounded-full transition-colors sm:size-8",
               active
-                ? "text-accent"
-                : "text-content-subtle hover:text-content",
+                ? "text-accent-strong"
+                : "text-content-subtle hover:text-accent",
             )}
           >
             <Icon aria-hidden="true" strokeWidth={1.5} className="size-4" />
