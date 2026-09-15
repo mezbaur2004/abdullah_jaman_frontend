@@ -8,6 +8,14 @@ import type { NavItem } from "./types";
  * leader*, not "founder of two schools" or "school builder". Founding the
  * institutions is a fact and appears as a role title against each one, but it
  * is not the summary of the person — the remit is wider than the founding.
+ *
+ * On counting: nothing here quantifies the institutions or their campuses.
+ * Two reasons, both from the owner. He is the principal founder but not the
+ * only member of the board, so a tally reads as a personal holding when it
+ * describes something governed jointly. And the career record is incomplete —
+ * earlier positions have not been collected yet — so a headline that counts
+ * what is currently known implies a completeness the dataset does not have.
+ * Name the institutions; do not add them up. See status.ts.
  */
 
 export const site = {
@@ -24,7 +32,7 @@ export const site = {
    * strengthen it without new source material.
    */
   description:
-    "Abdullah Jaman is an educationist based in Dhaka, Bangladesh, leading Wheaton International School and Guidance International School across six campuses, with an association with the University of Cambridge.",
+    "Abdullah Jaman is an educationist based in Dhaka, Bangladesh. He leads Wheaton International School and Guidance International School, and holds an association with the University of Cambridge.",
   tagline:
     "Educationist — Wheaton International School & Guidance International School",
 

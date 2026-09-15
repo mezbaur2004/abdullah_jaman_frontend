@@ -37,21 +37,26 @@ export const heroPanel: ImageAsset = {
 
 export const hero = {
   eyebrow: site.positioning,
-  /** The institutions, named — not a count of how many were founded. */
+  /** The institutions, named — never counted, and never called his alone. */
   headline: "Wheaton International School & Guidance International School",
   lede: site.description,
   primaryCta: { label: "About Abdullah", href: "/about" },
   secondaryCta: { label: "Get in touch", href: "/contact" },
 } as const;
 
-/** VERIFIED — roles, campus counts and the WIS website are all confirmed. */
+/**
+ * VERIFIED — the roles and the WIS website are confirmed.
+ *
+ * Campus counts were supplied and are recorded in status.ts, but they are
+ * deliberately not carried here: nothing in the UI can render a number that
+ * the content layer does not hold.
+ */
 export const organizations: Organization[] = [
   {
     name: "Wheaton International School",
     shortName: "WIS",
     role: "Founder & Principal",
     location: "Dhaka, Bangladesh",
-    campuses: 3,
     href: "https://wheaton.edu.bd",
   },
   {
@@ -59,14 +64,8 @@ export const organizations: Organization[] = [
     shortName: "GIS",
     role: "Founder & Principal",
     location: "Dhaka, Bangladesh",
-    campuses: 3,
   },
 ];
-
-export const totalCampuses = organizations.reduce(
-  (sum, organization) => sum + (organization.campuses ?? 0),
-  0,
-);
 
 /**
  * VERIFIED — the association with Cambridge is confirmed. The degree, subject
@@ -80,15 +79,15 @@ export const education: EducationEntry[] = [
 ];
 
 /**
- * The at-a-glance strip. Every value is verified, which is why this section
- * can carry real numbers where the statistics band still cannot.
+ * The at-a-glance strip. Four qualities, no quantities: each value says what
+ * kind of thing he does rather than how much of it there is.
  */
 export const atAGlance: GlanceItem[] = [
   {
-    icon: "campus",
-    label: "Campuses",
-    value: String(totalCampuses),
-    detail: "Three at Wheaton, three at Guidance",
+    icon: "focus",
+    label: "Field",
+    value: "Education",
+    detail: "Curriculum, teaching and school leadership",
   },
   {
     icon: "role",
@@ -112,7 +111,7 @@ export const atAGlance: GlanceItem[] = [
 
 export const aboutTeaser = {
   eyebrow: "About",
-  headline: "Leading two international schools across six campuses.",
+  headline: "An educationist leading international schools in Dhaka.",
   /** VERIFIED — the approved positioning statement, unembellished. */
   body: [site.description],
   cta: { label: "More about Abdullah", href: "/about" },
@@ -128,13 +127,17 @@ export const aboutPage = {
    * in order; while the array is empty the page shows only verified facts.
    */
   sections: [] as Array<{ heading: string; body: string[] }>,
+  /**
+   * "Current" is doing real work in the first label. Earlier positions have
+   * not been collected, so a bare "Position" would read as the whole career.
+   */
   facts: [
-    { label: "Position", value: "Founder & Principal" },
+    { label: "Field", value: "Education" },
+    { label: "Current position", value: "Founder & Principal" },
     {
       label: "Institutions",
       value: "Wheaton International School, Guidance International School",
     },
-    { label: "Campuses", value: `${totalCampuses} across both institutions` },
     { label: "Based in", value: site.location },
     { label: "Education", value: "University of Cambridge" },
   ],

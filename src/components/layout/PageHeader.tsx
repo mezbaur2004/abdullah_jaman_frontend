@@ -7,10 +7,15 @@ type PageHeaderProps = {
   lede?: string;
 };
 
-/** The masthead every inner page opens with, so they share one rhythm. */
+/**
+ * The masthead every inner page opens with, so they share one rhythm.
+ *
+ * It sits on the tinted band rather than plain grey: the inner pages have no
+ * hero image, so the colour is what stops them opening on a blank sheet.
+ */
 export function PageHeader({ eyebrow, title, lede }: PageHeaderProps) {
   return (
-    <div className="border-b border-line bg-surface-soft">
+    <div className="border-b border-line-accent bg-surface-accent">
       <Container className="pb-16 pt-14 sm:pb-20 sm:pt-20 lg:pb-24 lg:pt-28">
         <div className="animate-rise">
           <Eyebrow>{eyebrow}</Eyebrow>

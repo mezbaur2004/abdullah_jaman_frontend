@@ -30,20 +30,20 @@ export default async function OpenGraphImage() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          backgroundColor: "#0b0d10",
+          backgroundColor: "#07312d",
           color: "#faf9f6",
           padding: "72px 80px",
           fontFamily: "Fraunces",
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
-          <div style={{ width: 56, height: 2, backgroundColor: "#a98850" }} />
+          <div style={{ width: 56, height: 2, backgroundColor: "#7fcfc4" }} />
           <div
             style={{
               fontSize: 22,
               letterSpacing: "0.18em",
               textTransform: "uppercase",
-              color: "#c6ab7c",
+              color: "#7fcfc4",
             }}
           >
             Educationist
@@ -59,7 +59,7 @@ export default async function OpenGraphImage() {
               marginTop: 28,
               fontSize: 36,
               lineHeight: 1.3,
-              color: "#b5bbc4",
+              color: "#b9cbc6",
               maxWidth: 940,
             }}
           >
@@ -72,13 +72,12 @@ export default async function OpenGraphImage() {
             display: "flex",
             gap: 40,
             fontSize: 22,
-            color: "#8b939f",
-            borderTop: "1px solid rgba(250,249,246,0.15)",
+            color: "#9db1ac",
+            borderTop: "1px solid rgba(250,249,246,0.18)",
             paddingTop: 28,
           }}
         >
           <div>Dhaka, Bangladesh</div>
-          <div>Six campuses</div>
           <div>University of Cambridge</div>
         </div>
       </div>

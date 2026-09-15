@@ -32,7 +32,7 @@ export function Awards({ index }: { index?: string }) {
             <li key={award.title} className="border-b border-line">
               <Reveal delay={i * 0.04}>
                 <div className="grid gap-3 py-7 sm:grid-cols-12 sm:items-baseline sm:gap-8">
-                  <span className="font-display text-lg text-accent sm:col-span-2">
+                  <span className="font-display text-lg text-accent-warm sm:col-span-2">
                     {award.year}
                   </span>
                   <div className="sm:col-span-6">

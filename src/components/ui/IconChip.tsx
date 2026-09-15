@@ -26,7 +26,7 @@ export function IconChip({
         size === "md" ? "size-11" : "size-9",
         inverse
           ? "border-line-inverse bg-on-inverse/10 text-accent-on-inverse"
-          : "border-line bg-surface text-accent",
+          : "border-line-accent bg-accent-soft text-accent",
         className,
       )}
     >

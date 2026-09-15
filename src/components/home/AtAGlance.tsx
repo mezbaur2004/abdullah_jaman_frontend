@@ -1,4 +1,4 @@
-import { Building2, GraduationCap, MapPin, UserRound } from "lucide-react";
+import { BookOpen, GraduationCap, MapPin, UserRound } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
 import { Container } from "@/components/layout/Container";
@@ -13,22 +13,22 @@ import { cn } from "@/lib/cn";
 
 /** Content stores an icon key, not a component, so it stays serialisable. */
 const icons: Record<GlanceIcon, LucideIcon> = {
-  campus: Building2,
+  focus: BookOpen,
   role: UserRound,
   location: MapPin,
   education: GraduationCap,
 };
 
 /**
- * Every figure here is verified, which is why this band can carry numbers
- * where the statistics section still cannot.
+ * Four verified qualities. Deliberately no figures: see the note at the top of
+ * src/content/site.ts for why nothing on this site is counted.
  */
 export function AtAGlance({ index }: { index?: string }) {
   if (atAGlance.length === 0) return null;
 
   return (
     <Section
-      tone="soft"
+      tone="accent"
       index={index}
       indexLabel="At a glance"
       aria-labelledby="glance-heading"
@@ -37,12 +37,12 @@ export function AtAGlance({ index }: { index?: string }) {
         <SectionHeading
           id="glance-heading"
           title="The work, in short."
-          lede="Two international schools, six campuses, one academic standard."
+          lede="Where he works, what he leads, and where he studied — nothing beyond what is confirmed."
         />
 
         <ul className="mt-14 grid gap-5 sm:grid-cols-2 lg:mt-16 lg:grid-cols-4">
           {atAGlance.map((item, i) => {
-            // The lead figure gets the inverse treatment so the eye lands on it.
+            // The lead card gets the inverse treatment so the eye lands on it.
             const featured = i === 0;
 
             return (

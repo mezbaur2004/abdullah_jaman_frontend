@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 import { Container } from "./Container";
 import { cn } from "@/lib/cn";
 
-type Tone = "base" | "soft" | "raised" | "inverse";
+type Tone = "base" | "soft" | "raised" | "accent" | "inverse";
 
 type SectionProps = {
   children: ReactNode;
@@ -31,6 +31,9 @@ const tones: Record<Tone, string> = {
   base: "bg-surface text-content",
   soft: "bg-surface-soft text-content",
   raised: "bg-surface-raised text-content",
+  /* The tinted band. Carries the brand hue at low saturation, so the page can
+     change key without reaching for the full dark band every time. */
+  accent: "bg-surface-accent text-content",
   inverse: "bg-surface-inverse text-on-inverse",
 };
 
@@ -89,7 +92,14 @@ export function Section({
               inverse ? "text-on-inverse-muted" : "text-content-subtle",
             )}
           >
-            <span className={inverse ? "text-accent-on-inverse" : "text-accent"}>
+            {/* Brass, not forest. Enumeration is the secondary hue's one
+                standing job, which keeps the primary reserved for things the
+                reader can act on. */}
+            <span
+              className={
+                inverse ? "text-accent-warm-on-inverse" : "text-accent-warm"
+              }
+            >
               {index}
             </span>
             {indexLabel ? (
@@ -98,7 +108,7 @@ export function Section({
                   aria-hidden="true"
                   className={cn(
                     "h-px w-6",
-                    inverse ? "bg-line-inverse" : "bg-line-strong",
+                    inverse ? "bg-line-inverse" : "bg-line-accent",
                   )}
                 />
                 <span>{indexLabel}</span>

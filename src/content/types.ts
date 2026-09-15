@@ -37,20 +37,22 @@ export type NavItem = {
   description?: string;
 };
 
+/**
+ * Note what is absent: there is no campus count and no size field. The
+ * institutions are named, never tallied — see the note at the top of site.ts.
+ */
 export type Organization = {
   name: string;
   shortName?: string;
   role: string;
   location?: string;
-  /** Number of campuses, when confirmed. */
-  campuses?: number;
   /** Only set this once there is something factual to say. */
   summary?: string;
   href?: string;
 };
 
 /** Icon keys for the at-a-glance cards, mapped to components in the UI. */
-export type GlanceIcon = "campus" | "role" | "location" | "education";
+export type GlanceIcon = "focus" | "role" | "location" | "education";
 
 export type GlanceItem = {
   icon: GlanceIcon;

@@ -29,7 +29,7 @@ export function Eyebrow({
         aria-hidden="true"
         className={cn(
           "h-px w-8 shrink-0",
-          inverse ? "bg-line-inverse" : "bg-line-strong",
+          inverse ? "bg-accent-on-inverse" : "bg-accent",
         )}
       />
       {children}

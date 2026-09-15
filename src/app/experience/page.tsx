@@ -16,13 +16,7 @@ import {
   initiatives,
   roles,
 } from "@/content/experience";
-import { organizations } from "@/content/profile";
 import { pageMetadata } from "@/lib/seo";
-
-/** Campus counts live on the organization, not the role, so look them up. */
-function campusesFor(organization: string) {
-  return organizations.find((o) => o.name === organization)?.campuses;
-}
 
 export const metadata: Metadata = pageMetadata({
   title: "Experience",
@@ -45,6 +39,7 @@ export default function ExperiencePage() {
           <SectionHeading
             id="roles-heading"
             title="Current roles."
+            lede="Positions held now. Earlier roles are not yet part of the record."
           />
 
           <ol className="mt-14 grid gap-5 lg:mt-16 lg:gap-6">
@@ -103,16 +98,6 @@ export default function ExperiencePage() {
                     </div>
 
                     <dl className="mt-8 flex flex-wrap gap-x-12 gap-y-5 border-t border-line pt-7">
-                      {campusesFor(role.organization) ? (
-                        <div>
-                          <dt className="text-eyebrow font-medium uppercase text-content-subtle">
-                            Campuses
-                          </dt>
-                          <dd className="mt-1.5 font-display text-2xl text-content">
-                            {campusesFor(role.organization)}
-                          </dd>
-                        </div>
-                      ) : null}
                       {role.location ? (
                         <div>
                           <dt className="text-eyebrow font-medium uppercase text-content-subtle">

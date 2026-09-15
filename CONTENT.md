@@ -22,7 +22,6 @@ disallowed in `robots.txt`, and not linked from the site.
 | Location: Dhaka, Bangladesh | Dataset |
 | Founder & Principal, Wheaton International School (WIS) | Dataset, LinkedIn, The Daily Star |
 | Founder & Principal, Guidance International School (GIS) | Dataset, LinkedIn, The Daily Star |
-| WIS: 3 campuses. GIS: 3 campuses. Six in total. | Owner |
 | WIS website: https://wheaton.edu.bd | Dataset |
 | Association with the University of Cambridge | Dataset |
 | The Daily Star interview (live URL in `media.ts`) | Dataset |
@@ -36,9 +35,27 @@ does** without new source material.
 The site leads with **educationist and education leader**, not "founder of two
 schools" and not "school builder". Founding the institutions is a fact, and
 "Founder & Principal" appears as the role title against each one — but no
-headline reduces him to having built two schools, because the remit is wider
-than the founding. `site.positioning` holds the word used in headlines;
-`site.role` holds the factual title. They are separate on purpose.
+headline reduces him to having built schools, because the remit is wider than
+the founding. `site.positioning` holds the word used in headlines; `site.role`
+holds the factual title. They are separate on purpose.
+
+### Nothing is counted
+
+**The site names institutions, roles and places. It never adds them up.** No
+campus totals, no school counts, no figures summarising the career. Two
+independent reasons, and each one is sufficient on its own:
+
+1. **Governance.** He is the principal founder, but the institutions are
+   governed by a board of which he is not the only member. A tally against his
+   name reads as a personal holding rather than as shared work.
+2. **Completeness.** Earlier positions have not been collected. Any figure
+   summarising the career would count what happens to be known, not what
+   exists — and would read as the whole story.
+
+This is enforced in the data, not only in the copy: `Organization` has no
+campus or size field, so no component can render one by accident. The campus
+counts the owner supplied are recorded in `status.ts` for the record and are
+published nowhere.
 
 ## Awaiting confirmation — not published
 
@@ -59,8 +76,14 @@ Recorded in `src/content/status.ts` (`resolvedDecisions`) and rendered at
   not launched. An unlaunched venture does not belong in a public profile, and
   the earlier brief describing a Managing Director role there is superseded.
 - **Positioning — educationist, not school builder.** See above.
-- **Campus counts — three and three.** Supplied by the owner. These are the
-  only hard numbers the site publishes.
+- **Counting anything — the site does not.** See "Nothing is counted" above.
+- **Campus counts — recorded, never published.** Three at Wheaton, three at
+  Guidance, supplied by the owner and then withdrawn from publication by him.
+  They stay in `status.ts` because they are true and may be publishable in an
+  institutional context later; they are deliberately absent from `profile.ts`.
+- **Earlier career — treated as unknown, not as absent.** The experience page
+  is titled *current roles* and says so in a note, because positions held
+  before Wheaton and Guidance have not been collected.
 
 ## Empty on purpose
 
@@ -69,7 +92,7 @@ result. Populating an array is all it takes to bring its section back.
 
 | File | Export | Section it controls |
 | --- | --- | --- |
-| `achievements.ts` | `statistics` | Homepage statistics band (the at-a-glance band is separate and does have data) |
+| `achievements.ts` | `statistics` | Homepage statistics band (the at-a-glance band is separate, and carries qualities rather than figures) |
 | `achievements.ts` | `awards` | Awards, homepage and achievements page |
 | `achievements.ts` | `milestones` | Timeline on the achievements page |
 | `experience.ts` | `initiatives` | Professional work, homepage and experience page |
