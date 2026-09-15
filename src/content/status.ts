@@ -29,7 +29,7 @@ export const verifiedSources = [
   {
     label: "Supplied directly by the owner",
     detail:
-      "Campus counts (three at Wheaton, three at Guidance), and the decision to omit Pedago Academy as an unlaunched sister concern.",
+      "Campus counts (recorded, not published), the board-governance and earlier-career caveats behind the no-counting rule, and the decision to omit Pedago Academy as an unlaunched sister concern.",
   },
 ];
 
@@ -49,6 +49,20 @@ export const openQuestions: OpenQuestion[] = [
     known: "An association with the University of Cambridge is confirmed.",
     missing:
       "Degree, subject, programme type and dates. The About page therefore names the institution and nothing else.",
+  },
+  {
+    subject: "Earlier career",
+    known:
+      "He currently leads Wheaton International School and Guidance International School.",
+    missing:
+      "Any position held before these. Confirmed by the owner that earlier roles may exist and have not been collected, which is why the experience page is titled as current roles rather than as a career history.",
+  },
+  {
+    subject: "Governance",
+    known:
+      "He is the principal founder of both institutions and holds the title Founder & Principal at each.",
+    missing:
+      "The composition of the boards. Confirmed by the owner that he is not the sole member, so the site credits him with leadership rather than sole ownership.",
   },
   {
     subject: "LinkedIn activity",
@@ -74,13 +88,21 @@ export const resolvedDecisions: ResolvedDecision[] = [
     decision:
       "Led as educationist and education leader, not as a founder of schools.",
     rationale:
-      "Confirmed by the owner that the founding is only part of the remit. 'Founder & Principal' remains as the factual role title against each institution, but no headline reduces him to having built two schools.",
+      "Confirmed by the owner that the founding is only part of the remit. 'Founder & Principal' remains as the factual role title against each institution, but no headline reduces him to having built schools, and none counts them.",
   },
   {
     subject: "Campus counts",
-    decision: "Three campuses at Wheaton, three at Guidance — six in total.",
+    decision:
+      "Recorded here (three at Wheaton, three at Guidance) and published nowhere on the site.",
     rationale:
-      "Supplied directly by the owner. These are the only hard numbers the site publishes.",
+      "Supplied by the owner, then withdrawn from publication by him. Both institutions are governed by a board of which he is the principal founder but not the only member, so a campus tally against his name reads as a personal holding. The counts stay in this register because they are true and may be publishable in an institutional context later; they are absent from src/content/profile.ts so that no component can render them by accident.",
+  },
+  {
+    subject: "Counting anything",
+    decision:
+      "The site names institutions, roles and places. It does not count them.",
+    rationale:
+      "Two separate reasons and both have to hold. Governance: the institutions are not his alone to tally. Completeness: earlier positions have not been collected, so any figure summarising the career would be a count of what happens to be known rather than of what exists.",
   },
 ];
 

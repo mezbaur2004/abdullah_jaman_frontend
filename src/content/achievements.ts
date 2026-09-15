@@ -12,8 +12,8 @@ import type { Award, Statistic } from "./types";
 export const achievementsIntro = {
   eyebrow: "Achievements",
   headline: "Institutions under his leadership.",
-  /** VERIFIED — the institutions, the roles and the campus counts. */
-  lede: "Wheaton International School and Guidance International School operate across six campuses in Dhaka, with Abdullah Jaman as Principal of both.",
+  /** VERIFIED — the institutions and the roles. No counts: see site.ts. */
+  lede: "Abdullah Jaman is Principal of Wheaton International School and Guidance International School in Dhaka, Bangladesh.",
 } as const;
 
 /** TO COLLECT — measurable results, student and community impact. */

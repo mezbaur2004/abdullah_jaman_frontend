@@ -2,13 +2,7 @@ import { Container } from "@/components/layout/Container";
 import { Button } from "@/components/ui/Button";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Figure } from "@/components/ui/Figure";
-import {
-  hero,
-  heroPanel,
-  organizations,
-  portrait,
-  totalCampuses,
-} from "@/content/profile";
+import { hero, heroPanel, organizations, portrait } from "@/content/profile";
 import { site } from "@/content/site";
 
 export function Hero() {
@@ -65,7 +59,7 @@ export function Hero() {
               {/* An offset rule frames the panel without boxing it in. */}
               <span
                 aria-hidden="true"
-                className="absolute -bottom-5 -right-5 hidden h-2/3 w-2/3 rounded-card border-b border-r border-line sm:block"
+                className="absolute -bottom-5 -right-5 hidden h-2/3 w-2/3 rounded-card border-b border-r border-line-accent bg-accent-soft sm:block"
               />
               <Figure
                 image={image}
@@ -77,7 +71,7 @@ export function Hero() {
               />
             </div>
 
-            {/* The institutions as chips, with the one hard number alongside. */}
+            {/* The institutions as chips. Named, not counted. */}
             <ul className="mt-8 flex flex-wrap items-center gap-2.5">
               {organizations.map((organization) => (
                 <li key={organization.name}>
@@ -89,13 +83,11 @@ export function Hero() {
                   </span>
                 </li>
               ))}
-              {totalCampuses > 0 ? (
-                <li>
-                  <span className="inline-flex items-center rounded-full border border-line bg-surface-soft px-3.5 py-1.5 text-eyebrow font-medium uppercase text-accent">
-                    {totalCampuses} Campuses
-                  </span>
-                </li>
-              ) : null}
+              <li>
+                <span className="inline-flex items-center rounded-full border border-line-accent bg-accent-soft px-3.5 py-1.5 text-eyebrow font-medium uppercase text-accent">
+                  {site.location}
+                </span>
+              </li>
             </ul>
           </div>
         </div>

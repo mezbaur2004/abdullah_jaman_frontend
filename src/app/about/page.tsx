@@ -16,7 +16,6 @@ import {
   heroPanel,
   organizations,
   portrait,
-  totalCampuses,
 } from "@/content/profile";
 import { site } from "@/content/site";
 import { pageMetadata } from "@/lib/seo";
@@ -92,12 +91,12 @@ export default function AboutPage() {
         </Container>
       </Section>
 
-      <Section tone="soft" index="02" indexLabel="Institutions" aria-labelledby="about-roles-heading">
+      <Section tone="accent" index="02" indexLabel="Institutions" aria-labelledby="about-roles-heading">
         <Container>
           <SectionHeading
             id="about-roles-heading"
             title="Institutions."
-            lede={`Leadership across ${totalCampuses} campuses in Dhaka.`}
+            lede="The institutions he currently leads, in Dhaka, Bangladesh."
           />
 
           <ul className="mt-14 grid gap-5 lg:mt-16 lg:grid-cols-2 lg:gap-6">
@@ -135,16 +134,6 @@ export default function AboutPage() {
                     </p>
 
                     <dl className="mt-auto flex flex-wrap gap-x-10 gap-y-4 border-t border-line pt-7">
-                      {organization.campuses ? (
-                        <div>
-                          <dt className="text-eyebrow font-medium uppercase text-content-subtle">
-                            Campuses
-                          </dt>
-                          <dd className="mt-1.5 font-display text-2xl text-content">
-                            {organization.campuses}
-                          </dd>
-                        </div>
-                      ) : null}
                       {organization.location ? (
                         <div>
                           <dt className="text-eyebrow font-medium uppercase text-content-subtle">

@@ -18,7 +18,7 @@ export function PendingNote({
   return (
     <p
       className={cn(
-        "max-w-xl border-l-2 border-line-strong py-1 pl-5 text-sm leading-relaxed text-content-subtle",
+        "max-w-xl border-l-2 border-accent/50 py-1 pl-5 text-sm leading-relaxed text-content-subtle",
         className,
       )}
     >

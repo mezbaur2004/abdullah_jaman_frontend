@@ -2,7 +2,7 @@
 
 A premium personal-brand portfolio for Abdullah Jaman — educationist, and
 Founder and Principal of Wheaton International School (WIS) and Guidance
-International School (GIS), across six campuses in Dhaka.
+International School (GIS) in Dhaka, Bangladesh.
 
 Six pages — Home, About, Experience, Achievements, Media, Contact — built as a
 static site. No database, no authentication, no CMS and no admin panel in v1.
@@ -22,6 +22,7 @@ static site. No database, no authentication, no CMS and no admin panel in v1.
 | Styling | Tailwind CSS v4 (CSS-first `@theme` config) |
 | Animation | Framer Motion (`motion`), in one component only |
 | Theming | Light and dark, system default, no dependency |
+| Palette | Forest primary, brass secondary, on warm paper / green-black |
 | Icons | `lucide-react` |
 | Images | `next/image` |
 
@@ -102,8 +103,8 @@ reason the content layer exists.
 `src/app/globals.css` holds three layers, and components only ever touch the
 third:
 
-1. **Palette** — raw values (`--paper`, `--ink-*`, `--brass-*`). Referenced by
-   nothing outside this file.
+1. **Palette** — raw values (`--paper*`, `--night-*`, `--forest-*`, `--brass-*`,
+   `--ink-*`). Referenced by nothing outside this file.
 2. **Semantic tokens** — `--surface`, `--content`, `--accent`, `--line`,
    `--action` and friends, defined once per theme.
 3. **Tailwind theme** — `@theme inline` maps those to utilities, so a component
@@ -114,6 +115,26 @@ third:
 rather than through a second indirection, which is what lets the token
 re-resolve when the theme flips.
 
+### Colour
+
+Two hues carry the brand, and they have separate jobs.
+
+**Forest** is the primary. It fills the buttons, the dark contact band and
+footer, the hero plate, the tinted section band, the icon frames and every
+interactive accent — so a reader can tell what is clickable by colour alone.
+**Brass** is the secondary, and is rationed to one standing job: enumeration.
+Section numerals and years are brass; nothing else is. The two never compete
+for the same role, which is what keeps a two-colour page from looking busy.
+
+The neutrals are mixed toward forest rather than left cold, so a grey rule
+beside a forest heading still reads as part of one family. The same applies to
+the shadows, which carry a little of the hue instead of neutral black — that is
+what stops a raised white card from looking grey against warm paper.
+
+Light runs warm paper over deep forest; dark runs green-black over light teal.
+Both are checked with axe at 1440px and 390px; `--surface-accent` is the
+tightest ratio on the page and still clears AA.
+
 - **Type** — Fraunces (display serif) and Inter (sans), both self-hosted through
   `next/font/google`, so there are no external font requests at runtime. Display
   sizes are fluid `clamp()` values, set as `text-display-*`.
@@ -122,8 +143,10 @@ re-resolve when the theme flips.
 
 ### Sections and cards
 
-`<Section>` owns the page rhythm. Each one alternates surface tone, carries a
-rule along its top edge, and can take a two-digit `index` with a label — so
+`<Section>` owns the page rhythm. Each one alternates surface tone — including
+`accent`, the tinted band that lets the page change key without reaching for
+the full dark band every time — carries a rule along its top edge, and can take
+a two-digit `index` with a label, so
 boundaries read as boundaries rather than as a change of subject mid-scroll.
 The rule is on by default because two adjacent sections in the same tone would
 otherwise run together.

@@ -21,7 +21,7 @@ export function Credibility({ index }: { index?: string }) {
         <SectionHeading
           id="credibility-heading"
           title="Where he leads."
-          lede="Two international schools in Dhaka, operating across six campuses."
+          lede="The institutions he leads, in Dhaka, Bangladesh."
         />
 
         <ul className="mt-14 grid gap-5 lg:mt-16 lg:grid-cols-2 lg:gap-6">
@@ -69,16 +69,6 @@ export function Credibility({ index }: { index?: string }) {
                   </p>
 
                   <dl className="mt-auto flex flex-wrap gap-x-10 gap-y-4 border-t border-line pt-7">
-                    {organization.campuses ? (
-                      <div>
-                        <dt className="text-eyebrow font-medium uppercase text-content-subtle">
-                          Campuses
-                        </dt>
-                        <dd className="mt-1.5 font-display text-2xl text-content">
-                          {organization.campuses}
-                        </dd>
-                      </div>
-                    ) : null}
                     {organization.location ? (
                       <div>
                         <dt className="text-eyebrow font-medium uppercase text-content-subtle">

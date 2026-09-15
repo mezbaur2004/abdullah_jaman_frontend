@@ -2,7 +2,7 @@ import type { ElementType, ReactNode } from "react";
 
 import { cn } from "@/lib/cn";
 
-type Tone = "raised" | "soft" | "inverse" | "outline" | "feature";
+type Tone = "raised" | "soft" | "accent" | "inverse" | "outline" | "feature";
 
 type CardProps = {
   children: ReactNode;
@@ -23,6 +23,7 @@ type CardProps = {
 const tones: Record<Tone, string> = {
   raised: "border border-line bg-surface-raised shadow-card",
   soft: "border border-line bg-surface-soft",
+  accent: "border border-line-accent bg-accent-soft",
   outline: "border border-line bg-transparent",
   inverse:
     "border border-line-inverse bg-surface-inverse text-on-inverse shadow-card",

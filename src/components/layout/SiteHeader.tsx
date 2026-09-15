@@ -88,7 +88,7 @@ export function SiteHeader() {
                   aria-current={isCurrent(item.href) ? "page" : undefined}
                   className={cn(
                     "relative text-sm transition-colors duration-300 ease-editorial",
-                    "after:absolute after:-bottom-1.5 after:left-0 after:h-px after:bg-content after:transition-all after:duration-300 after:ease-editorial after:content-['']",
+                    "after:absolute after:-bottom-1.5 after:left-0 after:h-px after:bg-accent after:transition-all after:duration-300 after:ease-editorial after:content-['']",
                     isCurrent(item.href)
                       ? "text-content after:w-full"
                       : "text-content-subtle after:w-0 hover:text-content hover:after:w-full",
@@ -156,7 +156,7 @@ export function SiteHeader() {
                         className={cn(
                           "flex items-baseline justify-between py-5 font-display text-display-md",
                           isCurrent(item.href)
-                            ? "text-content"
+                            ? "text-accent"
                             : "text-content-muted",
                         )}
                       >

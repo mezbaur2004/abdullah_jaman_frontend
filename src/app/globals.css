@@ -5,28 +5,54 @@
    Raw values only. Nothing in the app references these directly — components
    use the semantic tokens below, which is what makes two themes possible from
    a single set of component classes.
+
+   Two hues carry the brand. Forest is the primary: it fills the buttons, the
+   dark bands and every interactive accent. Brass is the secondary and is
+   rationed deliberately — section numerals, years, small marks — so that the
+   two never compete for the same job. The neutrals are mixed toward forest
+   rather than left cold, so a grey rule beside a forest heading still reads as
+   part of the same family.
 --------------------------------------------------------------------------- */
 :root {
-  --paper: #faf9f6;
-  --paper-soft: #f1efe8;
-  --paper-deep: #e7e3d9;
+  /* Warm paper — the light ground. */
+  --paper: #fbfaf6;
+  --paper-soft: #f1f4f1;
+  --paper-tint: #e3ede9;
 
-  --ink-950: #0b0d10;
-  --ink-900: #14171b;
-  --ink-850: #1c2026;
-  --ink-800: #22272e;
-  --ink-700: #2f353d;
-  --ink-600: #4b535e;
-  --ink-500: #646c78;
-  --ink-400: #8b939f;
-  --ink-300: #a8b0bb;
-  --ink-200: #d7dae0;
+  /* Night — the dark ground. Green-black, not neutral black. */
+  --night-950: #0a1210;
+  --night-900: #101b19;
+  --night-800: #15221f;
+  --night-700: #17302b;
+  --night-tint: #0d1c19;
 
+  /* Forest — primary. */
+  --forest-950: #052421;
+  --forest-900: #07312d;
+  --forest-800: #0a4540;
+  --forest-700: #0d5a52;
+  --forest-600: #12736a;
+  --forest-400: #4bb9ab;
+  --forest-300: #7fcfc4;
+  --forest-200: #cfe8e1;
+  --forest-100: #e3efec;
+  --forest-shadow: #12332e;
+
+  /* Brass — secondary. */
   --brass-700: #6b5029;
   --brass-600: #7d5f33;
-  --brass-500: #8c6a3c;
   --brass-300: #c6ab7c;
   --brass-200: #ded0b4;
+
+  /* Neutrals, tinted toward forest. */
+  --ink-950: #080d0c;
+  --ink-900: #101614;
+  --ink-700: #2b3633;
+  --ink-600: #46534f;
+  --ink-500: #5a6763;
+  --ink-400: #85918d;
+  --ink-300: #a9bab6;
+  --ink-200: #cfd8d5;
 }
 
 /* ---------------------------------------------------------------------------
@@ -43,7 +69,10 @@
   --surface: var(--paper);
   --surface-soft: var(--paper-soft);
   --surface-raised: #ffffff;
-  --surface-inverse: var(--ink-950);
+  /* A tinted band. Colour, not just another shade of grey, so the page has
+     somewhere to change key without reaching for the dark band every time. */
+  --surface-accent: var(--paper-tint);
+  --surface-inverse: var(--forest-900);
 
   --content: var(--ink-900);
   --content-muted: var(--ink-600);
@@ -52,25 +81,32 @@
   --on-inverse: var(--paper);
   --on-inverse-muted: var(--ink-300);
 
-  --accent: var(--brass-600);
-  --accent-strong: var(--brass-700);
-  --accent-on-inverse: var(--brass-300);
+  --accent: var(--forest-700);
+  --accent-strong: var(--forest-900);
+  --accent-on-inverse: var(--forest-300);
+  /* A tinted fill for icon frames and badges — accent at low commitment. */
+  --accent-soft: var(--forest-100);
+  --accent-warm: var(--brass-600);
+  --accent-warm-on-inverse: var(--brass-300);
 
   --line: color-mix(in oklab, var(--ink-900) 13%, transparent);
   --line-strong: color-mix(in oklab, var(--ink-900) 26%, transparent);
+  --line-accent: color-mix(in oklab, var(--accent) 24%, transparent);
   --line-inverse: color-mix(in oklab, var(--paper) 16%, transparent);
 
-  --action: var(--ink-900);
-  --action-hover: var(--ink-700);
+  --action: var(--forest-800);
+  --action-hover: var(--forest-600);
   --on-action: var(--paper);
   --action-inverse: var(--paper);
-  --action-inverse-hover: var(--brass-200);
-  --on-action-inverse: var(--ink-900);
+  --action-inverse-hover: var(--forest-200);
+  --on-action-inverse: var(--forest-900);
 
-  --shadow-panel: 0 1px 2px rgb(11 13 16 / 0.04), 0 8px 24px -12px rgb(11 13 16 / 0.12);
-  --shadow-card: 0 1px 2px rgb(11 13 16 / 0.04), 0 4px 16px -8px rgb(11 13 16 / 0.1);
-  --shadow-card-hover: 0 2px 4px rgb(11 13 16 / 0.05),
-    0 14px 32px -14px rgb(11 13 16 / 0.18);
+  /* Shadows carry a little of the brand hue rather than neutral black, which
+     is what keeps a raised card from looking grey against warm paper. */
+  --shadow-panel: 0 1px 2px rgb(18 51 46 / 0.05), 0 8px 24px -12px rgb(18 51 46 / 0.16);
+  --shadow-card: 0 1px 2px rgb(18 51 46 / 0.05), 0 4px 16px -8px rgb(18 51 46 / 0.13);
+  --shadow-card-hover: 0 2px 4px rgb(18 51 46 / 0.06),
+    0 14px 32px -14px rgb(18 51 46 / 0.22);
 }
 
 /* Dark, by system preference — unless the reader has explicitly chosen light. */
@@ -78,28 +114,32 @@
   :root:not([data-theme="light"]) {
     color-scheme: dark;
 
-    --surface: #0e1013;
-    --surface-soft: #14171b;
-    --surface-raised: #191d22;
-    --surface-inverse: var(--ink-850);
+    --surface: var(--night-950);
+    --surface-soft: var(--night-900);
+    --surface-raised: var(--night-800);
+    --surface-accent: var(--night-tint);
+    --surface-inverse: var(--night-700);
 
-    --content: #edeae3;
-    --content-muted: var(--ink-300);
-    --content-subtle: #848c97;
+    --content: #e8ece9;
+    --content-muted: #aab6b2;
+    --content-subtle: var(--ink-400);
 
-    --accent: var(--brass-300);
-    --accent-strong: var(--brass-200);
+    --accent: #6fc9bb;
+    --accent-strong: var(--forest-200);
+    --accent-soft: var(--forest-shadow);
+    --accent-warm: var(--brass-300);
 
-    --line: color-mix(in oklab, #edeae3 14%, transparent);
-    --line-strong: color-mix(in oklab, #edeae3 28%, transparent);
-    --line-inverse: color-mix(in oklab, #edeae3 16%, transparent);
+    --line: color-mix(in oklab, #e8ece9 14%, transparent);
+    --line-strong: color-mix(in oklab, #e8ece9 28%, transparent);
+    --line-accent: color-mix(in oklab, var(--accent) 30%, transparent);
+    --line-inverse: color-mix(in oklab, #e8ece9 16%, transparent);
 
-    --action: #edeae3;
-    --action-hover: #ffffff;
-    --on-action: var(--ink-900);
-    --action-inverse: #edeae3;
-    --action-inverse-hover: #ffffff;
-    --on-action-inverse: var(--ink-900);
+    --action: var(--forest-400);
+    --action-hover: #6fd3c4;
+    --on-action: var(--forest-950);
+    --action-inverse: var(--forest-400);
+    --action-inverse-hover: #6fd3c4;
+    --on-action-inverse: var(--forest-950);
 
     --shadow-panel: 0 1px 2px rgb(0 0 0 / 0.4), 0 8px 24px -12px rgb(0 0 0 / 0.6);
     --shadow-card: 0 1px 2px rgb(0 0 0 / 0.5), 0 4px 16px -8px rgb(0 0 0 / 0.6);
@@ -113,28 +153,32 @@
 :root[data-theme="dark"] {
   color-scheme: dark;
 
-  --surface: #0e1013;
-  --surface-soft: #14171b;
-  --surface-raised: #191d22;
-  --surface-inverse: var(--ink-850);
+  --surface: var(--night-950);
+  --surface-soft: var(--night-900);
+  --surface-raised: var(--night-800);
+  --surface-accent: var(--night-tint);
+  --surface-inverse: var(--night-700);
 
-  --content: #edeae3;
-  --content-muted: var(--ink-300);
-  --content-subtle: #848c97;
+  --content: #e8ece9;
+  --content-muted: #aab6b2;
+  --content-subtle: var(--ink-400);
 
-  --accent: var(--brass-300);
-  --accent-strong: var(--brass-200);
+  --accent: #6fc9bb;
+  --accent-strong: var(--forest-200);
+  --accent-soft: var(--forest-shadow);
+  --accent-warm: var(--brass-300);
 
-  --line: color-mix(in oklab, #edeae3 14%, transparent);
-  --line-strong: color-mix(in oklab, #edeae3 28%, transparent);
-  --line-inverse: color-mix(in oklab, #edeae3 16%, transparent);
+  --line: color-mix(in oklab, #e8ece9 14%, transparent);
+  --line-strong: color-mix(in oklab, #e8ece9 28%, transparent);
+  --line-accent: color-mix(in oklab, var(--accent) 30%, transparent);
+  --line-inverse: color-mix(in oklab, #e8ece9 16%, transparent);
 
-  --action: #edeae3;
-  --action-hover: #ffffff;
-  --on-action: var(--ink-900);
-  --action-inverse: #edeae3;
-  --action-inverse-hover: #ffffff;
-  --on-action-inverse: var(--ink-900);
+  --action: var(--forest-400);
+  --action-hover: #6fd3c4;
+  --on-action: var(--forest-950);
+  --action-inverse: var(--forest-400);
+  --action-inverse-hover: #6fd3c4;
+  --on-action-inverse: var(--forest-950);
 
   --shadow-panel: 0 1px 2px rgb(0 0 0 / 0.4), 0 8px 24px -12px rgb(0 0 0 / 0.6);
   --shadow-card: 0 1px 2px rgb(0 0 0 / 0.5), 0 4px 16px -8px rgb(0 0 0 / 0.6);
@@ -151,6 +195,7 @@
   --color-surface: var(--surface);
   --color-surface-soft: var(--surface-soft);
   --color-surface-raised: var(--surface-raised);
+  --color-surface-accent: var(--surface-accent);
   --color-surface-inverse: var(--surface-inverse);
 
   --color-content: var(--content);
@@ -163,9 +208,13 @@
   --color-accent: var(--accent);
   --color-accent-strong: var(--accent-strong);
   --color-accent-on-inverse: var(--accent-on-inverse);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-warm: var(--accent-warm);
+  --color-accent-warm-on-inverse: var(--accent-warm-on-inverse);
 
   --color-line: var(--line);
   --color-line-strong: var(--line-strong);
+  --color-line-accent: var(--line-accent);
   --color-line-inverse: var(--line-inverse);
 
   --color-action: var(--action);
@@ -261,7 +310,7 @@
   }
 
   ::selection {
-    background-color: var(--content);
+    background-color: var(--accent);
     color: var(--surface);
   }
 

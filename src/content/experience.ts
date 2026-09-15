@@ -29,8 +29,9 @@ export const roles: Role[] = [
 
 export const experienceIntro = {
   eyebrow: "Experience",
-  headline: "Leadership across two institutions.",
-  lede: "Abdullah Jaman leads Wheaton International School and Guidance International School, across six campuses in Dhaka.",
+  /** "Current" is load-bearing — earlier positions have not been collected. */
+  headline: "Current leadership.",
+  lede: "Abdullah Jaman leads Wheaton International School and Guidance International School in Dhaka, Bangladesh.",
 } as const;
 
 /**
@@ -45,4 +46,4 @@ export const initiatives: Initiative[] = [];
  * Delete this once `roles` carries real dates and responsibilities.
  */
 export const experiencePending =
-  "A detailed career history — positions, dates, responsibilities and milestones — is being compiled and will be published here once confirmed.";
+  "This page shows current roles only. Earlier positions, dates, responsibilities and milestones are being compiled and will be published here once confirmed.";

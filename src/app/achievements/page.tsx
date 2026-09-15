@@ -17,13 +17,13 @@ import {
   milestones,
   statistics,
 } from "@/content/achievements";
-import { organizations, totalCampuses } from "@/content/profile";
+import { organizations } from "@/content/profile";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
   title: "Achievements",
   description:
-    "Abdullah Jaman founded Wheaton International School and Guidance International School in Dhaka and serves as Principal of both.",
+    "Abdullah Jaman is Principal of Wheaton International School and Guidance International School in Dhaka, Bangladesh.",
   path: "/achievements",
 });
 
@@ -36,8 +36,8 @@ export default function AchievementsPage() {
         lede={achievementsIntro.lede}
       />
 
-      {/* Founding both schools is the one achievement the record establishes,
-          so it carries the page while awards and figures are outstanding. */}
+      {/* Leading both institutions is what the record establishes, so it
+          carries the page while awards and figures are outstanding. */}
       <Section
         divider={false}
         index="01"
@@ -48,7 +48,7 @@ export default function AchievementsPage() {
           <SectionHeading
             id="institutions-heading"
             title="Institutions under his leadership."
-            lede={`${totalCampuses} campuses across two international schools in Dhaka.`}
+            lede="The institutions he currently leads, in Dhaka, Bangladesh."
           />
 
           <ul className="mt-14 grid gap-5 lg:mt-16 lg:grid-cols-2 lg:gap-6">
@@ -58,9 +58,9 @@ export default function AchievementsPage() {
                   <Card as="article" padding="lg" className="flex h-full flex-col">
                     <div className="flex items-start justify-between gap-5">
                       <IconChip icon={Building2} />
-                      {organization.campuses ? (
-                        <span className="rounded-full border border-line px-3 py-1 text-eyebrow font-medium uppercase text-accent">
-                          {organization.campuses} campuses
+                      {organization.shortName ? (
+                        <span className="rounded-full border border-line-accent bg-accent-soft px-3 py-1 text-eyebrow font-medium uppercase text-accent">
+                          {organization.shortName}
                         </span>
                       ) : null}
                     </div>
@@ -127,7 +127,7 @@ export default function AchievementsPage() {
                 <li key={award.title} className="border-b border-line">
                   <Reveal delay={i * 0.04}>
                     <article className="grid gap-3 py-8 sm:grid-cols-12 sm:items-baseline sm:gap-8">
-                      <p className="font-display text-lg text-accent sm:col-span-2">
+                      <p className="font-display text-lg text-accent-warm sm:col-span-2">
                         {award.year}
                       </p>
                       <div className="sm:col-span-6">
@@ -165,7 +165,7 @@ export default function AchievementsPage() {
                 <li key={milestone.year}>
                   <Reveal delay={i * 0.04}>
                     <div className="grid gap-4 sm:grid-cols-12 sm:gap-8">
-                      <p className="font-display text-lg text-accent sm:col-span-2">
+                      <p className="font-display text-lg text-accent-warm sm:col-span-2">
                         {milestone.year}
                       </p>
                       <div className="relative pb-10 sm:col-span-10 sm:border-l sm:border-line sm:pl-10">

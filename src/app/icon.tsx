@@ -21,7 +21,7 @@ export default async function Icon() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          backgroundColor: "#0b0d10",
+          backgroundColor: "#07312d",
           color: "#faf9f6",
           fontSize: 38,
           fontFamily: "Fraunces",
