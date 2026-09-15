@@ -13,7 +13,6 @@ export function MediaHighlights({ index }: { index?: string }) {
 
   return (
     <Section
-      tone="soft"
       index={index}
       indexLabel="Media"
       aria-labelledby="media-heading"
@@ -33,15 +32,15 @@ export function MediaHighlights({ index }: { index?: string }) {
           }
         />
 
-        <div className="mt-14 border-t border-line lg:mt-16">
+        <ul className="mt-14 grid gap-5 lg:mt-16">
           {highlights.map((item, i) => (
-            <div key={item.title} className="border-b border-line">
+            <li key={item.title}>
               <Reveal delay={i * 0.05}>
                 <MediaEntry item={item} />
               </Reveal>
-            </div>
+            </li>
           ))}
-        </div>
+        </ul>
       </Container>
     </Section>
   );

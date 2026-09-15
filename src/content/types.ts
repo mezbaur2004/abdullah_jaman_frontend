@@ -42,9 +42,21 @@ export type Organization = {
   shortName?: string;
   role: string;
   location?: string;
+  /** Number of campuses, when confirmed. */
+  campuses?: number;
   /** Only set this once there is something factual to say. */
   summary?: string;
   href?: string;
+};
+
+/** Icon keys for the at-a-glance cards, mapped to components in the UI. */
+export type GlanceIcon = "campus" | "role" | "location" | "education";
+
+export type GlanceItem = {
+  icon: GlanceIcon;
+  label: string;
+  value: string;
+  detail: string;
 };
 
 export type EducationEntry = {
@@ -117,4 +129,11 @@ export type OpenQuestion = {
   subject: string;
   known: string;
   missing: string;
+};
+
+/** A question that has been answered, kept so the reasoning is not lost. */
+export type ResolvedDecision = {
+  subject: string;
+  decision: string;
+  rationale: string;
 };

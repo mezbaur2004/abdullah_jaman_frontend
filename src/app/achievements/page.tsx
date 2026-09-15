@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
+import { Building2 } from "lucide-react";
 
 import { ContactCta } from "@/components/home/ContactCta";
 import { Container } from "@/components/layout/Container";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { Section } from "@/components/layout/Section";
+import { Card } from "@/components/ui/Card";
+import { IconChip } from "@/components/ui/IconChip";
 import { PendingNote } from "@/components/ui/PendingNote";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -14,7 +17,7 @@ import {
   milestones,
   statistics,
 } from "@/content/achievements";
-import { organizations } from "@/content/profile";
+import { organizations, totalCampuses } from "@/content/profile";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
@@ -44,29 +47,35 @@ export default function AchievementsPage() {
         <Container>
           <SectionHeading
             id="institutions-heading"
-            title="Two schools, founded and led."
+            title="Institutions under his leadership."
+            lede={`${totalCampuses} campuses across two international schools in Dhaka.`}
           />
 
-          <ul className="mt-14 grid gap-px lg:mt-16 lg:grid-cols-2">
+          <ul className="mt-14 grid gap-5 lg:mt-16 lg:grid-cols-2 lg:gap-6">
             {organizations.map((organization, i) => (
-              <li
-                key={organization.name}
-                className="border-t border-line lg:odd:pr-12 lg:even:border-l lg:even:pl-12"
-              >
-                <Reveal delay={i * 0.06}>
-                  <div className="py-10">
-                    <p className="font-display text-display-md text-content">
+              <li key={organization.name}>
+                <Reveal delay={i * 0.06} className="h-full">
+                  <Card as="article" padding="lg" className="flex h-full flex-col">
+                    <div className="flex items-start justify-between gap-5">
+                      <IconChip icon={Building2} />
+                      {organization.campuses ? (
+                        <span className="rounded-full border border-line px-3 py-1 text-eyebrow font-medium uppercase text-accent">
+                          {organization.campuses} campuses
+                        </span>
+                      ) : null}
+                    </div>
+                    <p className="mt-7 font-display text-display-md text-content">
                       {organization.name}
                     </p>
                     <p className="mt-4 text-sm font-medium text-accent">
                       {organization.role}
                     </p>
                     {organization.location ? (
-                      <p className="mt-2 text-sm text-content-subtle">
+                      <p className="mt-auto pt-6 text-sm text-content-subtle">
                         {organization.location}
                       </p>
                     ) : null}
-                  </div>
+                  </Card>
                 </Reveal>
               </li>
             ))}

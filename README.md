@@ -1,8 +1,8 @@
 # Abdullah Jaman — personal brand site
 
-A premium personal-brand portfolio for Abdullah Jaman: Founder and Principal of
-Wheaton International School (WIS) and Guidance International School (GIS),
-Dhaka.
+A premium personal-brand portfolio for Abdullah Jaman — educationist, and
+Founder and Principal of Wheaton International School (WIS) and Guidance
+International School (GIS), across six campuses in Dhaka.
 
 Six pages — Home, About, Experience, Achievements, Media, Contact — built as a
 static site. No database, no authentication, no CMS and no admin panel in v1.
@@ -120,13 +120,23 @@ re-resolve when the theme flips.
 - **Motion** — one entrance: a short rise and fade on first view (`Reveal`).
   Everything honours `prefers-reduced-motion`.
 
-### Sections
+### Sections and cards
 
 `<Section>` owns the page rhythm. Each one alternates surface tone, carries a
 rule along its top edge, and can take a two-digit `index` with a label — so
 boundaries read as boundaries rather than as a change of subject mid-scroll.
 The rule is on by default because two adjacent sections in the same tone would
 otherwise run together.
+
+Within a section, `<Card>` carries the content. Elevation comes from a border
+*and* a shadow rather than a shadow alone: the shadow does the work on paper,
+but against a near-black ground it is close to invisible, so the border and the
+raised surface are what separate a card from the page in dark mode. The
+`feature` tone exists for the same reason — one card per group draws the eye,
+and in dark mode it is the accent border rather than the fill that carries it.
+
+`<IconChip>` frames an icon and is always `aria-hidden`; the label beside it
+carries the meaning.
 
 ### Light and dark
 

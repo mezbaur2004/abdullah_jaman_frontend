@@ -1,14 +1,20 @@
 import { Container } from "@/components/layout/Container";
 import { Section } from "@/components/layout/Section";
 import { Button } from "@/components/ui/Button";
+import { Card } from "@/components/ui/Card";
 import { Reveal } from "@/components/ui/Reveal";
 import { aboutPage, aboutTeaser } from "@/content/profile";
 
 export function AboutTeaser({ index }: { index?: string }) {
   return (
-    <Section index={index} indexLabel="About" aria-labelledby="about-teaser-heading">
+    <Section
+      tone="soft"
+      index={index}
+      indexLabel="About"
+      aria-labelledby="about-teaser-heading"
+    >
       <Container>
-        <div className="grid gap-14 lg:grid-cols-12 lg:gap-20">
+        <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-7">
             <Reveal>
               <h2
@@ -36,16 +42,25 @@ export function AboutTeaser({ index }: { index?: string }) {
 
           <div className="lg:col-span-5">
             <Reveal delay={0.06}>
-              <dl className="border-t border-line">
-                {aboutPage.facts.map((fact) => (
-                  <div key={fact.label} className="border-b border-line py-5">
-                    <dt className="text-eyebrow font-medium uppercase text-content-subtle">
-                      {fact.label}
-                    </dt>
-                    <dd className="mt-2 text-content">{fact.value}</dd>
-                  </div>
-                ))}
-              </dl>
+              <Card padding="lg">
+                <dl className="flex flex-col">
+                  {aboutPage.facts.map((fact, i) => (
+                    <div
+                      key={fact.label}
+                      className={
+                        i === 0
+                          ? "pb-5"
+                          : "border-t border-line py-5 last:pb-0"
+                      }
+                    >
+                      <dt className="text-eyebrow font-medium uppercase text-content-subtle">
+                        {fact.label}
+                      </dt>
+                      <dd className="mt-2 text-content">{fact.value}</dd>
+                    </div>
+                  ))}
+                </dl>
+              </Card>
             </Reveal>
           </div>
         </div>

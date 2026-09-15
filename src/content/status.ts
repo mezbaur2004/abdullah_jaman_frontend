@@ -1,4 +1,4 @@
-import type { ContentGap, OpenQuestion } from "./types";
+import type { ContentGap, OpenQuestion, ResolvedDecision } from "./types";
 
 /**
  * The research register behind the site, rendered at /content-status
@@ -26,6 +26,11 @@ export const verifiedSources = [
     detail:
       "Confirms association with WIS and GIS. Several experience and education entries are redacted in the public profile.",
   },
+  {
+    label: "Supplied directly by the owner",
+    detail:
+      "Campus counts (three at Wheaton, three at Guidance), and the decision to omit Pedago Academy as an unlaunched sister concern.",
+  },
 ];
 
 /**
@@ -46,17 +51,36 @@ export const openQuestions: OpenQuestion[] = [
       "Degree, subject, programme type and dates. The About page therefore names the institution and nothing else.",
   },
   {
-    subject: "Pedago Academy",
-    known:
-      "The original project brief described Abdullah Jaman as Managing Director of Pedago Academy, and the contact address supplied was a Pedago Academy one.",
-    missing:
-      "Any mention in the verified dataset, which gives the positioning as Founder & Principal of WIS and GIS only. The role is not shown on the site pending confirmation of whether it is current, former, or not applicable.",
-  },
-  {
     subject: "LinkedIn activity",
     known: "The profile shows professional activity beyond the Daily Star share.",
     missing:
       "Enough detail to classify any of it as an achievement, publication, project or milestone. None of it is treated as portfolio content.",
+  },
+];
+
+/**
+ * Answered questions. Kept rather than deleted so that a future reader does
+ * not re-open a decision without seeing why it was made.
+ */
+export const resolvedDecisions: ResolvedDecision[] = [
+  {
+    subject: "Pedago Academy",
+    decision: "Not mentioned anywhere on the site.",
+    rationale:
+      "Confirmed by the owner as a sister concern of Wheaton and Guidance that is still in development and has not launched. An unlaunched venture does not belong in a public profile, and the earlier brief describing a Managing Director role there is superseded.",
+  },
+  {
+    subject: "Positioning",
+    decision:
+      "Led as educationist and education leader, not as a founder of schools.",
+    rationale:
+      "Confirmed by the owner that the founding is only part of the remit. 'Founder & Principal' remains as the factual role title against each institution, but no headline reduces him to having built two schools.",
+  },
+  {
+    subject: "Campus counts",
+    decision: "Three campuses at Wheaton, three at Guidance — six in total.",
+    rationale:
+      "Supplied directly by the owner. These are the only hard numbers the site publishes.",
   },
 ];
 

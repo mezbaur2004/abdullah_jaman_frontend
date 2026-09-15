@@ -5,7 +5,7 @@ import { ImageResponse } from "next/og";
 
 import { site } from "@/content/site";
 
-export const alt = `${site.name} — ${site.role}, Wheaton International School and Guidance International School`;
+export const alt = `${site.name} — ${site.positioning}, Wheaton International School and Guidance International School`;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -46,7 +46,7 @@ export default async function OpenGraphImage() {
               color: "#c6ab7c",
             }}
           >
-            Founder &amp; Principal
+            Educationist
           </div>
         </div>
 
@@ -78,6 +78,7 @@ export default async function OpenGraphImage() {
           }}
         >
           <div>Dhaka, Bangladesh</div>
+          <div>Six campuses</div>
           <div>University of Cambridge</div>
         </div>
       </div>
