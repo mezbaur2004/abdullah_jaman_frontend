@@ -1,20 +1,32 @@
-import { ArrowUpRight, Building2, GraduationCap, MapPin } from "lucide-react";
+import type { CSSProperties } from "react";
+import { ArrowUpRight } from "lucide-react";
 
 import { Container } from "@/components/layout/Container";
 import { Section } from "@/components/layout/Section";
 import { Card } from "@/components/ui/Card";
-import { IconChip } from "@/components/ui/IconChip";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { education, organizations } from "@/content/profile";
-import { cardAccent } from "@/lib/accent";
 
+/**
+ * The institutions, and the qualifications underneath them.
+ *
+ * Both cards are identical in structure and both link out, which they could
+ * not do until the Guidance address was supplied — one card lifting with an
+ * arrow beside one that did neither made a pair of equals look like a
+ * principal and an also-ran.
+ *
+ * The monogram replaces a building icon. A generic glyph from an icon set says
+ * "this is an organisation", which the reader already knows from the name
+ * underneath it; the institution's own initials in the display face say which
+ * organisation, and at that size they are a graphic rather than a label.
+ */
 export function Credibility({ index }: { index?: string }) {
   if (organizations.length === 0) return null;
 
   return (
     <Section
-      tone="soft"
+      tone="ivory"
       index={index}
       indexLabel="Institutions"
       accent="gold"
@@ -35,22 +47,28 @@ export function Credibility({ index }: { index?: string }) {
                 <Card
                   as="article"
                   padding="lg"
-                  // A card that links somewhere lifts; one that does not
-                  // acknowledges the cursor without promising a destination.
                   hover={organization.href ? "lift" : "quiet"}
-                  accent={cardAccent("gold", i)}
+                  accent="gold"
+                  accentEdge="bottom"
                   className="flex h-full flex-col"
+                  backdrop={
+                    organization.shortName ? (
+                      <span
+                        aria-hidden="true"
+                        // Bottom right, where the card is empty. Behind the
+                        // heading it was a watermark competing with the one
+                        // thing the card exists to say.
+                        style={
+                          {
+                            "--monogram": `"${organization.shortName}"`,
+                          } as CSSProperties
+                        }
+                        className="card-monogram absolute -bottom-7 -right-4 select-none font-display text-[9rem] font-semibold leading-none tracking-tight text-accent-solid/[0.10] transition-[color,transform] duration-500 ease-editorial group-hover/card:-translate-y-1 group-hover/card:text-accent-solid/[0.16]"
+                      />
+                    ) : null
+                  }
                 >
-                  <div className="flex items-start justify-between gap-5">
-                    <IconChip icon={Building2} />
-                    {organization.shortName ? (
-                      <span className="rounded-chip border border-line px-3 py-1 text-eyebrow font-semibold uppercase text-content-subtle transition-colors group-hover/card:border-line-accent group-hover/card:text-accent">
-                        {organization.shortName}
-                      </span>
-                    ) : null}
-                  </div>
-
-                  <h3 className="mt-7 font-display text-display-md text-content">
+                  <h3 className="max-w-[16ch] font-display text-display-md text-content">
                     {organization.href ? (
                       <a
                         href={organization.href}
@@ -58,13 +76,13 @@ export function Credibility({ index }: { index?: string }) {
                         rel="noopener noreferrer"
                         // Stretched over the card, so the whole surface is the
                         // click target the hover has been promising.
-                        className="inline-flex items-start gap-2 transition-colors after:absolute after:inset-0 after:content-[''] group-hover/card:text-accent"
+                        className="inline-flex items-start gap-2.5 transition-colors after:absolute after:inset-0 after:content-[''] group-hover/card:text-accent"
                       >
                         {organization.name}
                         <ArrowUpRight
                           aria-hidden="true"
-                          strokeWidth={1.5}
-                          className="mt-2 size-5 shrink-0 transition-transform group-hover/card:-translate-y-0.5 group-hover/card:translate-x-0.5"
+                          strokeWidth={1.75}
+                          className="mt-2 size-6 shrink-0 text-accent transition-transform group-hover/card:-translate-y-0.5 group-hover/card:translate-x-0.5"
                         />
                         <span className="sr-only">(opens in a new tab)</span>
                       </a>
@@ -73,27 +91,15 @@ export function Credibility({ index }: { index?: string }) {
                     )}
                   </h3>
 
-                  <p className="mt-4 text-sm font-medium text-accent">
+                  <p className="mt-5 text-ui font-medium uppercase tracking-[0.12em] text-accent">
                     {organization.role}
                   </p>
 
-                  <dl className="mt-auto flex flex-wrap gap-x-10 gap-y-4 border-t border-line pt-7">
-                    {organization.location ? (
-                      <div>
-                        <dt className="text-eyebrow font-semibold uppercase text-content-subtle">
-                          Location
-                        </dt>
-                        <dd className="mt-1.5 flex items-center gap-2 text-content">
-                          <MapPin
-                            aria-hidden="true"
-                            strokeWidth={1.5}
-                            className="size-4 text-accent"
-                          />
-                          {organization.location}
-                        </dd>
-                      </div>
-                    ) : null}
-                  </dl>
+                  {organization.location ? (
+                    <p className="mt-auto pt-10 text-sm text-content-subtle">
+                      {organization.location}
+                    </p>
+                  ) : null}
                 </Card>
               </Reveal>
             </li>
@@ -101,50 +107,73 @@ export function Credibility({ index }: { index?: string }) {
         </ul>
 
         {education.length > 0 ? (
-          <Reveal step={organizations.length}>
-            {/* Raised, not soft: this band is `surface-soft` now, and a soft
-                card on it was the same colour as the ground with a hairline
-                round it — a card that has to be inferred from its border. */}
-            <Card hover="quiet" padding="lg" className="mt-5 lg:mt-6">
-              <div className="flex flex-col gap-6 sm:flex-row sm:gap-8">
-                <IconChip icon={GraduationCap} className="sm:mt-1" />
-                <div className="min-w-0 flex-1">
-                  <p className="text-eyebrow font-semibold uppercase text-content-subtle">
-                    Education
-                  </p>
-                  {/* Two columns of stacked pairs, not one row per entry.
-                      Spread across the full card the qualification sat at the
-                      left margin and its institution was flushed right, four
-                      hundred pixels away with nothing in between — a justified
-                      list the eye cannot connect. Stacked, the pair reads as
-                      one item, and two columns use a width that was empty. */}
-                  <ul className="mt-6 grid gap-x-12 sm:grid-cols-2">
-                    {education.map((entry) => (
-                      <li
-                        key={`${entry.institution}-${entry.qualification ?? ""}`}
-                        className="border-t border-line py-4"
+          <div className="mt-16 lg:mt-20">
+            <Reveal>
+              <h3 className="text-eyebrow font-semibold uppercase text-accent">
+                <span
+                  aria-hidden="true"
+                  className="mr-3 inline-block h-0.5 w-10 align-middle bg-accent-solid"
+                />
+                Education
+              </h3>
+            </Reveal>
+
+            {/* A ledger, not a boxed list. The qualifications are the spine of
+                the page's claim to authority, and a card with an icon in the
+                corner filed them as one more item; ruled and marked they read
+                as a record. */}
+            <ol className="mt-10 border-l border-line pl-8 sm:pl-10">
+              {education.map((entry, i) => {
+                // Cambridge is the entry a reader scans this list for, so it
+                // is the one the list marks. Nothing else about it changes.
+                const marked = entry.institution.includes("Cambridge");
+
+                return (
+                  <li
+                    key={`${entry.institution}-${entry.qualification ?? ""}`}
+                    className="group/row relative pb-9 last:pb-0"
+                  >
+                    <Reveal step={i}>
+                      <span
+                        aria-hidden="true"
+                        className={
+                          marked
+                            ? "absolute -left-[2.3rem] top-2 size-[11px] rotate-45 bg-accent-solid sm:-left-[2.8rem]"
+                            : "absolute -left-[2.15rem] top-[0.6rem] size-[7px] rotate-45 border border-accent-solid bg-surface-ivory sm:-left-[2.65rem]"
+                        }
+                      />
+                      <p
+                        className={
+                          marked
+                            ? "font-display text-2xl leading-snug text-content"
+                            : "font-display text-xl leading-snug text-content"
+                        }
                       >
-                        <p className="font-display text-lg leading-snug text-content">
-                          {entry.qualification ?? entry.institution}
-                          {entry.field ? (
-                            <span className="text-content-muted">
-                              {" "}
-                              — {entry.field}
-                            </span>
-                          ) : null}
-                        </p>
-                        {entry.qualification ? (
-                          <p className="mt-1.5 text-sm leading-relaxed text-content-subtle">
-                            {entry.institution}
-                          </p>
+                        {entry.qualification ?? entry.institution}
+                        {entry.field ? (
+                          <span className="text-content-muted">
+                            {" "}
+                            — {entry.field}
+                          </span>
                         ) : null}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            </Card>
-          </Reveal>
+                      </p>
+                      {entry.qualification ? (
+                        <p
+                          className={
+                            marked
+                              ? "mt-2 text-ui text-accent"
+                              : "mt-2 text-sm leading-relaxed text-content-subtle"
+                          }
+                        >
+                          {entry.institution}
+                        </p>
+                      ) : null}
+                    </Reveal>
+                  </li>
+                );
+              })}
+            </ol>
+          </div>
         ) : null}
       </Container>
     </Section>

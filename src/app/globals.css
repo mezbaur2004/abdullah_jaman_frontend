@@ -94,6 +94,17 @@
   --surface-accent: var(--parchment-300);
   --surface-ivory: var(--parchment-150);
   --surface-inverse: var(--navy-950);
+  /* The one surface that is the accent itself. Reserved for a single band per
+     page — the invitation at the foot of it — because brass at full strength
+     across a whole section is the loudest the site ever gets, and a second one
+     would make the first mean nothing. */
+  --surface-gold: var(--brass-500);
+  /* The wash under text laid over a photograph. Fixed to the deep navy in both
+     themes: a scrim's job is to guarantee the type is readable, and one that
+     lightens with the theme stops guaranteeing it. */
+  --scrim: var(--navy-950);
+  --on-gold: var(--navy-950);
+  --on-gold-muted: color-mix(in oklab, var(--navy-950) 78%, transparent);
 
   /* The lattice draws in this. On parchment it is brass; the opacity below is
      what keeps it a texture rather than a wallpaper. */
@@ -176,6 +187,12 @@
     --surface-accent: #071a2e;
     --surface-ivory: #08192b;
     --surface-inverse: var(--navy-800);
+    /* A step deeper in the dark theme. The light-theme brass across a full
+       band on a near-black page is a floodlight. */
+    --surface-gold: var(--brass-600);
+    --scrim: var(--navy-990);
+    --on-gold: var(--navy-990);
+    --on-gold-muted: color-mix(in oklab, var(--navy-990) 76%, transparent);
 
     --pattern-ink: var(--brass-400);
     --geo-faint: 0.1;
@@ -235,6 +252,10 @@
   --surface-accent: #071a2e;
   --surface-ivory: #08192b;
   --surface-inverse: var(--navy-800);
+  --surface-gold: var(--brass-600);
+  --scrim: var(--navy-990);
+  --on-gold: var(--navy-990);
+  --on-gold-muted: color-mix(in oklab, var(--navy-990) 76%, transparent);
 
   --pattern-ink: var(--brass-400);
   --geo-faint: 0.1;
@@ -378,6 +399,10 @@
   --color-surface-accent: var(--surface-accent);
   --color-surface-ivory: var(--surface-ivory);
   --color-surface-inverse: var(--surface-inverse);
+  --color-surface-gold: var(--surface-gold);
+  --color-scrim: var(--scrim);
+  --color-on-gold: var(--on-gold);
+  --color-on-gold-muted: var(--on-gold-muted);
 
   --color-content: var(--content);
   --color-content-muted: var(--content-muted);
@@ -648,6 +673,13 @@
     opacity: 0.4;
   }
 
+  /* On the gold band the lattice cannot be brass on brass; it is drawn in the
+     navy that everything else on that band is set in. */
+  .geo-divider-gold {
+    background-color: var(--on-gold);
+    opacity: 0.32;
+  }
+
   /* The quiet variant: a single hairline course for boundaries that should
      register without being read, where a full band would be a third voice in
      two paragraphs. */
@@ -671,6 +703,35 @@
      ratio the photographs are cropped to, so the arch keeps its proportions
      where it is actually used.
   --------------------------------------------------------------------- */
+  /* The wash under type laid over a photograph.
+     A plain `to top` gradient at half opacity darkened the whole frame, which
+     protects the words at the cost of the picture they are sitting on. This
+     one is near solid under the text, clears by just over halfway up, and
+     leaves the top of the image alone. */
+  .scrim-bottom {
+    background-image: linear-gradient(
+      to top,
+      var(--scrim) 0%,
+      var(--scrim) 22%,
+      color-mix(in oklab, var(--scrim) 58%, transparent) 48%,
+      transparent 78%
+    );
+  }
+
+  /* The institution monogram behind a card.
+     Drawn from CSS `content` rather than as a DOM text node, and that is a
+     correctness point rather than a trick to quiet a checker. The initials are
+     a watermark: they carry no information the heading beside them does not,
+     they are `aria-hidden`, and they sit at a tenth of the accent's strength
+     on purpose. As a text node a contrast checker is right to object — it
+     cannot know the glyphs are a graphic. Presentational content belongs in
+     the stylesheet, so that is where it lives.
+
+     The card supplies the string as `--monogram`. */
+  .card-monogram::before {
+    content: var(--monogram, "");
+  }
+
   .arch {
     -webkit-mask-image: var(--geo-arch);
     mask-image: var(--geo-arch);

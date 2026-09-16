@@ -80,6 +80,20 @@ export const hero = {
   lede: "An educationist in Dhaka, Bangladesh. He leads Wheaton International School and Guidance International School, and writes Islamic Studies and Arabic learning materials for the classrooms he helps run.",
   primaryCta: { label: "Explore his work", href: "/leadership" },
   secondaryCta: { label: "Books", href: "/books" },
+  /**
+   * The line under the hero's buttons, replacing the row of short tags that
+   * used to sit under the portrait.
+   *
+   * Every one of these three names already appears in the content layer —
+   * the two institutions in `organizations`, Cambridge in `education`. Nothing
+   * new is claimed here; it is the same record set as a masthead credential
+   * rather than as three badges.
+   */
+  credentials: [
+    "Wheaton International School",
+    "Guidance International School",
+    "University of Cambridge",
+  ],
 } as const;
 
 /**
@@ -102,6 +116,8 @@ export const organizations: Organization[] = [
     shortName: "GIS",
     role: "Founder & Principal",
     location: "Dhaka, Bangladesh",
+    /* VERIFIED — supplied by the owner. */
+    href: "https://guidance.edu.bd/",
   },
 ];
 
