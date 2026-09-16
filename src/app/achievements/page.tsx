@@ -1,14 +1,10 @@
 import type { Metadata } from "next";
-import { Building2 } from "lucide-react";
 
 import { ContactCta } from "@/components/home/ContactCta";
 import { Container } from "@/components/layout/Container";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { Section } from "@/components/layout/Section";
-import { Card } from "@/components/ui/Card";
-import { IconChip } from "@/components/ui/IconChip";
 import { ListRow } from "@/components/ui/ListRow";
-import { cardAccent } from "@/lib/accent";
 import { PendingNote } from "@/components/ui/PendingNote";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -36,6 +32,7 @@ export default function AchievementsPage() {
         eyebrow={achievementsIntro.eyebrow}
         title={achievementsIntro.headline}
         lede={achievementsIntro.lede}
+        variant="ornament"
       />
 
       {/* Leading both institutions is what the record establishes, so it
@@ -53,38 +50,54 @@ export default function AchievementsPage() {
             lede="The institutions he currently leads, in Dhaka, Bangladesh."
           />
 
-          <ul className="mt-14 grid gap-5 lg:mt-16 lg:grid-cols-2 lg:gap-6">
+          {/* A strip, not a second set of the homepage's cards.
+              This page and the homepage were both opening with two large
+              bordered cards carrying the same two names, the same role and the
+              same city — the second one read as a page that had been copied.
+              Here the institutions are a credential rather than the subject,
+              so they are a ruled row: monogram, name, role, and the link out.
+              Same facts, a quarter of the height, and no reader will think
+              they have pressed back. */}
+          <ul className="mt-14 border-t border-line lg:mt-16">
             {organizations.map((organization, i) => (
-              <li key={organization.name}>
-                <Reveal step={i} className="h-full">
-                  <Card
-                    as="article"
-                    padding="lg"
-                    hover="quiet"
-                    accent={cardAccent("gold", i)}
-                    accentEdge="left"
-                    className="flex h-full flex-col"
-                  >
-                    <div className="flex items-start justify-between gap-5">
-                      <IconChip icon={Building2} />
-                      {organization.shortName ? (
-                        <span className="rounded-chip border border-line-accent bg-accent-soft px-3 py-1 text-eyebrow font-semibold uppercase text-accent transition-colors group-hover/card:border-accent/55 group-hover/card:text-accent-strong">
-                          {organization.shortName}
-                        </span>
-                      ) : null}
+              <li key={organization.name} className="group/row relative border-b border-line">
+                <Reveal step={i}>
+                  <div className="flex flex-col gap-4 py-7 sm:flex-row sm:items-center sm:gap-8 sm:py-8">
+                    <span
+                      aria-hidden="true"
+                      className="w-16 shrink-0 font-display text-2xl font-semibold text-accent transition-transform duration-500 ease-editorial group-hover/row:translate-x-1"
+                    >
+                      {organization.shortName}
+                    </span>
+
+                    <div className="min-w-0 flex-1">
+                      <p className="font-display text-2xl leading-snug text-content">
+                        {organization.href ? (
+                          <a
+                            href={organization.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="link-underline transition-colors after:absolute after:inset-0 after:content-[''] group-hover/row:text-accent"
+                          >
+                            {organization.name}
+                            <span className="sr-only"> (opens in a new tab)</span>
+                          </a>
+                        ) : (
+                          organization.name
+                        )}
+                      </p>
                     </div>
-                    <p className="mt-7 font-display text-display-md text-content">
-                      {organization.name}
-                    </p>
-                    <p className="mt-4 text-sm font-medium text-accent">
+
+                    <p className="shrink-0 text-ui font-medium uppercase tracking-[0.12em] text-accent sm:w-56 sm:text-right">
                       {organization.role}
                     </p>
+
                     {organization.location ? (
-                      <p className="mt-auto pt-6 text-sm text-content-subtle">
+                      <p className="shrink-0 text-sm text-content-subtle sm:w-40 sm:text-right">
                         {organization.location}
                       </p>
                     ) : null}
-                  </Card>
+                  </div>
                 </Reveal>
               </li>
             ))}

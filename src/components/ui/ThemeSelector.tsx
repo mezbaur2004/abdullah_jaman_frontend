@@ -93,7 +93,11 @@ export function ThemeSelector({ className }: { className?: string }) {
       role="radiogroup"
       aria-label="Colour theme"
       className={cn(
-        "relative inline-flex items-center rounded-control border border-line-accent bg-surface-soft p-[3px]",
+        // Quieter than it was. It sat in a bordered, filled tray next to the
+        // page's one navigation action and read as a second control of equal
+        // weight; a preference nobody changes twice should not compete with
+        // the button that is the point of the header.
+        "relative inline-flex items-center rounded-control p-[3px] transition-colors hover:bg-surface-soft",
         className,
       )}
     >
@@ -101,7 +105,7 @@ export function ThemeSelector({ className }: { className?: string }) {
           marker must not be reachable or readable on its own. */}
       <span
         aria-hidden="true"
-        className="absolute inset-y-[3px] left-[3px] w-[calc((100%-6px)/3)] rounded-chip border border-accent/45 bg-accent-soft shadow-card transition-transform"
+        className="absolute inset-y-[3px] left-[3px] w-[calc((100%-6px)/3)] rounded-chip bg-accent-soft transition-transform"
         style={{ transform: `translateX(${activeIndex * 100}%)` }}
       />
 
@@ -121,9 +125,7 @@ export function ThemeSelector({ className }: { className?: string }) {
             onClick={() => applyTheme(option)}
             className={cn(
               "relative z-10 inline-flex size-7 items-center justify-center rounded-chip transition-colors sm:size-8",
-              active
-                ? "text-accent-strong"
-                : "text-content-subtle hover:text-accent",
+              active ? "text-accent" : "text-content-subtle hover:text-accent",
             )}
           >
             <Icon aria-hidden="true" strokeWidth={1.5} className="size-4" />

@@ -20,6 +20,12 @@ type GeometricPatternProps = {
    * need, since a downward fade there would cut the figure in half.
    */
   fade?: boolean | "radial";
+  /**
+   * Drifts the figure against the scroll. Off by default and worth turning on
+   * only where the layer is large enough for a few per cent of travel to
+   * register — the hero and the page mastheads.
+   */
+  parallax?: boolean;
   className?: string;
 };
 
@@ -56,6 +62,7 @@ export function GeometricPattern({
   intensity = "faint",
   size = "field",
   fade = false,
+  parallax = false,
   className,
 }: GeometricPatternProps) {
   return (
@@ -65,6 +72,7 @@ export function GeometricPattern({
         "pointer-events-none absolute inset-0",
         "geo-pattern",
         size === "xl" && "geo-pattern-xl",
+        parallax && "geo-parallax",
         fade === "radial" ? "geo-fade-radial" : fade ? "geo-fade" : null,
         intensities[intensity],
         className,

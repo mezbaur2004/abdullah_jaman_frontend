@@ -37,6 +37,8 @@ export default function LeadershipPage() {
         eyebrow={leadershipIntro.eyebrow}
         title={leadershipIntro.headline}
         lede={leadershipIntro.lede}
+        variant="photo"
+        image={leadershipFeature}
       />
 
       <Section divider={false} index="01" indexLabel="Roles" aria-labelledby="roles-heading">
@@ -45,13 +47,6 @@ export default function LeadershipPage() {
             id="roles-heading"
             title="Current *roles*."
             lede="Positions held now. Earlier roles are not yet part of the record."
-          />
-
-          <FeatureImage
-            image={leadershipFeature}
-            caption="Presenting medals at an annual sports day."
-            priority
-            className="mt-14 lg:mt-16"
           />
 
           <ol className="mt-8 grid gap-5 lg:mt-10 lg:gap-6">

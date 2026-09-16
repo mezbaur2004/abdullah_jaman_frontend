@@ -30,6 +30,7 @@ export default function ContentStatusPage() {
         eyebrow="Internal"
         title="Content status"
         lede="What is verified, what is known but unconfirmed, and what is still to be collected. This page is excluded from search engines and is not linked from the site."
+        pattern
       />
 
       <Section divider={false} index="01" indexLabel="Verified" aria-labelledby="verified-heading">

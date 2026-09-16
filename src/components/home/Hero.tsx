@@ -22,7 +22,7 @@ export function Hero() {
   const image = portrait ?? heroPanel;
 
   return (
-    <section className="relative isolate overflow-hidden bg-surface-inverse pb-20 pt-14 text-on-inverse sm:pb-24 sm:pt-20 lg:pb-28 lg:pt-24">
+    <section className="geo-parallax-host relative isolate overflow-hidden bg-surface-inverse pb-20 pt-14 text-on-inverse sm:pb-24 sm:pt-20 lg:pb-28 lg:pt-24">
       <span
         aria-hidden="true"
         className="section-veil-inverse pointer-events-none absolute inset-0 -z-10"
@@ -35,6 +35,7 @@ export function Hero() {
         intensity="soft"
         size="xl"
         fade="radial"
+        parallax
         className="inset-auto -right-24 -top-28 -z-10 h-[150%] w-[78%]"
       />
 

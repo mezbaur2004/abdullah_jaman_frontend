@@ -128,7 +128,13 @@ export function Section({
   return (
     <section
       id={id}
-      className={cn("relative isolate", tones[tone], className)}
+      className={cn(
+        "relative isolate",
+        // Hosts the view timeline the pattern inside drifts against.
+        pattern && "geo-parallax-host",
+        tones[tone],
+        className,
+      )}
       {...aria}
     >
       {/* The depth layers, both decorative and both behind everything: `isolate`
@@ -148,6 +154,7 @@ export function Section({
         <GeometricPattern
           intensity={inverse ? "soft" : "faint"}
           fade="radial"
+          parallax
           className="-z-10"
         />
       ) : null}
