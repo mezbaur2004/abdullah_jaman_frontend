@@ -12,6 +12,12 @@ type AccentLineProps = {
    * deliberately a 2px rule rather than a glow or a badge.
    */
   reveal?: "none" | "card" | "row";
+  /**
+   * Draws a short muted-gold tick after the rule, so the mark closing a
+   * heading reads in two tones — the same pairing the section separators use.
+   * Horizontal only; a vertical rule has no room for it.
+   */
+  pair?: boolean;
   className?: string;
 };
 
@@ -34,9 +40,10 @@ export function AccentLine({
   tone = "base",
   orientation = "horizontal",
   reveal = "none",
+  pair = false,
   className,
 }: AccentLineProps) {
-  return (
+  const rule = (
     <span
       aria-hidden="true"
       className={cn(
@@ -44,8 +51,24 @@ export function AccentLine({
         orientation === "horizontal" ? "h-0.5 w-10" : "h-full w-0.5",
         accentMark(accent, tone === "inverse"),
         reveal !== "none" && reveals[reveal],
-        className,
+        !pair && className,
       )}
     />
+  );
+
+  if (!pair || orientation === "vertical") return rule;
+
+  return (
+    <span aria-hidden="true" className={cn("flex items-center gap-2", className)}>
+      {rule}
+      <span
+        className={cn(
+          // Blue when the section is already yellow: gold beside yellow is not
+          // a second tone, it is the first one slightly wrong.
+          "block h-0.5 w-3 opacity-80",
+          accent === "yellow" ? accentMark("blue", tone === "inverse") : "bg-gold",
+        )}
+      />
+    </span>
   );
 }

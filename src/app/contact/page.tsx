@@ -6,6 +6,7 @@ import { PageHeader } from "@/components/layout/PageHeader";
 import { Section } from "@/components/layout/Section";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
+import { Panel } from "@/components/ui/Panel";
 import { PendingNote } from "@/components/ui/PendingNote";
 import { Reveal } from "@/components/ui/Reveal";
 import { contactChannels, contactIntro, contactPending } from "@/content/contact";
@@ -31,7 +32,7 @@ export default function ContactPage() {
         lede={contactIntro.lede}
       />
 
-      <Section divider={false} index="01" indexLabel="Enquiries">
+      <Section tone="soft" divider={false} index="01" indexLabel="Enquiries">
         <Container>
           <div className="grid gap-16 lg:grid-cols-12 lg:gap-20">
             <div className="lg:col-span-7">
@@ -64,8 +65,11 @@ export default function ContactPage() {
             </div>
 
             <div className="lg:col-span-5">
+              {/* A panel rather than another card: this column is the page's
+                  one action, and it should not read as a fourth item in the
+                  list beside it. */}
               <Reveal>
-                <Card hover="quiet" padding="lg">
+                <Panel padding="md" pattern>
                   <h2 className="font-display text-display-md text-content">
                     Direct
                   </h2>
@@ -73,7 +77,7 @@ export default function ContactPage() {
                   <dl className="mt-8 flex flex-col gap-7 border-t border-line pt-8">
                     {site.email ? (
                       <div>
-                        <dt className="flex items-center gap-2.5 text-eyebrow font-medium uppercase text-content-subtle">
+                        <dt className="flex items-center gap-2.5 text-eyebrow font-semibold uppercase text-content-subtle">
                           <Mail
                             aria-hidden="true"
                             strokeWidth={1.5}
@@ -94,7 +98,7 @@ export default function ContactPage() {
 
                     {site.phone ? (
                       <div>
-                        <dt className="flex items-center gap-2.5 text-eyebrow font-medium uppercase text-content-subtle">
+                        <dt className="flex items-center gap-2.5 text-eyebrow font-semibold uppercase text-content-subtle">
                           <Phone
                             aria-hidden="true"
                             strokeWidth={1.5}
@@ -109,7 +113,7 @@ export default function ContactPage() {
                     ) : null}
 
                     <div>
-                      <dt className="flex items-center gap-2.5 text-eyebrow font-medium uppercase text-content-subtle">
+                      <dt className="flex items-center gap-2.5 text-eyebrow font-semibold uppercase text-content-subtle">
                         <MapPin
                           aria-hidden="true"
                           strokeWidth={1.5}
@@ -148,7 +152,7 @@ export default function ContactPage() {
 
                   {socialLinks.length > 0 ? (
                     <div className="mt-10 border-t border-line pt-8">
-                      <h3 className="text-eyebrow font-medium uppercase text-content-subtle">
+                      <h3 className="text-eyebrow font-semibold uppercase text-content-subtle">
                         Elsewhere
                       </h3>
                       <ul className="mt-4 flex flex-wrap gap-x-6 gap-y-2">
@@ -167,7 +171,7 @@ export default function ContactPage() {
                       </ul>
                     </div>
                   ) : null}
-                </Card>
+                </Panel>
               </Reveal>
             </div>
           </div>

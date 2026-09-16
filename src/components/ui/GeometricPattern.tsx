@@ -7,8 +7,14 @@ type GeometricPatternProps = {
    * opacity over navy reads as roughly half as much.
    */
   intensity?: "faint" | "soft";
-  /** Fades the tile downward so it never meets a section edge as a hard crop. */
-  fade?: boolean;
+  /**
+   * How the tile is released at its edges, so it never meets one as a hard
+   * crop. `true` fades it downward, which suits a tall block of prose;
+   * `"radial"` anchors it to the top right corner and dissolves it across the
+   * panel, which is what the wide shallow surfaces — the hero, the footer —
+   * need, since a downward fade there would cut the figure in half.
+   */
+  fade?: boolean | "radial";
   className?: string;
 };
 
@@ -39,7 +45,8 @@ export function GeometricPattern({
       aria-hidden="true"
       className={cn(
         "pointer-events-none absolute inset-0",
-        fade ? "geo-fade geo-pattern" : "geo-pattern",
+        "geo-pattern",
+        fade === "radial" ? "geo-fade-radial" : fade ? "geo-fade" : null,
         intensities[intensity],
         className,
       )}

@@ -90,7 +90,7 @@ export default function ContentStatusPage() {
                     {question.subject}
                   </h3>
                   <div className="lg:col-span-4">
-                    <p className="text-eyebrow font-medium uppercase text-accent">
+                    <p className="text-eyebrow font-semibold uppercase text-accent">
                       Known
                     </p>
                     <p className="mt-2 text-sm leading-relaxed text-content-muted">
@@ -98,7 +98,7 @@ export default function ContentStatusPage() {
                     </p>
                   </div>
                   <div className="lg:col-span-5">
-                    <p className="text-eyebrow font-medium uppercase text-content-subtle">
+                    <p className="text-eyebrow font-semibold uppercase text-content-subtle">
                       Missing
                     </p>
                     <p className="mt-2 text-sm leading-relaxed text-content-muted">

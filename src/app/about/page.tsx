@@ -60,7 +60,7 @@ export default function AboutPage() {
                 <dl className="border-t border-line">
                   {aboutPage.facts.map((fact) => (
                     <div key={fact.label} className="border-b border-line py-5">
-                      <dt className="text-eyebrow font-medium uppercase text-content-subtle">
+                      <dt className="text-eyebrow font-semibold uppercase text-content-subtle">
                         {fact.label}
                       </dt>
                       <dd className="mt-2 text-lede text-content">
@@ -102,7 +102,7 @@ export default function AboutPage() {
       </Section>
 
       <Section
-        tone="accent"
+        tone="soft"
         index="02"
         indexLabel="Institutions"
         accent="yellow"
@@ -130,7 +130,7 @@ export default function AboutPage() {
                     <div className="flex items-start justify-between gap-5">
                       <IconChip icon={Building2} />
                       {organization.shortName ? (
-                        <span className="rounded-full border border-line px-3 py-1 text-eyebrow font-medium uppercase text-content-subtle transition-colors group-hover/card:border-line-accent group-hover/card:text-accent">
+                        <span className="rounded-full border border-line px-3 py-1 text-eyebrow font-semibold uppercase text-content-subtle transition-colors group-hover/card:border-line-accent group-hover/card:text-accent">
                           {organization.shortName}
                         </span>
                       ) : null}
@@ -164,7 +164,7 @@ export default function AboutPage() {
                     <dl className="mt-auto flex flex-wrap gap-x-10 gap-y-4 border-t border-line pt-7">
                       {organization.location ? (
                         <div>
-                          <dt className="text-eyebrow font-medium uppercase text-content-subtle">
+                          <dt className="text-eyebrow font-semibold uppercase text-content-subtle">
                             Location
                           </dt>
                           <dd className="mt-1.5 text-content">
@@ -183,6 +183,7 @@ export default function AboutPage() {
 
       {education.length > 0 ? (
         <Section
+          tone="ivory"
           index="03"
           indexLabel="Education"
           accent="blue"
@@ -193,6 +194,7 @@ export default function AboutPage() {
             <SectionHeading
               id="about-education-heading"
               title="Study."
+              lede="Qualifications as recorded on his current school profile. Years were not supplied and are not shown."
             />
 
             <ul className="mt-14 border-t border-line lg:mt-16">

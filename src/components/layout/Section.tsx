@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 
 import { Container } from "./Container";
 import { Eyebrow } from "@/components/ui/Eyebrow";
+import { GeometricPattern } from "@/components/ui/GeometricPattern";
 import { SectionSeparator } from "@/components/ui/SectionSeparator";
 import { cn } from "@/lib/cn";
 import type { Accent } from "@/lib/accent";
@@ -30,6 +31,16 @@ type SectionProps = {
   accent?: Accent;
   /** Which separator the boundary above this section uses. */
   separator?: "line" | "editorial" | "minimal";
+  /**
+   * The depth wash behind the band. Defaults to on for every coloured tone and
+   * off for the plain paper ones, which is almost always the right answer:
+   * paper is the page's zero and should read as flat, and a coloured band is
+   * the thing that needs a near side and a far side to stop reading as a
+   * rectangle of paint. Pass it explicitly only to argue with that.
+   */
+  veil?: boolean;
+  /** Adds the geometric layer behind the band. Used sparingly — see below. */
+  pattern?: boolean;
   /** Two-digit marker shown above the heading, e.g. "03". */
   index?: string;
   /** Rendered beside the index, naming the section in the page's sequence. */
@@ -79,6 +90,16 @@ const spacings = {
   },
 } as const;
 
+/** The tones whose ground is a colour rather than paper, and so want depth. */
+const washed: Record<Tone, boolean> = {
+  base: false,
+  raised: false,
+  soft: true,
+  accent: true,
+  ivory: true,
+  inverse: true,
+};
+
 export function Section({
   children,
   id,
@@ -88,15 +109,43 @@ export function Section({
   divider = true,
   accent = "blue",
   separator = "line",
+  veil,
+  pattern = false,
   index,
   indexLabel,
   ...aria
 }: SectionProps) {
   const inverse = tone === "inverse";
   const rhythm = spacings[spacing];
+  const washing = veil ?? washed[tone];
 
   return (
-    <section id={id} className={cn(tones[tone], className)} {...aria}>
+    <section
+      id={id}
+      className={cn("relative isolate", tones[tone], className)}
+      {...aria}
+    >
+      {/* The depth layers, both decorative and both behind everything: `isolate`
+          on the section makes the negative z-index safe by giving it a stacking
+          context of its own, so these can never slide underneath the section's
+          own background or above the page. */}
+      {washing ? (
+        <span
+          aria-hidden="true"
+          className={cn(
+            "pointer-events-none absolute inset-0 -z-10",
+            inverse ? "section-veil-inverse" : "section-veil",
+          )}
+        />
+      ) : null}
+      {pattern ? (
+        <GeometricPattern
+          intensity={inverse ? "soft" : "faint"}
+          fade="radial"
+          className="-z-10"
+        />
+      ) : null}
+
       {divider ? (
         <SectionSeparator
           variant={separator}

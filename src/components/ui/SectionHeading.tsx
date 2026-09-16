@@ -21,6 +21,12 @@ type SectionHeadingProps = {
    */
   rule?: boolean;
   align?: "start" | "center";
+  /**
+   * `feature` is one step up, for the two or three sections on a page that
+   * carry it — the philosophy passage, the author's note, the closing band. It
+   * also pairs the closing rule with gold.
+   */
+  size?: "default" | "feature";
   className?: string;
   id?: string;
   as?: "h1" | "h2";
@@ -30,10 +36,12 @@ type SectionHeadingProps = {
  * Every major section opens with this, so the hierarchy is identical
  * everywhere: eyebrow, title, supporting line, accent rule.
  *
- * The title deliberately stays one size across the site. Scaling headings per
- * section to signal importance is the thing that makes a page feel assembled
- * from templates; the accent and the section index carry that signal instead,
- * at a size that does not disturb the reading rhythm.
+ * The title has exactly two sizes, and the restraint is the point. Scaling a
+ * heading per section to signal importance is what makes a page read as
+ * assembled from templates, so the accent and the section index carry that
+ * signal almost everywhere. `feature` is the one exception: the two or three
+ * passages a page is actually built around, where the step up says *this is
+ * the argument* and the rest of the page stays at one level beneath it.
  */
 export function SectionHeading({
   eyebrow,
@@ -44,11 +52,13 @@ export function SectionHeading({
   accent = "blue",
   rule = true,
   align = "start",
+  size = "default",
   className,
   id,
   as: Heading = "h2",
 }: SectionHeadingProps) {
   const inverse = tone === "inverse";
+  const feature = size === "feature";
 
   return (
     <div
@@ -73,7 +83,9 @@ export function SectionHeading({
         <Heading
           id={id}
           className={cn(
-            Heading === "h1" ? "text-display-xl" : "text-display-lg",
+            Heading === "h1" || feature
+              ? "text-display-xl"
+              : "text-display-lg",
             inverse ? "text-on-inverse" : "text-content",
           )}
         >
@@ -82,7 +94,8 @@ export function SectionHeading({
         {lede ? (
           <p
             className={cn(
-              "max-w-2xl text-lede",
+              "text-lede",
+              feature ? "max-w-[38rem]" : "max-w-2xl",
               inverse ? "text-on-inverse-muted" : "text-content-muted",
             )}
           >
@@ -93,6 +106,7 @@ export function SectionHeading({
           <AccentLine
             accent={accent}
             tone={tone}
+            pair={feature}
             className={cn("mt-1", align === "center" && "mx-auto")}
           />
         ) : null}

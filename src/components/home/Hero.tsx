@@ -2,6 +2,9 @@ import { Container } from "@/components/layout/Container";
 import { Button } from "@/components/ui/Button";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Figure } from "@/components/ui/Figure";
+import { GeometricPattern } from "@/components/ui/GeometricPattern";
+import { ImageReveal } from "@/components/ui/ImageReveal";
+import { OffsetFrame } from "@/components/ui/OffsetFrame";
 import { hero, heroPanel, organizations, portrait } from "@/content/profile";
 import { site } from "@/content/site";
 
@@ -11,7 +14,17 @@ export function Hero() {
   const image = portrait ?? heroPanel;
 
   return (
-    <section className="relative overflow-hidden bg-surface pb-20 pt-10 sm:pb-24 sm:pt-16 lg:pb-28 lg:pt-20">
+    <section className="relative isolate overflow-hidden bg-surface pb-20 pt-10 sm:pb-24 sm:pt-16 lg:pb-28 lg:pt-20">
+      {/* The two ground layers. The wash gives the opening a near and a far
+          side so it is not a white rectangle; the khatam tile enters from the
+          top right, behind the portrait, at the opacity where it registers as
+          texture rather than as pattern. */}
+      <span
+        aria-hidden="true"
+        className="section-veil pointer-events-none absolute inset-0 -z-10"
+      />
+      <GeometricPattern fade="radial" className="-z-10" />
+
       <Container>
         <div className="grid items-center gap-14 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-7 lg:pr-8">
@@ -51,32 +64,26 @@ export function Hero() {
             </div>
           </div>
 
-          <div
-            className="animate-rise lg:col-span-5"
-            style={{ animationDelay: "200ms" }}
-          >
-            <div className="relative">
-              {/* An offset rule frames the panel without boxing it in. */}
-              <span
-                aria-hidden="true"
-                className="absolute -bottom-5 -right-5 hidden h-2/3 w-2/3 rounded-card border-b border-r border-line-accent bg-accent-soft sm:block"
-              />
-              <Figure
-                image={image}
-                ratio="4 / 5"
-                priority
-                rounded
-                sizes="(min-width: 1024px) 38vw, (min-width: 640px) 70vw, 90vw"
-                className="relative"
-              />
-            </div>
+          <div className="lg:col-span-5">
+            <OffsetFrame>
+              <ImageReveal className="rounded-[0.75rem]">
+                <Figure
+                  image={image}
+                  ratio="4 / 5"
+                  priority
+                  rounded
+                  elevated
+                  sizes="(min-width: 1024px) 38vw, (min-width: 640px) 70vw, 90vw"
+                />
+              </ImageReveal>
+            </OffsetFrame>
 
             {/* The institutions as chips. Named, not counted. */}
-            <ul className="mt-8 flex flex-wrap items-center gap-2.5">
+            <ul className="mt-10 flex flex-wrap items-center gap-2.5 sm:mt-12">
               {organizations.map((organization) => (
                 <li key={organization.name}>
                   <span
-                    className="inline-flex items-center rounded-full border border-line bg-surface-soft px-3.5 py-1.5 text-eyebrow font-medium uppercase text-content-muted"
+                    className="inline-flex items-center rounded-full border border-line bg-surface-raised px-3.5 py-1.5 text-eyebrow font-semibold uppercase text-content-muted shadow-card"
                     title={organization.name}
                   >
                     {organization.shortName ?? organization.name}
@@ -84,7 +91,7 @@ export function Hero() {
                 </li>
               ))}
               <li>
-                <span className="inline-flex items-center rounded-full border border-line-accent bg-accent-soft px-3.5 py-1.5 text-eyebrow font-medium uppercase text-accent">
+                <span className="inline-flex items-center rounded-full border border-line-accent bg-accent-soft px-3.5 py-1.5 text-eyebrow font-semibold uppercase text-accent">
                   {site.location}
                 </span>
               </li>

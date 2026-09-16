@@ -87,8 +87,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd()) }}
         />
         <noscript>
-          {/* Scroll-reveals start at opacity 0; without JS they must not stay there. */}
-          <style>{`[data-reveal]{opacity:1!important;transform:none!important}`}</style>
+          {/* Scroll-reveals start at opacity 0; without JS they must not stay
+              there. `clip-path` is in the list for the Framer image reveals,
+              whose initial state Framer renders server-side and would never
+              clear if its own script never arrived. */}
+          <style>{`[data-reveal]{opacity:1!important;transform:none!important;clip-path:none!important;scale:1!important}`}</style>
         </noscript>
       </head>
       <body className="flex min-h-full flex-col bg-surface">

@@ -34,13 +34,13 @@ export function BookCard({ book, accent = "yellow", feature = false }: BookCardP
       image={book.cover}
       ratio="2 / 3"
       zoom
+      rounded
       sizes={feature ? "(min-width: 1024px) 26vw, 60vw" : "(min-width: 640px) 22vw, 45vw"}
-      className="overflow-hidden rounded-sm"
     />
   ) : (
     <div
       aria-hidden="true"
-      className="flex aspect-[2/3] flex-col justify-between rounded-sm border border-line-accent bg-surface-accent p-5"
+      className="flex aspect-[2/3] flex-col justify-between rounded-[0.75rem] border border-line-accent bg-surface-accent p-5"
     >
       <IconChip icon={BookOpen} size="sm" />
       <p className="font-display text-lg leading-snug text-content">
@@ -62,7 +62,7 @@ export function BookCard({ book, accent = "yellow", feature = false }: BookCardP
 
       <div className={cn(feature ? "mt-7 sm:mt-0" : "mt-6")}>
         {book.category || book.series ? (
-          <p className="text-eyebrow font-medium uppercase text-content-subtle">
+          <p className="text-eyebrow font-semibold uppercase text-content-subtle">
             {[book.series, book.category].filter(Boolean).join(" · ")}
           </p>
         ) : null}
