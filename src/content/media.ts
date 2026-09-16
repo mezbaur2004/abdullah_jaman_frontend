@@ -1,4 +1,4 @@
-import type { MediaItem } from "./types";
+import type { ImageAsset, MediaItem } from "./types";
 
 /**
  * VERIFIED — one item, with a live URL.
@@ -7,6 +7,21 @@ import type { MediaItem } from "./types";
  * publication, and the available profile data does not let the rest of that
  * activity be classified with confidence.
  */
+
+/**
+ * VERIFIED — supplied by the owner.
+ *
+ * The alt text names him and describes the setting, and stops there. The other
+ * person is not identified because no name was supplied, and the programme is
+ * not named because none is readable from the frame. An unsourced caption on a
+ * media page is exactly the kind of claim this site does not make.
+ */
+export const mediaFeature: ImageAsset = {
+  src: "/images/feature-interview.jpg",
+  alt: "Abdullah Jaman in conversation with an interviewer, the two seated in armchairs on a darkened studio set.",
+  width: 1600,
+  height: 730,
+};
 
 export const mediaIntro = {
   eyebrow: "Media",

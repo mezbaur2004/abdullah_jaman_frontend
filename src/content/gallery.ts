@@ -3,6 +3,11 @@ import type { GalleryItem } from "./types";
 /**
  * VERIFIED — every photograph here was supplied by the owner.
  *
+ * Three landscape photographs were reserved here for a later batch. They
+ * arrived and went to the pages they actually belong to instead — the
+ * interview to Media, the sports day to Experience, the reception to About —
+ * so the placeholders are gone rather than left as dead comments.
+ *
  * On alt text: each one describes what is visible in the frame and nothing
  * more. "Abdullah Jaman teaching a lesson-planning session" is readable from
  * the photograph; "Abdullah Jaman inspiring teachers" is not, and the site's
@@ -57,27 +62,4 @@ export const gallery: GalleryItem[] = [
     },
   },
 
-  // ---------------------------------------------------------------------
-  // RESERVED — three landscape media photographs, supplied separately.
-  //
-  // Drop the files in public/images/ as gallery-media-1.jpg through
-  // gallery-media-3.jpg, then uncomment the three entries below and correct
-  // each width, height, caption and alt to match the real file. Nothing else
-  // needs changing: the grid, the reveals and the hover zoom all read from
-  // this array.
-  //
-  // Landscape files (width greater than height) take the wide tile.
-  // ---------------------------------------------------------------------
-  // {
-  //   caption: "",
-  //   image: { src: "/images/gallery-media-1.jpg", alt: "", width: 1600, height: 1066 },
-  // },
-  // {
-  //   caption: "",
-  //   image: { src: "/images/gallery-media-2.jpg", alt: "", width: 1600, height: 1066 },
-  // },
-  // {
-  //   caption: "",
-  //   image: { src: "/images/gallery-media-3.jpg", alt: "", width: 1600, height: 1066 },
-  // },
 ];

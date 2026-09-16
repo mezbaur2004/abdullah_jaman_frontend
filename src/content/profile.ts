@@ -45,6 +45,18 @@ export const heroPanel: ImageAsset = {
   height: 1500,
 };
 
+/**
+ * VERIFIED — supplied by the owner. The two guests are not identified: no
+ * names were given, and inventing them would be the same failure as inventing
+ * an award.
+ */
+export const aboutFeature: ImageAsset = {
+  src: "/images/feature-reception.jpg",
+  alt: "Abdullah Jaman seated in conversation with two guests at a reception.",
+  width: 1600,
+  height: 1066,
+};
+
 export const hero = {
   eyebrow: site.positioning,
   /** The institutions, named — never counted, and never called his alone. */

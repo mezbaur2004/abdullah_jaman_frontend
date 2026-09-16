@@ -6,11 +6,13 @@ import { Container } from "@/components/layout/Container";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { Section } from "@/components/layout/Section";
 import { Card } from "@/components/ui/Card";
+import { FeatureImage } from "@/components/ui/FeatureImage";
 import { IconChip } from "@/components/ui/IconChip";
 import { PendingNote } from "@/components/ui/PendingNote";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import {
+  experienceFeature,
   experienceIntro,
   experiencePending,
   initiatives,
@@ -42,7 +44,14 @@ export default function ExperiencePage() {
             lede="Positions held now. Earlier roles are not yet part of the record."
           />
 
-          <ol className="mt-14 grid gap-5 lg:mt-16 lg:gap-6">
+          <FeatureImage
+            image={experienceFeature}
+            caption="Presenting medals at an annual sports day."
+            priority
+            className="mt-14 lg:mt-16"
+          />
+
+          <ol className="mt-5 lg:mt-6 grid gap-5 lg:mt-16 lg:gap-6">
             {roles.map((role) => (
               <li key={role.slug}>
                 <Reveal>
