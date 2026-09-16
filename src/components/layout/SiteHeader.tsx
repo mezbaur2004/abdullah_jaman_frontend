@@ -86,12 +86,15 @@ export function SiteHeader() {
                 <Link
                   href={item.href}
                   aria-current={isCurrent(item.href) ? "page" : undefined}
+                  // The rule under the current page is brass and two pixels:
+                  // one of the four jobs the accent has, and at a hairline in
+                  // the old blue it was not reading as a state at all.
                   className={cn(
-                    "relative text-sm transition-colors",
-                    "after:absolute after:-bottom-1.5 after:left-0 after:h-px after:bg-accent after:transition-all after:content-['']",
+                    "relative text-ui transition-colors",
+                    "after:absolute after:-bottom-2 after:left-0 after:h-0.5 after:bg-accent-solid after:transition-all after:content-['']",
                     isCurrent(item.href)
                       ? "text-content after:w-full"
-                      : "text-content-subtle after:w-0 hover:text-content hover:after:w-full",
+                      : "text-content-muted after:w-0 hover:text-content hover:after:w-full",
                   )}
                 >
                   {item.label}
@@ -105,7 +108,7 @@ export function SiteHeader() {
           <ThemeSelector />
           <Link
             href="/contact"
-            className="hidden rounded-control bg-action px-6 py-3 text-sm font-medium text-on-action transition-colors hover:bg-action-hover lg:inline-flex"
+            className="hidden rounded-control bg-action px-7 py-3.5 text-ui font-medium text-on-action transition-colors hover:bg-action-hover hover:text-on-action-hover lg:inline-flex"
           >
             Get in touch
           </Link>
@@ -167,7 +170,7 @@ export function SiteHeader() {
                 </ul>
                 <Link
                   href="/contact"
-                  className="mt-10 inline-flex w-full items-center justify-center rounded-control bg-action px-7 py-4 text-sm font-medium text-on-action"
+                  className="mt-10 inline-flex w-full items-center justify-center rounded-control bg-action px-7 py-4 text-ui font-medium text-on-action"
                 >
                   Get in touch
                 </Link>

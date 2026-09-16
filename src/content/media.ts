@@ -36,7 +36,7 @@ export const mediaSecondary: ImageAsset = {
 
 export const mediaIntro = {
   eyebrow: "Media",
-  headline: "Media & thought leadership.",
+  headline: "Media & *thought* leadership.",
   lede: "Interviews, features and talks — where his thinking on education, assessment and Islamic learning materials has been set out in public rather than in a prospectus.",
 } as const;
 

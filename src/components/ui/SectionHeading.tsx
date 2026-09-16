@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 
-import { AccentLine } from "./AccentLine";
 import { Eyebrow } from "./Eyebrow";
+import { emphasise } from "@/lib/emphasis";
 import { cn } from "@/lib/cn";
 import type { Accent } from "@/lib/accent";
 
@@ -14,12 +14,6 @@ type SectionHeadingProps = {
   tone?: "base" | "inverse";
   /** Matches the section's accent, so the header and its separator agree. */
   accent?: Accent;
-  /**
-   * The short accent rule closing the header block. On by default — it is what
-   * turns eyebrow, title and lede into one unit instead of three stacked
-   * paragraphs.
-   */
-  rule?: boolean;
   align?: "start" | "center";
   /**
    * `feature` is one step up, for the two or three sections on a page that
@@ -49,8 +43,7 @@ export function SectionHeading({
   lede,
   aside,
   tone = "base",
-  accent = "blue",
-  rule = true,
+  accent = "gold",
   align = "start",
   size = "default",
   className,
@@ -89,7 +82,7 @@ export function SectionHeading({
             inverse ? "text-on-inverse" : "text-content",
           )}
         >
-          {title}
+          {typeof title === "string" ? emphasise(title) : title}
         </Heading>
         {lede ? (
           <p
@@ -101,14 +94,6 @@ export function SectionHeading({
           >
             {lede}
           </p>
-        ) : null}
-        {rule ? (
-          <AccentLine
-            accent={accent}
-            tone={tone}
-            pair={feature}
-            className={cn("mt-1", align === "center" && "mx-auto")}
-          />
         ) : null}
       </div>
       {aside ? <div className="shrink-0">{aside}</div> : null}

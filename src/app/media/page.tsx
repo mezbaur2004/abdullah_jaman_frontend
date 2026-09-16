@@ -42,7 +42,7 @@ export default function MediaPage() {
         <Container>
           <SectionHeading
             id="press-heading"
-            title="Interviews and features."
+            title="Interviews and *features*."
           />
 
           <FeatureImage
@@ -90,15 +90,15 @@ export default function MediaPage() {
           tone="soft"
           index="02"
           indexLabel="Publications"
-          accent="yellow"
-          separator="editorial"
+          accent="gold"
+          separator="band"
           aria-labelledby="publications-heading"
         >
           <Container>
             <SectionHeading
               id="publications-heading"
               title="Published writing."
-              accent="yellow"
+              accent="gold"
             />
 
             <ul className="mt-14 grid gap-5 lg:mt-16">

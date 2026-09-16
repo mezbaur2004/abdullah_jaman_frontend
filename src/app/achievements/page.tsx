@@ -49,7 +49,7 @@ export default function AchievementsPage() {
         <Container>
           <SectionHeading
             id="institutions-heading"
-            title="Institutions under his leadership."
+            title="Institutions under his *leadership*."
             lede="The institutions he currently leads, in Dhaka, Bangladesh."
           />
 
@@ -61,7 +61,7 @@ export default function AchievementsPage() {
                     as="article"
                     padding="lg"
                     hover="quiet"
-                    accent={cardAccent("blue", i)}
+                    accent={cardAccent("gold", i)}
                     accentEdge="left"
                     className="flex h-full flex-col"
                   >
@@ -172,8 +172,8 @@ export default function AchievementsPage() {
         <Section
           index="03"
           indexLabel="Timeline"
-          accent="blue"
-          separator="minimal"
+          accent="gold"
+          separator="quiet"
           aria-labelledby="milestones-heading"
         >
           <Container>
@@ -193,7 +193,7 @@ export default function AchievementsPage() {
                       <div className="relative pb-10 sm:col-span-10 sm:border-l sm:border-line sm:pl-10">
                         <span
                           aria-hidden="true"
-                          className="absolute -left-[3px] top-2.5 hidden size-1.5 rounded-full bg-accent transition-transform group-hover/row:scale-150 sm:block"
+                          className="absolute -left-[3px] top-2.5 hidden size-1.5 rounded-full bg-accent-solid transition-transform group-hover/row:scale-150 sm:block"
                         />
                         <h3 className="font-display text-xl leading-snug text-content transition-colors group-hover/row:text-accent">
                           {milestone.title}

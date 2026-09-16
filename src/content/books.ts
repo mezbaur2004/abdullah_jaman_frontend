@@ -64,7 +64,7 @@ export const featuredBook = books.find((book) => book.featured) ?? books[0];
 
 export const booksIntro = {
   eyebrow: "Books",
-  headline: "Books & educational publications.",
+  headline: "*Books* & educational publications.",
   /**
    * VERIFIED — the remit is described in the Daily Star interview. It says
    * what the writing is *for* without claiming a single title, which is the
@@ -79,7 +79,7 @@ export const booksIntro = {
  */
 export const authorNote = {
   eyebrow: "The writing",
-  headline: "Writing for the next generation.",
+  headline: "Writing for the next *generation*.",
   body: [
     "Classroom materials are where an educational philosophy either holds or falls apart. A syllabus can state that a child should understand rather than memorise; only the book in front of them decides whether that happens.",
     "His work on Islamic Studies and Arabic materials is a continuation of the same responsibility he carries as a principal — that what a school teaches should be authentic to the tradition, structured well enough to be taught, and written for the age of the reader rather than the convenience of the adult.",

@@ -9,7 +9,7 @@ import { Card } from "@/components/ui/Card";
 import { FeatureImage } from "@/components/ui/FeatureImage";
 import { Figure } from "@/components/ui/Figure";
 import { ImageReveal } from "@/components/ui/ImageReveal";
-import { OffsetFrame } from "@/components/ui/OffsetFrame";
+import { ArchFrame } from "@/components/ui/ArchFrame";
 import { IconChip } from "@/components/ui/IconChip";
 import { ListRow } from "@/components/ui/ListRow";
 import { cardAccent } from "@/lib/accent";
@@ -50,18 +50,17 @@ export default function AboutPage() {
               {/* The same frame the hero gives it: a picture on this site is
                   framed one way, and this one was the exception — a bare
                   hairline crop beside a page of framed photographs. */}
-              <OffsetFrame className="mx-auto w-full max-w-sm lg:max-w-none">
-                <ImageReveal className="rounded-figure">
+              <ArchFrame className="mx-auto w-full max-w-sm lg:max-w-none">
+                <ImageReveal>
                   <Figure
                     image={image}
                     ratio="4 / 5"
                     priority
-                    rounded
-                    elevated
+                    frame="none"
                     sizes="(min-width: 1024px) 38vw, (min-width: 640px) 24rem, 90vw"
                   />
                 </ImageReveal>
-              </OffsetFrame>
+              </ArchFrame>
             </div>
 
             <div className="lg:col-span-7">
@@ -122,7 +121,7 @@ export default function AboutPage() {
         tone="soft"
         index="02"
         indexLabel="Institutions"
-        accent="yellow"
+        accent="gold"
         aria-labelledby="about-roles-heading"
       >
         <Container>
@@ -130,7 +129,7 @@ export default function AboutPage() {
             id="about-roles-heading"
             title="Institutions."
             lede="The institutions he currently leads, in Dhaka, Bangladesh."
-            accent="yellow"
+            accent="gold"
           />
 
           <ul className="mt-14 grid gap-5 lg:mt-16 lg:grid-cols-2 lg:gap-6">
@@ -141,7 +140,7 @@ export default function AboutPage() {
                     as="article"
                     padding="lg"
                     hover={organization.href ? "lift" : "quiet"}
-                    accent={cardAccent("yellow", i)}
+                    accent={cardAccent("gold", i)}
                     className="flex h-full flex-col"
                   >
                     <div className="flex items-start justify-between gap-5">
@@ -203,8 +202,8 @@ export default function AboutPage() {
           tone="ivory"
           index="03"
           indexLabel="Education"
-          accent="blue"
-          separator="minimal"
+          accent="gold"
+          separator="quiet"
           aria-labelledby="about-education-heading"
         >
           <Container>

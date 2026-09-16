@@ -42,7 +42,7 @@ export const leadershipFeature: ImageAsset = {
 /** The homepage teaser. Its own narrative, not a trimmed copy of the page. */
 export const leadershipTeaser = {
   eyebrow: "Leadership",
-  headline: "Running schools, not just leading them.",
+  headline: "Running schools, not just *leading* them.",
   body: "The institutions he leads in Dhaka, and the ordinary work of keeping them good — curriculum, teachers, assessment, the culture a child actually experiences between the timetable and the gate.",
   cta: { label: "Leadership & experience", href: "/leadership" },
   image: {
@@ -82,7 +82,7 @@ export const leadershipSecondary: ImageAsset = {
  */
 export const leadershipPhilosophy = {
   eyebrow: "Approach",
-  headline: "What a school is actually for.",
+  headline: "What a school is actually *for*.",
   body: [
     "Running a school is mostly unglamorous: curriculum sequencing, how teachers are trained, whether assessment measures understanding or recall, what happens in the corridor between lessons. None of it photographs well, and all of it decides what a child gets.",
     "The through-line is integration rather than balance — academic standards and Islamic values taught as one education rather than two timetables sharing a building, with technology used where it earns its place and left alone where it does not.",
@@ -92,7 +92,7 @@ export const leadershipPhilosophy = {
 export const leadershipIntro = {
   eyebrow: "Leadership",
   /** "Current" is load-bearing — earlier positions have not been collected. */
-  headline: "Leadership & educational journey.",
+  headline: "Leadership & educational *journey*.",
   lede: "The institutions he leads, how they are run, and the thinking underneath — academic standards, teacher development, and the place of faith and character in a modern school.",
 } as const;
 

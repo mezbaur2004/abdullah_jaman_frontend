@@ -1,6 +1,6 @@
 import { Container } from "./Container";
-import { AccentLine } from "@/components/ui/AccentLine";
 import { Eyebrow } from "@/components/ui/Eyebrow";
+import { emphasise } from "@/lib/emphasis";
 import { GeometricPattern } from "@/components/ui/GeometricPattern";
 
 type PageHeaderProps = {
@@ -44,7 +44,7 @@ export function PageHeader({ eyebrow, title, lede, pattern = false }: PageHeader
             className="animate-rise text-display-xl text-content lg:col-span-7"
             style={{ animationDelay: "80ms" }}
           >
-            {title}
+            {emphasise(title)}
           </h1>
           {lede ? (
             <p
@@ -54,10 +54,6 @@ export function PageHeader({ eyebrow, title, lede, pattern = false }: PageHeader
               {lede}
             </p>
           ) : null}
-        </div>
-
-        <div className="animate-rise mt-10" style={{ animationDelay: "220ms" }}>
-          <AccentLine pair />
         </div>
       </Container>
     </div>

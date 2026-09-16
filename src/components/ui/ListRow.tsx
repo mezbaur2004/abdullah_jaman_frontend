@@ -35,7 +35,7 @@ export function ListRow({
     >
       <span
         aria-hidden="true"
-        className="absolute left-0 top-0 h-full w-0.5 origin-top scale-y-0 bg-accent transition-transform group-hover/row:scale-y-100"
+        className="absolute left-0 top-0 h-full w-0.5 origin-top scale-y-0 bg-accent-solid transition-transform group-hover/row:scale-y-100"
       />
       {children}
     </li>

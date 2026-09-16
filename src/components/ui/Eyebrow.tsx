@@ -5,12 +5,12 @@ type EyebrowProps = {
   /** Optional so a numbered marker can stand on its own if a label is absent. */
   children?: string;
   className?: string;
-  /** "inverse" for the dark band, where the muted tokens flip. */
+  /** "inverse" for the navy band, where the accent flips to its light value. */
   tone?: "base" | "inverse";
   accent?: Accent;
   /**
    * Two-digit section number, e.g. "03". Renders as `03 / LABEL`, with the
-   * number in the section's accent.
+   * number set in the display face.
    */
   index?: string;
   id?: string;
@@ -23,16 +23,17 @@ type EyebrowProps = {
  * standalone label can never drift apart in size, tracking, colour or the
  * length of their leading rule.
  *
- * The label itself stays slate rather than taking the accent. Yellow at this
- * size would fail contrast outright, and red would read as a warning — so the
- * accent lives in the leading rule and the index number, where it is a signal
- * rather than the thing being read.
+ * The label is brass now, and larger. It used to be 11px slate — a footnote
+ * above a seventy-pixel headline, which at a glance simply was not there. At
+ * 13px in the accent it reads as a label the heading below belongs to, and it
+ * is one of the four places the accent does its work: eyebrows, section
+ * numbers, the rule under the active nav item, and the arrow on a link.
  */
 export function Eyebrow({
   children,
   className,
   tone = "base",
-  accent = "blue",
+  accent = "gold",
   index,
   id,
 }: EyebrowProps) {
@@ -42,25 +43,20 @@ export function Eyebrow({
     <p
       id={id}
       className={cn(
-        // Semibold rather than medium. At 11px with 0.19em of tracking, medium
-        // reads as a caption; the extra weight is what makes it a label the
-        // heading below belongs to.
         "flex items-center gap-3 text-eyebrow font-semibold uppercase",
-        inverse ? "text-on-inverse-muted" : "text-content-subtle",
+        accentText(accent, inverse),
         className,
       )}
     >
       <span
         aria-hidden="true"
-        className={cn("h-[3px] w-9 shrink-0", accentMark(accent, inverse))}
+        className={cn("h-0.5 w-10 shrink-0", accentMark(accent, inverse))}
       />
       {index ? (
-        <span className={cn("font-display text-xs", accentText(accent, inverse))}>
-          {index}
-        </span>
+        <span className="font-display text-sm font-semibold">{index}</span>
       ) : null}
       {index && children ? (
-        <span aria-hidden="true" className="opacity-45">
+        <span aria-hidden="true" className="opacity-40">
           /
         </span>
       ) : null}

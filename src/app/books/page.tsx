@@ -62,14 +62,14 @@ export default function BooksPage() {
           divider={false}
           index="01"
           indexLabel="Featured"
-          accent="yellow"
+          accent="gold"
           aria-labelledby="featured-book-heading"
         >
           <Container>
             <SectionHeading
               id="featured-book-heading"
               title="Featured."
-              accent="yellow"
+              accent="gold"
             />
             <Reveal className="mt-14 lg:mt-16">
               <BookCard book={featuredBook} feature />
@@ -86,8 +86,8 @@ export default function BooksPage() {
         divider={Boolean(featuredBook)}
         index={featuredBook ? "02" : "01"}
         indexLabel="The writing"
-        accent="yellow"
-        separator="editorial"
+        accent="gold"
+        separator="band"
         aria-labelledby="author-note-heading"
       >
         <Container className="relative">
@@ -98,7 +98,7 @@ export default function BooksPage() {
               <SectionHeading
                 id="author-note-heading"
                 title={authorNote.headline}
-                accent="yellow"
+                accent="gold"
                 size="feature"
               />
               <div className="mt-10 flex max-w-2xl flex-col gap-6 text-lede text-content-muted">
@@ -111,9 +111,15 @@ export default function BooksPage() {
             </div>
 
             <div className="lg:col-span-5">
+              {/* Cropped to the arch's own 4:5 rather than the picture's 4:3.
+                   A mihrab over a landscape frame is a shape fighting its
+                   subject; given the portrait ratio the arch is doing what an
+                   arch does, which is to frame a figure. */}
               <FeatureImage
                 image={booksFeature}
                 caption="At the school office."
+                ratio="4 / 5"
+                arch
               />
             </div>
           </div>
@@ -124,7 +130,7 @@ export default function BooksPage() {
         <Section
           index={featuredBook ? "03" : "02"}
           indexLabel="Titles"
-          accent="blue"
+          accent="gold"
           aria-labelledby="titles-heading"
         >
           <Container>
@@ -183,8 +189,8 @@ export default function BooksPage() {
         <Section
           index={featuredBook ? "03" : "02"}
           indexLabel="Titles"
-          accent="blue"
-          separator="minimal"
+          accent="gold"
+          separator="quiet"
           aria-labelledby="titles-pending-heading"
         >
           <Container>

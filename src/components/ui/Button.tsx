@@ -3,16 +3,15 @@ import { ArrowRight, ArrowUpRight } from "lucide-react";
 import type { ReactNode } from "react";
 
 import { cn } from "@/lib/cn";
+import { accentMark, type Accent } from "@/lib/accent";
 
 type Variant = "primary" | "secondary" | "inverse" | "quiet";
-
-/** Which accent the secondary button's micro-detail uses on hover. */
-type Accent = "blue" | "yellow" | "red";
 
 type ButtonProps = {
   href: string;
   children: ReactNode;
   variant?: Variant;
+  /** Which accent the secondary button's micro-rule uses on hover. */
   accent?: Accent;
   className?: string;
   /** Adds context for links whose label alone is ambiguous out of context. */
@@ -20,28 +19,27 @@ type ButtonProps = {
 };
 
 const base =
-  "group relative inline-flex items-center justify-center gap-2.5 overflow-hidden text-sm font-medium tracking-[0.01em] transition-[transform,background-color,border-color,box-shadow,color]";
+  "group relative inline-flex items-center justify-center gap-2.5 overflow-hidden text-ui font-medium tracking-[0.005em] transition-[transform,background-color,border-color,box-shadow,color]";
 
 const variants: Record<Variant, string> = {
-  // Solid blue, white text, a darker blue on hover and a small lift. No
-  // gradient: a flat institutional blue is the whole point of the identity.
+  /**
+   * Navy, and on hover the accent arrives: brass ground, navy type.
+   *
+   * The hover is deliberately not a shade of the resting state. A button that
+   * goes from navy to slightly-darker navy is a button reporting that it
+   * noticed you; one that turns brass is the identity answering. It is the
+   * loudest single moment on the site and the only place the accent fills
+   * anything larger than a rule.
+   */
   primary:
-    "rounded-control bg-action px-7 py-3.5 text-on-action shadow-card hover:translate-y-[var(--hover-lift)] hover:bg-action-hover hover:shadow-card-hover",
-  // Blue border, blue text, transparent ground — the quieter half of the pair.
+    "rounded-control bg-action px-8 py-4 text-on-action shadow-card hover:translate-y-[var(--hover-lift)] hover:bg-action-hover hover:text-on-action-hover hover:shadow-card-hover",
+  // Brass border, brass type, transparent ground — the quieter half of the pair.
   secondary:
-    "rounded-control border border-line-accent px-7 py-3.5 text-accent hover:translate-y-[var(--hover-lift)] hover:border-accent hover:bg-accent-soft",
-  // For use on the inverse band, where the fill has to read light in both themes.
+    "rounded-control border border-line-accent px-8 py-4 text-accent hover:translate-y-[var(--hover-lift)] hover:border-accent-solid hover:bg-accent-soft",
+  // For the navy band, where the fill has to read light in both themes.
   inverse:
-    "rounded-control bg-action-inverse px-7 py-3.5 text-on-action-inverse hover:translate-y-[var(--hover-lift)] hover:bg-action-inverse-hover",
-  quiet:
-    "border-b border-line-accent pb-1 text-accent hover:border-accent",
-};
-
-/** The secondary button's hover detail — a short rule under the label. */
-const accentMarks: Record<Accent, string> = {
-  blue: "bg-accent",
-  yellow: "bg-highlight-solid",
-  red: "bg-emphasis-solid",
+    "rounded-control bg-action-inverse px-8 py-4 text-on-action-inverse hover:translate-y-[var(--hover-lift)] hover:bg-action-inverse-hover",
+  quiet: "border-b-2 border-line-accent pb-1 text-accent hover:border-accent-solid",
 };
 
 function isExternal(href: string) {
@@ -52,7 +50,7 @@ export function Button({
   href,
   children,
   variant = "primary",
-  accent = "blue",
+  accent = "gold",
   className,
   srSuffix,
 }: ButtonProps) {
@@ -63,13 +61,13 @@ export function Button({
     <>
       {/* The secondary button's micro-accent: a rule that draws itself along
           the bottom edge on hover. Only the secondary gets one — the primary
-          is already solid blue and has nothing to add. */}
+          turns brass all over and has nothing left to add. */}
       {variant === "secondary" ? (
         <span
           aria-hidden="true"
           className={cn(
             "absolute inset-x-5 bottom-0 h-0.5 origin-left scale-x-0 transition-transform group-hover:scale-x-100",
-            accentMarks[accent],
+            accentMark(accent),
           )}
         />
       ) : null}
@@ -79,11 +77,11 @@ export function Button({
       </span>
       <Icon
         aria-hidden="true"
-        strokeWidth={1.5}
+        strokeWidth={1.75}
         className={cn(
-          "size-4 transition-transform",
+          "size-[1.05rem] transition-transform",
           external
-            ? "group-hover:translate-y-[var(--hover-lift)] group-hover:translate-x-0.5"
+            ? "group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
             : "group-hover:translate-x-1",
         )}
       />

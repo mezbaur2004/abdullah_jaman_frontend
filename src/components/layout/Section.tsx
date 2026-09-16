@@ -29,8 +29,8 @@ type SectionProps = {
    * sequence, and a section cannot see the sequence it is in.
    */
   accent?: Accent;
-  /** Which separator the boundary above this section uses. */
-  separator?: "line" | "editorial" | "minimal";
+  /** Which divider the boundary above this section uses. */
+  separator?: "band" | "quiet";
   /**
    * The depth wash behind the band. Defaults to on for every coloured tone and
    * off for the plain paper ones, which is almost always the right answer:
@@ -107,8 +107,8 @@ export function Section({
   tone = "base",
   spacing = "default",
   divider = true,
-  accent = "blue",
-  separator = "line",
+  accent = "gold",
+  separator = "band",
   veil,
   pattern = false,
   index,
@@ -149,7 +149,6 @@ export function Section({
       {divider ? (
         <SectionSeparator
           variant={separator}
-          accent={accent}
           tone={inverse ? "inverse" : "base"}
         />
       ) : null}

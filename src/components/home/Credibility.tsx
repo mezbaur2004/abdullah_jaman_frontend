@@ -17,15 +17,15 @@ export function Credibility({ index }: { index?: string }) {
       tone="soft"
       index={index}
       indexLabel="Institutions"
-      accent="blue"
+      accent="gold"
       aria-labelledby="credibility-heading"
     >
       <Container>
         <SectionHeading
           id="credibility-heading"
-          title="Where he leads."
+          title="Where he *leads*."
           lede="The institutions he leads, in Dhaka, Bangladesh."
-          accent="blue"
+          accent="gold"
         />
 
         <ul className="mt-14 grid gap-5 lg:mt-16 lg:grid-cols-2 lg:gap-6">
@@ -38,7 +38,7 @@ export function Credibility({ index }: { index?: string }) {
                   // A card that links somewhere lifts; one that does not
                   // acknowledges the cursor without promising a destination.
                   hover={organization.href ? "lift" : "quiet"}
-                  accent={cardAccent("blue", i)}
+                  accent={cardAccent("gold", i)}
                   className="flex h-full flex-col"
                 >
                   <div className="flex items-start justify-between gap-5">

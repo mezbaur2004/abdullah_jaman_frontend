@@ -4,7 +4,7 @@ import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Figure } from "@/components/ui/Figure";
 import { GeometricPattern } from "@/components/ui/GeometricPattern";
 import { ImageReveal } from "@/components/ui/ImageReveal";
-import { OffsetFrame } from "@/components/ui/OffsetFrame";
+import { ArchFrame } from "@/components/ui/ArchFrame";
 import { hero, heroPanel, organizations, portrait } from "@/content/profile";
 import { site } from "@/content/site";
 
@@ -23,9 +23,14 @@ export function Hero() {
         aria-hidden="true"
         className="section-veil pointer-events-none absolute inset-0 -z-10"
       />
+      {/* Large, and deliberately cut off. The figure runs past the top and the
+          right of the band, so what shows is part of something bigger rather
+          than a tile repeating politely inside its box — the section's own
+          `overflow-hidden` is what does the cropping. */}
       <GeometricPattern
+        size="xl"
         fade="radial"
-        className="inset-auto right-0 top-0 -z-10 h-[62%] w-[58%]"
+        className="inset-auto -right-24 -top-28 -z-10 h-[150%] w-[78%]"
       />
 
       <Container>
@@ -68,18 +73,17 @@ export function Hero() {
           </div>
 
           <div className="sm:col-span-5">
-            <OffsetFrame>
-              <ImageReveal className="rounded-figure">
+            <ArchFrame>
+              <ImageReveal>
                 <Figure
                   image={image}
                   ratio="4 / 5"
                   priority
-                  rounded
-                  elevated
+                  frame="none"
                   sizes="(min-width: 1024px) 38vw, (min-width: 640px) 36vw, 90vw"
                 />
               </ImageReveal>
-            </OffsetFrame>
+            </ArchFrame>
 
             {/* The institutions as tags. Named, not counted. */}
             <ul className="mt-10 flex flex-wrap items-center gap-2.5 lg:mt-11">

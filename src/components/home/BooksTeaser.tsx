@@ -1,6 +1,6 @@
 import { Container } from "@/components/layout/Container";
+import { emphasise } from "@/lib/emphasis";
 import { Section } from "@/components/layout/Section";
-import { AccentLine } from "@/components/ui/AccentLine";
 import { Button } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -31,7 +31,7 @@ export function BooksTeaser({ index }: { index?: string }) {
       tone="ivory"
       index={index}
       indexLabel="Books"
-      accent="yellow"
+      accent="gold"
       pattern
       aria-labelledby="books-teaser-heading"
     >
@@ -43,12 +43,12 @@ export function BooksTeaser({ index }: { index?: string }) {
                 id="books-teaser-heading"
                 title={booksIntro.headline}
                 lede={booksIntro.lede}
-                accent="yellow"
+                accent="gold"
                 size="feature"
               />
               <Reveal step={1}>
                 <div className="mt-10">
-                  <Button href="/books" accent="yellow" variant="secondary">
+                  <Button href="/books" accent="gold" variant="secondary">
                     View all books
                   </Button>
                 </div>
@@ -76,9 +76,8 @@ export function BooksTeaser({ index }: { index?: string }) {
                   id="books-teaser-heading"
                   className="max-w-xl text-display-xl text-content"
                 >
-                  {booksIntro.headline}
+                  {emphasise(booksIntro.headline)}
                 </h2>
-                <AccentLine accent="yellow" pair className="mt-8" />
               </Reveal>
             </div>
 
@@ -88,7 +87,7 @@ export function BooksTeaser({ index }: { index?: string }) {
                   {booksIntro.lede}
                 </p>
                 <div className="mt-10">
-                  <Button href="/books" accent="yellow" variant="secondary">
+                  <Button href="/books" accent="gold" variant="secondary">
                     About the writing
                   </Button>
                 </div>

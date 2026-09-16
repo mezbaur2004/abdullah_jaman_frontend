@@ -17,7 +17,7 @@ export function MediaHighlights({ index }: { index?: string }) {
       index={index}
       indexLabel="Media"
       accent="red"
-      separator="editorial"
+      separator="band"
       aria-labelledby="media-heading"
     >
       <Container>
