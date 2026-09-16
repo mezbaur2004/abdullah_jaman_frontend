@@ -23,11 +23,14 @@ export function Hero() {
         aria-hidden="true"
         className="section-veil pointer-events-none absolute inset-0 -z-10"
       />
-      <GeometricPattern fade="radial" className="-z-10" />
+      <GeometricPattern
+        fade="radial"
+        className="inset-auto right-0 top-0 -z-10 h-[62%] w-[58%]"
+      />
 
       <Container>
-        <div className="grid items-center gap-14 lg:grid-cols-12 lg:gap-16">
-          <div className="lg:col-span-7 lg:pr-8">
+        <div className="grid items-center gap-12 sm:grid-cols-12 sm:gap-10 lg:gap-16">
+          <div className="sm:col-span-7 lg:pr-8">
             <div className="animate-rise">
               <Eyebrow>{hero.eyebrow}</Eyebrow>
             </div>
@@ -64,26 +67,26 @@ export function Hero() {
             </div>
           </div>
 
-          <div className="lg:col-span-5">
+          <div className="sm:col-span-5">
             <OffsetFrame>
-              <ImageReveal className="rounded-[0.75rem]">
+              <ImageReveal className="rounded-figure">
                 <Figure
                   image={image}
                   ratio="4 / 5"
                   priority
                   rounded
                   elevated
-                  sizes="(min-width: 1024px) 38vw, (min-width: 640px) 70vw, 90vw"
+                  sizes="(min-width: 1024px) 38vw, (min-width: 640px) 36vw, 90vw"
                 />
               </ImageReveal>
             </OffsetFrame>
 
-            {/* The institutions as chips. Named, not counted. */}
-            <ul className="mt-10 flex flex-wrap items-center gap-2.5 sm:mt-12">
+            {/* The institutions as tags. Named, not counted. */}
+            <ul className="mt-10 flex flex-wrap items-center gap-2.5 lg:mt-11">
               {organizations.map((organization) => (
                 <li key={organization.name}>
                   <span
-                    className="inline-flex items-center rounded-full border border-line bg-surface-raised px-3.5 py-1.5 text-eyebrow font-semibold uppercase text-content-muted shadow-card"
+                    className="inline-flex items-center rounded-chip border border-line bg-surface-raised px-3 py-1.5 text-eyebrow font-semibold uppercase text-content-muted"
                     title={organization.name}
                   >
                     {organization.shortName ?? organization.name}
@@ -91,7 +94,7 @@ export function Hero() {
                 </li>
               ))}
               <li>
-                <span className="inline-flex items-center rounded-full border border-line-accent bg-accent-soft px-3.5 py-1.5 text-eyebrow font-semibold uppercase text-accent">
+                <span className="inline-flex items-center rounded-chip border border-line-accent bg-accent-soft px-3 py-1.5 text-eyebrow font-semibold uppercase text-accent">
                   {site.location}
                 </span>
               </li>

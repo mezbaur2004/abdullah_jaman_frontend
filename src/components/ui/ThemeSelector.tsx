@@ -79,10 +79,10 @@ function applyTheme(next: Theme) {
  * of 3, not selected" instead of three unrelated buttons, and arrow keys move
  * between the options natively.
  *
- * The active pill is one absolutely positioned element that slides, not three
- * backgrounds fading in and out. Sliding is what makes the three read as
- * positions on a single control rather than as separate lit-up buttons — and
- * it is one transition instead of six.
+ * The active marker is one absolutely positioned element that slides, not
+ * three backgrounds fading in and out. Sliding is what makes the three read
+ * as positions on a single control rather than as separate lit-up buttons —
+ * and it is one transition instead of six.
  */
 export function ThemeSelector({ className }: { className?: string }) {
   const theme = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
@@ -93,15 +93,15 @@ export function ThemeSelector({ className }: { className?: string }) {
       role="radiogroup"
       aria-label="Colour theme"
       className={cn(
-        "relative inline-flex items-center rounded-full border border-line-accent bg-surface-soft p-[3px]",
+        "relative inline-flex items-center rounded-control border border-line-accent bg-surface-soft p-[3px]",
         className,
       )}
     >
       {/* Decorative: the selected state is announced by aria-checked, so the
-          pill must not be reachable or readable on its own. */}
+          marker must not be reachable or readable on its own. */}
       <span
         aria-hidden="true"
-        className="absolute inset-y-[3px] left-[3px] w-[calc((100%-6px)/3)] rounded-full border border-accent/45 bg-accent-soft shadow-card transition-transform"
+        className="absolute inset-y-[3px] left-[3px] w-[calc((100%-6px)/3)] rounded-chip border border-accent/45 bg-accent-soft shadow-card transition-transform"
         style={{ transform: `translateX(${activeIndex * 100}%)` }}
       />
 
@@ -120,7 +120,7 @@ export function ThemeSelector({ className }: { className?: string }) {
             title={`${label} — ${hint.toLowerCase()}`}
             onClick={() => applyTheme(option)}
             className={cn(
-              "relative z-10 inline-flex size-7 items-center justify-center rounded-full transition-colors sm:size-8",
+              "relative z-10 inline-flex size-7 items-center justify-center rounded-chip transition-colors sm:size-8",
               active
                 ? "text-accent-strong"
                 : "text-content-subtle hover:text-accent",

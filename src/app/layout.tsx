@@ -97,7 +97,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="flex min-h-full flex-col bg-surface">
         <a
           href="#main"
-          className="sr-only rounded-full focus:not-sr-only focus:absolute focus:left-6 focus:top-6 focus:z-[60] focus:bg-action focus:px-5 focus:py-3 focus:text-sm focus:text-on-action"
+          className="sr-only rounded-control focus:not-sr-only focus:absolute focus:left-6 focus:top-6 focus:z-[60] focus:bg-action focus:px-5 focus:py-3 focus:text-sm focus:text-on-action"
         >
           Skip to content
         </a>

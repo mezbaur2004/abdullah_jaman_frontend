@@ -18,9 +18,18 @@ type GeometricPatternProps = {
   className?: string;
 };
 
+/**
+ * The two strengths, each resolved from a theme token rather than a fixed
+ * opacity. Gold on navy carries considerably further than gold on ivory, so a
+ * single figure cannot serve both: the values tuned for paper vanished in dark
+ * mode, and the dark-mode values read as a pattern on paper.
+ *
+ * Both are lower than they look written down. The figure is drawn at 76px, so
+ * a reader has to go looking for it — which is the whole intent.
+ */
 const intensities = {
-  faint: "opacity-[0.05]",
-  soft: "opacity-[0.09]",
+  faint: "geo-faint",
+  soft: "geo-soft",
 } as const;
 
 /**

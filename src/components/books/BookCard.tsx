@@ -40,7 +40,7 @@ export function BookCard({ book, accent = "yellow", feature = false }: BookCardP
   ) : (
     <div
       aria-hidden="true"
-      className="flex aspect-[2/3] flex-col justify-between rounded-[0.75rem] border border-line-accent bg-surface-accent p-5"
+      className="flex aspect-[2/3] flex-col justify-between rounded-figure border border-line-accent bg-surface-accent p-5"
     >
       <IconChip icon={BookOpen} size="sm" />
       <p className="font-display text-lg leading-snug text-content">

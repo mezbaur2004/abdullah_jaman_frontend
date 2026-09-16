@@ -105,7 +105,7 @@ export function SiteHeader() {
           <ThemeSelector />
           <Link
             href="/contact"
-            className="hidden rounded-full bg-action px-6 py-3 text-sm font-medium text-on-action transition-colors hover:bg-action-hover lg:inline-flex"
+            className="hidden rounded-control bg-action px-6 py-3 text-sm font-medium text-on-action transition-colors hover:bg-action-hover lg:inline-flex"
           >
             Get in touch
           </Link>
@@ -167,7 +167,7 @@ export function SiteHeader() {
                 </ul>
                 <Link
                   href="/contact"
-                  className="mt-10 inline-flex w-full items-center justify-center rounded-full bg-action px-7 py-4 text-sm font-medium text-on-action"
+                  className="mt-10 inline-flex w-full items-center justify-center rounded-control bg-action px-7 py-4 text-sm font-medium text-on-action"
                 >
                   Get in touch
                 </Link>

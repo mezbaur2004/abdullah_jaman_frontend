@@ -62,6 +62,10 @@ export const aboutFeature: ImageAsset = {
   alt: "Abdullah Jaman seated in conversation with two guests at a reception.",
   width: 1600,
   height: 1066,
+  // The subjects sit across the lower half of the frame, under a tall wall of
+  // flowers. At its own ratio the picture was mostly the flowers; weighting the
+  // crop low puts the three people in it.
+  position: "50% 74%",
 };
 
 export const hero = {

@@ -52,7 +52,7 @@ export function Panel({
         // `overflow-hidden` is what keeps the pattern off the corners. Nothing
         // interactive is clipped by it: the panel's content is ordinary flow,
         // and focus rings sit inside padding that starts at 32px.
-        "relative isolate overflow-hidden rounded-[1.75rem] border",
+        "relative isolate overflow-hidden rounded-panel border",
         tones[tone],
         paddings[padding],
         className,

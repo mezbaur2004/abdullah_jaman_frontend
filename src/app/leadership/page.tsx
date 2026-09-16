@@ -193,9 +193,13 @@ export default function LeadershipPage() {
             </div>
 
             <div className="lg:col-span-6">
+              {/* The caption changed with the photograph. A caption left
+                  behind after the image under it is swapped is a caption that
+                  describes something the reader cannot see. */}
               <FeatureImage
                 image={leadershipSecondary}
-                caption="Leading a teacher training session on lesson planning and Bloom's taxonomy."
+                caption="Addressing a room."
+                ratio="4 / 5"
               />
             </div>
           </div>

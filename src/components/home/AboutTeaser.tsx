@@ -24,7 +24,6 @@ export function AboutTeaser({ index }: { index?: string }) {
       indexLabel="Philosophy"
       accent="blue"
       separator="minimal"
-      spacing="loose"
       aria-labelledby="about-teaser-heading"
     >
       <Container className="relative">
@@ -57,7 +56,7 @@ export function AboutTeaser({ index }: { index?: string }) {
             </Reveal>
           </div>
 
-          <div className="lg:col-span-5 lg:pt-24">
+          <div className="lg:col-span-5 lg:pt-14">
             <Reveal step={1}>
               <Panel padding="md">
                 <p className="text-eyebrow font-semibold uppercase text-content-subtle">
