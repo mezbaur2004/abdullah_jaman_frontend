@@ -85,6 +85,39 @@ Recorded in `src/content/status.ts` (`resolvedDecisions`) and rendered at
   is titled *current roles* and says so in a note, because positions held
   before Wheaton and Guidance have not been collected.
 
+## Photographs
+
+Supplied by the owner and in use:
+
+| File | Where it appears |
+| --- | --- |
+| `portrait.jpg` | Hero and About page, via `portrait` in `profile.ts` |
+| `gallery-teaching.jpg` | Gallery — teacher training session |
+| `gallery-address.jpg` | Gallery — speaking with a microphone |
+| `gallery-podium.jpg` | Gallery — speaking at a podium |
+| `gallery-office.jpg` | Gallery — at the school office |
+
+**Alt text describes only what is in the frame.** The rule against unsupported
+claims applies to image descriptions exactly as it applies to prose: "teaching
+a lesson-planning session" is readable from the photograph, "inspiring
+teachers" is not.
+
+Two of the files were edited on the way in. The portrait was cropped to 4:5
+from a square original so the hero and About page can share one file. The
+speaking photograph was cropped past a globe-and-dove graphic sitting in its
+lower left, and pulled back from a saturated orange so the tile sits with the
+brand's yellow rather than fighting it. Originals are unmodified on the owner's
+side; `scripts/` holds no image pipeline, so re-supplying a file means dropping
+in a replacement of the same name.
+
+**Three landscape media photographs are reserved** in `gallery.ts` as commented
+entries — drop `gallery-media-1.jpg` through `-3.jpg` into `public/images/`,
+uncomment, and correct the dimensions, caption and alt.
+
+`gallery-office.jpg` is the one low-resolution file at 412px wide. The grid
+gives it a smaller tile to compensate, but a higher-resolution original would
+be better.
+
 ## Empty on purpose
 
 These arrays are empty, and their sections remove themselves from the site as a
@@ -96,10 +129,8 @@ result. Populating an array is all it takes to bring its section back.
 | `achievements.ts` | `awards` | Awards, homepage and achievements page |
 | `achievements.ts` | `milestones` | Timeline on the achievements page |
 | `experience.ts` | `initiatives` | Professional work, homepage and experience page |
-| `gallery.ts` | `gallery` | Homepage photo gallery |
 | `media.ts` | `publications` | Publications on the media page |
 | `site.ts` | `socialLinks` | Social links in the footer and contact page |
-| `profile.ts` | `portrait` (`null`) | Every portrait slot |
 
 **Do not fill any of these with plausible-sounding placeholders.** An invented
 award or statistic on a personal-brand site is the single easiest thing to be
@@ -115,11 +146,7 @@ The full list is in `src/content/status.ts` (`contentGaps`) and renders at
    the single highest-value thing to supply.
 2. **The live domain.** `site.url` is a placeholder. Canonical URLs, Open
    Graph, the sitemap and `robots.txt` all derive from it.
-3. **A photograph.** No portrait exists, so the hero and About page use an
-   abstract decorative panel — not a likeness, and marked decorative so screen
-   readers skip it. Set `portrait` in `profile.ts` and it is used everywhere
-   automatically.
-4. **Biography.** `aboutPage.sections` is empty; the About page currently shows
+3. **Biography.** `aboutPage.sections` is empty; the About page currently shows
    verified facts only. Add `{ heading, body[] }` entries and they render in
    order.
 5. **Career history**, with dates and responsibilities, to fill out `roles`.

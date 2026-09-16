@@ -15,18 +15,28 @@ import { site } from "./site";
  */
 
 /**
- * TO COLLECT — no photograph of Abdullah Jaman has been supplied. Null keeps
- * every portrait slot empty rather than captioning a stand-in as him.
+ * VERIFIED — supplied by the owner.
  *
- * To add one: drop the file in public/images/ and set this to
- * { src: "/images/portrait.jpg", alt: "Abdullah Jaman", width, height }.
+ * Cropped to 4:5 from a square original so the hero and the About page can
+ * share one file without either needing its own crop. The alt text names him
+ * and stops there: it is a photograph of a person, not a claim about a role,
+ * and a caption that editorialises is a claim the image cannot support.
+ *
+ * Setting this to null is still supported everywhere — the hero and About
+ * both fall back to the decorative plate below.
  */
-export const portrait: ImageAsset | null = null;
+export const portrait: ImageAsset | null = {
+  src: "/images/portrait.jpg",
+  alt: "Abdullah Jaman",
+  width: 1000,
+  height: 1250,
+};
 
 /**
  * Decorative only. An abstract plate, not a photograph and not a likeness, so
  * it makes no claim about anyone. The empty `alt` hides it from assistive
- * technology. It gives the hero a visual anchor until a real portrait exists.
+ * technology. Now that a real portrait exists it is only the fallback, kept so
+ * that clearing `portrait` never leaves a hole in the layout.
  */
 export const heroPanel: ImageAsset = {
   src: "/images/panel-hero.jpg",

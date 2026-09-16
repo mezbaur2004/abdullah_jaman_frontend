@@ -29,7 +29,7 @@ export const verifiedSources = [
   {
     label: "Supplied directly by the owner",
     detail:
-      "Campus counts (recorded, not published), the board-governance and earlier-career caveats behind the no-counting rule, and the decision to omit Pedago Academy as an unlaunched sister concern.",
+      "Campus counts (recorded, not published), the board-governance and earlier-career caveats behind the no-counting rule, the decision to omit Pedago Academy as an unlaunched sister concern, and the photographs now used for the portrait and the gallery.",
   },
 ];
 
@@ -189,13 +189,12 @@ export const contentGaps: ContentGap[] = [
   {
     area: "Photos & assets",
     items: [
-      "Professional portrait",
       "Cover / banner image",
       "School and institution photographs",
-      "Event photographs",
       "Award photographs",
-      "Media photographs",
+      "Media photographs — three landscape files reserved in gallery.ts",
       "Organization logos",
+      "A higher-resolution original of the office photograph (the supplied file is 412px wide)",
     ],
   },
   {
