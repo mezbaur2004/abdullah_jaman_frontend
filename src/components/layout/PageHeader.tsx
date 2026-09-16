@@ -33,21 +33,30 @@ export function PageHeader({ eyebrow, title, lede, pattern = false }: PageHeader
         <div className="animate-rise">
           <Eyebrow>{eyebrow}</Eyebrow>
         </div>
-        <h1
-          className="animate-rise mt-7 max-w-4xl text-display-xl text-content"
-          style={{ animationDelay: "80ms" }}
-        >
-          {title}
-        </h1>
-        {lede ? (
-          <p
-            className="animate-rise mt-8 max-w-2xl text-lede text-content-muted"
-            style={{ animationDelay: "160ms" }}
+
+        {/* Title and lede as a spread rather than a stack. Set one under the
+            other they occupied the left half of the band and left the right
+            half empty on every page of the site; side by side, with the lede
+            settling onto the title's last line, the masthead fills its width
+            and reads the way a title page does. */}
+        <div className="mt-7 grid gap-7 lg:grid-cols-12 lg:items-end lg:gap-16">
+          <h1
+            className="animate-rise text-display-xl text-content lg:col-span-7"
+            style={{ animationDelay: "80ms" }}
           >
-            {lede}
-          </p>
-        ) : null}
-        <div className="animate-rise mt-9" style={{ animationDelay: "220ms" }}>
+            {title}
+          </h1>
+          {lede ? (
+            <p
+              className="animate-rise max-w-2xl text-lede text-content-muted lg:col-span-5 lg:pb-2"
+              style={{ animationDelay: "160ms" }}
+            >
+              {lede}
+            </p>
+          ) : null}
+        </div>
+
+        <div className="animate-rise mt-10" style={{ animationDelay: "220ms" }}>
           <AccentLine pair />
         </div>
       </Container>

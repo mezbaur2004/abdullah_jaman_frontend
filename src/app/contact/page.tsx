@@ -5,13 +5,11 @@ import { Container } from "@/components/layout/Container";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { Section } from "@/components/layout/Section";
 import { Button } from "@/components/ui/Button";
-import { Card } from "@/components/ui/Card";
 import { Panel } from "@/components/ui/Panel";
 import { PendingNote } from "@/components/ui/PendingNote";
 import { Reveal } from "@/components/ui/Reveal";
 import { contactChannels, contactIntro, contactPending } from "@/content/contact";
 import { institutionLinks, site, socialLinks } from "@/content/site";
-import { cardAccent } from "@/lib/accent";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
@@ -38,30 +36,40 @@ export default function ContactPage() {
             <div className="lg:col-span-7">
               <Reveal>
                 <h2 className="font-display text-display-md text-content">
-                  What to write about
+                  What to write about.
                 </h2>
               </Reveal>
 
-              <ul className="mt-10 grid gap-5">
+              {/* A ruled list, not three cards. Each of these is a heading and
+                  one line; as cards they were three near-identical boxes with
+                  more padding in them than content, and the page's only
+                  substance read as a form. Under rules they are what they are
+                  — three kinds of enquiry — and the column beside them keeps
+                  the one raised surface on the page to itself. */}
+              <ol className="mt-10">
                 {contactChannels.map((channel, i) => (
-                  <li key={channel.label}>
+                  <li key={channel.label} className="group/row">
                     <Reveal step={i}>
-                      <Card
-                        hover="quiet"
-                        accent={cardAccent("red", i)}
-                        padding="lg"
-                      >
-                        <h3 className="font-display text-2xl leading-snug text-content">
-                          {channel.label}
-                        </h3>
-                        <p className="mt-3 max-w-xl leading-relaxed text-content-muted">
-                          {channel.description}
-                        </p>
-                      </Card>
+                      <div className="flex gap-6 border-t border-line py-7 sm:gap-10">
+                        <span
+                          aria-hidden="true"
+                          className="mt-1 font-display text-sm text-content-subtle transition-colors group-hover/row:text-accent"
+                        >
+                          {String(i + 1).padStart(2, "0")}
+                        </span>
+                        <div className="min-w-0 flex-1">
+                          <h3 className="font-display text-2xl leading-snug text-content">
+                            {channel.label}
+                          </h3>
+                          <p className="mt-3 max-w-xl leading-relaxed text-content-muted">
+                            {channel.description}
+                          </p>
+                        </div>
+                      </div>
                     </Reveal>
                   </li>
                 ))}
-              </ul>
+              </ol>
             </div>
 
             <div className="lg:col-span-5">

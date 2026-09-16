@@ -54,9 +54,16 @@ export function LeadershipTeaser({ index }: { index?: string }) {
               the section's own `overflow-hidden`, so nothing widens the page. */}
           <div className="lg:col-span-7 lg:-mr-6 lg:pl-8">
             <OffsetFrame tone="inverse">
-              <ImageReveal className="rounded-[0.75rem]">
+              <ImageReveal className="rounded-figure">
+                {/* 4:3 against a 3:2 source, so roughly an eighth of the
+                    width is cropped and the asset's own `position` decides
+                    which side loses it. Without a ratio narrower than the
+                    source there is no overflow to position, the picture is
+                    drawn whole, and the band of red curtain at the left edge
+                    stays exactly where it was. */}
                 <Figure
                   image={leadershipTeaser.image}
+                  ratio="4 / 3"
                   rounded
                   elevated
                   frame="inverse"

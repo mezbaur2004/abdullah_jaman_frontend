@@ -8,6 +8,8 @@ import { Section } from "@/components/layout/Section";
 import { Card } from "@/components/ui/Card";
 import { FeatureImage } from "@/components/ui/FeatureImage";
 import { Figure } from "@/components/ui/Figure";
+import { ImageReveal } from "@/components/ui/ImageReveal";
+import { OffsetFrame } from "@/components/ui/OffsetFrame";
 import { IconChip } from "@/components/ui/IconChip";
 import { ListRow } from "@/components/ui/ListRow";
 import { cardAccent } from "@/lib/accent";
@@ -45,25 +47,35 @@ export default function AboutPage() {
         <Container>
           <div className="grid gap-14 lg:grid-cols-12 lg:gap-20">
             <div className="lg:col-span-5">
-              <Reveal>
-                <Figure
-                  image={image}
-                  ratio="4 / 5"
-                  priority
-                  sizes="(min-width: 1024px) 38vw, (min-width: 640px) 70vw, 90vw"
-                />
-              </Reveal>
+              {/* The same frame the hero gives it: a picture on this site is
+                  framed one way, and this one was the exception — a bare
+                  hairline crop beside a page of framed photographs. */}
+              <OffsetFrame className="mx-auto w-full max-w-sm lg:max-w-none">
+                <ImageReveal className="rounded-figure">
+                  <Figure
+                    image={image}
+                    ratio="4 / 5"
+                    priority
+                    rounded
+                    elevated
+                    sizes="(min-width: 1024px) 38vw, (min-width: 640px) 24rem, 90vw"
+                  />
+                </ImageReveal>
+              </OffsetFrame>
             </div>
 
             <div className="lg:col-span-7">
               <Reveal>
-                <dl className="border-t border-line">
+                {/* Two columns from `sm` up. Each value is a phrase, not a
+                    paragraph, so one per full-width row left most of every
+                    line empty and made five short facts look like a form. */}
+                <dl className="grid gap-x-12 sm:grid-cols-2">
                   {aboutPage.facts.map((fact) => (
-                    <div key={fact.label} className="border-b border-line py-5">
+                    <div key={fact.label} className="border-t border-line py-5">
                       <dt className="text-eyebrow font-semibold uppercase text-content-subtle">
                         {fact.label}
                       </dt>
-                      <dd className="mt-2 text-lede text-content">
+                      <dd className="mt-2 leading-relaxed text-content">
                         {fact.value}
                       </dd>
                     </div>
@@ -90,14 +102,19 @@ export default function AboutPage() {
                   ))}
                 </div>
               ) : null}
+
+              {/* Set here rather than as a band across the foot of the
+                  section: the facts are short, the portrait beside them is
+                  tall, and this is what brings the two columns level. */}
+              <FeatureImage
+                image={aboutFeature}
+                caption="With guests at a reception."
+                ratio="16 / 8"
+                className="mt-12"
+              />
             </div>
           </div>
 
-          <FeatureImage
-            image={aboutFeature}
-            caption="With guests at a reception."
-            className="mt-14 lg:mt-20"
-          />
         </Container>
       </Section>
 
@@ -130,7 +147,7 @@ export default function AboutPage() {
                     <div className="flex items-start justify-between gap-5">
                       <IconChip icon={Building2} />
                       {organization.shortName ? (
-                        <span className="rounded-full border border-line px-3 py-1 text-eyebrow font-semibold uppercase text-content-subtle transition-colors group-hover/card:border-line-accent group-hover/card:text-accent">
+                        <span className="rounded-chip border border-line px-3 py-1 text-eyebrow font-semibold uppercase text-content-subtle transition-colors group-hover/card:border-line-accent group-hover/card:text-accent">
                           {organization.shortName}
                         </span>
                       ) : null}

@@ -38,7 +38,7 @@ export function FeatureImage({
   const frame = (
     // The reveal wrapper clips, so it holds the frame alone — with the caption
     // inside it the opening wipe would take the first line of text with it.
-    <ImageReveal className="rounded-[0.75rem]">
+    <ImageReveal className="rounded-figure">
       <Figure
         image={image}
         caption={undefined}

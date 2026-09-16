@@ -34,7 +34,7 @@ export function OffsetFrame({
       <span
         aria-hidden="true"
         className={cn(
-          "pointer-events-none absolute inset-0 hidden translate-x-5 translate-y-5 rounded-[0.75rem] border sm:block",
+          "pointer-events-none absolute inset-0 hidden translate-x-5 translate-y-5 rounded-figure border sm:block",
           tone === "inverse" ? "border-gold/70" : "border-gold/60",
         )}
       />

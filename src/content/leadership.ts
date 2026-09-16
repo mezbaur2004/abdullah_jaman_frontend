@@ -50,19 +50,30 @@ export const leadershipTeaser = {
     alt: "Abdullah Jaman writing on an interactive whiteboard during a teacher training session, beside a diagram of Bloom's taxonomy and the stages of a lesson plan.",
     width: 1600,
     height: 1066,
+    // Weighted right of centre. At the frame's left edge a band of red curtain
+    // was cropped into a hard vertical block that read as a rendering fault
+    // rather than as part of the room.
+    position: "62% 50%",
   },
 } as const;
 
 /**
- * VERIFIED — supplied by the owner. The teacher-training frame belongs to the
- * leadership page rather than a gallery: it is the clearest picture on the
- * site of how he actually works.
+ * VERIFIED — supplied by the owner.
+ *
+ * This was the teacher-training frame, which is also the homepage's leadership
+ * picture — the same photograph twice, once on the section that routes to this
+ * page and again on the page it routes to. The speaking frame had been held in
+ * reserve since it arrived; addressing a room is leadership in practice, which
+ * is what the passage beside it is about.
+ *
+ * The alt text describes the frame and stops. No event, audience or occasion
+ * is named, because none is readable from the picture.
  */
 export const leadershipSecondary: ImageAsset = {
-  src: "/images/gallery-teaching.jpg",
-  alt: "Abdullah Jaman writing on an interactive whiteboard during a teacher training session, beside a diagram of Bloom's taxonomy and the stages of a lesson plan.",
-  width: 1600,
-  height: 1066,
+  src: "/images/gallery-address.jpg",
+  alt: "Abdullah Jaman speaking into a handheld microphone.",
+  width: 865,
+  height: 1320,
 };
 
 /**

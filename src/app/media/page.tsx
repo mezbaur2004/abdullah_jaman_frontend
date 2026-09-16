@@ -57,7 +57,7 @@ export default function MediaPage() {
               {mediaItems.map((item, i) => (
                 <li key={item.title}>
                   <Reveal step={i}>
-                    <MediaEntry item={item} />
+                    <MediaEntry item={item} lead={i === 0} />
                   </Reveal>
                 </li>
               ))}

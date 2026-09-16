@@ -64,7 +64,7 @@ export function Figure({
         // Softer than a card's corner and firmer than a hairline crop. One
         // value for every photograph on the site, so a frame is never a
         // decision a caller has to make twice.
-        rounded && "rounded-[0.75rem]",
+        rounded && "rounded-figure",
         elevated && "shadow-panel",
         // Its own group, so a standalone figure zooms on its own hover; the
         // card group is honoured too, for a figure sitting inside a card.

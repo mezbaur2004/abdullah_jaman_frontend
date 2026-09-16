@@ -26,13 +26,16 @@ export function MediaHighlights({ index }: { index?: string }) {
           title={mediaIntro.headline}
           lede={mediaIntro.lede}
           accent="red"
+          // Always. It used to appear only when the page held more than the
+          // homepage showed — which, with one interview on the record, meant
+          // the section had no way through to the media page at all except the
+          // top nav, and left the right of the header empty into the bargain.
           aside={
-            // Only worth a link out when the page holds more than is shown here.
-            mediaItems.length > highlights.length ? (
-              <Button href="/media" variant="quiet">
-                All media
-              </Button>
-            ) : undefined
+            <Button href="/media" variant="quiet">
+              {mediaItems.length > highlights.length
+                ? "All media"
+                : "Media & press"}
+            </Button>
           }
         />
 
@@ -40,7 +43,7 @@ export function MediaHighlights({ index }: { index?: string }) {
           {highlights.map((item, i) => (
             <li key={item.title}>
               <Reveal step={i}>
-                <MediaEntry item={item} />
+                <MediaEntry item={item} lead={i === 0} />
               </Reveal>
             </li>
           ))}

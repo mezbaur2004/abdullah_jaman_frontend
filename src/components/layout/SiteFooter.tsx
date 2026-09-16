@@ -53,7 +53,10 @@ export function SiteFooter() {
               <h2 className="font-sans text-eyebrow font-semibold uppercase text-on-inverse-muted">
                 Site
               </h2>
-              <ul className="mt-5 flex flex-col gap-3">
+              {/* Two columns. Seven links in one made this column twice the
+                  height of the brand block beside it, and the difference read
+                  as a hole in the bottom left of the footer. */}
+              <ul className="mt-5 grid grid-cols-2 gap-x-10 gap-y-3 sm:gap-x-14">
                 {footerNav.map((item) => (
                   <li key={item.href}>
                     <Link

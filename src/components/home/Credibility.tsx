@@ -44,7 +44,7 @@ export function Credibility({ index }: { index?: string }) {
                   <div className="flex items-start justify-between gap-5">
                     <IconChip icon={Building2} />
                     {organization.shortName ? (
-                      <span className="rounded-full border border-line px-3 py-1 text-eyebrow font-semibold uppercase text-content-subtle transition-colors group-hover/card:border-line-accent group-hover/card:text-accent">
+                      <span className="rounded-chip border border-line px-3 py-1 text-eyebrow font-semibold uppercase text-content-subtle transition-colors group-hover/card:border-line-accent group-hover/card:text-accent">
                         {organization.shortName}
                       </span>
                     ) : null}
@@ -112,16 +112,19 @@ export function Credibility({ index }: { index?: string }) {
                   <p className="text-eyebrow font-semibold uppercase text-content-subtle">
                     Education
                   </p>
-                  {/* One row per qualification. The previous single-line
-                      treatment held one entry; five ran together into a
-                      sentence that read as neither a list nor a paragraph. */}
-                  <ul className="mt-5 flex flex-col divide-y divide-line">
+                  {/* Two columns of stacked pairs, not one row per entry.
+                      Spread across the full card the qualification sat at the
+                      left margin and its institution was flushed right, four
+                      hundred pixels away with nothing in between — a justified
+                      list the eye cannot connect. Stacked, the pair reads as
+                      one item, and two columns use a width that was empty. */}
+                  <ul className="mt-6 grid gap-x-12 sm:grid-cols-2">
                     {education.map((entry) => (
                       <li
                         key={`${entry.institution}-${entry.qualification ?? ""}`}
-                        className="flex flex-col gap-1 py-3 first:pt-0 last:pb-0 sm:flex-row sm:items-baseline sm:justify-between sm:gap-8"
+                        className="border-t border-line py-4"
                       >
-                        <span className="font-display text-lg leading-snug text-content">
+                        <p className="font-display text-lg leading-snug text-content">
                           {entry.qualification ?? entry.institution}
                           {entry.field ? (
                             <span className="text-content-muted">
@@ -129,11 +132,11 @@ export function Credibility({ index }: { index?: string }) {
                               — {entry.field}
                             </span>
                           ) : null}
-                        </span>
+                        </p>
                         {entry.qualification ? (
-                          <span className="text-sm text-content-subtle sm:text-right">
+                          <p className="mt-1.5 text-sm leading-relaxed text-content-subtle">
                             {entry.institution}
-                          </span>
+                          </p>
                         ) : null}
                       </li>
                     ))}

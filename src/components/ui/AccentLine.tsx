@@ -65,7 +65,7 @@ export function AccentLine({
         className={cn(
           // Blue when the section is already yellow: gold beside yellow is not
           // a second tone, it is the first one slightly wrong.
-          "block h-0.5 w-3 opacity-80",
+          "block h-0.5 w-4",
           accent === "yellow" ? accentMark("blue", tone === "inverse") : "bg-gold",
         )}
       />
