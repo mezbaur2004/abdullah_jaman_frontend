@@ -9,7 +9,7 @@ type SectionSeparatorProps = {
    * would over-announce.
    */
   variant?: Variant;
-  tone?: "base" | "inverse";
+  tone?: "base" | "inverse" | "gold";
   className?: string;
 };
 
@@ -46,6 +46,7 @@ export function SectionSeparator({
         "geo-divider",
         variant === "quiet" && "geo-divider-quiet",
         tone === "inverse" && variant !== "quiet" && "geo-divider-inverse",
+        tone === "gold" && variant !== "quiet" && "geo-divider-gold",
         className,
       )}
     />

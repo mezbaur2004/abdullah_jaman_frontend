@@ -36,7 +36,6 @@ export function AtAGlance({ index }: { index?: string }) {
 
   return (
     <Section
-      tone="accent"
       index={index}
       indexLabel="At a glance"
       accent="gold"

@@ -78,13 +78,19 @@ export const footerNav: NavItem[] = [
 export const socialLinks: NavItem[] = [];
 
 /**
- * VERIFIED — the one institutional site confirmed in the dataset. It doubles
- * as the only working contact route until a professional address is supplied.
+ * VERIFIED — both institutional sites, the Guidance address supplied by the
+ * owner. They double as the only working contact route until a professional
+ * email address is supplied.
  */
 export const institutionLinks: NavItem[] = [
   {
     label: "Wheaton International School",
     href: "https://wheaton.edu.bd",
+    description: "Official school website",
+  },
+  {
+    label: "Guidance International School",
+    href: "https://guidance.edu.bd/",
     description: "Official school website",
   },
 ];

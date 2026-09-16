@@ -63,12 +63,21 @@ export function SiteHeader() {
     href === "/" ? pathname === "/" : pathname.startsWith(href);
 
   return (
+    /*
+     * Always a solid ground, and that is a change forced by the hero.
+     *
+     * The header used to sit transparent on the page until it was scrolled,
+     * which was a nice touch over a parchment hero and a bug over a navy one:
+     * the logo and the nav are set in the page's dark ink, and on navy they
+     * would simply not be there. A header whose legibility depends on what is
+     * underneath it is a header that will eventually be invisible.
+     *
+     * The rule below it still arrives on scroll, so the lift is not lost.
+     */
     <header
       className={cn(
-        "sticky top-0 z-50 transition-colors duration-500 ease-editorial",
-        scrolled || menuOpen
-          ? "border-b border-line bg-surface"
-          : "border-b border-transparent",
+        "sticky top-0 z-50 bg-surface transition-colors duration-500 ease-editorial",
+        scrolled || menuOpen ? "border-b border-line" : "border-b border-transparent",
       )}
     >
       <Container className="flex h-20 items-center justify-between gap-4 sm:gap-8 lg:h-24">

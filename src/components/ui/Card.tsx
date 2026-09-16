@@ -33,7 +33,16 @@ type CardProps = {
    * — an experience entry, a role — where a vertical rule reads as a margin
    * mark rather than as an underline.
    */
-  accentEdge?: "top" | "left";
+  accentEdge?: "top" | "left" | "bottom";
+  /**
+   * Decoration drawn behind the card's content — a monogram, a watermark.
+   *
+   * It goes inside the clip layer rather than into `children`, which is what
+   * guarantees a graphic bigger than the card is cut at the corner radius
+   * instead of escaping it. The layer is `pointer-events: none`, so nothing
+   * here can ever intercept a click meant for the card.
+   */
+  backdrop?: ReactNode;
   /** Adds the light sweep. Dark tones only — see `.card-clip` in globals.css. */
   sweep?: boolean;
   padding?: "none" | "sm" | "md" | "lg";
@@ -90,11 +99,12 @@ export function Card({
   hover = "none",
   accent = "gold",
   accentEdge = "top",
+  backdrop,
   sweep = false,
   padding = "md",
 }: CardProps) {
   const dark = tone === "inverse" || tone === "feature";
-  const decorated = hover !== "none" || sweep;
+  const decorated = hover !== "none" || sweep || Boolean(backdrop);
 
   return (
     <Tag
@@ -131,13 +141,20 @@ export function Card({
           {/* The accent micro-line. It draws itself along one edge on hover,
               and is the only place a card shows its accent — a coloured border
               on every card at rest would turn a grid into bunting. */}
+          {backdrop}
           {hover !== "none" ? (
             <span
               className={cn(
                 "absolute transition-transform",
-                accentEdge === "top"
-                  ? "inset-x-0 top-0 h-0.5 origin-left scale-x-0 group-hover/card:scale-x-100"
-                  : "inset-y-0 left-0 w-0.5 origin-top scale-y-0 group-hover/card:scale-y-100",
+                accentEdge === "top" &&
+                  "inset-x-0 top-0 h-0.5 origin-left scale-x-0 group-hover/card:scale-x-100",
+                accentEdge === "left" &&
+                  "inset-y-0 left-0 w-0.5 origin-top scale-y-0 group-hover/card:scale-y-100",
+                // The bottom rule is thicker and starts visible at a third of
+                // its width, so the card reads as underlined at rest and the
+                // hover extends it rather than conjuring it.
+                accentEdge === "bottom" &&
+                  "inset-x-0 bottom-0 h-[3px] origin-left scale-x-[0.33] group-hover/card:scale-x-100",
                 accentMark(accent, dark),
               )}
             />

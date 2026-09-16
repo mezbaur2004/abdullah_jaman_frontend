@@ -4,8 +4,12 @@ import { Section } from "@/components/layout/Section";
 import { Button } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { ArchFrame } from "@/components/ui/ArchFrame";
+import { Figure } from "@/components/ui/Figure";
+import { ImageReveal } from "@/components/ui/ImageReveal";
 import { BookCard } from "@/components/books/BookCard";
 import { books, booksIntro } from "@/content/books";
+import { booksFeature } from "@/content/profile";
 
 /**
  * Authorship as a homepage section in its own right.
@@ -16,12 +20,11 @@ import { books, booksIntro } from "@/content/books";
  * record — and routes to the page, rather than either inventing titles or
  * pretending the work does not exist.
  *
- * With no titles it is set as type and nothing else, and that is the second
- * deliberate part. It used to fill the empty half with the office photograph,
- * which is the same picture the books page opens with — so a reader following
- * the link arrived at the photograph they had just been looking at. Set as a
- * spread instead, this is the one section on the homepage with no cards and no
- * picture in it, which is worth more to the page than a repeated image.
+ * With no titles it is the argument and the office photograph, cut to the
+ * arch. That photograph also opens the books page, so a reader following the
+ * link meets it twice — a real cost, and the one the owner weighed when asking
+ * for it here. A books section with no picture on a page where every other
+ * section has one read as an aside, and the repeat is the cheaper problem.
  */
 export function BooksTeaser({ index }: { index?: string }) {
   const featured = books.slice(0, 4);
@@ -66,11 +69,11 @@ export function BooksTeaser({ index }: { index?: string }) {
             </ul>
           </div>
         ) : (
-          /* The heading takes the left, the argument and the way in take the
-             right, and the two meet on a rule — a spread rather than a column
-             with a gap beside it. */
-          <div className="grid gap-10 lg:grid-cols-12 lg:gap-16">
-            <div className="lg:col-span-6">
+          /* Text and photograph, not text and a gap. The section carried no
+             image at all, which on a page where every other section has one
+             made thebooks band read as an aside. */
+          <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
+            <div className="lg:col-span-7">
               <Reveal>
                 <h2
                   id="books-teaser-heading"
@@ -79,19 +82,30 @@ export function BooksTeaser({ index }: { index?: string }) {
                   {emphasise(booksIntro.headline)}
                 </h2>
               </Reveal>
-            </div>
 
-            <div className="lg:col-span-6 lg:pt-3">
               <Reveal step={1}>
-                <p className="max-w-xl text-lede text-content-muted">
+                <p className="mt-9 max-w-xl text-lede text-content-muted">
                   {booksIntro.lede}
                 </p>
-                <div className="mt-10">
+                <div className="mt-11">
                   <Button href="/books" accent="gold" variant="secondary">
                     About the writing
                   </Button>
                 </div>
               </Reveal>
+            </div>
+
+            <div className="lg:col-span-5">
+              <ArchFrame className="mx-auto w-full max-w-sm lg:max-w-none">
+                <ImageReveal>
+                  <Figure
+                    image={booksFeature}
+                    ratio="4 / 5"
+                    frame="none"
+                    sizes="(min-width: 1024px) 38vw, (min-width: 640px) 24rem, 90vw"
+                  />
+                </ImageReveal>
+              </ArchFrame>
             </div>
           </div>
         )}

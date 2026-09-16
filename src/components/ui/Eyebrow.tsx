@@ -5,8 +5,12 @@ type EyebrowProps = {
   /** Optional so a numbered marker can stand on its own if a label is absent. */
   children?: string;
   className?: string;
-  /** "inverse" for the navy band, where the accent flips to its light value. */
-  tone?: "base" | "inverse";
+  /**
+   * Which ground it sits on. `inverse` is the navy band, where the accent
+   * flips to its light value; `gold` is the invitation band, where brass on
+   * brass would be invisible and everything is navy instead.
+   */
+  tone?: "base" | "inverse" | "gold";
   accent?: Accent;
   /**
    * Two-digit section number, e.g. "03". Renders as `03 / LABEL`, with the
@@ -38,19 +42,23 @@ export function Eyebrow({
   id,
 }: EyebrowProps) {
   const inverse = tone === "inverse";
+  const gold = tone === "gold";
 
   return (
     <p
       id={id}
       className={cn(
         "flex items-center gap-3 text-eyebrow font-semibold uppercase",
-        accentText(accent, inverse),
+        gold ? "text-on-gold" : accentText(accent, inverse),
         className,
       )}
     >
       <span
         aria-hidden="true"
-        className={cn("h-0.5 w-10 shrink-0", accentMark(accent, inverse))}
+        className={cn(
+          "h-0.5 w-10 shrink-0",
+          gold ? "bg-on-gold" : accentMark(accent, inverse),
+        )}
       />
       {index ? (
         <span className="font-display text-sm font-semibold">{index}</span>

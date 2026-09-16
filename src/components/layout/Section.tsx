@@ -7,7 +7,7 @@ import { SectionSeparator } from "@/components/ui/SectionSeparator";
 import { cn } from "@/lib/cn";
 import type { Accent } from "@/lib/accent";
 
-type Tone = "base" | "soft" | "raised" | "accent" | "ivory" | "inverse";
+type Tone = "base" | "soft" | "raised" | "accent" | "ivory" | "inverse" | "gold";
 
 type SectionProps = {
   children: ReactNode;
@@ -61,6 +61,8 @@ const tones: Record<Tone, string> = {
      material feel like a different kind of page without leaving the palette. */
   ivory: "bg-surface-ivory text-content",
   inverse: "bg-surface-inverse text-on-inverse",
+  /* The accent at full strength, across a whole band. One per page. */
+  gold: "bg-surface-gold text-on-gold",
 };
 
 /**
@@ -98,6 +100,9 @@ const washed: Record<Tone, boolean> = {
   accent: true,
   ivory: true,
   inverse: true,
+  /* No wash on gold: a gradient over a saturated ground reads as a printing
+     fault rather than as depth. */
+  gold: false,
 };
 
 export function Section({
@@ -116,6 +121,7 @@ export function Section({
   ...aria
 }: SectionProps) {
   const inverse = tone === "inverse";
+  const gold = tone === "gold";
   const rhythm = spacings[spacing];
   const washing = veil ?? washed[tone];
 
@@ -149,14 +155,14 @@ export function Section({
       {divider ? (
         <SectionSeparator
           variant={separator}
-          tone={inverse ? "inverse" : "base"}
+          tone={inverse ? "inverse" : gold ? "gold" : "base"}
         />
       ) : null}
 
       {index ? (
         <Container className={rhythm.marker}>
           <Eyebrow
-            tone={inverse ? "inverse" : "base"}
+            tone={inverse ? "inverse" : gold ? "gold" : "base"}
             accent={accent}
             index={index}
           >
