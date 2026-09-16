@@ -27,9 +27,15 @@ export const verifiedSources = [
       "Confirms association with WIS and GIS. Several experience and education entries are redacted in the public profile.",
   },
   {
+    label: "Wheaton International School profile",
+    detail:
+      "The five qualifications now shown on the About page, supplied by the owner from his current profile. Years were not supplied and are not shown.",
+    href: "https://wheaton.edu.bd",
+  },
+  {
     label: "Supplied directly by the owner",
     detail:
-      "Campus counts (recorded, not published), the board-governance and earlier-career caveats behind the no-counting rule, the decision to omit Pedago Academy as an unlaunched sister concern, and the photographs now used for the portrait and the gallery.",
+      "Campus counts (recorded, not published), the board-governance and earlier-career caveats behind the no-counting rule, the decision to omit Pedago Academy as an unlaunched sister concern, the photographs used across the site, and confirmation that he has authored multiple books.",
   },
 ];
 
@@ -65,6 +71,20 @@ export const openQuestions: OpenQuestion[] = [
       "The composition of the boards. Confirmed by the owner that he is not the sole member, so the site credits him with leadership rather than sole ownership.",
   },
   {
+    subject: "The bibliography",
+    known:
+      "Authorship is confirmed. The Daily Star interview describes his development and supervision of Islamic Studies and Arabic learning materials, and the owner has confirmed multiple authored titles.",
+    missing:
+      "Every specific: not one title, cover, publisher, year or ISBN has been supplied. The books page and its data model are built and empty. A bibliography is the easiest thing on a personal site to check and the worst to get wrong — an invented title is a fabricated work attributed to a real author — so nothing is listed until it is supplied.",
+  },
+  {
+    subject: "A quotation",
+    known:
+      "The closing section of the homepage carries a statement of his educational position.",
+    missing:
+      "Anything he has actually said, on the record, in a verified form. The statement is therefore composed from the documented philosophy and deliberately not typeset as a quotation — no quote marks, no attribution. Replace it the moment a real quotation exists.",
+  },
+  {
     subject: "LinkedIn activity",
     known: "The profile shows professional activity beyond the Daily Star share.",
     missing:
@@ -89,6 +109,20 @@ export const resolvedDecisions: ResolvedDecision[] = [
       "Led as educationist and education leader, not as a founder of schools.",
     rationale:
       "Confirmed by the owner that the founding is only part of the remit. 'Founder & Principal' remains as the factual role title against each institution, but no headline reduces him to having built schools, and none counts them.",
+  },
+  {
+    subject: "The standalone gallery",
+    decision:
+      "Removed as a section. The photographs are distributed across the pages they support.",
+    rationale:
+      "A gallery makes photographs their own content category, which is exactly backwards: each of these pictures is evidence for something a page is already saying. The teaching frame belongs with leadership, the office shelves with the writing, the interview still with media. Nothing was deleted and nothing is shown merely because it exists.",
+  },
+  {
+    subject: "The hero role line",
+    decision:
+      "\"Founder, Principal & Education Leader\", as supplied by the owner.",
+    rationale:
+      "This sits alongside the earlier decision not to reduce him to school-building, and does not overturn it. The objection was to a headline whose whole content was the founding; this line names the founding as one of three things and closes on the widest of them. The educationist framing still leads the page above it.",
   },
   {
     subject: "Campus counts",
@@ -185,6 +219,19 @@ export const contentGaps: ContentGap[] = [
   {
     area: "Publications",
     items: ["Articles", "Books", "Research", "Reports", "Other published work"],
+  },
+  {
+    area: "Books",
+    items: [
+      "Titles",
+      "Cover images",
+      "Publishers",
+      "Publication years",
+      "Categories — Islamic Studies, Arabic Language, Aqidah, Educational Materials",
+      "Series or collection names",
+      "His role on each, where it is not sole authorship",
+      "Links to publisher or retailer pages",
+    ],
   },
   {
     area: "Photos & assets",

@@ -6,7 +6,7 @@ import { SectionSeparator } from "@/components/ui/SectionSeparator";
 import { cn } from "@/lib/cn";
 import type { Accent } from "@/lib/accent";
 
-type Tone = "base" | "soft" | "raised" | "accent" | "inverse";
+type Tone = "base" | "soft" | "raised" | "accent" | "ivory" | "inverse";
 
 type SectionProps = {
   children: ReactNode;
@@ -45,6 +45,10 @@ const tones: Record<Tone, string> = {
   /* The tinted band. Carries the brand hue at low saturation, so the page can
      change key without reaching for the full dark band every time. */
   accent: "bg-surface-accent text-content",
+  /* Ivory — warmer than the blue-white paper, and reserved for the places
+     where the writing itself is the subject. It is what makes the books
+     material feel like a different kind of page without leaving the palette. */
+  ivory: "bg-surface-ivory text-content",
   inverse: "bg-surface-inverse text-on-inverse",
 };
 

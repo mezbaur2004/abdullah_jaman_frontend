@@ -52,10 +52,16 @@ export const site = {
   whatsapp: "",
 } as const;
 
+/**
+ * Seven items is the ceiling. Books earns a place because authorship is a
+ * distinct strand of the work rather than a subsection of it; everything else
+ * that might want one goes inside an existing page instead.
+ */
 export const primaryNav: NavItem[] = [
   { label: "About", href: "/about" },
-  { label: "Experience", href: "/experience" },
+  { label: "Leadership", href: "/leadership" },
   { label: "Achievements", href: "/achievements" },
+  { label: "Books", href: "/books" },
   { label: "Media", href: "/media" },
   { label: "Contact", href: "/contact" },
 ];

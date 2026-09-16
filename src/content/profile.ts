@@ -50,6 +50,13 @@ export const heroPanel: ImageAsset = {
  * names were given, and inventing them would be the same failure as inventing
  * an award.
  */
+export const booksFeature: ImageAsset = {
+  src: "/images/gallery-office.jpg",
+  alt: "Abdullah Jaman seated at a desk in front of shelves of school books.",
+  width: 824,
+  height: 620,
+};
+
 export const aboutFeature: ImageAsset = {
   src: "/images/feature-reception.jpg",
   alt: "Abdullah Jaman seated in conversation with two guests at a reception.",
@@ -59,11 +66,16 @@ export const aboutFeature: ImageAsset = {
 
 export const hero = {
   eyebrow: site.positioning,
-  /** The institutions, named — never counted, and never called his alone. */
-  headline: "Wheaton International School & Guidance International School",
-  lede: site.description,
-  primaryCta: { label: "About Abdullah", href: "/about" },
-  secondaryCta: { label: "Get in touch", href: "/contact" },
+  /**
+   * The role line, as supplied by the owner. It names the founding without
+   * reducing him to it — "education leader" is the wider remit the earlier
+   * decision was protecting, and it sits in the same line rather than in a
+   * paragraph further down. See the Positioning entry in status.ts.
+   */
+  headline: "Founder, Principal & Education Leader",
+  lede: "An educationist in Dhaka, Bangladesh. He leads Wheaton International School and Guidance International School, and writes Islamic Studies and Arabic learning materials for the classrooms he helps run.",
+  primaryCta: { label: "Explore his work", href: "/leadership" },
+  secondaryCta: { label: "Books", href: "/books" },
 } as const;
 
 /**
@@ -90,13 +102,40 @@ export const organizations: Organization[] = [
 ];
 
 /**
- * VERIFIED — the association with Cambridge is confirmed. The degree, subject
- * and dates are not, so no qualification is stated.
+ * VERIFIED — supplied by the owner from his current Wheaton profile.
+ *
+ * This replaces a single placeholder entry that named Cambridge and admitted
+ * it knew nothing else. The wording is kept as supplied rather than tidied
+ * into a house style: "Postgraduate Advanced Certificate in Educational
+ * Studies (Assessment)" is the qualification's name, not a description of it,
+ * and paraphrasing a credential is how credentials drift.
+ *
+ * Still absent, and still not guessed: the years. None were supplied, so none
+ * are shown.
  */
 export const education: EducationEntry[] = [
   {
+    institution: "University of Dhaka",
+    qualification: "BSS (Hons.)",
+    field: "Sociology",
+  },
+  {
+    institution: "Al-Madinah International Islamic University, Malaysia",
+    qualification: "M.A.",
+    field: "Aqidah",
+  },
+  {
+    institution: "Institute of Education and Research, University of Dhaka",
+    qualification: "M.Ed.",
+  },
+  {
+    institution: "United Kingdom",
+    qualification: "Child Psychology, Level 7",
+  },
+  {
     institution: "University of Cambridge",
-    note: "Programme and dates to be confirmed.",
+    qualification:
+      "Postgraduate Advanced Certificate in Educational Studies (Assessment)",
   },
 ];
 
@@ -125,18 +164,44 @@ export const atAGlance: GlanceItem[] = [
   },
   {
     icon: "education",
-    label: "Education",
-    value: "Cambridge",
-    detail: "University of Cambridge",
+    label: "Studied",
+    value: "Dhaka · Cambridge",
+    detail: "Sociology, Aqidah, Education and Assessment",
   },
 ];
 
+/**
+ * The philosophy teaser.
+ *
+ * APPROVED FRAMING, not a verified quotation. The owner asked for his
+ * educational philosophy to be introduced, and this is written from the
+ * documented material — the integration of academic standards with character
+ * and Islamic values. It states a position rather than reporting words he
+ * said, and nothing here is presented as his phrasing.
+ */
 export const aboutTeaser = {
-  eyebrow: "About",
-  headline: "An educationist leading international schools in Dhaka.",
-  /** VERIFIED — the approved positioning statement, unembellished. */
-  body: [site.description],
-  cta: { label: "More about Abdullah", href: "/about" },
+  eyebrow: "Philosophy",
+  headline: "Academic rigour and character are not separate subjects.",
+  body: [
+    "A school can teach a child to pass an examination without teaching them who to be. The two are not in tension, and treating them as separate timetables is how they come apart.",
+    "His work holds them together — an academic standard that would stand anywhere, taught inside a framework of Islamic values, with the development of the whole child treated as the actual objective rather than a line in a prospectus.",
+  ],
+  cta: { label: "Read more about Abdullah", href: "/about" },
+} as const;
+
+/**
+ * The closing statement.
+ *
+ * NOT A QUOTATION, and deliberately not typeset as one — no quotation marks,
+ * no attribution rule, no name beneath it. No verified quotation from him has
+ * been supplied, and setting composed words in quote marks under his name
+ * would be inventing a quotation, which is the one thing a page like this must
+ * not do. It reads as the site's statement of his position, which is what it
+ * is. Replace it the moment something he actually said is on the record.
+ */
+export const closingStatement = {
+  eyebrow: "In closing",
+  text: "Education is not only what a child knows by the end of it. It is who they have become, and what they do with what they know.",
 } as const;
 
 export const aboutPage = {
@@ -161,6 +226,10 @@ export const aboutPage = {
       value: "Wheaton International School, Guidance International School",
     },
     { label: "Based in", value: site.location },
-    { label: "Education", value: "University of Cambridge" },
+    {
+      label: "Studied at",
+      value:
+        "University of Dhaka · Al-Madinah International Islamic University · University of Cambridge",
+    },
   ],
 } as const;

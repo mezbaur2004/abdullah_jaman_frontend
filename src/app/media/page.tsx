@@ -9,7 +9,13 @@ import { FeatureImage } from "@/components/ui/FeatureImage";
 import { PendingNote } from "@/components/ui/PendingNote";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { mediaFeature, mediaIntro, mediaItems, publications } from "@/content/media";
+import {
+  mediaFeature,
+  mediaIntro,
+  mediaItems,
+  mediaSecondary,
+  publications,
+} from "@/content/media";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
@@ -57,9 +63,19 @@ export default function MediaPage() {
             </ul>
           ) : null}
 
-          <Reveal step={1}>
-            <PendingNote className="mt-12">{pending}</PendingNote>
-          </Reveal>
+          <div className="mt-14 grid gap-10 lg:mt-16 lg:grid-cols-12 lg:items-start lg:gap-16">
+            <div className="lg:col-span-5">
+              <FeatureImage
+                image={mediaSecondary}
+                caption="Speaking at a school event."
+              />
+            </div>
+            <div className="lg:col-span-7">
+              <Reveal step={1}>
+                <PendingNote>{pending}</PendingNote>
+              </Reveal>
+            </div>
+          </div>
         </Container>
       </Section>
 

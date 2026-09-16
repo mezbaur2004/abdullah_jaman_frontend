@@ -27,7 +27,7 @@ export function Hero() {
             </h1>
 
             <p
-              className="animate-rise mt-8 max-w-xl font-display text-display-md text-content-muted"
+              className="animate-rise mt-7 max-w-xl font-display text-display-md text-accent"
               style={{ animationDelay: "160ms" }}
             >
               {hero.headline}

@@ -1,4 +1,5 @@
 import { Container } from "@/components/layout/Container";
+import { GeometricPattern } from "@/components/ui/GeometricPattern";
 import { Section } from "@/components/layout/Section";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
@@ -8,15 +9,17 @@ import { aboutPage, aboutTeaser } from "@/content/profile";
 export function AboutTeaser({ index }: { index?: string }) {
   return (
     <Section
-      tone="soft"
+      tone="ivory"
       index={index}
-      indexLabel="About"
+      indexLabel="Philosophy"
       accent="blue"
       separator="minimal"
       aria-labelledby="about-teaser-heading"
     >
-      <Container>
-        <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
+      <Container className="relative">
+        <GeometricPattern className="-top-12 h-64" fade />
+
+        <div className="relative grid gap-12 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-7">
             <Reveal>
               <h2

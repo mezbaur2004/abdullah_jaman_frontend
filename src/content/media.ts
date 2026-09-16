@@ -23,10 +23,21 @@ export const mediaFeature: ImageAsset = {
   height: 730,
 };
 
+/**
+ * VERIFIED — supplied by the owner. A second frame for the media page, used
+ * lower down so the page does not open and close on the same picture.
+ */
+export const mediaSecondary: ImageAsset = {
+  src: "/images/gallery-podium.jpg",
+  alt: "Abdullah Jaman speaking at a flower-decorated podium on a darkened stage.",
+  width: 704,
+  height: 714,
+};
+
 export const mediaIntro = {
   eyebrow: "Media",
-  headline: "Press and interviews.",
-  lede: "External coverage of Abdullah Jaman and his work at Wheaton International School and Guidance International School.",
+  headline: "Media & thought leadership.",
+  lede: "Interviews, features and talks — where his thinking on education, assessment and Islamic learning materials has been set out in public rather than in a prospectus.",
 } as const;
 
 export const mediaItems: MediaItem[] = [

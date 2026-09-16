@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/Button";
 import { ListRow } from "@/components/ui/ListRow";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { initiatives } from "@/content/experience";
+import { initiatives } from "@/content/leadership";
 
 /** Hidden until initiatives are confirmed. */
 export function Work({ index }: { index?: string }) {
