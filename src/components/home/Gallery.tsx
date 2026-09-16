@@ -26,28 +26,29 @@ export function Gallery({ index }: { index?: string }) {
           title="Photographs."
         />
 
-        <ul className="mt-14 grid gap-5 sm:grid-cols-2 lg:mt-16 lg:grid-cols-12 lg:gap-6">
-          {gallery.map((entry, i) => {
-            // A deliberately uneven rhythm: wide and tall plates alternating.
-            const isWide = entry.image.width >= entry.image.height;
-
-            return (
-              <li
-                key={entry.image.src}
-                className={isWide ? "lg:col-span-7" : "lg:col-span-5"}
-              >
-                <Reveal step={i}>
-                  <Figure
-                    image={entry.image}
-                    caption={entry.caption}
-                    ratio={isWide ? "4 / 3" : "3 / 4"}
-                    zoom
-                    sizes="(min-width: 1024px) 45vw, (min-width: 640px) 48vw, 90vw"
-                  />
-                </Reveal>
-              </li>
-            );
-          })}
+        {/* CSS columns rather than a grid of fixed ratio boxes. The forced
+            ratios were cropping heads off portraits that did not happen to
+            match them, and no aspect ratio suits a set that runs from 3:2 to
+            2:3. Each photograph keeps its own shape here, and the columns pack
+            the varying heights without leaving holes. DOM order is preserved,
+            so the reading order stays correct even though the visual order
+            flows down each column. */}
+        <ul className="mt-14 columns-1 gap-5 sm:columns-2 lg:mt-16 lg:gap-6">
+          {gallery.map((entry, i) => (
+            <li
+              key={entry.image.src}
+              className="mb-5 break-inside-avoid lg:mb-6"
+            >
+              <Reveal step={i}>
+                <Figure
+                  image={entry.image}
+                  caption={entry.caption}
+                  zoom
+                  sizes="(min-width: 1024px) 46vw, (min-width: 640px) 48vw, 90vw"
+                />
+              </Reveal>
+            </li>
+          ))}
         </ul>
       </Container>
     </Section>
