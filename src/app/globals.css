@@ -24,6 +24,14 @@
   --paper: #fcfdff;
   --paper-soft: #f7f9fd;
   --paper-tint: #e7f0fb;
+  /* Ivory. Warmer than the blue-white paper, and used only where the writing
+     is the subject — the books page and the philosophy passages. */
+  --paper-ivory: #fbf8f1;
+
+  /* Muted gold. Deliberately not the yellow accent: this one never carries a
+     mark the reader is meant to notice, only the geometric layer, so it sits
+     deeper and quieter than #F4C430 would. */
+  --gold-ink: #b8912f;
 
   /* Dark ground — navy, not neutral black and never pure black. */
   --night-950: #051529;
@@ -31,6 +39,8 @@
   --night-800: #0b2440;
   --night-700: #0e3059;
   --night-tint: #071f38;
+  --night-ivory: #0a1c2d;
+  --gold-ink-dark: #d8b45a;
 
   /* Blue — the brand. The three supplied values are 900, 700 and 600. */
   --blue-950: #04162e;
@@ -85,7 +95,11 @@
   /* The very light blue band. Colour, not another shade of grey, so the page
      has somewhere to change key without reaching for the dark band. */
   --surface-accent: var(--paper-tint);
+  --surface-ivory: var(--paper-ivory);
   --surface-inverse: var(--blue-900);
+
+  /* The colour the geometric layer draws in. Never used for anything else. */
+  --pattern-ink: var(--gold-ink);
 
   --content: var(--slate-900);
   --content-muted: var(--slate-600);
@@ -141,7 +155,10 @@
     --surface-soft: var(--night-900);
     --surface-raised: var(--night-800);
     --surface-accent: var(--night-tint);
+    --surface-ivory: var(--night-ivory);
     --surface-inverse: var(--night-700);
+
+    --pattern-ink: var(--gold-ink-dark);
 
     --content: #eef4fb;
     --content-muted: var(--slate-300);
@@ -187,7 +204,10 @@
   --surface-soft: var(--night-900);
   --surface-raised: var(--night-800);
   --surface-accent: var(--night-tint);
+  --surface-ivory: var(--night-ivory);
   --surface-inverse: var(--night-700);
+
+  --pattern-ink: var(--gold-ink-dark);
 
   --content: #eef4fb;
   --content-muted: var(--slate-300);
@@ -255,6 +275,10 @@
      as the card jumping away from the cursor. */
   --hover-lift: -3px;
   --hover-zoom: 1.045;
+
+  /* The khatam tile. A mask, so only its alpha matters — the stroke colour
+     here is irrelevant and the fill stays transparent. */
+  --geo-tile: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cg fill='none' stroke='%23000' stroke-width='1'%3E%3Crect x='15' y='15' width='30' height='30'/%3E%3Crect x='15' y='15' width='30' height='30' transform='rotate(45 30 30)'/%3E%3Cpath d='M0 30h15M45 30h15M30 0v15M30 45v15'/%3E%3C/g%3E%3C/svg%3E");
 }
 
 /* ---------------------------------------------------------------------------
@@ -267,6 +291,7 @@
   --color-surface-soft: var(--surface-soft);
   --color-surface-raised: var(--surface-raised);
   --color-surface-accent: var(--surface-accent);
+  --color-surface-ivory: var(--surface-ivory);
   --color-surface-inverse: var(--surface-inverse);
 
   --color-content: var(--content);
@@ -498,6 +523,41 @@
       color-mix(in oklab, var(--line-inverse) 75%, transparent) 34%,
       transparent 82%
     );
+  }
+
+  /* ---------------------------------------------------------------------
+     Geometric layer
+     An eight-point khatam tile — two overlapping squares, the oldest and
+     plainest figure in Islamic geometric design — drawn as a mask rather than
+     a background image so it takes its colour from a theme token instead of
+     being baked in. It draws in muted gold, at an opacity low enough that on
+     most screens it registers as texture rather than as pattern.
+
+     That restraint is the whole point. The brief was for the design to carry a
+     cultural character without announcing one, and a motif you have to look
+     for does that where a visible one would turn into decoration.
+  --------------------------------------------------------------------- */
+  .geo-pattern {
+    background-color: var(--pattern-ink);
+    -webkit-mask-image: var(--geo-tile);
+    mask-image: var(--geo-tile);
+    -webkit-mask-repeat: repeat;
+    mask-repeat: repeat;
+    -webkit-mask-size: 60px 60px;
+    mask-size: 60px 60px;
+  }
+
+  /* Fades the tile out so it never meets a section edge as a hard crop. */
+  .geo-fade {
+    -webkit-mask-composite: source-in;
+    mask-composite: intersect;
+    -webkit-mask-image: var(--geo-tile),
+      linear-gradient(to bottom, #000, transparent);
+    mask-image: var(--geo-tile), linear-gradient(to bottom, #000, transparent);
+    -webkit-mask-repeat: repeat, no-repeat;
+    mask-repeat: repeat, no-repeat;
+    -webkit-mask-size: 60px 60px, 100% 100%;
+    mask-size: 60px 60px, 100% 100%;
   }
 
   /* ---------------------------------------------------------------------

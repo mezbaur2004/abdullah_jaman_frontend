@@ -7,33 +7,36 @@ import { PageHeader } from "@/components/layout/PageHeader";
 import { Section } from "@/components/layout/Section";
 import { Card } from "@/components/ui/Card";
 import { FeatureImage } from "@/components/ui/FeatureImage";
+import { GeometricPattern } from "@/components/ui/GeometricPattern";
 import { IconChip } from "@/components/ui/IconChip";
 import { PendingNote } from "@/components/ui/PendingNote";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import {
-  experienceFeature,
-  experienceIntro,
-  experiencePending,
   initiatives,
+  leadershipFeature,
+  leadershipIntro,
+  leadershipPending,
+  leadershipPhilosophy,
+  leadershipSecondary,
   roles,
-} from "@/content/experience";
+} from "@/content/leadership";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Experience",
+  title: "Leadership",
   description:
     "Abdullah Jaman is the Founder and Principal of Wheaton International School and Guidance International School in Dhaka, Bangladesh.",
-  path: "/experience",
+  path: "/leadership",
 });
 
-export default function ExperiencePage() {
+export default function LeadershipPage() {
   return (
     <>
       <PageHeader
-        eyebrow={experienceIntro.eyebrow}
-        title={experienceIntro.headline}
-        lede={experienceIntro.lede}
+        eyebrow={leadershipIntro.eyebrow}
+        title={leadershipIntro.headline}
+        lede={leadershipIntro.lede}
       />
 
       <Section divider={false} index="01" indexLabel="Roles" aria-labelledby="roles-heading">
@@ -45,7 +48,7 @@ export default function ExperiencePage() {
           />
 
           <FeatureImage
-            image={experienceFeature}
+            image={leadershipFeature}
             caption="Presenting medals at an annual sports day."
             priority
             className="mt-14 lg:mt-16"
@@ -151,18 +154,57 @@ export default function ExperiencePage() {
             ))}
           </ol>
 
-          {experiencePending ? (
+          {leadershipPending ? (
             <Reveal step={roles.length}>
-              <PendingNote className="mt-12">{experiencePending}</PendingNote>
+              <PendingNote className="mt-12">{leadershipPending}</PendingNote>
             </Reveal>
           ) : null}
+        </Container>
+      </Section>
+
+      {/* The approach, with the teacher-training frame beside it. Placed after
+          the roles because a list of titles says what he holds; this says how
+          he works, which is the part worth a page of its own. */}
+      <Section
+        tone="ivory"
+        index="02"
+        indexLabel="Approach"
+        accent="blue"
+        separator="editorial"
+        aria-labelledby="leadership-philosophy-heading"
+      >
+        <Container className="relative">
+          <GeometricPattern className="-top-14 h-64" fade />
+
+          <div className="relative grid gap-14 lg:grid-cols-12 lg:gap-20">
+            <div className="lg:col-span-6">
+              <SectionHeading
+                id="leadership-philosophy-heading"
+                title={leadershipPhilosophy.headline}
+              />
+              <div className="mt-10 flex max-w-2xl flex-col gap-6 text-lede text-content-muted">
+                {leadershipPhilosophy.body.map((paragraph, i) => (
+                  <Reveal key={paragraph.slice(0, 32)} step={i}>
+                    <p>{paragraph}</p>
+                  </Reveal>
+                ))}
+              </div>
+            </div>
+
+            <div className="lg:col-span-6">
+              <FeatureImage
+                image={leadershipSecondary}
+                caption="Leading a teacher training session on lesson planning and Bloom's taxonomy."
+              />
+            </div>
+          </div>
         </Container>
       </Section>
 
       {initiatives.length > 0 ? (
         <Section
           tone="soft"
-          index="02"
+          index="03"
           indexLabel="Initiatives"
           accent="red"
           separator="editorial"
@@ -215,7 +257,7 @@ export default function ExperiencePage() {
         </Section>
       ) : null}
 
-      <ContactCta index={initiatives.length > 0 ? "03" : "02"} />
+      <ContactCta index={initiatives.length > 0 ? "04" : "03"} />
     </>
   );
 }

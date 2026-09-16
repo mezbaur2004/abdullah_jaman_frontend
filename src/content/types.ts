@@ -116,9 +116,45 @@ export type MediaItem = {
   href?: string;
 };
 
-export type GalleryItem = {
-  caption: string;
-  image: ImageAsset;
+/**
+ * A book's subject. Only the categories actually represented in `books` are
+ * ever rendered — an empty category heading advertises a gap rather than
+ * filling one.
+ */
+export type BookCategory =
+  | "Islamic Studies"
+  | "Arabic Language"
+  | "Aqidah"
+  | "Educational Materials";
+
+/**
+ * One authored or supervised title.
+ *
+ * Almost every field is optional, and that is the point. A book with nothing
+ * but a title is still publishable here; a book with an invented publisher is
+ * not. The UI renders what each entry actually carries and omits the rest, so
+ * partial metadata never has to be padded out to look complete.
+ */
+export type Book = {
+  /** The only required field. Never approximate one. */
+  title: string;
+  category?: BookCategory;
+  /** Front cover under /images/books/. Absent renders a typographic plate. */
+  cover?: ImageAsset;
+  /** Series or collection this belongs to, when it is part of one. */
+  series?: string;
+  /** One or two sentences, from the book or its publisher — never written here. */
+  description?: string;
+  publisher?: string;
+  /** A year only, and only when confirmed. */
+  year?: string;
+  language?: string;
+  /** His role, when it is not sole authorship — e.g. "Supervising editor". */
+  role?: string;
+  /** A publisher or retailer page. Omit and the card renders without a link. */
+  href?: string;
+  /** Lifts one title into the featured position on the page. */
+  featured?: boolean;
 };
 
 /** One line of the outstanding-research register rendered at /content-status. */

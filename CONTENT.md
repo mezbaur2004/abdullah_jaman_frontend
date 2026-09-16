@@ -92,10 +92,10 @@ Supplied by the owner and in use:
 | File | Where it appears |
 | --- | --- |
 | `portrait.jpg` | Hero and About page, via `portrait` in `profile.ts` |
-| `gallery-teaching.jpg` | Gallery — teacher training session |
-| `gallery-address.jpg` | Gallery — speaking with a microphone |
-| `gallery-podium.jpg` | Gallery — speaking at a podium |
-| `gallery-office.jpg` | Gallery — at the school office |
+| `gallery-teaching.jpg` | Leadership page and homepage leadership section |
+| `gallery-address.jpg` | Held in reserve — not currently placed |
+| `gallery-podium.jpg` | Media page, lower block |
+| `gallery-office.jpg` | Books page and homepage books section |
 | `feature-interview.jpg` | Media page, via `mediaFeature` in `media.ts` |
 | `feature-sports-day.jpg` | Experience page, via `experienceFeature` in `experience.ts` |
 | `feature-reception.jpg` | About page, via `aboutFeature` in `profile.ts` |
@@ -112,6 +112,12 @@ lower left, and pulled back from a saturated orange so the tile sits with the
 brand's yellow rather than fighting it. Originals are unmodified on the owner's
 side; `scripts/` holds no image pipeline, so re-supplying a file means dropping
 in a replacement of the same name.
+
+**There is no gallery.** It was removed as a section: a gallery makes
+photographs their own content category, which is backwards, since each of these
+pictures is evidence for something a page is already saying. Every photograph
+now sits where it supports the content, and none is shown merely because it
+exists.
 
 **The three landscape photographs went to pages rather than to the gallery.**
 Each one is about the page it sits on: the interview belongs on Media, the
@@ -130,6 +136,30 @@ interview: nothing in the frame identifies it, so nothing claims it.
 `gallery-office.jpg` is the one low-resolution file at 412px wide. The grid
 gives it a smaller tile to compensate, but a higher-resolution original would
 be better.
+
+## Books
+
+**The bibliography is empty, and that is the correct state today.** Authorship
+is confirmed — the Daily Star interview describes his development and
+supervision of Islamic Studies and Arabic learning materials, and the owner has
+confirmed multiple authored titles. What has not been supplied is a single
+title, cover, publisher or date.
+
+So `/books` ships built and waiting. It leads with what the writing is *for*,
+which is on the record, and lists nothing. A bibliography is the easiest thing
+on a personal site to check and the worst to get wrong: an invented title is not
+a rounding error, it is a fabricated work attributed to a real author.
+
+**To add a book**, append an object to `books` in `src/content/books.ts`.
+`title` is the only required field — an entry with nothing else still renders,
+as a typographic plate rather than a cover. Covers go in
+`public/images/books/`. Nothing in the UI needs touching: the page, the
+homepage section, the category grouping and the featured slot all read from
+that array.
+
+Categories (`Islamic Studies`, `Arabic Language`, `Aqidah`,
+`Educational Materials`) appear only when a book actually carries one, so an
+empty category never advertises a gap.
 
 ## Empty on purpose
 

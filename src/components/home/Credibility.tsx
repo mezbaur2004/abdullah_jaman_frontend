@@ -102,27 +102,38 @@ export function Credibility({ index }: { index?: string }) {
         {education.length > 0 ? (
           <Reveal step={organizations.length}>
             <Card tone="soft" hover="quiet" padding="lg" className="mt-5 lg:mt-6">
-              <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:gap-7">
-                <IconChip icon={GraduationCap} />
-                <div>
+              <div className="flex flex-col gap-6 sm:flex-row sm:gap-8">
+                <IconChip icon={GraduationCap} className="sm:mt-1" />
+                <div className="min-w-0 flex-1">
                   <p className="text-eyebrow font-medium uppercase text-content-subtle">
                     Education
                   </p>
-                  <div className="mt-2 flex flex-wrap items-baseline gap-x-4 gap-y-1">
+                  {/* One row per qualification. The previous single-line
+                      treatment held one entry; five ran together into a
+                      sentence that read as neither a list nor a paragraph. */}
+                  <ul className="mt-5 flex flex-col divide-y divide-line">
                     {education.map((entry) => (
-                      <p
-                        key={entry.institution}
-                        className="font-display text-2xl text-content"
+                      <li
+                        key={`${entry.institution}-${entry.qualification ?? ""}`}
+                        className="flex flex-col gap-1 py-3 first:pt-0 last:pb-0 sm:flex-row sm:items-baseline sm:justify-between sm:gap-8"
                       >
-                        {entry.institution}
+                        <span className="font-display text-lg leading-snug text-content">
+                          {entry.qualification ?? entry.institution}
+                          {entry.field ? (
+                            <span className="text-content-muted">
+                              {" "}
+                              — {entry.field}
+                            </span>
+                          ) : null}
+                        </span>
                         {entry.qualification ? (
-                          <span className="ml-3 font-sans text-sm text-content-muted">
-                            {entry.qualification}
+                          <span className="text-sm text-content-subtle sm:text-right">
+                            {entry.institution}
                           </span>
                         ) : null}
-                      </p>
+                      </li>
                     ))}
-                  </div>
+                  </ul>
                 </div>
               </div>
             </Card>

@@ -1,10 +1,13 @@
 import { Container } from "./Container";
 import { Eyebrow } from "@/components/ui/Eyebrow";
+import { GeometricPattern } from "@/components/ui/GeometricPattern";
 
 type PageHeaderProps = {
   eyebrow: string;
   title: string;
   lede?: string;
+  /** Adds the geometric layer behind the masthead. Used sparingly. */
+  pattern?: boolean;
 };
 
 /**
@@ -13,10 +16,11 @@ type PageHeaderProps = {
  * It sits on the tinted band rather than plain grey: the inner pages have no
  * hero image, so the colour is what stops them opening on a blank sheet.
  */
-export function PageHeader({ eyebrow, title, lede }: PageHeaderProps) {
+export function PageHeader({ eyebrow, title, lede, pattern = false }: PageHeaderProps) {
   return (
-    <div className="border-b border-line-accent bg-surface-accent">
-      <Container className="pb-16 pt-14 sm:pb-20 sm:pt-20 lg:pb-24 lg:pt-28">
+    <div className="relative overflow-hidden border-b border-line-accent bg-surface-accent">
+      {pattern ? <GeometricPattern className="inset-x-0 top-0 h-full" /> : null}
+      <Container className="relative pb-16 pt-14 sm:pb-20 sm:pt-20 lg:pb-24 lg:pt-28">
         <div className="animate-rise">
           <Eyebrow>{eyebrow}</Eyebrow>
         </div>

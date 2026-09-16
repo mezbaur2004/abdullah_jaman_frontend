@@ -8,6 +8,14 @@ const nextConfig: NextConfig = {
     // dropped in at the same paths. AVIF first keeps hero imagery light.
     formats: ["image/avif", "image/webp"],
   },
+  /**
+   * /experience became /leadership when the page's remit widened past a list
+   * of roles. Permanent, because the old path is in the wild — the site has
+   * been deployed under it — and a 404 is a worse answer than a redirect.
+   */
+  async redirects() {
+    return [{ source: "/experience", destination: "/leadership", permanent: true }];
+  },
   async headers() {
     return [
       {
