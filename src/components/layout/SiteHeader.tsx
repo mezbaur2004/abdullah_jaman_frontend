@@ -76,20 +76,22 @@ export function SiteHeader() {
      */
     <header
       className={cn(
-        "sticky top-0 z-50 bg-surface transition-colors duration-500 ease-editorial",
-        scrolled || menuOpen ? "border-b border-line" : "border-b border-transparent",
+        "sticky top-0 z-50 bg-surface transition-[border-color,box-shadow] duration-500 ease-editorial",
+        scrolled || menuOpen
+          ? "border-b border-line shadow-panel"
+          : "border-b border-transparent",
       )}
     >
       <Container className="flex h-20 items-center justify-between gap-4 sm:gap-8 lg:h-24">
         <Link
           href="/"
-          className="whitespace-nowrap font-display text-base tracking-[-0.015em] text-content sm:text-lg lg:text-xl"
+          className="whitespace-nowrap font-display text-lg font-semibold tracking-[-0.015em] text-content sm:text-xl xl:text-2xl"
         >
           {site.shortName}
         </Link>
 
         <nav aria-label="Primary" className="hidden lg:block">
-          <ul className="flex items-center gap-9">
+          <ul className="flex items-center gap-6 xl:gap-10">
             {primaryNav.map((item) => (
               <li key={item.href}>
                 <Link
@@ -99,7 +101,7 @@ export function SiteHeader() {
                   // one of the four jobs the accent has, and at a hairline in
                   // the old blue it was not reading as a state at all.
                   className={cn(
-                    "relative text-ui transition-colors",
+                    "relative text-base transition-colors",
                     "after:absolute after:-bottom-2 after:left-0 after:h-0.5 after:bg-accent-solid after:transition-all after:content-['']",
                     isCurrent(item.href)
                       ? "text-content after:w-full"
@@ -117,7 +119,7 @@ export function SiteHeader() {
           <ThemeSelector />
           <Link
             href="/contact"
-            className="hidden rounded-control bg-action px-7 py-3.5 text-ui font-medium text-on-action transition-colors hover:bg-action-hover hover:text-on-action-hover lg:inline-flex"
+            className="hidden rounded-control bg-action px-5 py-3.5 text-ui font-medium text-on-action transition-colors hover:bg-action-hover hover:text-on-action-hover lg:inline-flex xl:px-7"
           >
             Get in touch
           </Link>

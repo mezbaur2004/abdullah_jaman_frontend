@@ -2,6 +2,7 @@ import Link from "next/link";
 
 import { Container } from "./Container";
 import { GeometricPattern } from "@/components/ui/GeometricPattern";
+import { SectionSeparator } from "@/components/ui/SectionSeparator";
 import {
   footerNav,
   institutionLinks,
@@ -14,7 +15,9 @@ export function SiteFooter() {
   const elsewhere = [...socialLinks, ...institutionLinks];
 
   return (
-    <footer className="relative isolate overflow-hidden border-t border-line-inverse bg-surface-inverse text-on-inverse">
+    <footer className="relative isolate overflow-hidden bg-surface-inverse text-on-inverse">
+      {/* The lattice closes the page the same way it opens every section. */}
+      <SectionSeparator tone="inverse" />
       {/* The geometric layer's last appearance, and the quietest. The footer is
           a wide shallow band, so the tile enters from the top right and is
           gone before it reaches the copyright line. */}
@@ -27,7 +30,7 @@ export function SiteFooter() {
       <Container className="py-16 lg:py-20">
         <div className="flex flex-col gap-14 lg:flex-row lg:justify-between lg:gap-20">
           <div className="max-w-md">
-            <p className="font-display text-display-md">{site.name}</p>
+            <p className="font-display text-display-lg">{site.name}</p>
             <span
               aria-hidden="true"
               className="mt-5 flex items-center gap-2"
@@ -50,7 +53,7 @@ export function SiteFooter() {
 
           <div className="grid grid-cols-2 gap-10 sm:gap-16">
             <nav aria-label="Footer">
-              <h2 className="font-sans text-eyebrow font-semibold uppercase text-on-inverse-muted">
+              <h2 className="font-sans text-eyebrow font-semibold uppercase text-accent-on-inverse">
                 Site
               </h2>
               {/* Two columns. Seven links in one made this column twice the
@@ -61,7 +64,7 @@ export function SiteFooter() {
                   <li key={item.href}>
                     <Link
                       href={item.href}
-                      className="text-sm text-on-inverse-muted transition-colors hover:text-on-inverse"
+                      className="link-underline text-ui text-on-inverse-muted transition-colors hover:text-on-inverse"
                     >
                       {item.label}
                     </Link>
@@ -72,7 +75,7 @@ export function SiteFooter() {
 
             {elsewhere.length > 0 ? (
               <div>
-                <h2 className="font-sans text-eyebrow font-semibold uppercase text-on-inverse-muted">
+                <h2 className="font-sans text-eyebrow font-semibold uppercase text-accent-on-inverse">
                   Elsewhere
                 </h2>
                 <ul className="mt-5 flex flex-col gap-3">
@@ -82,7 +85,7 @@ export function SiteFooter() {
                         href={item.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-sm text-on-inverse-muted transition-colors hover:text-on-inverse"
+                        className="link-underline text-ui text-on-inverse-muted transition-colors hover:text-on-inverse"
                       >
                         {item.label}
                       </a>

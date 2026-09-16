@@ -41,6 +41,7 @@ export default function AboutPage() {
         eyebrow={aboutPage.eyebrow}
         title={aboutPage.headline}
         lede={aboutPage.lede}
+        pattern
       />
 
       <Section divider={false} index="01" indexLabel="Profile">

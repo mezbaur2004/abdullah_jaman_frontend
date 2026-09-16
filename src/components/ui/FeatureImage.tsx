@@ -30,10 +30,11 @@ type FeatureImageProps = {
  * set into a page is illustrating the prose around it, and something that
  * moves under the cursor there is an effect competing with the reading.
  *
- * The frame is a raised plane rather than a hairline box: a rounded edge, a
- * border and a panel shadow, so a photograph reads as laid on the page rather
- * than cut into it. The caption sits under a short accent rule on the same
- * axis as every other mark on the page.
+ * One framing treatment, whichever shape it takes: the picture, and a thin
+ * gold outline set down and to the right of it. The arch pictures had that
+ * outline and the rectangular ones did not, which meant the site held two
+ * different ideas about what a framed photograph looks like and used them
+ * three sections apart.
  */
 export function FeatureImage({
   image,
@@ -62,7 +63,17 @@ export function FeatureImage({
     </ImageReveal>
   );
 
-  const frame = arch ? <ArchFrame>{picture}</ArchFrame> : picture;
+  const frame = arch ? (
+    <ArchFrame>{picture}</ArchFrame>
+  ) : (
+    <div className="relative">
+      <span
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 hidden translate-x-5 translate-y-5 rounded-figure border border-gold/70 sm:block"
+      />
+      <div className="relative">{picture}</div>
+    </div>
+  );
 
   if (!caption) return <div className={cn(className)}>{frame}</div>;
 
@@ -70,10 +81,13 @@ export function FeatureImage({
     <figure className={cn(className)}>
       {frame}
       <Reveal step={1}>
-        <figcaption className="mt-5 flex gap-4 text-sm leading-relaxed text-content-subtle">
+        {/* Small italic serif under a short gold rule. A caption is an aside
+            in the author's voice rather than another line of interface, and
+            the display face in italic is what says so. */}
+        <figcaption className="mt-6 flex gap-4 font-display text-sm italic leading-relaxed text-content-muted sm:text-base">
           <span
             aria-hidden="true"
-            className="mt-2 h-0.5 w-7 shrink-0 bg-gold opacity-80"
+            className="mt-2.5 h-0.5 w-8 shrink-0 bg-gold"
           />
           <span className="max-w-xl">{caption}</span>
         </figcaption>

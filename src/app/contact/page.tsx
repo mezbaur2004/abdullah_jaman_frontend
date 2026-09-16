@@ -29,6 +29,7 @@ export default function ContactPage() {
         eyebrow={contactIntro.eyebrow}
         title={contactIntro.headline}
         lede={contactIntro.lede}
+        pattern
       />
 
       <Section tone="soft" divider={false} index="01" indexLabel="Enquiries">

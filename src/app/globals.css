@@ -732,6 +732,101 @@
     content: var(--monogram, "");
   }
 
+  /* The wash over a photographic page masthead.
+     Heavier than the card scrim and weighted to the left, because a masthead
+     carries a display-sized heading and a lede rather than two lines, and the
+     text starts at the left margin. It never drops below three-quarters navy,
+     so the type is legible wherever the line happens to end and whatever the
+     photograph underneath is doing. */
+  .scrim-page {
+    background-image:
+      linear-gradient(
+        to right,
+        var(--scrim) 0%,
+        color-mix(in oklab, var(--scrim) 92%, transparent) 45%,
+        color-mix(in oklab, var(--scrim) 80%, transparent) 78%,
+        color-mix(in oklab, var(--scrim) 74%, transparent) 100%
+      ),
+      linear-gradient(
+        to top,
+        color-mix(in oklab, var(--scrim) 45%, transparent) 0%,
+        transparent 70%
+      );
+  }
+
+  /* Scroll-linked drift on the lattice.
+     A view timeline rather than a scroll listener: no JavaScript, nothing
+     running per frame on the main thread, and it simply does not apply where
+     the browser has no support — which is the right failure, since a parallax
+     that never arrives costs the reader nothing.
+
+     The timeline is declared on the *section* and referenced by name from the
+     pattern inside it, and that indirection is not optional. A bare `view()`
+     resolves against the subject's nearest scroll container, and every section
+     carrying a pattern clips it with `overflow: hidden` — which makes the
+     section itself a scrollport. Measured against a box it is pinned inside,
+     the pattern's progress is a constant: the transform applies once and then
+     never moves again, which is precisely what the first two attempts did.
+     Named on the section, the timeline tracks the section through the document
+     instead, and the pattern rides it.
+
+     The reduced-motion guard is explicit rather than relying on the blanket
+     duration reset, because a timeline-driven animation has no duration to
+     zero. */
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      .geo-parallax-host {
+        view-timeline-name: --geo-section;
+        view-timeline-axis: block;
+      }
+
+      .geo-parallax {
+        /* Longhand, and `animation-duration: auto` is load-bearing. The
+           `animation` shorthand resets duration to 0s, and a scroll-driven
+           animation with a zero duration is pinned at a single frame. */
+        animation-name: geo-drift;
+        animation-duration: auto;
+        animation-timing-function: linear;
+        animation-fill-mode: both;
+        animation-timeline: --geo-section;
+        animation-range: entry 0% exit 100%;
+      }
+    }
+  }
+
+  @keyframes geo-drift {
+    from {
+      transform: translate3d(0, -3.5%, 0);
+    }
+    to {
+      transform: translate3d(0, 5%, 0);
+    }
+  }
+
+  /* The gold rule that slides in under a link on hover. Applied to the link
+     itself; the rule is a pseudo-element so it needs no extra markup. */
+  .link-underline {
+    position: relative;
+  }
+
+  .link-underline::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -0.2em;
+    height: 2px;
+    background-color: var(--accent-solid);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--duration-hover) var(--ease-hover);
+  }
+
+  .link-underline:hover::after,
+  .link-underline:focus-visible::after {
+    transform: scaleX(1);
+  }
+
   .arch {
     -webkit-mask-image: var(--geo-arch);
     mask-image: var(--geo-arch);

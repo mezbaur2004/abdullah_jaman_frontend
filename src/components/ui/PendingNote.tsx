@@ -1,4 +1,4 @@
-import { cn } from "@/lib/cn";
+import { Callout } from "./Callout";
 
 /**
  * Says plainly that a section's content is still being confirmed.
@@ -7,6 +7,10 @@ import { cn } from "@/lib/cn";
  * invents an achievement or a date to avoid an empty column. Each of these is
  * driven by a string in the content layer — delete the string and the note
  * goes with it.
+ *
+ * Kept as its own name rather than folded into `Callout` because the meaning
+ * is specific: this is not an aside, it is the site declining to make
+ * something up. The label is fixed here so all three of them agree.
  */
 export function PendingNote({
   children,
@@ -16,13 +20,8 @@ export function PendingNote({
   className?: string;
 }) {
   return (
-    <p
-      className={cn(
-        "max-w-xl border-l-2 border-accent/50 py-1 pl-5 text-sm leading-relaxed text-content-subtle",
-        className,
-      )}
-    >
+    <Callout label="Still being confirmed" className={className}>
       {children}
-    </p>
+    </Callout>
   );
 }

@@ -5,7 +5,6 @@ import { ContactCta } from "@/components/home/ContactCta";
 import { Container } from "@/components/layout/Container";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { Section } from "@/components/layout/Section";
-import { FeatureImage } from "@/components/ui/FeatureImage";
 import { GeometricPattern } from "@/components/ui/GeometricPattern";
 import { PendingNote } from "@/components/ui/PendingNote";
 import { Reveal } from "@/components/ui/Reveal";
@@ -53,7 +52,8 @@ export default function BooksPage() {
         eyebrow={booksIntro.eyebrow}
         title={booksIntro.headline}
         lede={booksIntro.lede}
-        pattern
+        variant="arch"
+        image={booksFeature}
       />
 
       {featuredBook ? (
@@ -93,34 +93,26 @@ export default function BooksPage() {
         <Container className="relative">
           <GeometricPattern className="-top-16 h-72" fade />
 
-          <div className="relative grid gap-14 lg:grid-cols-12 lg:gap-20">
-            <div className="lg:col-span-7">
+          {/* The office photograph opens this page now, so the passage runs
+              as prose alone. Two columns here, with the same picture in the
+              right-hand one, had the page showing a reader the same thing
+              twice within a screen and a half. */}
+          <div className="relative grid gap-12 lg:grid-cols-12 lg:gap-20">
+            <div className="lg:col-span-5">
               <SectionHeading
                 id="author-note-heading"
                 title={authorNote.headline}
                 accent="gold"
                 size="feature"
               />
-              <div className="mt-10 flex max-w-2xl flex-col gap-6 text-lede text-content-muted">
-                {authorNote.body.map((paragraph, i) => (
-                  <Reveal key={paragraph.slice(0, 32)} step={i}>
-                    <p>{paragraph}</p>
-                  </Reveal>
-                ))}
-              </div>
             </div>
 
-            <div className="lg:col-span-5">
-              {/* Cropped to the arch's own 4:5 rather than the picture's 4:3.
-                   A mihrab over a landscape frame is a shape fighting its
-                   subject; given the portrait ratio the arch is doing what an
-                   arch does, which is to frame a figure. */}
-              <FeatureImage
-                image={booksFeature}
-                caption="At the school office."
-                ratio="4 / 5"
-                arch
-              />
+            <div className="flex flex-col gap-6 text-lede text-content-muted lg:col-span-7 lg:pt-2">
+              {authorNote.body.map((paragraph, i) => (
+                <Reveal key={paragraph.slice(0, 32)} step={i}>
+                  <p>{paragraph}</p>
+                </Reveal>
+              ))}
             </div>
           </div>
         </Container>
