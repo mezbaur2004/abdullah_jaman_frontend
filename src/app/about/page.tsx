@@ -6,6 +6,7 @@ import { Container } from "@/components/layout/Container";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { Section } from "@/components/layout/Section";
 import { Card } from "@/components/ui/Card";
+import { FeatureImage } from "@/components/ui/FeatureImage";
 import { Figure } from "@/components/ui/Figure";
 import { IconChip } from "@/components/ui/IconChip";
 import { ListRow } from "@/components/ui/ListRow";
@@ -13,6 +14,7 @@ import { cardAccent } from "@/lib/accent";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import {
+  aboutFeature,
   aboutPage,
   education,
   heroPanel,
@@ -90,6 +92,12 @@ export default function AboutPage() {
               ) : null}
             </div>
           </div>
+
+          <FeatureImage
+            image={aboutFeature}
+            caption="With guests at a reception."
+            className="mt-14 lg:mt-20"
+          />
         </Container>
       </Section>
 

@@ -5,10 +5,11 @@ import { Container } from "@/components/layout/Container";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { Section } from "@/components/layout/Section";
 import { MediaEntry } from "@/components/media/MediaEntry";
+import { FeatureImage } from "@/components/ui/FeatureImage";
 import { PendingNote } from "@/components/ui/PendingNote";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { mediaIntro, mediaItems, publications } from "@/content/media";
+import { mediaFeature, mediaIntro, mediaItems, publications } from "@/content/media";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
@@ -35,6 +36,13 @@ export default function MediaPage() {
           <SectionHeading
             id="press-heading"
             title="Interviews and features."
+          />
+
+          <FeatureImage
+            image={mediaFeature}
+            caption="In conversation on an interview set."
+            priority
+            className="mt-14 lg:mt-16"
           />
 
           {mediaItems.length > 0 ? (

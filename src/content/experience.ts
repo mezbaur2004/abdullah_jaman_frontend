@@ -1,4 +1,4 @@
-import type { Initiative, Role } from "./types";
+import type { ImageAsset, Initiative, Role } from "./types";
 
 /**
  * VERIFIED: the two roles and the institutions.
@@ -26,6 +26,18 @@ export const roles: Role[] = [
     current: true,
   },
 ];
+
+/**
+ * VERIFIED — supplied by the owner. "Annual sports" is readable from the
+ * banner in the frame and the school name from the students' kit; nothing
+ * beyond that is claimed, and no one else in the photograph is identified.
+ */
+export const experienceFeature: ImageAsset = {
+  src: "/images/feature-sports-day.jpg",
+  alt: "Abdullah Jaman placing a medal around a student's neck at a school annual sports day, with staff and other students alongside.",
+  width: 1600,
+  height: 1066,
+};
 
 export const experienceIntro = {
   eyebrow: "Experience",

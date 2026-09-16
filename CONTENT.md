@@ -96,6 +96,9 @@ Supplied by the owner and in use:
 | `gallery-address.jpg` | Gallery — speaking with a microphone |
 | `gallery-podium.jpg` | Gallery — speaking at a podium |
 | `gallery-office.jpg` | Gallery — at the school office |
+| `feature-interview.jpg` | Media page, via `mediaFeature` in `media.ts` |
+| `feature-sports-day.jpg` | Experience page, via `experienceFeature` in `experience.ts` |
+| `feature-reception.jpg` | About page, via `aboutFeature` in `profile.ts` |
 
 **Alt text describes only what is in the frame.** The rule against unsupported
 claims applies to image descriptions exactly as it applies to prose: "teaching
@@ -110,9 +113,19 @@ brand's yellow rather than fighting it. Originals are unmodified on the owner's
 side; `scripts/` holds no image pipeline, so re-supplying a file means dropping
 in a replacement of the same name.
 
-**Three landscape media photographs are reserved** in `gallery.ts` as commented
-entries — drop `gallery-media-1.jpg` through `-3.jpg` into `public/images/`,
-uncomment, and correct the dimensions, caption and alt.
+**The three landscape photographs went to pages rather than to the gallery.**
+Each one is about the page it sits on: the interview belongs on Media, the
+sports day on Experience, the reception on About. They render through
+`FeatureImage`, which is the gallery's counterpart for a single image set into
+a page — and deliberately without the gallery's hover zoom. A gallery is a grid
+you browse, where a small push-in rewards looking closer; an image inside a
+page is illustrating the prose around it, and movement under the cursor there
+competes with the reading.
+
+**Nobody else in a photograph is named.** No names were supplied for the other
+people in the interview and reception frames, and inventing one would be the
+same failure as inventing an award. The same goes for the programme behind the
+interview: nothing in the frame identifies it, so nothing claims it.
 
 `gallery-office.jpg` is the one low-resolution file at 412px wide. The grid
 gives it a smaller tile to compensate, but a higher-resolution original would
