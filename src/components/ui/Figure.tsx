@@ -25,7 +25,7 @@ type FigureProps = {
    * photograph sitting on the navy band, where the standard rule is a dark
    * line on a dark ground and simply disappears.
    */
-  frame?: "base" | "inverse";
+  frame?: "base" | "inverse" | "none";
   /**
    * Pushes the image in slightly on hover, cropped by the frame. The move is
    * small on purpose: a photograph that leaps is a carousel effect, while a
@@ -59,8 +59,14 @@ export function Figure({
   const frame = (
     <div
       className={cn(
-        "relative overflow-hidden border bg-surface-soft transition-colors",
-        frameTone === "inverse" ? "border-line-inverse" : "border-line",
+        "relative overflow-hidden bg-surface-soft transition-colors",
+        // `none` is for a picture whose edge is drawn by something else — the
+        // mihrab outline, for one. A rectangular border under an arch mask
+        // survives only along the straight sides and vanishes round the curve,
+        // which reads as a frame someone forgot to finish.
+        frameTone !== "none" && "border",
+        frameTone === "inverse" && "border-line-inverse",
+        frameTone === "base" && "border-line",
         // Softer than a card's corner and firmer than a hairline crop. One
         // value for every photograph on the site, so a frame is never a
         // decision a caller has to make twice.

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Mail, MapPin, Phone } from "lucide-react";
 
 import { Container } from "@/components/layout/Container";
+import { emphasise } from "@/lib/emphasis";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { Section } from "@/components/layout/Section";
 import { Button } from "@/components/ui/Button";
@@ -36,7 +37,7 @@ export default function ContactPage() {
             <div className="lg:col-span-7">
               <Reveal>
                 <h2 className="font-display text-display-md text-content">
-                  What to write about.
+                  {emphasise("What to write *about*.")}
                 </h2>
               </Reveal>
 

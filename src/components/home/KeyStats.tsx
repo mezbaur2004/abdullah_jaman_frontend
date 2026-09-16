@@ -16,7 +16,7 @@ export function KeyStats({ index }: { index?: string }) {
       tone="inverse"
       index={index}
       indexLabel="Achievements"
-      accent="blue"
+      accent="gold"
       aria-labelledby="key-stats-heading"
     >
       <Container>

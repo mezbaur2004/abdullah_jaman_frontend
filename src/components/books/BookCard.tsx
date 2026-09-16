@@ -26,7 +26,7 @@ type BookCardProps = {
  * Without a cover it falls back to a typographic plate rather than a grey box:
  * a missing image should still look like a book.
  */
-export function BookCard({ book, accent = "yellow", feature = false }: BookCardProps) {
+export function BookCard({ book, accent = "gold", feature = false }: BookCardProps) {
   const linked = Boolean(book.href);
 
   const cover = book.cover ? (

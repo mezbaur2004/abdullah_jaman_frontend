@@ -1,7 +1,7 @@
 import { Container } from "@/components/layout/Container";
+import { emphasise } from "@/lib/emphasis";
 import { GeometricPattern } from "@/components/ui/GeometricPattern";
 import { Section } from "@/components/layout/Section";
-import { AccentLine } from "@/components/ui/AccentLine";
 import { Button } from "@/components/ui/Button";
 import { Panel } from "@/components/ui/Panel";
 import { Reveal } from "@/components/ui/Reveal";
@@ -22,8 +22,8 @@ export function AboutTeaser({ index }: { index?: string }) {
       tone="ivory"
       index={index}
       indexLabel="Philosophy"
-      accent="blue"
-      separator="minimal"
+      accent="gold"
+      separator="quiet"
       aria-labelledby="about-teaser-heading"
     >
       <Container className="relative">
@@ -36,9 +36,8 @@ export function AboutTeaser({ index }: { index?: string }) {
                 id="about-teaser-heading"
                 className="max-w-2xl text-display-xl text-content"
               >
-                {aboutTeaser.headline}
+                {emphasise(aboutTeaser.headline)}
               </h2>
-              <AccentLine pair className="mt-8" />
             </Reveal>
 
             <Reveal step={1}>

@@ -185,7 +185,7 @@ export const atAGlance: GlanceItem[] = [
  */
 export const aboutTeaser = {
   eyebrow: "Philosophy",
-  headline: "Academic rigour and character are not separate subjects.",
+  headline: "Academic rigour and character are not *separate* subjects.",
   body: [
     "A school can teach a child to pass an examination without teaching them who to be. The two are not in tension, and treating them as separate timetables is how they come apart.",
     "His work holds them together — an academic standard that would stand anywhere, taught inside a framework of Islamic values, with the development of the whole child treated as the actual objective rather than a line in a prospectus.",

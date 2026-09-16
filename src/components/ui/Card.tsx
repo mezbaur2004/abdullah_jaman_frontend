@@ -88,7 +88,7 @@ export function Card({
   as: Tag = "div",
   tone = "raised",
   hover = "none",
-  accent = "blue",
+  accent = "gold",
   accentEdge = "top",
   sweep = false,
   padding = "md",

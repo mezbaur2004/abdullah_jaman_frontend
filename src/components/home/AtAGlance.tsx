@@ -39,14 +39,14 @@ export function AtAGlance({ index }: { index?: string }) {
       tone="accent"
       index={index}
       indexLabel="At a glance"
-      accent="yellow"
+      accent="gold"
       aria-labelledby="glance-heading"
     >
       <Container>
         <SectionHeading
           id="glance-heading"
-          title="The work, in short."
-          accent="yellow"
+          title="The work, in *short*."
+          accent="gold"
           lede="Where he works, what he leads, and where he studied — nothing beyond what is confirmed."
         />
 
@@ -68,7 +68,7 @@ export function AtAGlance({ index }: { index?: string }) {
                 step={i}
                 className={cn(
                   "border-t-2 pt-6",
-                  lead ? "border-highlight-solid" : "border-line-strong",
+                  lead ? "border-accent-solid" : "border-line-strong",
                 )}
               >
                 <dt>

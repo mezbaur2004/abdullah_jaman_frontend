@@ -43,7 +43,7 @@ export default function LeadershipPage() {
         <Container>
           <SectionHeading
             id="roles-heading"
-            title="Current roles."
+            title="Current *roles*."
             lede="Positions held now. Earlier roles are not yet part of the record."
           />
 
@@ -62,7 +62,7 @@ export default function LeadershipPage() {
                     as="article"
                     padding="lg"
                     hover={role.href ? "lift" : "quiet"}
-                    accent="blue"
+                    accent="gold"
                     accentEdge="left"
                   >
                     {/* One column throughout: the meta row is a footer under a
@@ -113,7 +113,7 @@ export default function LeadershipPage() {
                               >
                                 <span
                                   aria-hidden="true"
-                                  className="mt-2.5 h-px w-4 shrink-0 bg-accent"
+                                  className="mt-2.5 h-px w-4 shrink-0 bg-accent-solid"
                                 />
                                 {highlight}
                               </li>
@@ -169,8 +169,8 @@ export default function LeadershipPage() {
         tone="ivory"
         index="02"
         indexLabel="Approach"
-        accent="blue"
-        separator="editorial"
+        accent="gold"
+        separator="band"
         aria-labelledby="leadership-philosophy-heading"
       >
         <Container className="relative">
@@ -212,7 +212,7 @@ export default function LeadershipPage() {
           index="03"
           indexLabel="Initiatives"
           accent="red"
-          separator="editorial"
+          separator="band"
           aria-labelledby="initiatives-heading"
         >
           <Container>
@@ -247,7 +247,7 @@ export default function LeadershipPage() {
                           >
                             <span
                               aria-hidden="true"
-                              className="mt-2 h-px w-3 shrink-0 bg-accent"
+                              className="mt-2 h-px w-3 shrink-0 bg-accent-solid"
                             />
                             {outcome}
                           </li>

@@ -1,106 +1,53 @@
-import { Container } from "@/components/layout/Container";
 import { cn } from "@/lib/cn";
-import { accentMark, type Accent } from "@/lib/accent";
 
-type Variant = "line" | "editorial" | "minimal";
+type Variant = "band" | "quiet";
 
 type SectionSeparatorProps = {
   /**
-   * `line` is the standard boundary — a blue rule with the accent breaking it.
-   * `editorial` carries a thinner rule further across, for a quieter change of
-   * subject. `minimal` drops to blue-grey with only a small indicator, for
-   * boundaries that should register without being noticed.
+   * `band` is the boundary: one course of the lattice, edge to edge. `quiet`
+   * is a hairline, for a change of subject inside a passage that a full band
+   * would over-announce.
    */
   variant?: Variant;
-  accent?: Accent;
   tone?: "base" | "inverse";
   className?: string;
 };
 
-const rules: Record<Variant, string> = {
-  line: "section-rule",
-  editorial: "section-rule section-rule-editorial",
-  minimal: "section-rule section-rule-minimal",
-};
-
 /**
- * The boundary between two sections.
+ * The boundary between two sections, and the site's signature.
  *
- * Deliberately not a full-width hairline. A symmetrical rule edge-to-edge
- * reads as a box being closed; every variant here is solid at the left margin
- * and dissolves before it reaches the right, so it reads as a new section
- * opening. The mark sits exactly on the text column's left edge — the same
- * axis the section index, the heading and every paragraph begin on — so it
- * lands as part of the page's grid rather than as an ornament dropped on top.
+ * It used to be an asymmetric gradient rule carrying a rotated square, a short
+ * bar and a gold tick at the left margin. At arm's length those three marks
+ * read as debris on the edge of a band rather than as the opening of a
+ * section, and they were the site's most conspicuous ornament while saying
+ * nothing about it.
  *
- * The accent is what gives a long page its rhythm: blue for most boundaries,
- * with yellow or red arriving occasionally. It is passed in by the section
- * rather than chosen here, because rhythm is a property of the sequence and
- * a component cannot see the sequence it is in.
+ * This is the same lattice that fills the navy sections, run across the page
+ * as a single course: two rails with a chain of interlaced diamonds between
+ * them. It is what a border looks like in this tradition, it needs no
+ * explanation, and it is the one detail a reader will remember about the site.
+ *
+ * Full width rather than contained. A border that stops at the text column is
+ * a rule under a paragraph; one that runs edge to edge is architecture.
  *
  * Entirely decorative: `aria-hidden` keeps it out of the accessibility tree.
  * The real boundary for assistive technology is the `<section>` and its
  * heading.
  */
 export function SectionSeparator({
-  variant = "line",
-  accent = "blue",
+  variant = "band",
   tone = "base",
   className,
 }: SectionSeparatorProps) {
-  const inverse = tone === "inverse";
-  const minimal = variant === "minimal";
-
-  /**
-   * The second note. Muted gold against blue or red; blue against yellow,
-   * because gold beside yellow is not a second colour, it is the same one
-   * slightly wrong. Either way the mark reads as two deliberate tones rather
-   * than as a dot someone forgot to finish.
-   */
-  const secondary =
-    accent === "yellow" ? accentMark("blue", inverse) : "bg-gold";
-
   return (
-    <div aria-hidden="true" className={cn("relative", className)}>
-      <div className={cn(rules[variant], inverse && "section-rule-inverse")} />
-
-      <Container className="pointer-events-none absolute inset-x-0 top-0">
-        <span className="flex items-center gap-2">
-          {/* The mark itself: a small block sitting on the rule, in the
-              section's accent. Rotated for the standard variant so it breaks
-              the line rather than thickening it. */}
-          <span
-            className={cn(
-              "block -translate-y-1/2",
-              minimal ? "size-[3px]" : "size-[5px] rotate-45",
-              accentMark(accent, inverse),
-            )}
-          />
-          {/* A solid segment riding the rule. Without it the boundary is a
-              hairline with a speck on it, which at arm's length is not a
-              section opening — it is a scratch. */}
-          {minimal ? null : (
-            <span
-              className={cn(
-                "block h-0.5 -translate-y-1/2",
-                variant === "editorial" ? "w-8" : "w-7",
-                accentMark(accent, inverse),
-                variant === "editorial" && "opacity-70",
-              )}
-            />
-          )}
-          {/* And the second tone, shorter and set slightly apart, so the pair
-              reads left to right as one mark rather than as two. */}
-          {minimal ? null : (
-            <span
-              className={cn(
-                "block h-0.5 w-2.5 -translate-y-1/2 opacity-80",
-                secondary,
-              )}
-            />
-          )}
-        </span>
-      </Container>
-    </div>
+    <div
+      aria-hidden="true"
+      className={cn(
+        "geo-divider",
+        variant === "quiet" && "geo-divider-quiet",
+        tone === "inverse" && variant !== "quiet" && "geo-divider-inverse",
+        className,
+      )}
+    />
   );
 }

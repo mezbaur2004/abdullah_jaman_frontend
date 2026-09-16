@@ -1,6 +1,7 @@
 import { Mail } from "lucide-react";
 
 import { Container } from "@/components/layout/Container";
+import { emphasise } from "@/lib/emphasis";
 import { Section } from "@/components/layout/Section";
 import { Button } from "@/components/ui/Button";
 import { IconChip } from "@/components/ui/IconChip";
@@ -28,8 +29,8 @@ export function ContactCta({ index }: { index?: string }) {
       tone="accent"
       index={index}
       indexLabel="Contact"
-      accent="yellow"
-      separator="editorial"
+      accent="gold"
+      separator="band"
       aria-labelledby="contact-cta-heading"
     >
       <Container>
@@ -42,7 +43,7 @@ export function ContactCta({ index }: { index?: string }) {
                   id="contact-cta-heading"
                   className="mt-8 text-display-lg text-content"
                 >
-                  {contactCta.headline}
+                  {emphasise(contactCta.headline)}
                 </h2>
                 <p className="mt-6 max-w-xl text-lede text-content-muted">
                   {contactCta.lede}

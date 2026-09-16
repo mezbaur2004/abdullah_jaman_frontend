@@ -9,7 +9,7 @@
 
 export const contactIntro = {
   eyebrow: "Contact",
-  headline: "Get in touch.",
+  headline: "Get in *touch*.",
   lede: "For speaking invitations, academic partnerships, media requests and institutional enquiries.",
 } as const;
 
@@ -38,6 +38,6 @@ export const contactPending =
 
 export const contactCta = {
   eyebrow: "Get in touch",
-  headline: "Enquiries and invitations are welcome.",
+  headline: "Enquiries and invitations are *welcome*.",
   lede: "For speaking, partnerships, media and institutional enquiries.",
 } as const;

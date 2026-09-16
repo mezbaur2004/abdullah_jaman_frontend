@@ -3,7 +3,6 @@ import { Section } from "@/components/layout/Section";
 import { Button } from "@/components/ui/Button";
 import { Figure } from "@/components/ui/Figure";
 import { ImageReveal } from "@/components/ui/ImageReveal";
-import { OffsetFrame } from "@/components/ui/OffsetFrame";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { leadershipTeaser } from "@/content/leadership";
@@ -25,7 +24,7 @@ export function LeadershipTeaser({ index }: { index?: string }) {
       tone="inverse"
       index={index}
       indexLabel="Leadership"
-      accent="yellow"
+      accent="gold"
       pattern
       aria-labelledby="leadership-teaser-heading"
     >
@@ -37,7 +36,7 @@ export function LeadershipTeaser({ index }: { index?: string }) {
               title={leadershipTeaser.headline}
               lede={leadershipTeaser.body}
               tone="inverse"
-              accent="yellow"
+              accent="gold"
             />
             <Reveal step={1}>
               <div className="mt-10">
@@ -53,7 +52,7 @@ export function LeadershipTeaser({ index }: { index?: string }) {
               sitting side by side in equal boxes. The overhang is contained by
               the section's own `overflow-hidden`, so nothing widens the page. */}
           <div className="lg:col-span-7 lg:-mr-6 lg:pl-8">
-            <OffsetFrame tone="inverse">
+            <div>
               <ImageReveal className="rounded-figure">
                 {/* 4:3 against a 3:2 source, so roughly an eighth of the
                     width is cropped and the asset's own `position` decides
@@ -70,7 +69,7 @@ export function LeadershipTeaser({ index }: { index?: string }) {
                   sizes="(min-width: 1024px) 58vw, 90vw"
                 />
               </ImageReveal>
-            </OffsetFrame>
+            </div>
           </div>
         </div>
       </Container>

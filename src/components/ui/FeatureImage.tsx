@@ -1,3 +1,4 @@
+import { ArchFrame } from "./ArchFrame";
 import { Figure } from "./Figure";
 import { ImageReveal } from "./ImageReveal";
 import { Reveal } from "./Reveal";
@@ -11,6 +12,12 @@ type FeatureImageProps = {
   priority?: boolean;
   /** Crops the photograph to a ratio instead of using its own. */
   ratio?: string;
+  /**
+   * Cuts the photograph to the mihrab arch instead of a rectangle. For the one
+   * or two pictures on a page that are carrying it; a page of arches is a
+   * motif that has stopped meaning anything.
+   */
+  arch?: boolean;
   className?: string;
 };
 
@@ -33,25 +40,29 @@ export function FeatureImage({
   caption,
   priority = false,
   ratio,
+  arch = false,
   className,
 }: FeatureImageProps) {
-  const frame = (
+  const picture = (
     // The reveal wrapper clips, so it holds the frame alone — with the caption
     // inside it the opening wipe would take the first line of text with it.
-    <ImageReveal className="rounded-figure">
+    <ImageReveal className={arch ? undefined : "rounded-figure"}>
       <Figure
         image={image}
         caption={undefined}
         priority={priority}
         ratio={ratio}
-        rounded
-        elevated
+        rounded={!arch}
+        elevated={!arch}
+        frame={arch ? "none" : "base"}
         // One column wide at every breakpoint, capped at the container's own
         // maximum so the largest screens do not fetch more than they show.
         sizes="(min-width: 1280px) 1152px, (min-width: 640px) 92vw, 90vw"
       />
     </ImageReveal>
   );
+
+  const frame = arch ? <ArchFrame>{picture}</ArchFrame> : picture;
 
   if (!caption) return <div className={cn(className)}>{frame}</div>;
 

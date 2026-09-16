@@ -18,7 +18,7 @@ export const achievementsIntro = {
    * the page rather than the section, and it says plainly that the record is
    * partial, which the pending note at the foot of the page then explains.
    */
-  headline: "The record so far.",
+  headline: "The record so *far*.",
   /** VERIFIED — the institutions and the roles. No counts: see site.ts. */
   lede: "Abdullah Jaman is Principal of Wheaton International School and Guidance International School in Dhaka, Bangladesh.",
 } as const;
