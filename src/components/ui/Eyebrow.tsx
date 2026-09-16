@@ -42,17 +42,22 @@ export function Eyebrow({
     <p
       id={id}
       className={cn(
-        "flex items-center gap-3 text-eyebrow font-medium uppercase",
+        // Semibold rather than medium. At 11px with 0.19em of tracking, medium
+        // reads as a caption; the extra weight is what makes it a label the
+        // heading below belongs to.
+        "flex items-center gap-3 text-eyebrow font-semibold uppercase",
         inverse ? "text-on-inverse-muted" : "text-content-subtle",
         className,
       )}
     >
       <span
         aria-hidden="true"
-        className={cn("h-0.5 w-8 shrink-0", accentMark(accent, inverse))}
+        className={cn("h-[3px] w-9 shrink-0", accentMark(accent, inverse))}
       />
       {index ? (
-        <span className={accentText(accent, inverse)}>{index}</span>
+        <span className={cn("font-display text-xs", accentText(accent, inverse))}>
+          {index}
+        </span>
       ) : null}
       {index && children ? (
         <span aria-hidden="true" className="opacity-45">

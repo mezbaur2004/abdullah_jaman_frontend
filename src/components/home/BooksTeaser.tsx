@@ -3,6 +3,8 @@ import { Section } from "@/components/layout/Section";
 import { Button } from "@/components/ui/Button";
 import { Figure } from "@/components/ui/Figure";
 import { GeometricPattern } from "@/components/ui/GeometricPattern";
+import { ImageReveal } from "@/components/ui/ImageReveal";
+import { OffsetFrame } from "@/components/ui/OffsetFrame";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { BookCard } from "@/components/books/BookCard";
@@ -39,6 +41,7 @@ export function BooksTeaser({ index }: { index?: string }) {
               title={booksIntro.headline}
               lede={booksIntro.lede}
               accent="yellow"
+              size="feature"
             />
             <Reveal step={1}>
               <div className="mt-10">
@@ -61,12 +64,18 @@ export function BooksTeaser({ index }: { index?: string }) {
                 ))}
               </ul>
             ) : (
-              <Reveal step={1}>
-                <Figure
-                  image={booksFeature}
-                  sizes="(min-width: 1024px) 46vw, 90vw"
-                />
-              </Reveal>
+              // With no titles to show, the photograph carries the column, so
+              // it is framed rather than dropped in.
+              <OffsetFrame>
+                <ImageReveal className="rounded-[0.75rem]">
+                  <Figure
+                    image={booksFeature}
+                    rounded
+                    elevated
+                    sizes="(min-width: 1024px) 46vw, 90vw"
+                  />
+                </ImageReveal>
+              </OffsetFrame>
             )}
           </div>
         </div>

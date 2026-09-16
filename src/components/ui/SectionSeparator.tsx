@@ -51,6 +51,15 @@ export function SectionSeparator({
   const inverse = tone === "inverse";
   const minimal = variant === "minimal";
 
+  /**
+   * The second note. Muted gold against blue or red; blue against yellow,
+   * because gold beside yellow is not a second colour, it is the same one
+   * slightly wrong. Either way the mark reads as two deliberate tones rather
+   * than as a dot someone forgot to finish.
+   */
+  const secondary =
+    accent === "yellow" ? accentMark("blue", inverse) : "bg-gold";
+
   return (
     <div aria-hidden="true" className={cn("relative", className)}>
       <div className={cn(rules[variant], inverse && "section-rule-inverse")} />
@@ -67,18 +76,29 @@ export function SectionSeparator({
               accentMark(accent, inverse),
             )}
           />
-          {/* The editorial variant adds a short segment beside the mark — an
-              asymmetric detail that reads as a typographic rule rather than a
-              divider. */}
-          {variant === "editorial" ? (
+          {/* A solid segment riding the rule. Without it the boundary is a
+              hairline with a speck on it, which at arm's length is not a
+              section opening — it is a scratch. */}
+          {minimal ? null : (
             <span
               className={cn(
-                "block h-0.5 w-8 -translate-y-1/2",
+                "block h-0.5 -translate-y-1/2",
+                variant === "editorial" ? "w-8" : "w-7",
                 accentMark(accent, inverse),
-                "opacity-70",
+                variant === "editorial" && "opacity-70",
               )}
             />
-          ) : null}
+          )}
+          {/* And the second tone, shorter and set slightly apart, so the pair
+              reads left to right as one mark rather than as two. */}
+          {minimal ? null : (
+            <span
+              className={cn(
+                "block h-0.5 w-2.5 -translate-y-1/2 opacity-80",
+                secondary,
+              )}
+            />
+          )}
         </span>
       </Container>
     </div>

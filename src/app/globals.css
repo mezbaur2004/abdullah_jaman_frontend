@@ -100,6 +100,11 @@
 
   /* The colour the geometric layer draws in. Never used for anything else. */
   --pattern-ink: var(--gold-ink);
+  /* Muted gold as a *mark*. Separate from --pattern-ink because they answer to
+     different rules: the pattern is texture nobody is meant to notice, this is
+     a deliberate second note beside the blue on separators and frames. Never
+     sets type — it is not dark enough against ivory to be read. */
+  --gold: var(--gold-ink);
 
   --content: var(--slate-900);
   --content-muted: var(--slate-600);
@@ -142,6 +147,11 @@
   --shadow-card: 0 1px 2px rgb(10 42 82 / 0.05), 0 4px 16px -8px rgb(10 42 82 / 0.14);
   --shadow-card-hover: 0 2px 6px rgb(10 42 82 / 0.08),
     0 18px 38px -16px rgb(10 42 82 / 0.28);
+  /* For a contained surface that holds a whole section rather than one card.
+     Deeper and softer than --shadow-panel, because the thing casting it is
+     bigger and should read as further off the page. */
+  --shadow-raise: 0 2px 4px rgb(10 42 82 / 0.05),
+    0 28px 64px -28px rgb(10 42 82 / 0.30);
 }
 
 /* Dark, by system preference — unless the reader has explicitly chosen light.
@@ -159,6 +169,7 @@
     --surface-inverse: var(--night-700);
 
     --pattern-ink: var(--gold-ink-dark);
+    --gold: var(--gold-ink-dark);
 
     --content: #eef4fb;
     --content-muted: var(--slate-300);
@@ -192,6 +203,8 @@
     --shadow-card: 0 1px 2px rgb(0 0 0 / 0.5), 0 4px 16px -8px rgb(0 0 0 / 0.6);
     --shadow-card-hover: 0 2px 6px rgb(0 0 0 / 0.6),
       0 18px 38px -16px rgb(0 0 0 / 0.8);
+    --shadow-raise: 0 2px 4px rgb(0 0 0 / 0.5),
+      0 28px 64px -28px rgb(0 0 0 / 0.75);
   }
 }
 
@@ -208,6 +221,7 @@
   --surface-inverse: var(--night-700);
 
   --pattern-ink: var(--gold-ink-dark);
+  --gold: var(--gold-ink-dark);
 
   --content: #eef4fb;
   --content-muted: var(--slate-300);
@@ -241,6 +255,8 @@
   --shadow-card: 0 1px 2px rgb(0 0 0 / 0.5), 0 4px 16px -8px rgb(0 0 0 / 0.6);
   --shadow-card-hover: 0 2px 6px rgb(0 0 0 / 0.6),
     0 18px 38px -16px rgb(0 0 0 / 0.8);
+  --shadow-raise: 0 2px 4px rgb(0 0 0 / 0.5),
+    0 28px 64px -28px rgb(0 0 0 / 0.75);
 }
 
 /* ---------------------------------------------------------------------------
@@ -274,11 +290,32 @@
   /* Hover intensity. Small on purpose: the lift should register as depth, not
      as the card jumping away from the cursor. */
   --hover-lift: -3px;
-  --hover-zoom: 1.045;
+  /* Kept just inside the 1.02-1.04 band. Past that a photograph stops
+     settling under the cursor and starts behaving like a carousel. */
+  --hover-zoom: 1.035;
 
   /* The khatam tile. A mask, so only its alpha matters — the stroke colour
      here is irrelevant and the fill stays transparent. */
   --geo-tile: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cg fill='none' stroke='%23000' stroke-width='1'%3E%3Crect x='15' y='15' width='30' height='30'/%3E%3Crect x='15' y='15' width='30' height='30' transform='rotate(45 30 30)'/%3E%3Cpath d='M0 30h15M45 30h15M30 0v15M30 45v15'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* A reader who has asked for less motion should get less motion, not the same
+   motion delivered instantly. The base reset below zeroes every transition
+   *duration*, which stops things animating but still lets a card jump three
+   pixels the moment a cursor touches it — movement without the courtesy of an
+   easing, which is worse than either.
+
+   Zeroing the two distances here is what actually removes it, and it removes
+   it everywhere at once: the card lift, the button lift and the image zoom all
+   read these, so none of them needs its own escape hatch. Colour changes are
+   untouched, so every hover still answers.
+--------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --hover-lift: 0px;
+    --hover-zoom: 1;
+    --reveal-rise: 0px;
+  }
 }
 
 /* ---------------------------------------------------------------------------
@@ -315,6 +352,8 @@
   --color-emphasis-solid: var(--emphasis-solid);
   --color-emphasis-soft: var(--emphasis-soft);
   --color-emphasis-on-inverse: var(--emphasis-on-inverse);
+
+  --color-gold: var(--gold);
 
   --color-line: var(--line);
   --color-line-strong: var(--line-strong);
@@ -368,6 +407,7 @@
   --shadow-panel: var(--shadow-panel);
   --shadow-card: var(--shadow-card);
   --shadow-card-hover: var(--shadow-card-hover);
+  --shadow-raise: var(--shadow-raise);
 
   --radius-card: 0.875rem;
   --radius-chip: 0.75rem;
@@ -547,6 +587,22 @@
     mask-size: 60px 60px;
   }
 
+  /* Anchors the tile to one corner and lets it dissolve across the panel.
+     For the wide, shallow surfaces — the hero, the footer — where a downward
+     fade would cut the tile off mid-figure rather than releasing it. */
+  .geo-fade-radial {
+    -webkit-mask-composite: source-in;
+    mask-composite: intersect;
+    -webkit-mask-image: var(--geo-tile),
+      radial-gradient(118% 104% at 100% 0%, #000 0%, transparent 64%);
+    mask-image: var(--geo-tile),
+      radial-gradient(118% 104% at 100% 0%, #000 0%, transparent 64%);
+    -webkit-mask-repeat: repeat, no-repeat;
+    mask-repeat: repeat, no-repeat;
+    -webkit-mask-size: 60px 60px, 100% 100%;
+    mask-size: 60px 60px, 100% 100%;
+  }
+
   /* Fades the tile out so it never meets a section edge as a hard crop. */
   .geo-fade {
     -webkit-mask-composite: source-in;
@@ -561,17 +617,42 @@
   }
 
   /* ---------------------------------------------------------------------
-     Light sweep
-     A single band of light crossing the surface once per hover. Reserved for
-     the dark cards, where there is enough contrast for it to read as sheen
-     rather than as a flash. Masked to the card's own radius by the card's
-     `overflow-hidden`.
+     Card clip layer
+     Every decorative thing a card does on hover lives inside this, and this
+     is the only element on a card that clips.
+
+     It exists because of a real bug. A card's accent rule was drawn straight
+     onto the card at `inset-x-0 top-0`, so at the corners it ran out past the
+     curve: a 2px-tall box has no room to take a 14px radius, and the card
+     itself was not clipping. The rule appeared as two small square ears
+     sticking out of the rounded corners for the length of every hover.
+
+     The radius is the card's own *less its 1px border*, because an absolutely
+     positioned child is laid out against the padding box — one pixel inside
+     the border box on each side. Inheriting the radius outright would leave
+     this layer a pixel proud of the curve at each corner and reintroduce the
+     same bug in miniature.
   --------------------------------------------------------------------- */
-  .sweep::after {
+  .card-clip {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    border-radius: calc(var(--radius-card) - 1px);
+    pointer-events: none;
+  }
+
+  /* A single band of light crossing the surface once per hover. Reserved for
+     the dark cards, where there is enough contrast for it to read as sheen
+     rather than as a flash.
+
+     Driven from the card's hover rather than its own: this layer is
+     `pointer-events: none`, so it never receives a hover of its own, and the
+     child combinator keeps the rule to a sweep layer that is a direct child of
+     whatever is being hovered. */
+  .card-clip[data-sweep]::after {
     content: "";
     position: absolute;
     inset: 0;
-    pointer-events: none;
     background-image: linear-gradient(
       105deg,
       transparent 38%,
@@ -582,8 +663,49 @@
     transition: transform 900ms var(--ease-editorial);
   }
 
-  .sweep:hover::after {
+  :hover > .card-clip[data-sweep]::after {
     transform: translateX(100%);
+  }
+
+  /* ---------------------------------------------------------------------
+     Section veil
+     What keeps two coloured bands from reading as two flat fills stacked on
+     each other. A blue wash entering from the top left and a gold one leaving
+     at the bottom right, both far below the threshold of being noticed as
+     gradients — the effect is that a band has a near side and a far side, so
+     the page reads as planes at different depths rather than as paint.
+
+     Both tokens flip with the theme, so the same two gradients describe light
+     falling across paper and light falling across navy.
+  --------------------------------------------------------------------- */
+  .section-veil {
+    background-image:
+      radial-gradient(
+        112% 78% at 14% -12%,
+        color-mix(in oklab, var(--accent) 10%, transparent) 0%,
+        transparent 62%
+      ),
+      radial-gradient(
+        76% 62% at 102% 104%,
+        color-mix(in oklab, var(--gold) 9%, transparent) 0%,
+        transparent 58%
+      );
+  }
+
+  /* On the navy band the light has to come from the pale end of the ramp —
+     `--accent` there is a mid blue that disappears into the ground. */
+  .section-veil-inverse {
+    background-image:
+      radial-gradient(
+        112% 78% at 14% -12%,
+        color-mix(in oklab, var(--accent-on-inverse) 11%, transparent) 0%,
+        transparent 62%
+      ),
+      radial-gradient(
+        76% 62% at 102% 104%,
+        color-mix(in oklab, var(--gold) 13%, transparent) 0%,
+        transparent 58%
+      );
   }
 
   /* Motion is decoration here, so it is the first thing to go. Every entrance
@@ -596,7 +718,7 @@
       transition: none;
     }
 
-    .sweep::after {
+    .card-clip[data-sweep]::after {
       display: none;
     }
   }

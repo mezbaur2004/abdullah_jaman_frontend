@@ -26,13 +26,13 @@ const variants: Record<Variant, string> = {
   // Solid blue, white text, a darker blue on hover and a small lift. No
   // gradient: a flat institutional blue is the whole point of the identity.
   primary:
-    "rounded-full bg-action px-7 py-3.5 text-on-action shadow-card hover:-translate-y-0.5 hover:bg-action-hover hover:shadow-card-hover",
+    "rounded-full bg-action px-7 py-3.5 text-on-action shadow-card hover:translate-y-[var(--hover-lift)] hover:bg-action-hover hover:shadow-card-hover",
   // Blue border, blue text, transparent ground — the quieter half of the pair.
   secondary:
-    "rounded-full border border-line-accent px-7 py-3.5 text-accent hover:-translate-y-0.5 hover:border-accent hover:bg-accent-soft",
+    "rounded-full border border-line-accent px-7 py-3.5 text-accent hover:translate-y-[var(--hover-lift)] hover:border-accent hover:bg-accent-soft",
   // For use on the inverse band, where the fill has to read light in both themes.
   inverse:
-    "rounded-full bg-action-inverse px-7 py-3.5 text-on-action-inverse hover:-translate-y-0.5 hover:bg-action-inverse-hover",
+    "rounded-full bg-action-inverse px-7 py-3.5 text-on-action-inverse hover:translate-y-[var(--hover-lift)] hover:bg-action-inverse-hover",
   quiet:
     "border-b border-line-accent pb-1 text-accent hover:border-accent",
 };
@@ -83,7 +83,7 @@ export function Button({
         className={cn(
           "size-4 transition-transform",
           external
-            ? "group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+            ? "group-hover:translate-y-[var(--hover-lift)] group-hover:translate-x-0.5"
             : "group-hover:translate-x-1",
         )}
       />

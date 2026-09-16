@@ -45,7 +45,7 @@ export function MediaEntry({ item }: { item: MediaItem }) {
             {/* The metadata firms up on hover rather than moving: it is what
                 tells you what the entry is, so it should gain weight, not
                 travel. */}
-            <span className="rounded-full border border-line-accent bg-accent-soft px-3 py-1 text-eyebrow font-medium uppercase text-accent transition-colors group-hover/card:border-accent/55 group-hover/card:text-accent-strong">
+            <span className="rounded-full border border-line-accent bg-accent-soft px-3 py-1 text-eyebrow font-semibold uppercase text-accent transition-colors group-hover/card:border-accent/55 group-hover/card:text-accent-strong">
               {item.type}
             </span>
             <span className="text-sm text-content-subtle transition-colors group-hover/card:text-content-muted">

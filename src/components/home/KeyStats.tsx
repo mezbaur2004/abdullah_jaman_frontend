@@ -23,6 +23,7 @@ export function KeyStats({ index }: { index?: string }) {
         <SectionHeading
           id="key-stats-heading"
           tone="inverse"
+          size="feature"
           title={achievementsIntro.headline}
           lede={achievementsIntro.lede}
         />

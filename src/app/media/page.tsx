@@ -6,6 +6,7 @@ import { PageHeader } from "@/components/layout/PageHeader";
 import { Section } from "@/components/layout/Section";
 import { MediaEntry } from "@/components/media/MediaEntry";
 import { FeatureImage } from "@/components/ui/FeatureImage";
+import { Panel } from "@/components/ui/Panel";
 import { PendingNote } from "@/components/ui/PendingNote";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -72,7 +73,12 @@ export default function MediaPage() {
             </div>
             <div className="lg:col-span-7">
               <Reveal step={1}>
-                <PendingNote>{pending}</PendingNote>
+                <Panel tone="ivory" padding="md" pattern>
+                  <p className="text-eyebrow font-semibold uppercase text-content-subtle">
+                    Still being confirmed
+                  </p>
+                  <PendingNote className="mt-6 text-lede">{pending}</PendingNote>
+                </Panel>
               </Reveal>
             </div>
           </div>

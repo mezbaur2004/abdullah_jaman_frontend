@@ -43,7 +43,7 @@ export const leadershipFeature: ImageAsset = {
 export const leadershipTeaser = {
   eyebrow: "Leadership",
   headline: "Running schools, not just leading them.",
-  body: "Two institutions in Dhaka, and the ordinary work of keeping them good — curriculum, teachers, assessment, the culture a child actually experiences between the timetable and the gate.",
+  body: "The institutions he leads in Dhaka, and the ordinary work of keeping them good — curriculum, teachers, assessment, the culture a child actually experiences between the timetable and the gate.",
   cta: { label: "Leadership & experience", href: "/leadership" },
   image: {
     src: "/images/gallery-teaching.jpg",

@@ -34,7 +34,7 @@ type CardProps = {
    * mark rather than as an underline.
    */
   accentEdge?: "top" | "left";
-  /** Adds the light sweep. Dark tones only — see `.sweep` in globals.css. */
+  /** Adds the light sweep. Dark tones only — see `.card-clip` in globals.css. */
   sweep?: boolean;
   padding?: "none" | "sm" | "md" | "lg";
 };
@@ -63,11 +63,16 @@ const tones: Record<Tone, string> = {
  * Both hovers bring the border to blue — that shared note is what makes the
  * whole site's cards feel like one family, whichever accent a card carries.
  * Only `lift` adds the movement and the deeper shadow.
+ *
+ * The lift reads its distance from `--hover-lift` rather than from a Tailwind
+ * step, so the one number in globals.css governs every card on the site. It
+ * used to be `-translate-y-1`, which is 4px — a value nothing else agreed
+ * with, and a third further than the system's own figure.
  */
 const hovers: Record<Hover, string> = {
   none: "",
-  lift: "hover:-translate-y-1 hover:border-accent/60 hover:shadow-card-hover",
-  quiet: "hover:border-accent/45",
+  lift: "hover:translate-y-[var(--hover-lift)] hover:border-accent/70 hover:shadow-card-hover",
+  quiet: "hover:border-accent/50 hover:shadow-card",
 };
 
 const paddings = {
@@ -89,6 +94,7 @@ export function Card({
   padding = "md",
 }: CardProps) {
   const dark = tone === "inverse" || tone === "feature";
+  const decorated = hover !== "none" || sweep;
 
   return (
     <Tag
@@ -104,26 +110,39 @@ export function Card({
           "transition-[transform,box-shadow,border-color,background-color]",
         tones[tone],
         hovers[hover],
-        sweep && "overflow-hidden sweep",
         paddings[padding],
         className,
       )}
     >
-      {/* The accent micro-line. It draws itself along the card's top edge on
-          hover, inside the border radius, and is the only place a card shows
-          its accent — a coloured border on every card at rest would turn a
-          grid into bunting. */}
-      {hover !== "none" ? (
+      {/* Everything decorative a card does on hover happens in here, and this
+          is the only element on the card that clips. Nothing can escape the
+          corner radius because nothing decorative is drawn outside this box —
+          not the accent rule, not the sweep, and not anything added later.
+
+          The card itself deliberately does *not* clip: a focus ring on a link
+          near a card's edge is drawn 3px outside its box, and an
+          `overflow: hidden` on the card would cut it in half. */}
+      {decorated ? (
         <span
           aria-hidden="true"
-          className={cn(
-            "absolute transition-transform",
-            accentEdge === "top"
-              ? "inset-x-0 top-0 h-0.5 origin-left scale-x-0 rounded-t-card group-hover/card:scale-x-100"
-              : "inset-y-0 left-0 w-0.5 origin-top scale-y-0 rounded-l-card group-hover/card:scale-y-100",
-            accentMark(accent, dark),
-          )}
-        />
+          className="card-clip"
+          {...(sweep ? { "data-sweep": "" } : {})}
+        >
+          {/* The accent micro-line. It draws itself along one edge on hover,
+              and is the only place a card shows its accent — a coloured border
+              on every card at rest would turn a grid into bunting. */}
+          {hover !== "none" ? (
+            <span
+              className={cn(
+                "absolute transition-transform",
+                accentEdge === "top"
+                  ? "inset-x-0 top-0 h-0.5 origin-left scale-x-0 group-hover/card:scale-x-100"
+                  : "inset-y-0 left-0 w-0.5 origin-top scale-y-0 group-hover/card:scale-y-100",
+                accentMark(accent, dark),
+              )}
+            />
+          ) : null}
+        </span>
       ) : null}
       {children}
     </Tag>

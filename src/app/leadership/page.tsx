@@ -54,7 +54,7 @@ export default function LeadershipPage() {
             className="mt-14 lg:mt-16"
           />
 
-          <ol className="mt-5 lg:mt-6 grid gap-5 lg:mt-16 lg:gap-6">
+          <ol className="mt-8 grid gap-5 lg:mt-10 lg:gap-6">
             {roles.map((role) => (
               <li key={role.slug}>
                 <Reveal>
@@ -126,7 +126,7 @@ export default function LeadershipPage() {
                     <dl className="mt-8 flex flex-wrap gap-x-12 gap-y-5 border-t border-line pt-7">
                       {role.location ? (
                         <div>
-                          <dt className="text-eyebrow font-medium uppercase text-content-subtle">
+                          <dt className="text-eyebrow font-semibold uppercase text-content-subtle">
                             Location
                           </dt>
                           <dd className="mt-1.5 text-content transition-colors group-hover/card:text-accent">
@@ -136,7 +136,7 @@ export default function LeadershipPage() {
                       ) : null}
                       {role.period ? (
                         <div>
-                          <dt className="text-eyebrow font-medium uppercase text-content-subtle">
+                          <dt className="text-eyebrow font-semibold uppercase text-content-subtle">
                             Period
                           </dt>
                           {/* The dated line is what a reader scans an
@@ -181,6 +181,7 @@ export default function LeadershipPage() {
               <SectionHeading
                 id="leadership-philosophy-heading"
                 title={leadershipPhilosophy.headline}
+                size="feature"
               />
               <div className="mt-10 flex max-w-2xl flex-col gap-6 text-lede text-content-muted">
                 {leadershipPhilosophy.body.map((paragraph, i) => (
@@ -225,7 +226,7 @@ export default function LeadershipPage() {
                 >
                   <Reveal step={i % 2}>
                     <article className="py-10 lg:py-12">
-                      <p className="text-eyebrow font-medium uppercase text-content-subtle">
+                      <p className="text-eyebrow font-semibold uppercase text-content-subtle">
                         {initiative.category}
                       </p>
                       <h3 className="mt-4 text-display-md text-content transition-colors group-hover/row:text-accent">

@@ -68,7 +68,7 @@ export default function AchievementsPage() {
                     <div className="flex items-start justify-between gap-5">
                       <IconChip icon={Building2} />
                       {organization.shortName ? (
-                        <span className="rounded-full border border-line-accent bg-accent-soft px-3 py-1 text-eyebrow font-medium uppercase text-accent transition-colors group-hover/card:border-accent/55 group-hover/card:text-accent-strong">
+                        <span className="rounded-full border border-line-accent bg-accent-soft px-3 py-1 text-eyebrow font-semibold uppercase text-accent transition-colors group-hover/card:border-accent/55 group-hover/card:text-accent-strong">
                           {organization.shortName}
                         </span>
                       ) : null}

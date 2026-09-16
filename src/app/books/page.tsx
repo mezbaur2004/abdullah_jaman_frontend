@@ -99,6 +99,7 @@ export default function BooksPage() {
                 id="author-note-heading"
                 title={authorNote.headline}
                 accent="yellow"
+                size="feature"
               />
               <div className="mt-10 flex max-w-2xl flex-col gap-6 text-lede text-content-muted">
                 {authorNote.body.map((paragraph, i) => (
@@ -132,7 +133,7 @@ export default function BooksPage() {
             <div className="mt-14 flex flex-col gap-16 lg:mt-16">
               {grouped.map((group) => (
                 <section key={group.category}>
-                  <h3 className="text-eyebrow font-medium uppercase text-content-subtle">
+                  <h3 className="text-eyebrow font-semibold uppercase text-content-subtle">
                     {group.category}
                   </h3>
                   <ul className="mt-7 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
@@ -150,7 +151,7 @@ export default function BooksPage() {
               {loose.length > 0 ? (
                 <section>
                   {grouped.length > 0 ? (
-                    <h3 className="text-eyebrow font-medium uppercase text-content-subtle">
+                    <h3 className="text-eyebrow font-semibold uppercase text-content-subtle">
                       Other titles
                     </h3>
                   ) : null}

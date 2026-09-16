@@ -13,6 +13,7 @@ export function MediaHighlights({ index }: { index?: string }) {
 
   return (
     <Section
+      tone="soft"
       index={index}
       indexLabel="Media"
       accent="red"

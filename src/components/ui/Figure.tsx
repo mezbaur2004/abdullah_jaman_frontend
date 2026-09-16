@@ -15,6 +15,18 @@ type FigureProps = {
   ratio?: string;
   rounded?: boolean;
   /**
+   * Lifts the frame off the page with the panel shadow. For a photograph set
+   * into prose, where it should read as laid on the page rather than cut into
+   * it. Off inside a card, which is already a raised surface of its own.
+   */
+  elevated?: boolean;
+  /**
+   * Which side of the palette the frame's hairline comes from. `inverse` for a
+   * photograph sitting on the navy band, where the standard rule is a dark
+   * line on a dark ground and simply disappears.
+   */
+  frame?: "base" | "inverse";
+  /**
    * Pushes the image in slightly on hover, cropped by the frame. The move is
    * small on purpose: a photograph that leaps is a carousel effect, while a
    * few per cent reads as the image settling under the cursor.
@@ -38,6 +50,8 @@ export function Figure({
   className,
   ratio,
   rounded = false,
+  elevated = false,
+  frame: frameTone = "base",
   zoom = false,
 }: FigureProps) {
   const decorative = image.alt === "";
@@ -45,8 +59,13 @@ export function Figure({
   const frame = (
     <div
       className={cn(
-        "relative overflow-hidden border border-line bg-surface-soft transition-colors",
-        rounded && "rounded-sm",
+        "relative overflow-hidden border bg-surface-soft transition-colors",
+        frameTone === "inverse" ? "border-line-inverse" : "border-line",
+        // Softer than a card's corner and firmer than a hairline crop. One
+        // value for every photograph on the site, so a frame is never a
+        // decision a caller has to make twice.
+        rounded && "rounded-[0.75rem]",
+        elevated && "shadow-panel",
         // Its own group, so a standalone figure zooms on its own hover; the
         // card group is honoured too, for a figure sitting inside a card.
         zoom && "group/figure hover:border-line-accent",
