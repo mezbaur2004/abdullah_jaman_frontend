@@ -120,17 +120,18 @@ export function PageHeader({
           <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-16">
             <div className="lg:col-span-7">{heading}</div>
             <div className="lg:col-span-5">
-              <ArchFrame className="mx-auto w-full max-w-xs lg:max-w-none">
+              <div className="mx-auto w-full max-w-xs lg:max-w-none">
                 <ImageReveal>
                   <Figure
                     image={image}
-                    ratio="4 / 5"
+                    ratio="1 / 1"
                     priority
                     frame="none"
+                    className="overflow-hidden rounded-t-3xl"
                     sizes="(min-width: 1024px) 38vw, (min-width: 640px) 20rem, 80vw"
                   />
                 </ImageReveal>
-              </ArchFrame>
+              </div>
             </div>
           </div>
         </Container>
