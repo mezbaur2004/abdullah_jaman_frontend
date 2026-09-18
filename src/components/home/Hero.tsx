@@ -106,11 +106,15 @@ export function Hero() {
 
           <div className="sm:col-span-5">
               <ImageReveal>
+                {/* Square, with the top corners curved and the bottom left
+                    square — the simple shape that replaced the mihrab arch
+                    here, once the arch itself was removed. */}
                 <Figure
                   image={image}
-                  ratio="4 / 5"
+                  ratio="1 / 1"
                   priority
                   frame="none"
+                  className="overflow-hidden rounded-t-3xl"
                   sizes="(min-width: 1024px) 38vw, (min-width: 640px) 36vw, 90vw"
                 />
               </ImageReveal>
