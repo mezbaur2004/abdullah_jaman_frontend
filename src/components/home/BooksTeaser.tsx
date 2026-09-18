@@ -1,6 +1,5 @@
 import { Container } from "@/components/layout/Container";
 import { Section } from "@/components/layout/Section";
-import { ArchFrame } from "@/components/ui/ArchFrame";
 import { Figure } from "@/components/ui/Figure";
 import { ImageReveal } from "@/components/ui/ImageReveal";
 import { Reveal } from "@/components/ui/Reveal";
@@ -72,16 +71,19 @@ export function BooksTeaser({ index }: { index?: string }) {
           </div>
 
           <div className="lg:col-span-6 lg:pt-3">
-            <ArchFrame className="mx-auto w-full max-w-sm lg:max-w-none">
+            {/* Square, with the top corners curved and the bottom left
+                square — the same shape as the hero and about portraits. */}
+            <div className="mx-auto w-full max-w-sm lg:max-w-none">
               <ImageReveal>
                 <Figure
                   image={booksFeature}
-                  ratio="4 / 5"
+                  ratio="1 / 1"
                   frame="none"
+                  className="overflow-hidden rounded-t-3xl"
                   sizes="(min-width: 1024px) 44vw, (min-width: 640px) 24rem, 90vw"
                 />
               </ImageReveal>
-            </ArchFrame>
+            </div>
           </div>
         </div>
 
