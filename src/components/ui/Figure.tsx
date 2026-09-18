@@ -87,8 +87,11 @@ export function Figure({
         priority={priority}
         className={cn(
           "object-cover",
+          // Three groups, because a zooming picture has three owners: its own
+          // frame, the card it sits in, and — for a whole section made one
+          // target by a stretched SectionLink — the block around it.
           zoom &&
-            "transition-transform duration-500 ease-hover group-hover/figure:scale-[var(--hover-zoom)] group-hover/card:scale-[var(--hover-zoom)]",
+            "transition-transform duration-500 ease-hover group-hover/figure:scale-[var(--hover-zoom)] group-hover/card:scale-[var(--hover-zoom)] group-hover/block:scale-[var(--hover-zoom)]",
         )}
         style={image.position ? { objectPosition: image.position } : undefined}
       />

@@ -71,12 +71,12 @@ export function Hero() {
               className="animate-rise mt-11 flex flex-col gap-3.5 sm:flex-row sm:items-center sm:gap-4"
               style={{ animationDelay: "320ms" }}
             >
-              <Button href={hero.primaryCta.href} variant="inverse" size="lg">
+              <Button href={hero.primaryCta.href} variant="primary" size="lg">
                 {hero.primaryCta.label}
               </Button>
               <Button
                 href={hero.secondaryCta.href}
-                variant="inverseOutline"
+                variant="secondaryInverse"
                 size="lg"
               >
                 {hero.secondaryCta.label}

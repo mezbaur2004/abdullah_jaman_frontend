@@ -2,7 +2,7 @@ import { Container } from "@/components/layout/Container";
 import { emphasise } from "@/lib/emphasis";
 import { GeometricPattern } from "@/components/ui/GeometricPattern";
 import { Section } from "@/components/layout/Section";
-import { Button } from "@/components/ui/Button";
+import { SectionLink } from "@/components/ui/SectionLink";
 import { Panel } from "@/components/ui/Panel";
 import { Reveal } from "@/components/ui/Reveal";
 import { aboutPage, aboutTeaser } from "@/content/profile";
@@ -47,11 +47,6 @@ export function AboutTeaser({ index }: { index?: string }) {
                 ))}
               </div>
 
-              <div className="mt-10">
-                <Button href={aboutTeaser.cta.href} variant="quiet">
-                  {aboutTeaser.cta.label}
-                </Button>
-              </div>
             </Reveal>
           </div>
 
@@ -80,6 +75,16 @@ export function AboutTeaser({ index }: { index?: string }) {
             </Reveal>
           </div>
         </div>
+
+        {/* The doorway. It used to be a small arrow link under the prose,
+            identical to the five others on the page; a full-width rule with
+            the destination set at heading size is the section actually
+            ending in a way out rather than trailing off into a footnote. */}
+        <Reveal className="relative mt-16 block lg:mt-20">
+          <SectionLink href={aboutTeaser.cta.href}>
+            {aboutTeaser.cta.label}
+          </SectionLink>
+        </Reveal>
       </Container>
     </Section>
   );

@@ -4,6 +4,7 @@ import { join } from "node:path";
 import { ImageResponse } from "next/og";
 
 import { site } from "@/content/site";
+import { brand } from "@/lib/brand";
 
 export const alt = `${site.name} — ${site.positioning}, Wheaton International School and Guidance International School`;
 export const size = { width: 1200, height: 630 };
@@ -30,7 +31,7 @@ export default async function OpenGraphImage() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          backgroundColor: "#051529",
+          backgroundColor: brand.navy,
           color: "#f6f1e4",
           padding: "72px 80px",
           fontFamily: "Fraunces",

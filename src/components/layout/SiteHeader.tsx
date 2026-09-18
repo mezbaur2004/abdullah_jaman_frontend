@@ -161,27 +161,48 @@ export function SiteHeader() {
               className="absolute inset-x-0 top-full h-[calc(100dvh-5rem)] overflow-y-auto border-t border-line bg-surface lg:hidden"
             >
               <Container as="nav" aria-label="Primary" className="py-10">
-                <ul className="flex flex-col">
-                  {primaryNav.map((item) => (
+                {/* Numbered, in brass, in the display face — the same marker
+                    every section on every page opens with. The menu is the
+                    site's table of contents and should look like one rather
+                    than like a list of six words. */}
+                <ol className="flex flex-col">
+                  {primaryNav.map((item, i) => (
                     <li key={item.href} className="border-b border-line">
                       <Link
                         href={item.href}
                         aria-current={isCurrent(item.href) ? "page" : undefined}
-                        className={cn(
-                          "flex items-baseline justify-between py-5 font-display text-display-md",
-                          isCurrent(item.href)
-                            ? "text-accent"
-                            : "text-content-muted",
-                        )}
+                        className="group/row flex items-baseline gap-5 py-5"
                       >
-                        {item.label}
+                        <span
+                          aria-hidden="true"
+                          className="w-7 shrink-0 font-display text-sm font-semibold text-accent"
+                        >
+                          {String(i + 1).padStart(2, "0")}
+                        </span>
+                        <span
+                          className={cn(
+                            "font-display text-display-md transition-colors",
+                            isCurrent(item.href)
+                              ? "text-accent"
+                              : "text-content group-hover/row:text-accent",
+                          )}
+                        >
+                          {item.label}
+                        </span>
                       </Link>
                     </li>
                   ))}
-                </ul>
+                </ol>
+
+                {/* Brass here and navy in the bar above, and the pair is not
+                    an inconsistency. The overlay is the whole screen when it
+                    is open, so this is the one control on it and takes the
+                    primary style; the bar's button shares its screen with
+                    whatever page is under it, where a second brass block
+                    would compete with the page's own one action. */}
                 <Link
                   href="/contact"
-                  className="mt-10 inline-flex w-full items-center justify-center rounded-control bg-action px-7 py-4 text-ui font-medium text-on-action"
+                  className="mt-10 inline-flex w-full items-center justify-center rounded-control bg-action-inverse px-7 py-4 text-ui font-medium text-on-action-inverse transition-colors hover:bg-action-inverse-hover"
                 >
                   Get in touch
                 </Link>

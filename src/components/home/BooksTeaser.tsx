@@ -1,34 +1,32 @@
 import { Container } from "@/components/layout/Container";
-import { emphasise } from "@/lib/emphasis";
 import { Section } from "@/components/layout/Section";
-import { Button } from "@/components/ui/Button";
-import { Reveal } from "@/components/ui/Reveal";
-import { SectionHeading } from "@/components/ui/SectionHeading";
 import { ArchFrame } from "@/components/ui/ArchFrame";
 import { Figure } from "@/components/ui/Figure";
 import { ImageReveal } from "@/components/ui/ImageReveal";
-import { BookCard } from "@/components/books/BookCard";
-import { books, booksIntro } from "@/content/books";
+import { Reveal } from "@/components/ui/Reveal";
+import { SectionLink } from "@/components/ui/SectionLink";
+import { BookSetNote } from "@/components/books/BookSetNote";
+import { BookTitleCard } from "@/components/books/BookTitleCard";
+import { booksIntro } from "@/content/books";
 import { booksFeature } from "@/content/profile";
+import { books } from "@/data/books";
+import { emphasise } from "@/lib/emphasis";
 
 /**
- * Authorship as a homepage section in its own right.
+ * Authorship as a homepage section in its own right — and now with the work
+ * on it rather than only an account of the work.
  *
- * It renders whether or not any titles have been supplied, and that is
- * deliberate: the authorship itself is confirmed, only the bibliography is
- * outstanding. So the section says what the writing is for — which is on the
- * record — and routes to the page, rather than either inventing titles or
- * pretending the work does not exist.
+ * The section used to be the argument and a photograph, because the
+ * bibliography was outstanding and inventing a title to fill the space was
+ * never on the table. Two volumes are published, so the covers are here, each
+ * card a door to the title's own page. A homepage that describes someone's
+ * writing without showing any of it is a homepage asking to be taken on trust.
  *
- * With no titles it is the argument and the office photograph, cut to the
- * arch. That photograph also opens the books page, so a reader following the
+ * The office photograph still opens the books page, so a reader following the
  * link meets it twice — a real cost, and the one the owner weighed when asking
- * for it here. A books section with no picture on a page where every other
- * section has one read as an aside, and the repeat is the cheaper problem.
+ * for it here.
  */
 export function BooksTeaser({ index }: { index?: string }) {
-  const featured = books.slice(0, 4);
-
   return (
     <Section
       tone="ivory"
@@ -39,76 +37,59 @@ export function BooksTeaser({ index }: { index?: string }) {
       aria-labelledby="books-teaser-heading"
     >
       <Container>
-        {featured.length > 0 ? (
-          <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
-            <div className="lg:col-span-5">
-              <SectionHeading
+        <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
+          <div className="lg:col-span-6">
+            <Reveal>
+              <h2
                 id="books-teaser-heading"
-                title={booksIntro.headline}
-                lede={booksIntro.lede}
-                accent="gold"
-                size="feature"
-              />
-              <Reveal step={1}>
-                <div className="mt-10">
-                  <Button href="/books" accent="gold" variant="secondary">
-                    View all books
-                  </Button>
-                </div>
-              </Reveal>
-            </div>
+                className="max-w-xl text-display-xl text-content"
+              >
+                {emphasise(booksIntro.headline)}
+              </h2>
+            </Reveal>
 
-            <ul className="grid gap-5 sm:grid-cols-2 lg:col-span-7">
-              {featured.map((book, i) => (
-                <li key={book.title}>
-                  <Reveal step={i}>
-                    <BookCard book={book} />
+            <Reveal step={1}>
+              <p className="mt-9 max-w-xl text-lede text-content-muted">
+                {booksIntro.lede}
+              </p>
+            </Reveal>
+
+            {/* The published titles, beneath the argument and beside the
+                photograph. Each card is the whole target, cover included. */}
+            <ul className="mt-12 grid gap-5 sm:max-w-lg sm:grid-cols-2 lg:max-w-none">
+              {books.map((book, i) => (
+                <li key={book.slug}>
+                  <Reveal step={i + 1} className="h-full">
+                    <BookTitleCard book={book} size="compact" />
                   </Reveal>
                 </li>
               ))}
             </ul>
-          </div>
-        ) : (
-          /* Text and photograph, not text and a gap. The section carried no
-             image at all, which on a page where every other section has one
-             made thebooks band read as an aside. */
-          <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
-            <div className="lg:col-span-7">
-              <Reveal>
-                <h2
-                  id="books-teaser-heading"
-                  className="max-w-xl text-display-xl text-content"
-                >
-                  {emphasise(booksIntro.headline)}
-                </h2>
-              </Reveal>
 
-              <Reveal step={1}>
-                <p className="mt-9 max-w-xl text-lede text-content-muted">
-                  {booksIntro.lede}
-                </p>
-                <div className="mt-11">
-                  <Button href="/books" accent="gold" variant="secondary">
-                    About the writing
-                  </Button>
-                </div>
-              </Reveal>
-            </div>
-
-            <div className="lg:col-span-5">
-              <ArchFrame className="mx-auto w-full max-w-sm lg:max-w-none">
-                <ImageReveal>
-                  <Figure
-                    image={booksFeature}
-                    ratio="4 / 5"
-                    frame="none"
-                    sizes="(min-width: 1024px) 38vw, (min-width: 640px) 24rem, 90vw"
-                  />
-                </ImageReveal>
-              </ArchFrame>
-            </div>
+            <Reveal step={2}>
+              <BookSetNote className="mt-8 max-w-lg" />
+            </Reveal>
           </div>
-        )}
+
+          <div className="lg:col-span-6 lg:pt-3">
+            <ArchFrame className="mx-auto w-full max-w-sm lg:max-w-none">
+              <ImageReveal>
+                <Figure
+                  image={booksFeature}
+                  ratio="4 / 5"
+                  frame="none"
+                  sizes="(min-width: 1024px) 44vw, (min-width: 640px) 24rem, 90vw"
+                />
+              </ImageReveal>
+            </ArchFrame>
+          </div>
+        </div>
+
+        <Reveal className="mt-16 block lg:mt-20">
+          <SectionLink href="/books" detail="The writing, and both published volumes.">
+            Books
+          </SectionLink>
+        </Reveal>
       </Container>
     </Section>
   );

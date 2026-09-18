@@ -73,9 +73,9 @@ export const openQuestions: OpenQuestion[] = [
   {
     subject: "The bibliography",
     known:
-      "Authorship is confirmed. The Daily Star interview describes his development and supervision of Islamic Studies and Arabic learning materials, and the owner has confirmed multiple authored titles.",
+      "Two published volumes, supplied in full by the owner and now on the site: Arabi Shikkha Obhijatra volumes one and two, published by Manuver in 2024, with publisher, subject, extent, format, edition, list price and retailer page for each. They are in src/data/books.ts and each has a page of its own.",
     missing:
-      "Every specific: not one title, cover, publisher, year or ISBN has been supplied. The books page and its data model are built and empty. A bibliography is the easiest thing on a personal site to check and the worst to get wrong — an invented title is a fabricated work attributed to a real author — so nothing is listed until it is supplied.",
+      "Whether these two are the whole of it. The Daily Star interview describes wider work developing and supervising Islamic Studies and Arabic materials, and the owner has referred to multiple authored titles, so further books may exist that have not been supplied. Also outstanding: print-quality cover files, and an ISBN for either volume. Nothing is added to the list on inference — an invented title is a fabricated work attributed to a real author.",
   },
   {
     subject: "A quotation",
@@ -223,14 +223,10 @@ export const contentGaps: ContentGap[] = [
   {
     area: "Books",
     items: [
-      "Titles",
-      "Cover images",
-      "Publishers",
-      "Publication years",
-      "Categories — Islamic Studies, Arabic Language, Aqidah, Educational Materials",
-      "Series or collection names",
-      "His role on each, where it is not sole authorship",
-      "Links to publisher or retailer pages",
+      "Any further titles beyond the two volumes of Arabi Shikkha Obhijatra",
+      "Print-quality cover files — the current images are low-resolution stand-ins, to be dropped in at the same paths under /images/books/",
+      "ISBNs for both volumes",
+      "His role on any title where it is not sole authorship",
     ],
   },
   {
