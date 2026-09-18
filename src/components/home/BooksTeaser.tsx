@@ -85,10 +85,8 @@ export function BooksTeaser({ index }: { index?: string }) {
           </div>
         </div>
 
-        <Reveal className="mt-16 block lg:mt-20">
-          <SectionLink href="/books" detail="The writing, and both published volumes.">
-            Books
-          </SectionLink>
+        <Reveal className="mt-14 block lg:mt-16">
+          <SectionLink href="/books">Books</SectionLink>
         </Reveal>
       </Container>
     </Section>

@@ -129,7 +129,10 @@ export function SiteHeader() {
             onClick={() => setMenu({ open: !menuOpen, route: pathname })}
             aria-expanded={menuOpen}
             aria-controls="mobile-navigation"
-            className="-mr-2 inline-flex size-10 items-center justify-center text-content sm:size-11 lg:hidden"
+            // 44px tall, 40px wide. The button draws no box of its own, so the
+            // extra height is invisible and costs nothing horizontally — which
+            // matters, because at 320px the header has almost no slack left.
+            className="-mr-2 inline-flex h-11 w-10 items-center justify-center text-content sm:size-11 lg:hidden"
           >
             <span className="sr-only">
               {menuOpen ? "Close menu" : "Open menu"}

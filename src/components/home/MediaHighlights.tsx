@@ -120,11 +120,8 @@ export function MediaHighlights({ index }: { index?: string }) {
             This is the other one: the section's way through to the rest of
             the press, in the same row style every section on the page ends
             in. */}
-        <Reveal className="mt-16 block lg:mt-20">
-          <SectionLink
-            href="/media"
-            detail="Interviews, features and press coverage."
-          >
+        <Reveal className="mt-14 block lg:mt-16">
+          <SectionLink href="/media">
             {mediaItems.length > highlights.length ? "All media" : "Media & press"}
           </SectionLink>
         </Reveal>

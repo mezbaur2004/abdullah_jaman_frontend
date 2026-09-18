@@ -54,7 +54,11 @@ export function PagePager() {
             takes the whole width rather than leaving half the row empty. It
             keeps its own alignment, so the direction still reads off the
             side it sits on. */}
-        <div className="grid gap-px overflow-hidden border-b border-line sm:grid-cols-2">
+        {/* `gap-px` over a line-coloured ground draws the rule between the two
+            cells — one technique that works stacked on a phone and side by
+            side on a desktop, instead of a border that has to change edge at
+            the breakpoint. */}
+        <div className="grid gap-px overflow-hidden border-b border-line bg-line sm:grid-cols-2">
           {previous ? (
             <PagerCell
               item={previous}
@@ -106,7 +110,10 @@ function PagerCell({
         />
       ) : null}
 
-      <span className="min-w-0">
+      {/* `flex-1` so the trailing arrow is pushed to the far edge rather than
+          trailing the label. Stacked on a phone the two cells then agree: the
+          arrow is at an edge in both, and which edge says which direction. */}
+      <span className="min-w-0 flex-1">
         <span className="block text-eyebrow font-semibold uppercase text-accent">
           {forward ? "Next" : "Previous"}
         </span>

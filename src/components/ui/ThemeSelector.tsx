@@ -125,6 +125,15 @@ export function ThemeSelector({ className }: { className?: string }) {
             onClick={() => applyTheme(option)}
             className={cn(
               "relative z-10 inline-flex size-7 items-center justify-center rounded-chip transition-colors sm:size-8",
+              // The tap target, extended vertically only.
+              //
+              // The visible segment is 28px, and it has to stay 28px: at 320px
+              // the header has about four pixels of slack, so there is nowhere
+              // for three wider segments to go. A thumb misses vertically far
+              // more than horizontally on a row like this, so the hit area
+              // grows to 46px tall and keeps its width — which also means the
+              // three areas cannot overlap and steal each other's taps.
+              "after:absolute after:inset-x-0 after:-inset-y-[9px] after:content-['']",
               active ? "text-accent" : "text-content-subtle hover:text-accent",
             )}
           >
