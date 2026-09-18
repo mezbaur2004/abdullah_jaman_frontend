@@ -48,15 +48,15 @@ export default function AboutPage() {
         <Container>
           <div className="grid gap-14 lg:grid-cols-12 lg:gap-20">
             <div className="lg:col-span-5">
-              {/* The same frame the hero gives it: a picture on this site is
-                  framed one way, and this one was the exception — a bare
-                  hairline crop beside a page of framed photographs. */}
+              {/* The same shape the hero gives its portrait: square, with the
+                  top corners curved and the bottom left square. */}
                 <ImageReveal>
                   <Figure
                     image={image}
-                    ratio="4 / 5"
+                    ratio="1 / 1"
                     priority
                     frame="none"
+                    className="overflow-hidden rounded-t-3xl"
                     sizes="(min-width: 1024px) 38vw, (min-width: 640px) 24rem, 90vw"
                   />
                 </ImageReveal>
