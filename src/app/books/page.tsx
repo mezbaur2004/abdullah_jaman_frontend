@@ -1,30 +1,23 @@
 import type { Metadata } from "next";
 
-import { BookCard } from "@/components/books/BookCard";
+import { BookSetNote } from "@/components/books/BookSetNote";
+import { BookTitleCard } from "@/components/books/BookTitleCard";
 import { ContactCta } from "@/components/home/ContactCta";
 import { Container } from "@/components/layout/Container";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { Section } from "@/components/layout/Section";
 import { GeometricPattern } from "@/components/ui/GeometricPattern";
-import { PendingNote } from "@/components/ui/PendingNote";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import {
-  authorNote,
-  books,
-  booksByCategory,
-  booksIntro,
-  booksPending,
-  featuredBook,
-  uncategorisedBooks,
-} from "@/content/books";
+import { authorNote, booksIntro } from "@/content/books";
 import { booksFeature } from "@/content/profile";
+import { books } from "@/data/books";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
   title: "Books",
   description:
-    "Abdullah Jaman writes and supervises Islamic Studies and Arabic learning materials for school classrooms in Dhaka, Bangladesh.",
+    "Abdullah Jaman is the author of Arabi Shikkha Obhijatra, a two-volume Arabic course for Bengali-speaking readers, and writes and supervises Islamic Studies and Arabic learning materials for school classrooms in Dhaka.",
   path: "/books",
 });
 
@@ -36,16 +29,11 @@ export const metadata: Metadata = pageMetadata({
  * than elsewhere. A bibliography is a different kind of object from a CV, and
  * the page should feel like one.
  *
- * It is also built to be honest while empty. Authorship is on the record; not
- * one title has been supplied. So the page leads with what the writing is
- * *for* rather than with a list, and the list appears the moment `books` has
- * entries. Nothing here is conditional on invention.
+ * It used to lead with an apology for having no titles on it. That is gone:
+ * two volumes are published, they are on the page, and the "nothing is listed
+ * until it is confirmed" note has been deleted rather than left dormant.
  */
 export default function BooksPage() {
-  const grouped = booksByCategory();
-  const loose = uncategorisedBooks();
-  const rest = books.filter((book) => book !== featuredBook);
-
   return (
     <>
       <PageHeader
@@ -56,47 +44,20 @@ export default function BooksPage() {
         image={booksFeature}
       />
 
-      {featuredBook ? (
-        <Section
-          tone="ivory"
-          divider={false}
-          index="01"
-          indexLabel="Featured"
-          accent="gold"
-          aria-labelledby="featured-book-heading"
-        >
-          <Container>
-            <SectionHeading
-              id="featured-book-heading"
-              title="Featured."
-              accent="gold"
-            />
-            <Reveal className="mt-14 lg:mt-16">
-              <BookCard book={featuredBook} feature />
-            </Reveal>
-          </Container>
-        </Section>
-      ) : null}
-
-      {/* The author's approach. With no titles yet this carries the page, and
-          it stays first-class once they arrive — how the writing is done is
-          more interesting than how much of it there is. */}
+      {/* The author's approach. It opens the page rather than the list because
+          how the writing is done is the more interesting half, and because the
+          titles read better once a reader knows what they are for. */}
       <Section
         tone="ivory"
-        divider={Boolean(featuredBook)}
-        index={featuredBook ? "02" : "01"}
+        divider={false}
+        index="01"
         indexLabel="The writing"
         accent="gold"
-        separator="band"
         aria-labelledby="author-note-heading"
       >
         <Container className="relative">
           <GeometricPattern className="-top-16 h-72" fade />
 
-          {/* The office photograph opens this page now, so the passage runs
-              as prose alone. Two columns here, with the same picture in the
-              right-hand one, had the page showing a reader the same thing
-              twice within a screen and a half. */}
           <div className="relative grid gap-12 lg:grid-cols-12 lg:gap-20">
             <div className="lg:col-span-5">
               <SectionHeading
@@ -118,87 +79,42 @@ export default function BooksPage() {
         </Container>
       </Section>
 
-      {grouped.length > 0 || loose.length > 0 ? (
-        <Section
-          index={featuredBook ? "03" : "02"}
-          indexLabel="Titles"
-          accent="gold"
-          aria-labelledby="titles-heading"
-        >
-          <Container>
-            <SectionHeading id="titles-heading" title="All titles." />
+      {/* The titles. Navy cards on the paper ground rather than a navy band:
+          the covers need a dark surface to read as objects rather than as two
+          pale rectangles, and a navy card on navy would be an outline holding
+          nothing. It also puts the section's weight in the cards, which is
+          where a reader's attention on this page belongs. */}
+      <Section
+        index="02"
+        indexLabel="Titles"
+        accent="gold"
+        pattern
+        aria-labelledby="titles-heading"
+      >
+        <Container>
+          <SectionHeading
+            id="titles-heading"
+            title="Published *titles*."
+            lede="A two-volume Arabic course, published by Manuver in 2024."
+          />
 
-            <div className="mt-14 flex flex-col gap-16 lg:mt-16">
-              {grouped.map((group) => (
-                <section key={group.category}>
-                  <h3 className="text-eyebrow font-semibold uppercase text-content-subtle">
-                    {group.category}
-                  </h3>
-                  <ul className="mt-7 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
-                    {group.items.map((book, i) => (
-                      <li key={book.title}>
-                        <Reveal step={i}>
-                          <BookCard book={book} />
-                        </Reveal>
-                      </li>
-                    ))}
-                  </ul>
-                </section>
-              ))}
+          <ul className="mt-14 grid gap-6 sm:grid-cols-2 lg:mt-16 lg:gap-8">
+            {books.map((book, i) => (
+              <li key={book.slug}>
+                <Reveal step={i} className="h-full">
+                  <BookTitleCard book={book} />
+                </Reveal>
+              </li>
+            ))}
+          </ul>
 
-              {loose.length > 0 ? (
-                <section>
-                  {grouped.length > 0 ? (
-                    <h3 className="text-eyebrow font-semibold uppercase text-content-subtle">
-                      Other titles
-                    </h3>
-                  ) : null}
-                  <ul
-                    className={`grid gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6 ${
-                      grouped.length > 0 ? "mt-7" : ""
-                    }`}
-                  >
-                    {loose.map((book, i) => (
-                      <li key={book.title}>
-                        <Reveal step={i}>
-                          <BookCard book={book} />
-                        </Reveal>
-                      </li>
-                    ))}
-                  </ul>
-                </section>
-              ) : null}
-            </div>
+          <Reveal step={1}>
+            <BookSetNote className="mt-12 max-w-xl" />
+          </Reveal>
+        </Container>
+      </Section>
 
-            {rest.length === 0 && booksPending ? (
-              <Reveal step={1}>
-                <PendingNote className="mt-14">{booksPending}</PendingNote>
-              </Reveal>
-            ) : null}
-          </Container>
-        </Section>
-      ) : (
-        <Section
-          index={featuredBook ? "03" : "02"}
-          indexLabel="Titles"
-          accent="gold"
-          separator="quiet"
-          aria-labelledby="titles-pending-heading"
-        >
-          <Container>
-            <SectionHeading
-              id="titles-pending-heading"
-              title="Titles."
-              lede="Nothing is listed here until the title, the cover and the publication details are confirmed."
-            />
-            <Reveal step={1}>
-              <PendingNote className="mt-12">{booksPending}</PendingNote>
-            </Reveal>
-          </Container>
-        </Section>
-      )}
-
-      <ContactCta index={featuredBook ? "04" : "03"} />
+      <ContactCta index="03" />
     </>
   );
 }

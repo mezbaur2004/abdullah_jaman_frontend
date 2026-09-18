@@ -450,6 +450,15 @@
   --font-display: var(--font-fraunces), ui-serif, "Iowan Old Style", Georgia,
     "Times New Roman", serif;
 
+  /* Bangla. Fraunces has no Bengali coverage at all, so a Bengali title set in
+     `font-display` does not fall back gracefully — it falls out of the family
+     entirely, usually into the platform sans. Every Bengali string on the site
+     is set in this instead, and the stack behind Noto names Bangla serifs
+     rather than generic ones so a machine without the webfont still lands on a
+     serif rather than on Vrinda or a default sans. */
+  --font-bangla: var(--font-bengali), "Kalpurush", "SolaimanLipi",
+    "Shonar Bangla", ui-serif, serif;
+
   --text-display-2xl: clamp(3.125rem, 8vw, 6.75rem);
   --text-display-2xl--line-height: 0.94;
   --text-display-2xl--letter-spacing: -0.035em;
@@ -805,6 +814,37 @@
 
   /* The gold rule that slides in under a link on hover. Applied to the link
      itself; the rule is a pseudo-element so it needs no extra markup. */
+  /* ---------------------------------------------------------------------
+     Route transition
+
+     Applied by app/template.tsx, which is remounted on every navigation. A
+     short fade with a slight rise — the same gesture the section reveals use,
+     so arriving at a page reads as continuous with reading down one.
+
+     No `animation-fill-mode`: at rest the element must carry no transform at
+     all, because a transformed ancestor becomes the containing block for any
+     `position: fixed` descendant and would quietly break one later.
+
+     Off under reduced motion rather than shortened. A whole-page movement is
+     exactly the class of animation that rule exists for.
+  --------------------------------------------------------------------- */
+  @media (prefers-reduced-motion: no-preference) {
+    .route-enter {
+      animation: route-enter 300ms var(--ease-editorial);
+    }
+  }
+
+  @keyframes route-enter {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
   .link-underline {
     position: relative;
   }

@@ -2,6 +2,7 @@ import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 
 import { ImageResponse } from "next/og";
+import { brand } from "@/lib/brand";
 
 export const size = { width: 64, height: 64 };
 export const contentType = "image/png";
@@ -21,7 +22,7 @@ export default async function Icon() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          backgroundColor: "#051529",
+          backgroundColor: brand.navy,
           color: "#e4c87e",
           fontSize: 38,
           fontFamily: "Fraunces",

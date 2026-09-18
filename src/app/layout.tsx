@@ -1,8 +1,11 @@
 import type { Metadata, Viewport } from "next";
-import { Fraunces, Inter } from "next/font/google";
+import { Fraunces, Inter, Noto_Serif_Bengali } from "next/font/google";
 
+import { PagePager } from "@/components/layout/PagePager";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
+import { ScrollProgress } from "@/components/ui/ScrollProgress";
+import { brand } from "@/lib/brand";
 import { site } from "@/content/site";
 import { personJsonLd } from "@/lib/seo";
 import { themeInitScript } from "@/lib/theme";
@@ -17,6 +20,26 @@ const inter = Inter({
 const fraunces = Fraunces({
   subsets: ["latin"],
   variable: "--font-fraunces",
+  display: "swap",
+});
+
+/**
+ * The Bangla face, and it has to be a serif.
+ *
+ * Two of the books are titled in Bengali and the titles are the loudest type
+ * on those pages. Fraunces carries no Bengali, so without this every one of
+ * them falls through to whatever the browser keeps for the script — on most
+ * machines a sans, and a jarring one beside a page set entirely in a serif.
+ * Loading the face is not a refinement here; it is the difference between the
+ * titles looking typeset and looking pasted in.
+ *
+ * `display: "swap"` for the same reason as the others: a title that is
+ * invisible while a font loads is worse than one that reflows.
+ */
+const notoSerifBengali = Noto_Serif_Bengali({
+  subsets: ["bengali", "latin"],
+  weight: ["400", "500", "600"],
+  variable: "--font-bengali",
   display: "swap",
 });
 
@@ -60,10 +83,15 @@ export const metadata: Metadata = {
   },
 };
 
+/**
+ * Declared once, at the root, and never overridden by a route. Both values
+ * come from the single brand token — the chrome should not change colour
+ * because a reader moved from the homepage to the books page.
+ */
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#fbf7ef" },
-    { media: "(prefers-color-scheme: dark)", color: "#030c17" },
+    { media: "(prefers-color-scheme: light)", color: brand.parchment },
+    { media: "(prefers-color-scheme: dark)", color: brand.navy },
   ],
 };
 
@@ -75,7 +103,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       data-scroll-behavior="smooth"
       suppressHydrationWarning
-      className={`${inter.variable} ${fraunces.variable} h-full antialiased`}
+      className={`${inter.variable} ${fraunces.variable} ${notoSerifBengali.variable} h-full antialiased`}
     >
       <head>
         {/* Blocking and first, so a saved theme is applied before first paint
@@ -101,10 +129,14 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         >
           Skip to content
         </a>
+        <ScrollProgress />
         <SiteHeader />
         <main id="main" className="flex-1">
           {children}
         </main>
+        {/* Derived from the path rather than placed by each page, so a route
+            cannot join the navigation and be left out of the sequence. */}
+        <PagePager />
         <SiteFooter />
       </body>
     </html>

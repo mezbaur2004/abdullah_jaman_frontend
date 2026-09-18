@@ -1,6 +1,6 @@
 import { Container } from "@/components/layout/Container";
 import { Section } from "@/components/layout/Section";
-import { Button } from "@/components/ui/Button";
+import { SectionLink } from "@/components/ui/SectionLink";
 import { ListRow } from "@/components/ui/ListRow";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -23,11 +23,6 @@ export function Awards({ index }: { index?: string }) {
           id="awards-heading"
           title="Awards and honours."
           accent="red"
-          aside={
-            <Button href="/achievements" variant="quiet">
-              All achievements
-            </Button>
-          }
         />
 
         <ul className="mt-14 border-t border-line lg:mt-16">
@@ -56,6 +51,10 @@ export function Awards({ index }: { index?: string }) {
             </ListRow>
           ))}
         </ul>
+
+        <Reveal className="mt-16 block lg:mt-20">
+          <SectionLink href="/achievements">All achievements</SectionLink>
+        </Reveal>
       </Container>
     </Section>
   );

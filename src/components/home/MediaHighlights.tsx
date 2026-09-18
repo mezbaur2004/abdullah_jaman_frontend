@@ -3,7 +3,7 @@ import { ArrowUpRight } from "lucide-react";
 import { Container } from "@/components/layout/Container";
 import { Section } from "@/components/layout/Section";
 import { MediaEntry } from "@/components/media/MediaEntry";
-import { Button } from "@/components/ui/Button";
+import { SectionLink } from "@/components/ui/SectionLink";
 import { Figure } from "@/components/ui/Figure";
 import { ImageReveal } from "@/components/ui/ImageReveal";
 import { Reveal } from "@/components/ui/Reveal";
@@ -43,13 +43,6 @@ export function MediaHighlights({ index }: { index?: string }) {
           title={mediaIntro.headline}
           lede={mediaIntro.lede}
           accent="red"
-          aside={
-            <Button href="/media" variant="quiet">
-              {mediaItems.length > highlights.length
-                ? "All media"
-                : "Media & press"}
-            </Button>
-          }
         />
 
         <Reveal className="mt-14 lg:mt-16">
@@ -121,6 +114,20 @@ export function MediaHighlights({ index }: { index?: string }) {
             ))}
           </ul>
         ) : null}
+
+        {/* The lead item above is already one target, photograph and all, and
+            it goes to the article itself — which is the more valuable door.
+            This is the other one: the section's way through to the rest of
+            the press, in the same row style every section on the page ends
+            in. */}
+        <Reveal className="mt-16 block lg:mt-20">
+          <SectionLink
+            href="/media"
+            detail="Interviews, features and press coverage."
+          >
+            {mediaItems.length > highlights.length ? "All media" : "Media & press"}
+          </SectionLink>
+        </Reveal>
       </Container>
     </Section>
   );

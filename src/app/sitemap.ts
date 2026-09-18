@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 
 import { primaryNav, site } from "@/content/site";
+import { books } from "@/data/books";
 
 /**
  * Derived from the same nav the header renders, so a new page cannot be added
@@ -21,6 +22,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified,
       changeFrequency: "monthly" as const,
       priority: 0.8,
+    })),
+    /* One entry per title. The set is not among them: it is a way of buying
+       these same two volumes, has no page here, and listing it would put a
+       third book in front of a crawler. */
+    ...books.map((book) => ({
+      url: new URL(`/books/${book.slug}`, site.url).toString(),
+      lastModified,
+      changeFrequency: "yearly" as const,
+      priority: 0.6,
     })),
   ];
 }
