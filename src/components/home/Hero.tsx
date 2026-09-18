@@ -105,7 +105,6 @@ export function Hero() {
           </div>
 
           <div className="sm:col-span-5">
-            <ArchFrame tone="inverse">
               <ImageReveal>
                 <Figure
                   image={image}
@@ -115,7 +114,6 @@ export function Hero() {
                   sizes="(min-width: 1024px) 38vw, (min-width: 640px) 36vw, 90vw"
                 />
               </ImageReveal>
-            </ArchFrame>
           </div>
         </div>
       </Container>
