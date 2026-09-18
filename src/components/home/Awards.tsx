@@ -52,7 +52,7 @@ export function Awards({ index }: { index?: string }) {
           ))}
         </ul>
 
-        <Reveal className="mt-16 block lg:mt-20">
+        <Reveal className="mt-14 block lg:mt-16">
           <SectionLink href="/achievements">All achievements</SectionLink>
         </Reveal>
       </Container>

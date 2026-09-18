@@ -3,8 +3,9 @@
  * address. None have been supplied.
  *
  * While `site.email` is blank every email link on the site disappears, and the
- * contact page falls back to the one verified route: the Wheaton International
- * School website.
+ * contact page falls back to the verified route: the two school websites. Both
+ * of them — he holds the same post at each, and sending every enquiry to one
+ * of the pair implies a seniority between them that does not exist.
  */
 
 export const contactIntro = {
@@ -34,7 +35,7 @@ export const contactChannels = [
  * Shown while no direct contact details exist. Delete once `site.email` is set.
  */
 export const contactPending =
-  "Direct contact details are being confirmed. In the meantime, enquiries can be directed through the Wheaton International School website.";
+  "Direct contact details are being confirmed. In the meantime, enquiries can be directed through either school's website.";
 
 export const contactCta = {
   eyebrow: "Get in touch",

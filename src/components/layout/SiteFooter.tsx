@@ -88,6 +88,14 @@ export function SiteFooter() {
                         className="link-underline text-ui text-on-inverse-muted transition-colors hover:text-on-inverse"
                       >
                         {item.label}
+                        {/* The one place on the site an external link opened a
+                            new tab without saying so. Every other external
+                            link — the institution cards, the achievements
+                            strip, the retailer links — carries this note, and
+                            a screen reader user meeting a school's name in the
+                            footer should be told the same thing they are told
+                            about the same school three sections up. */}
+                        <span className="sr-only"> (opens in a new tab)</span>
                       </a>
                     </li>
                   ))}

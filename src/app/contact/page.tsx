@@ -137,8 +137,18 @@ export default function ContactPage() {
                     </div>
                   </dl>
 
-                  {/* While no personal address exists, the school's own site is
-                      the only honest route — so it is the primary action. */}
+                  {/* While no personal address exists, the schools' own sites
+                      are the only honest route — so they are the action here.
+
+                      Both of them, and that is the whole point of the change:
+                      this block used to offer `institutionLinks[0]` and stop,
+                      which sent every enquiry to Wheaton and left Guidance
+                      unreachable from the one page a reader comes to in order
+                      to reach him. He holds the same post at each.
+
+                      The first takes the filled brass, the rest the outline —
+                      one primary per screen, and the pair reads as two routes
+                      to the same person rather than as a route and a footnote. */}
                   {hasDirectDetails ? (
                     <div className="mt-9">
                       <Button href={`mailto:${site.email}`}>
@@ -150,11 +160,18 @@ export default function ContactPage() {
                       <PendingNote className="mt-9">
                         {contactPending}
                       </PendingNote>
-                      {institutionLinks[0] ? (
-                        <div className="mt-8">
-                          <Button href={institutionLinks[0].href}>
-                            Visit {institutionLinks[0].label}
-                          </Button>
+                      {institutionLinks.length > 0 ? (
+                        <div className="mt-8 flex flex-col items-start gap-4 sm:flex-row sm:flex-wrap sm:items-center">
+                          {institutionLinks.map((institution, i) => (
+                            <Button
+                              key={institution.href}
+                              href={institution.href}
+                              variant={i === 0 ? "primary" : "secondary"}
+                              className="w-full sm:w-auto"
+                            >
+                              Visit {institution.label}
+                            </Button>
+                          ))}
                         </div>
                       ) : null}
                     </>

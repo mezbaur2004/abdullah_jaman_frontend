@@ -39,8 +39,18 @@ type ButtonProps = {
   srSuffix?: string;
 };
 
+/**
+ * `min-h-12` is the 48px minimum tap target. Every variant clears it on
+ * padding alone at the default size, but a button whose label wraps on a
+ * narrow phone must not end up shorter than the thumb aiming at it.
+ *
+ * Every variant also carries an `active:` state. Hover is gated behind
+ * `@media (hover: hover)` — Tailwind does that for its own hover utilities —
+ * so on a touch screen there is no hover feedback at all, and without a
+ * pressed state a tap returns nothing until the next page paints.
+ */
 const base =
-  "group relative inline-flex items-center justify-center gap-2.5 overflow-hidden rounded-control font-medium tracking-[0.005em] transition-[transform,background-color,border-color,box-shadow,color]";
+  "group relative inline-flex min-h-12 items-center justify-center gap-2.5 overflow-hidden rounded-control font-medium tracking-[0.005em] transition-[transform,background-color,border-color,box-shadow,color]";
 
 const sizes: Record<Size, string> = {
   default: "text-ui px-8 py-4",
@@ -57,7 +67,7 @@ const variants: Record<Variant, string> = {
    * screen is unmistakably the identity's own colour.
    */
   primary:
-    "bg-action-inverse text-on-action-inverse shadow-card hover:translate-y-[var(--hover-lift)] hover:bg-action-inverse-hover hover:shadow-card-hover",
+    "bg-action-inverse text-on-action-inverse shadow-card hover:translate-y-[var(--hover-lift)] hover:bg-action-inverse-hover hover:shadow-card-hover active:translate-y-0 active:shadow-card",
   /**
    * An outline that fills. On parchment the line is the page's own ink, for
    * the plain reason that an ivory outline on an ivory ground is not an
@@ -65,11 +75,11 @@ const variants: Record<Variant, string> = {
    * rectangle, on hover the rectangle solid and the type reversed out.
    */
   secondary:
-    "border border-line-strong text-content hover:translate-y-[var(--hover-lift)] hover:border-action hover:bg-action hover:text-on-action",
+    "border border-line-strong text-content hover:translate-y-[var(--hover-lift)] hover:border-action hover:bg-action hover:text-on-action active:translate-y-0 active:bg-surface-soft",
   secondaryInverse:
-    "border border-line-inverse text-on-inverse hover:translate-y-[var(--hover-lift)] hover:border-on-inverse hover:bg-on-inverse hover:text-surface-inverse",
+    "border border-line-inverse text-on-inverse hover:translate-y-[var(--hover-lift)] hover:border-on-inverse hover:bg-on-inverse hover:text-surface-inverse active:translate-y-0 active:bg-surface-raise-inverse",
   onGold:
-    "bg-on-gold text-surface-gold shadow-card hover:translate-y-[var(--hover-lift)] hover:bg-on-inverse hover:text-on-gold hover:shadow-card-hover",
+    "bg-on-gold text-surface-gold shadow-card hover:translate-y-[var(--hover-lift)] hover:bg-on-inverse hover:text-on-gold hover:shadow-card-hover active:translate-y-0 active:shadow-card",
 };
 
 function isExternal(href: string) {

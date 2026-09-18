@@ -93,7 +93,13 @@
   --surface-raised: var(--parchment-50);
   --surface-accent: var(--parchment-300);
   --surface-ivory: var(--parchment-150);
+  /* A step up from the navy band, for a control that has to read as an object
+     sitting ON that band rather than as an outline drawn on it. Without one a
+     button on the dark band can only be a border — which is exactly what made
+     the section links read as bars rather than as controls. */
   --surface-inverse: var(--navy-950);
+  --surface-raise-inverse: var(--navy-900);
+  --surface-raise-inverse-hover: var(--navy-850);
   /* The one surface that is the accent itself. Reserved for a single band per
      page — the invitation at the foot of it — because brass at full strength
      across a whole section is the loudest the site ever gets, and a second one
@@ -187,6 +193,8 @@
     --surface-accent: #071a2e;
     --surface-ivory: #08192b;
     --surface-inverse: var(--navy-800);
+    --surface-raise-inverse: var(--navy-700);
+    --surface-raise-inverse-hover: color-mix(in oklab, var(--navy-700) 86%, #f4efe2);
     /* A step deeper in the dark theme. The light-theme brass across a full
        band on a near-black page is a floodlight. */
     --surface-gold: var(--brass-600);
@@ -252,6 +260,8 @@
   --surface-accent: #071a2e;
   --surface-ivory: #08192b;
   --surface-inverse: var(--navy-800);
+  --surface-raise-inverse: var(--navy-700);
+  --surface-raise-inverse-hover: color-mix(in oklab, var(--navy-700) 86%, #f4efe2);
   --surface-gold: var(--brass-600);
   --scrim: var(--navy-990);
   --on-gold: var(--navy-990);
@@ -399,6 +409,8 @@
   --color-surface-accent: var(--surface-accent);
   --color-surface-ivory: var(--surface-ivory);
   --color-surface-inverse: var(--surface-inverse);
+  --color-surface-raise-inverse: var(--surface-raise-inverse);
+  --color-surface-raise-inverse-hover: var(--surface-raise-inverse-hover);
   --color-surface-gold: var(--surface-gold);
   --color-scrim: var(--scrim);
   --color-on-gold: var(--on-gold);
@@ -862,9 +874,21 @@
     transition: transform var(--duration-hover) var(--ease-hover);
   }
 
-  .link-underline:hover::after,
+  /* Keyboard focus draws the rule on every device; the pointer half is gated
+     behind a device that actually has one.
+     Without the gate a tap on a phone leaves `:hover` stuck on the link until
+     something else is tapped, so the underline sits there looking like a
+     current-page marker on a link the reader has already left. Tailwind gates
+     its own `hover:` utilities this way; these two hand-written rules were the
+     only ones on the site that were not. */
   .link-underline:focus-visible::after {
     transform: scaleX(1);
+  }
+
+  @media (hover: hover) {
+    .link-underline:hover::after {
+      transform: scaleX(1);
+    }
   }
 
   .arch {
@@ -991,8 +1015,13 @@
     transition: transform 900ms var(--ease-editorial);
   }
 
-  :hover > .card-clip[data-sweep]::after {
-    transform: translateX(100%);
+  /* Gated for the same reason: on a touch screen the sweep would fire on tap
+     and then stay at the end of its travel, leaving a band of light parked
+     across a card the reader has moved on from. */
+  @media (hover: hover) {
+    :hover > .card-clip[data-sweep]::after {
+      transform: translateX(100%);
+    }
   }
 
   /* ---------------------------------------------------------------------

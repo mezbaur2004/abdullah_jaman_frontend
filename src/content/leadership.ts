@@ -23,6 +23,11 @@ export const roles: Role[] = [
     organization: "Guidance International School",
     title: "Founder & Principal",
     location: "Dhaka, Bangladesh",
+    /* VERIFIED — supplied by the owner, same as the entry in `organizations`.
+       It was missing here alone, so the leadership page linked one school out
+       and left the other as plain text: two equal posts, one of which looked
+       like the lesser. */
+    href: "https://guidance.edu.bd/",
     current: true,
   },
 ];

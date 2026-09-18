@@ -77,10 +77,10 @@ export function AboutTeaser({ index }: { index?: string }) {
         </div>
 
         {/* The doorway. It used to be a small arrow link under the prose,
-            identical to the five others on the page; a full-width rule with
-            the destination set at heading size is the section actually
-            ending in a way out rather than trailing off into a footnote. */}
-        <Reveal className="relative mt-16 block lg:mt-20">
+            identical to the five others on the page — and then, briefly, a
+            full-width rule that only looked like a control once a cursor was
+            on it. It is a button now, and says so at rest. */}
+        <Reveal className="relative mt-14 block lg:mt-16">
           <SectionLink href={aboutTeaser.cta.href}>
             {aboutTeaser.cta.label}
           </SectionLink>
