@@ -51,7 +51,6 @@ export default function AboutPage() {
               {/* The same frame the hero gives it: a picture on this site is
                   framed one way, and this one was the exception — a bare
                   hairline crop beside a page of framed photographs. */}
-              <ArchFrame className="mx-auto w-full max-w-sm lg:max-w-none">
                 <ImageReveal>
                   <Figure
                     image={image}
@@ -61,7 +60,6 @@ export default function AboutPage() {
                     sizes="(min-width: 1024px) 38vw, (min-width: 640px) 24rem, 90vw"
                   />
                 </ImageReveal>
-              </ArchFrame>
             </div>
 
             <div className="lg:col-span-7">
