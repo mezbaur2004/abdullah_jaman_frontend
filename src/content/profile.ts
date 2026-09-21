@@ -33,6 +33,19 @@ export const portrait: ImageAsset | null = {
 };
 
 /**
+ * VERIFIED — supplied by the owner, for the homepage hero specifically.
+ *
+ * A square original, shown whole rather than cropped: the hero's frame is
+ * already 1:1, so nothing is cut to fit it.
+ */
+export const heroPhoto: ImageAsset = {
+  src: "/images/hero-photo.jpg",
+  alt: "Abdullah Jaman speaking into a microphone.",
+  width: 1320,
+  height: 1320,
+};
+
+/**
  * Decorative only. An abstract plate, not a photograph and not a likeness, so
  * it makes no claim about anyone. The empty `alt` hides it from assistive
  * technology. Now that a real portrait exists it is only the fallback, kept so

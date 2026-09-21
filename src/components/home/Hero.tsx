@@ -5,7 +5,7 @@ import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Figure } from "@/components/ui/Figure";
 import { GeometricPattern } from "@/components/ui/GeometricPattern";
 import { ImageReveal } from "@/components/ui/ImageReveal";
-import { hero, heroPanel, portrait } from "@/content/profile";
+import { hero, heroPhoto } from "@/content/profile";
 import { site } from "@/content/site";
 
 /**
@@ -17,9 +17,7 @@ import { site } from "@/content/site";
  * visible at the top of the site rather than halfway down it.
  */
 export function Hero() {
-  // A real portrait when one exists; otherwise the abstract panel, which is
-  // decorative and claims nothing about who is pictured.
-  const image = portrait ?? heroPanel;
+  const image = heroPhoto;
 
   return (
     <section className="geo-parallax-host relative isolate overflow-hidden bg-surface-inverse pb-20 pt-14 text-on-inverse sm:pb-24 sm:pt-20 lg:pb-28 lg:pt-24">
