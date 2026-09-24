@@ -2,17 +2,26 @@ import { Play } from "lucide-react";
 
 import { Card } from "@/components/ui/Card";
 import { GeometricPattern } from "@/components/ui/GeometricPattern";
+import { VideoThumb } from "@/components/media/VideoThumb";
 import { cn } from "@/lib/cn";
 import type { VideoItem } from "@/content/types";
+
+/** The 11-character video id from a youtu.be, watch or embed link. */
+function youtubeId(href: string): string | null {
+  const match = href.match(/(?:youtu\.be\/|[?&]v=|\/embed\/)([\w-]{11})/);
+  return match ? match[1] : null;
+}
 
 /**
  * One video, linked out to YouTube.
  *
- * The frame is drawn rather than a thumbnail: YouTube's thumbnails would mean
- * hotlinking a third-party image host, and the red play mark on the navy
- * lattice is the founder page's own treatment for these links.
+ * Shows the video's own YouTube thumbnail, under the red play mark. The navy
+ * lattice stays beneath it, so a thumbnail that fails to load still leaves a
+ * designed frame rather than a hole.
  */
 export function VideoCard({ video, lead = false }: { video: VideoItem; lead?: boolean }) {
+  const id = youtubeId(video.href);
+
   return (
     <Card as="article" padding="none" hover="lift" className={cn("flex h-full flex-col overflow-hidden", lead && "lg:flex-row")}>
       <div
@@ -22,6 +31,12 @@ export function VideoCard({ video, lead = false }: { video: VideoItem; lead?: bo
         )}
       >
         <GeometricPattern intensity="soft" fade="radial" className="-z-10" />
+        {id ? (
+          <VideoThumb
+            id={id}
+            sizes={lead ? "(min-width: 1024px) 60vw, 100vw" : "(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"}
+          />
+        ) : null}
         <span
           aria-hidden="true"
           className={cn(

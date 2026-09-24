@@ -7,6 +7,8 @@ const nextConfig: NextConfig = {
     // Placeholder art direction ships as JPEG; real photography should be
     // dropped in at the same paths. AVIF first keeps hero imagery light.
     formats: ["image/avif", "image/webp"],
+    // YouTube's own thumbnails for the video cards.
+    remotePatterns: [{ protocol: "https", hostname: "i.ytimg.com", pathname: "/vi/**" }],
   },
   /**
    * /experience became /leadership when the page's remit widened past a list
