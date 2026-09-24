@@ -1,4 +1,5 @@
-import { Award, Globe2, GraduationCap } from "lucide-react";
+import { Award, BookOpen, Star } from "lucide-react";
+import type { ReactNode } from "react";
 
 import { Container } from "@/components/layout/Container";
 import { Button } from "@/components/ui/Button";
@@ -106,97 +107,127 @@ export function Hero() {
           </div>
 
           <div className="sm:col-span-5">
-            {/* The photograph with its ambient layer: a breathing glow behind
-                it, a slow dashed ring and a dot field at two corners, and three
-                floating badges carrying verified facts from his founder page.
-                All motion is `motion-safe:`, so reduced motion gets it still. */}
-            <div className="relative mx-auto max-w-md px-4 sm:max-w-none sm:px-0">
+            {/* The photograph as a card: all four corners rounded, red corner
+                brackets at two corners, his name set into the navy foot, and
+                three floating badges with verified facts from his founder
+                page. On phones the middle badge is dropped and "20+" moves to
+                the top right, as in the mobile reference. All motion is
+                `motion-safe:`, so reduced motion gets it still. */}
+            <div className="relative mx-auto max-w-md px-3 sm:max-w-none sm:px-0">
               <span
                 aria-hidden="true"
                 className="pointer-events-none absolute -inset-6 -z-10 rounded-[3rem] bg-[radial-gradient(closest-side,color-mix(in_oklab,var(--gold)_55%,transparent),transparent)] blur-2xl motion-safe:animate-glow"
               />
               <span
                 aria-hidden="true"
-                className="pointer-events-none absolute -right-2 -top-8 -z-10 size-36 rounded-full border-2 border-dashed border-accent-on-inverse/35 motion-safe:animate-spin-slow sm:-right-10 sm:-top-10 sm:size-44"
-              />
-              <span
-                aria-hidden="true"
-                className="pointer-events-none absolute -bottom-6 -left-2 -z-10 size-28 bg-[radial-gradient(currentColor_1.5px,transparent_1.6px)] [background-size:14px_14px] text-accent-on-inverse/45 sm:-bottom-8 sm:-left-8"
+                className="pointer-events-none absolute -right-2 -top-8 -z-10 size-36 rounded-full border-2 border-dashed border-accent-on-inverse/30 motion-safe:animate-spin-slow sm:-right-10 sm:-top-10 sm:size-44"
               />
 
-              <ImageReveal>
-                <Figure
-                  image={image}
-                  ratio={`${image.width} / ${image.height}`}
-                  priority
-                  frame="none"
-                  className="overflow-hidden rounded-t-3xl shadow-panel"
-                  sizes="(min-width: 1024px) 38vw, (min-width: 640px) 36vw, 90vw"
+              <div className="relative">
+                {/* Corner brackets, behind the card's top-left and bottom-right. */}
+                <span
+                  aria-hidden="true"
+                  className="pointer-events-none absolute -left-2 -top-2 -z-10 size-10 rounded-tl-lg border-l-[3px] border-t-[3px] border-emphasis-solid sm:-left-3 sm:-top-3 sm:size-12"
                 />
-              </ImageReveal>
+                <span
+                  aria-hidden="true"
+                  className="pointer-events-none absolute -bottom-2 -right-2 -z-10 size-10 rounded-br-lg border-b-[3px] border-r-[3px] border-emphasis-solid sm:-bottom-3 sm:-right-3 sm:size-12"
+                />
+
+                <ImageReveal className="rounded-3xl">
+                  <Figure
+                    image={image}
+                    ratio={`${image.width} / ${image.height}`}
+                    priority
+                    frame="none"
+                    className="overflow-hidden rounded-3xl shadow-panel"
+                    sizes="(min-width: 1024px) 38vw, (min-width: 640px) 36vw, 90vw"
+                  />
+                </ImageReveal>
+
+                <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 px-6 pb-14 sm:px-5 sm:pb-14 lg:px-8 lg:pb-16">
+                  <p className="font-display text-2xl font-bold leading-tight text-white lg:text-3xl">
+                    {site.name}
+                  </p>
+                  <p className="mt-1 text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-white/80">
+                    {hero.headline}
+                  </p>
+                </div>
+              </div>
 
               {experience ? (
                 <div
-                  className="animate-rise absolute -left-1 top-[5%] sm:-left-4 sm:top-[10%] lg:-left-8 lg:top-[16%] xl:-left-10"
+                  className="animate-rise absolute -top-3 right-0 sm:-left-4 sm:right-auto sm:top-[6%] lg:-left-8 xl:-left-10"
                   style={{ animationDelay: "520ms" }}
                 >
-                  <div className="flex items-center gap-2 whitespace-nowrap rounded-xl border border-line bg-surface-raised/95 px-2.5 py-1.5 text-content shadow-panel backdrop-blur lg:gap-2.5 lg:px-3 lg:py-2 motion-safe:animate-float">
-                    <span className="flex size-7 shrink-0 items-center justify-center rounded-full lg:size-8 bg-emphasis-solid text-white">
-                      <GraduationCap aria-hidden="true" className="size-3.5 lg:size-4" strokeWidth={1.75} />
-                    </span>
-                    <span className="leading-tight">
-                      <span className="block font-display text-base font-bold text-ink lg:text-lg">
-                        {experience.value}
-                      </span>
-                      <span className="block text-[0.65rem] font-medium text-content-muted lg:text-[0.7rem]">
-                        Years in education
-                      </span>
-                    </span>
-                  </div>
+                  <Badge
+                    icon={<Star aria-hidden="true" className="size-4" strokeWidth={2} />}
+                    tint="bg-[#fde7e3] text-[#ef3e26]"
+                    title={`${experience.value} Years`}
+                    subtitle="in Education"
+                    float="motion-safe:animate-float"
+                  />
                 </div>
               ) : null}
 
               <div
-                className="animate-rise absolute -left-1 top-[56%] sm:left-auto sm:-right-3 sm:top-[34%] lg:-right-6 lg:top-[40%] xl:-right-8"
+                className="animate-rise absolute top-[50%] hidden sm:-right-4 sm:block lg:-right-8 xl:-right-10"
                 style={{ animationDelay: "600ms" }}
               >
-                <div className="flex items-center gap-2 whitespace-nowrap rounded-xl border border-line bg-surface-raised/95 px-2.5 py-1.5 text-content shadow-panel backdrop-blur motion-safe:animate-float-mid lg:gap-2.5 lg:px-3 lg:py-2">
-                  <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-accent-solid text-white lg:size-8">
-                    <Globe2 aria-hidden="true" className="size-3.5 lg:size-4" strokeWidth={1.75} />
-                  </span>
-                  <span className="leading-tight">
-                    <span className="block font-display text-sm font-bold text-content lg:text-base">
-                      Madinah &bull; Dhaka
-                    </span>
-                    <span className="block text-[0.65rem] font-medium text-content-muted lg:text-[0.7rem]">
-                      Int&rsquo;l Scholar
-                    </span>
-                  </span>
-                </div>
+                <Badge
+                  icon={<Award aria-hidden="true" className="size-4" strokeWidth={2} />}
+                  tint="bg-[#f6ecd6] text-[#a07a2c]"
+                  title="Madinah • Dhaka"
+                  subtitle="Int’l Scholar"
+                  float="motion-safe:animate-float-mid"
+                />
               </div>
 
               <div
-                className="animate-rise absolute -right-1 bottom-[8%] sm:-right-3 lg:-right-6 lg:bottom-[12%] xl:-right-8"
+                className="animate-rise absolute -bottom-4 left-0 sm:-left-4 lg:-left-8 xl:-left-10"
                 style={{ animationDelay: "680ms" }}
               >
-                <div className="flex items-center gap-2 whitespace-nowrap rounded-xl border border-line bg-surface-raised/95 px-2.5 py-1.5 text-content shadow-panel backdrop-blur lg:gap-2.5 lg:px-3 lg:py-2 motion-safe:animate-float-late">
-                  <span className="flex size-7 shrink-0 items-center justify-center rounded-full lg:size-8 bg-ink text-white">
-                    <Award aria-hidden="true" className="size-3.5 lg:size-4" strokeWidth={1.75} />
-                  </span>
-                  <span className="leading-tight">
-                    <span className="block font-display text-sm font-bold text-content lg:text-base">
-                      Cambridge Scholar
-                    </span>
-                    <span className="block text-[0.65rem] font-medium text-content-muted lg:text-[0.7rem]">
-                      University of Cambridge, UK
-                    </span>
-                  </span>
-                </div>
+                <Badge
+                  icon={<BookOpen aria-hidden="true" className="size-4" strokeWidth={2} />}
+                  tint="bg-[#e4eaf6] text-[#244092]"
+                  title="Cambridge Scholar"
+                  subtitle="Cambridge, UK"
+                  float="motion-safe:animate-float-late"
+                />
               </div>
             </div>
           </div>
         </div>
       </Container>
     </section>
+  );
+}
+
+/** A floating fact card on the hero photograph. */
+function Badge({
+  icon,
+  tint,
+  title,
+  subtitle,
+  float,
+}: {
+  icon: ReactNode;
+  tint: string;
+  title: string;
+  subtitle: string;
+  float: string;
+}) {
+  return (
+    <div
+      className={`flex items-center gap-2.5 whitespace-nowrap rounded-2xl bg-white px-3 py-2 shadow-panel lg:gap-3 lg:px-4 lg:py-3 ${float}`}
+    >
+      <span className={`flex size-8 shrink-0 items-center justify-center rounded-lg lg:size-9 ${tint}`}>
+        {icon}
+      </span>
+      <span className="leading-tight">
+        <span className="block text-sm font-bold text-[#1e2a42] lg:text-[0.95rem]">{title}</span>
+        <span className="block text-xs text-[#5a6682]">{subtitle}</span>
+      </span>
+    </div>
   );
 }
