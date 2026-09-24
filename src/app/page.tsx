@@ -12,7 +12,6 @@ import { Hero } from "@/components/home/Hero";
 import { KeyStats } from "@/components/home/KeyStats";
 import { LeadershipTeaser } from "@/components/home/LeadershipTeaser";
 import { MediaHighlights } from "@/components/home/MediaHighlights";
-import { VideoHighlights } from "@/components/home/VideoHighlights";
 import { awards, statistics } from "@/content/achievements";
 import { mediaItems, videos } from "@/content/media";
 import { atAGlance, organizations } from "@/content/profile";
@@ -59,19 +58,14 @@ const sections: Array<{ key: string; show: boolean; render: (index: string) => R
     show: awards.length > 0,
     render: (index) => <Awards index={index} />,
   },
+  {
+    key: "media",
+    show: mediaItems.length + videos.length > 0,
+    render: (index) => <MediaHighlights index={index} />,
+  },
   // Authorship is confirmed even though the bibliography is not, so this one
   // does not wait on `books` having entries — see the note in BooksTeaser.
   { key: "books", show: true, render: (index) => <BooksTeaser index={index} /> },
-  {
-    key: "media",
-    show: mediaItems.length > 0,
-    render: (index) => <MediaHighlights index={index} />,
-  },
-  {
-    key: "videos",
-    show: videos.length > 0,
-    render: (index) => <VideoHighlights index={index} />,
-  },
   { key: "closing", show: true, render: (index) => <ClosingStatement index={index} /> },
   { key: "contact", show: true, render: (index) => <ContactCta index={index} /> },
 ];
