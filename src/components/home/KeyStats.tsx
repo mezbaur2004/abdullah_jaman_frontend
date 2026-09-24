@@ -8,8 +8,32 @@ import { achievementsIntro, statistics } from "@/content/achievements";
  * Renders nothing until verified figures exist. Measurable results are still
  * being collected, and a statistics band is the last place to approximate.
  */
-export function KeyStats({ index }: { index?: string }) {
+export function KeyStats({ index, strip = false }: { index?: string; strip?: boolean }) {
   if (statistics.length === 0) return null;
+
+  // The homepage opens with the figures as a compact band straight under the
+  // hero: no heading, no index, just the numbers — the quickest proof the page
+  // has, so it goes first rather than seventh.
+  if (strip) {
+    return (
+      <section aria-label="At a glance" className="relative border-b border-line bg-surface-raised">
+        <Container>
+          <dl className="grid grid-cols-3 divide-x divide-line py-8 sm:py-10">
+            {statistics.map((statistic) => (
+              <div key={statistic.label} className="flex flex-col px-3 text-center sm:px-6">
+                <dt className="order-2 mt-2 text-xs font-semibold uppercase tracking-[0.12em] text-content-subtle sm:text-eyebrow">
+                  {statistic.label}
+                </dt>
+                <dd className="font-display text-display-lg leading-none text-ink">
+                  {statistic.value}
+                </dd>
+              </div>
+            ))}
+          </dl>
+        </Container>
+      </section>
+    );
+  }
 
   return (
     <Section
