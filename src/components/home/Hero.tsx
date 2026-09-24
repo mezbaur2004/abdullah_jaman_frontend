@@ -1,4 +1,4 @@
-import { Award, GraduationCap } from "lucide-react";
+import { Award, Globe2, GraduationCap } from "lucide-react";
 
 import { Container } from "@/components/layout/Container";
 import { Button } from "@/components/ui/Button";
@@ -107,8 +107,8 @@ export function Hero() {
 
           <div className="sm:col-span-5">
             {/* The photograph with its ambient layer: a breathing glow behind
-                it, a slow dashed ring and a dot field at two corners, and two
-                floating badges that carry real figures from the content layer.
+                it, a slow dashed ring and a dot field at two corners, and three
+                floating badges carrying verified facts from his founder page.
                 All motion is `motion-safe:`, so reduced motion gets it still. */}
             <div className="relative mx-auto max-w-md px-4 sm:max-w-none sm:px-0">
               <span
@@ -137,18 +137,18 @@ export function Hero() {
 
               {experience ? (
                 <div
-                  className="animate-rise absolute -left-1 top-[5%] sm:top-[16%] sm:-left-8 lg:-left-12"
+                  className="animate-rise absolute -left-1 top-[5%] sm:-left-4 sm:top-[10%] lg:-left-8 lg:top-[16%] xl:-left-10"
                   style={{ animationDelay: "520ms" }}
                 >
-                  <div className="flex items-center gap-3 rounded-2xl border border-line bg-surface-raised/95 px-4 py-3 text-content shadow-panel backdrop-blur motion-safe:animate-float">
-                    <span className="flex size-10 items-center justify-center rounded-full bg-emphasis-solid text-white">
-                      <GraduationCap aria-hidden="true" className="size-5" strokeWidth={1.75} />
+                  <div className="flex items-center gap-2 whitespace-nowrap rounded-xl border border-line bg-surface-raised/95 px-2.5 py-1.5 text-content shadow-panel backdrop-blur lg:gap-2.5 lg:px-3 lg:py-2 motion-safe:animate-float">
+                    <span className="flex size-7 shrink-0 items-center justify-center rounded-full lg:size-8 bg-emphasis-solid text-white">
+                      <GraduationCap aria-hidden="true" className="size-3.5 lg:size-4" strokeWidth={1.75} />
                     </span>
                     <span className="leading-tight">
-                      <span className="block font-display text-2xl font-bold text-ink">
+                      <span className="block font-display text-base font-bold text-ink lg:text-lg">
                         {experience.value}
                       </span>
-                      <span className="block text-xs font-medium text-content-muted">
+                      <span className="block text-[0.65rem] font-medium text-content-muted lg:text-[0.7rem]">
                         Years in education
                       </span>
                     </span>
@@ -157,18 +157,37 @@ export function Hero() {
               ) : null}
 
               <div
-                className="animate-rise absolute -right-1 bottom-[12%] sm:-right-6 lg:-right-10"
-                style={{ animationDelay: "680ms" }}
+                className="animate-rise absolute -left-1 top-[56%] sm:left-auto sm:-right-3 sm:top-[34%] lg:-right-6 lg:top-[40%] xl:-right-8"
+                style={{ animationDelay: "600ms" }}
               >
-                <div className="flex items-center gap-3 rounded-2xl border border-line bg-surface-raised/95 px-4 py-3 text-content shadow-panel backdrop-blur motion-safe:animate-float-late">
-                  <span className="flex size-10 items-center justify-center rounded-full bg-ink text-white">
-                    <Award aria-hidden="true" className="size-5" strokeWidth={1.75} />
+                <div className="flex items-center gap-2 whitespace-nowrap rounded-xl border border-line bg-surface-raised/95 px-2.5 py-1.5 text-content shadow-panel backdrop-blur motion-safe:animate-float-mid lg:gap-2.5 lg:px-3 lg:py-2">
+                  <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-accent-solid text-white lg:size-8">
+                    <Globe2 aria-hidden="true" className="size-3.5 lg:size-4" strokeWidth={1.75} />
                   </span>
                   <span className="leading-tight">
-                    <span className="block font-display text-lg font-bold text-content">
+                    <span className="block font-display text-sm font-bold text-content lg:text-base">
+                      Madinah &bull; Dhaka
+                    </span>
+                    <span className="block text-[0.65rem] font-medium text-content-muted lg:text-[0.7rem]">
+                      Int&rsquo;l Scholar
+                    </span>
+                  </span>
+                </div>
+              </div>
+
+              <div
+                className="animate-rise absolute -right-1 bottom-[8%] sm:-right-3 lg:-right-6 lg:bottom-[12%] xl:-right-8"
+                style={{ animationDelay: "680ms" }}
+              >
+                <div className="flex items-center gap-2 whitespace-nowrap rounded-xl border border-line bg-surface-raised/95 px-2.5 py-1.5 text-content shadow-panel backdrop-blur lg:gap-2.5 lg:px-3 lg:py-2 motion-safe:animate-float-late">
+                  <span className="flex size-7 shrink-0 items-center justify-center rounded-full lg:size-8 bg-ink text-white">
+                    <Award aria-hidden="true" className="size-3.5 lg:size-4" strokeWidth={1.75} />
+                  </span>
+                  <span className="leading-tight">
+                    <span className="block font-display text-sm font-bold text-content lg:text-base">
                       Cambridge Scholar
                     </span>
-                    <span className="block text-xs font-medium text-content-muted">
+                    <span className="block text-[0.65rem] font-medium text-content-muted lg:text-[0.7rem]">
                       University of Cambridge, UK
                     </span>
                   </span>
