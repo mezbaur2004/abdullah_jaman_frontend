@@ -133,6 +133,12 @@ export const resolvedDecisions: ResolvedDecision[] = [
       "Supplied by the owner, then withdrawn from publication by him. Both institutions are governed by a board of which he is the principal founder but not the only member, so a campus tally against his name reads as a personal holding. The counts stay in this register because they are true and may be publishable in an institutional context later; they are absent from src/content/profile.ts so that no component can render them by accident.",
   },
   {
+    subject: "Institutions founded",
+    decision: "Shown as \"5+ Institutions founded\" in the statistics.",
+    rationale:
+      "The figure is on his founder page, which the owner supplied as the final source. It was first left out under the rule below; the owner then asked for it explicitly, which makes it the one exception. Per-institution campus counts remain unpublished.",
+  },
+  {
     subject: "Counting anything",
     decision:
       "The site names institutions, roles and places. It does not count them.",

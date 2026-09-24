@@ -19,7 +19,7 @@ export function KeyStats({ index, strip = false }: { index?: string; strip?: boo
     return (
       <section aria-label="At a glance" className="relative border-b border-line bg-surface-raised">
         <Container>
-          <dl className="grid grid-cols-3 divide-x divide-line py-8 sm:py-10">
+          <dl className="grid grid-cols-2 gap-y-6 py-8 sm:grid-cols-4 sm:divide-x sm:divide-line sm:py-10">
             {statistics.map((statistic) => (
               <div key={statistic.label} className="flex flex-col px-3 text-center sm:px-6">
                 <dt className="order-2 mt-2 text-xs font-semibold uppercase tracking-[0.12em] text-content-subtle sm:text-eyebrow">

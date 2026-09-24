@@ -24,13 +24,15 @@ export const achievementsIntro = {
 } as const;
 
 /**
- * VERIFIED — from his founder page, supplied by the owner as the final source.
- * The page also gives a count of institutions founded; the owner chose not to
- * publish it, in keeping with the no-counting rule in site.ts.
+ * VERIFIED — from his founder page, supplied by the owner as the final source,
+ * in that page's order. "5+ Institutions founded" was held back at first under
+ * the no-counting rule in site.ts; the owner has since asked for it to be
+ * shown, which overrides that rule for this one figure.
  */
 export const statistics: Statistic[] = [
   { value: "20+", label: "Years experience", detail: "In education" },
   { value: "4", label: "Degrees & certificates" },
+  { value: "5+", label: "Institutions founded" },
   { value: "10+", label: "Media appearances" },
 ];
 
