@@ -1,5 +1,10 @@
 import type { Metadata, Viewport } from "next";
-import { Fraunces, Inter, Noto_Serif_Bengali } from "next/font/google";
+import {
+  Cormorant_Garamond,
+  DM_Sans,
+  Noto_Serif_Bengali,
+  Scheherazade_New,
+} from "next/font/google";
 
 import { PagePager } from "@/components/layout/PagePager";
 import { SiteFooter } from "@/components/layout/SiteFooter";
@@ -11,15 +16,27 @@ import { personJsonLd } from "@/lib/seo";
 import { themeInitScript } from "@/lib/theme";
 import "./globals.css";
 
-const inter = Inter({
+/* The body face, as on the founder page. */
+const dmSans = DM_Sans({
   subsets: ["latin"],
-  variable: "--font-inter",
+  variable: "--font-dm-sans",
   display: "swap",
 });
 
-const fraunces = Fraunces({
+/* The display face, as on the founder page: a high-contrast serif at 700. */
+const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
-  variable: "--font-fraunces",
+  weight: ["500", "600", "700"],
+  style: ["normal", "italic"],
+  variable: "--font-cormorant",
+  display: "swap",
+});
+
+/* The basmalah and the Qur'anic verse. */
+const scheherazade = Scheherazade_New({
+  subsets: ["arabic"],
+  weight: ["400", "700"],
+  variable: "--font-scheherazade",
   display: "swap",
 });
 
@@ -27,7 +44,7 @@ const fraunces = Fraunces({
  * The Bangla face, and it has to be a serif.
  *
  * Two of the books are titled in Bengali and the titles are the loudest type
- * on those pages. Fraunces carries no Bengali, so without this every one of
+ * on those pages. Cormorant Garamond carries no Bengali, so without this every one of
  * them falls through to whatever the browser keeps for the script — on most
  * machines a sans, and a jarring one beside a page set entirely in a serif.
  * Loading the face is not a refinement here; it is the difference between the
@@ -103,7 +120,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       data-scroll-behavior="smooth"
       suppressHydrationWarning
-      className={`${inter.variable} ${fraunces.variable} ${notoSerifBengali.variable} h-full antialiased`}
+      className={`${dmSans.variable} ${cormorant.variable} ${scheherazade.variable} ${notoSerifBengali.variable} h-full antialiased`}
     >
       <head>
         {/* Blocking and first, so a saved theme is applied before first paint

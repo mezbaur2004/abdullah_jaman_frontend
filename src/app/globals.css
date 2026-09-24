@@ -33,23 +33,23 @@
 --------------------------------------------------------------------------- */
 :root {
   /* Parchment — the light ground, warm through the whole ladder. */
-  --parchment-50: #fffdf8;
-  --parchment-100: #fbf7ef;
-  --parchment-150: #f8f2e3;
-  --parchment-200: #f4ecdc;
-  --parchment-300: #ece0c9;
+  --parchment-50: #ffffff;
+  --parchment-100: #ffffff;
+  --parchment-150: #f7f9fd;
+  --parchment-200: #f2f5fb;
+  --parchment-300: #e4eaf6;
 
   /* Navy — the brand. #051529 is the anchor and everything else is derived. */
-  --navy-990: #030c17;
-  --navy-950: #051529;
-  --navy-900: #09203a;
-  --navy-850: #0c2a48;
-  --navy-800: #103356;
-  --navy-700: #16456f;
+  --navy-990: #0e1424;
+  --navy-950: #1e2a42;
+  --navy-900: #26344f;
+  --navy-850: #2e3d5b;
+  --navy-800: #244092;
+  --navy-700: #2f50b0;
 
   /* Blue — focus and link hover, and nothing else on the site. */
-  --blue-focus: #1d5a8e;
-  --blue-focus-bright: #6fb0ea;
+  --blue-focus: #244092;
+  --blue-focus-bright: #8fa8ec;
 
   /* Brass — the accent. `-ink` values are dark enough to set type in on
      parchment; the rest are for marks, washes and the lattice. */
@@ -57,25 +57,25 @@
   --brass-800: #73571b;
   --brass-700: #8f6e26;
   --brass-600: #b8893b;
-  --brass-500: #c9a24a;
+  --brass-500: #c9a84c;
   --brass-400: #d9b45c;
   --brass-300: #e4c87e;
   --brass-200: #efdfb4;
   --brass-100: #f6ecd6;
 
   /* Red — controlled emphasis, kept rare. */
-  --red-solid: #b3341f;
-  --red-ink: #93291a;
-  --red-bright: #e58873;
-  --red-soft: #f7e4de;
+  --red-solid: #ef3e26;
+  --red-ink: #c42d17;
+  --red-bright: #ff8e7a;
+  --red-soft: #fde7e3;
 
   /* Ink neutrals, warmed so no grey reads cold against parchment. */
-  --ink-950: #101a26;
-  --ink-800: #2b3644;
-  --ink-600: #4a5260;
-  --ink-500: #6a6455;
-  --ink-300: #a89f8b;
-  --ink-200: #cfc6b2;
+  --ink-950: #1e2a42;
+  --ink-800: #2e3a55;
+  --ink-600: #4a5672;
+  --ink-500: #5a6682;
+  --ink-300: #a3adc2;
+  --ink-200: #cdd4e2;
 }
 
 /* ---------------------------------------------------------------------------
@@ -110,7 +110,7 @@
      lightens with the theme stops guaranteeing it. */
   --scrim: var(--navy-950);
   --on-gold: var(--navy-950);
-  --on-gold-muted: color-mix(in oklab, var(--navy-950) 78%, transparent);
+  --on-gold-muted: color-mix(in oklab, var(--navy-950) 86%, transparent);
 
   /* The lattice draws in this. On parchment it is brass; the opacity below is
      what keeps it a texture rather than a wallpaper. */
@@ -125,8 +125,8 @@
   --content-muted: var(--ink-600);
   --content-subtle: var(--ink-500);
 
-  --on-inverse: #f6f1e4;
-  --on-inverse-muted: #c9bfa6;
+  --on-inverse: #ffffff;
+  --on-inverse-muted: #bcc6db;
 
   /* The accent is brass. `accent` sets type, `accent-solid` draws marks. */
   --accent: var(--brass-800);
@@ -139,8 +139,8 @@
   --ink: var(--navy-800);
   --ink-strong: var(--navy-950);
   --ink-solid: var(--navy-800);
-  --ink-on-inverse: #a8c4dd;
-  --ink-soft: #e6e2d6;
+  --ink-on-inverse: #aebff0;
+  --ink-soft: #e4eaf6;
 
   --emphasis: var(--red-ink);
   --emphasis-solid: var(--red-solid);
@@ -153,14 +153,14 @@
   --line: color-mix(in oklab, var(--ink-950) 15%, transparent);
   --line-strong: color-mix(in oklab, var(--ink-950) 30%, transparent);
   --line-accent: color-mix(in oklab, var(--brass-600) 45%, transparent);
-  --line-inverse: color-mix(in oklab, #f6f1e4 20%, transparent);
+  --line-inverse: color-mix(in oklab, #ffffff 20%, transparent);
 
   /* Navy button, brass on hover with navy type. The hover is not a shade of
      the resting state — it is the accent arriving, which is what makes a
      primary action on this site feel like part of the identity. */
   --action: var(--navy-950);
   --action-hover: var(--brass-600);
-  --on-action: #f6f1e4;
+  --on-action: #ffffff;
   --on-action-hover: var(--navy-950);
   --action-inverse: var(--brass-500);
   --action-inverse-hover: var(--brass-300);
@@ -168,12 +168,12 @@
 
   /* Shadows carry the navy hue rather than neutral black, which is what keeps
      a raised card from reading grey against a warm ground. */
-  --shadow-panel: 0 1px 2px rgb(5 21 41 / 0.07), 0 8px 24px -12px rgb(5 21 41 / 0.22);
-  --shadow-card: 0 1px 2px rgb(5 21 41 / 0.06), 0 4px 16px -8px rgb(5 21 41 / 0.16);
-  --shadow-card-hover: 0 2px 6px rgb(5 21 41 / 0.09),
-    0 18px 38px -16px rgb(5 21 41 / 0.30);
-  --shadow-raise: 0 1px 2px rgb(5 21 41 / 0.06),
-    0 16px 36px -22px rgb(5 21 41 / 0.24);
+  --shadow-panel: 0 1px 2px rgb(30 42 66 / 0.07), 0 8px 24px -12px rgb(30 42 66 / 0.22);
+  --shadow-card: 0 1px 2px rgb(30 42 66 / 0.06), 0 4px 16px -8px rgb(30 42 66 / 0.16);
+  --shadow-card-hover: 0 2px 6px rgb(30 42 66 / 0.09),
+    0 18px 38px -16px rgb(30 42 66 / 0.30);
+  --shadow-raise: 0 1px 2px rgb(30 42 66 / 0.06),
+    0 16px 36px -22px rgb(30 42 66 / 0.24);
 }
 
 /* The dark theme, written once and applied twice — by system preference
@@ -190,24 +190,24 @@
     --surface: var(--navy-990);
     --surface-soft: var(--navy-950);
     --surface-raised: var(--navy-900);
-    --surface-accent: #071a2e;
-    --surface-ivory: #08192b;
+    --surface-accent: #121b30;
+    --surface-ivory: #111a2d;
     --surface-inverse: var(--navy-800);
     --surface-raise-inverse: var(--navy-700);
-    --surface-raise-inverse-hover: color-mix(in oklab, var(--navy-700) 86%, #f4efe2);
+    --surface-raise-inverse-hover: color-mix(in oklab, var(--navy-700) 86%, #f2f5fb);
     /* A step deeper in the dark theme. The light-theme brass across a full
        band on a near-black page is a floodlight. */
     --surface-gold: var(--brass-600);
     --scrim: var(--navy-990);
     --on-gold: var(--navy-990);
-    --on-gold-muted: color-mix(in oklab, var(--navy-990) 76%, transparent);
+    --on-gold-muted: color-mix(in oklab, var(--navy-990) 88%, transparent);
 
     --pattern-ink: var(--brass-400);
     --geo-faint: 0.1;
     --geo-soft: 0.12;
     --gold: var(--brass-400);
 
-    --content: #f4efe2;
+    --content: #f2f5fb;
     --content-muted: var(--ink-200);
     --content-subtle: var(--ink-300);
 
@@ -217,11 +217,11 @@
     --accent-on-inverse: var(--brass-300);
     --accent-soft: color-mix(in oklab, var(--brass-400) 14%, transparent);
 
-    --ink: #a8c4dd;
-    --ink-strong: #cfe0ef;
-    --ink-solid: #7ba3c7;
-    --ink-on-inverse: #a8c4dd;
-    --ink-soft: color-mix(in oklab, #a8c4dd 12%, transparent);
+    --ink: #aebff0;
+    --ink-strong: #d3ddf7;
+    --ink-solid: #8fa8ec;
+    --ink-on-inverse: #aebff0;
+    --ink-soft: color-mix(in oklab, #aebff0 12%, transparent);
 
     --emphasis: var(--red-bright);
     --emphasis-solid: var(--red-bright);
@@ -229,10 +229,10 @@
 
     --focus: var(--blue-focus-bright);
 
-    --line: color-mix(in oklab, #f4efe2 16%, transparent);
-    --line-strong: color-mix(in oklab, #f4efe2 32%, transparent);
+    --line: color-mix(in oklab, #f2f5fb 16%, transparent);
+    --line-strong: color-mix(in oklab, #f2f5fb 32%, transparent);
     --line-accent: color-mix(in oklab, var(--brass-400) 45%, transparent);
-    --line-inverse: color-mix(in oklab, #f4efe2 20%, transparent);
+    --line-inverse: color-mix(in oklab, #f2f5fb 20%, transparent);
 
     --action: var(--brass-500);
     --action-hover: var(--brass-300);
@@ -257,22 +257,22 @@
   --surface: var(--navy-990);
   --surface-soft: var(--navy-950);
   --surface-raised: var(--navy-900);
-  --surface-accent: #071a2e;
-  --surface-ivory: #08192b;
+  --surface-accent: #121b30;
+  --surface-ivory: #111a2d;
   --surface-inverse: var(--navy-800);
   --surface-raise-inverse: var(--navy-700);
-  --surface-raise-inverse-hover: color-mix(in oklab, var(--navy-700) 86%, #f4efe2);
+  --surface-raise-inverse-hover: color-mix(in oklab, var(--navy-700) 86%, #f2f5fb);
   --surface-gold: var(--brass-600);
   --scrim: var(--navy-990);
   --on-gold: var(--navy-990);
-  --on-gold-muted: color-mix(in oklab, var(--navy-990) 76%, transparent);
+  --on-gold-muted: color-mix(in oklab, var(--navy-990) 88%, transparent);
 
   --pattern-ink: var(--brass-400);
   --geo-faint: 0.1;
   --geo-soft: 0.12;
   --gold: var(--brass-400);
 
-  --content: #f4efe2;
+  --content: #f2f5fb;
   --content-muted: var(--ink-200);
   --content-subtle: var(--ink-300);
 
@@ -282,11 +282,11 @@
   --accent-on-inverse: var(--brass-300);
   --accent-soft: color-mix(in oklab, var(--brass-400) 14%, transparent);
 
-  --ink: #a8c4dd;
-  --ink-strong: #cfe0ef;
-  --ink-solid: #7ba3c7;
-  --ink-on-inverse: #a8c4dd;
-  --ink-soft: color-mix(in oklab, #a8c4dd 12%, transparent);
+  --ink: #aebff0;
+  --ink-strong: #d3ddf7;
+  --ink-solid: #8fa8ec;
+  --ink-on-inverse: #aebff0;
+  --ink-soft: color-mix(in oklab, #aebff0 12%, transparent);
 
   --emphasis: var(--red-bright);
   --emphasis-solid: var(--red-bright);
@@ -294,10 +294,10 @@
 
   --focus: var(--blue-focus-bright);
 
-  --line: color-mix(in oklab, #f4efe2 16%, transparent);
-  --line-strong: color-mix(in oklab, #f4efe2 32%, transparent);
+  --line: color-mix(in oklab, #f2f5fb 16%, transparent);
+  --line-strong: color-mix(in oklab, #f2f5fb 32%, transparent);
   --line-accent: color-mix(in oklab, var(--brass-400) 45%, transparent);
-  --line-inverse: color-mix(in oklab, #f4efe2 20%, transparent);
+  --line-inverse: color-mix(in oklab, #f2f5fb 20%, transparent);
 
   --action: var(--brass-500);
   --action-hover: var(--brass-300);
@@ -457,17 +457,21 @@
   --color-action-inverse-hover: var(--action-inverse-hover);
   --color-on-action-inverse: var(--on-action-inverse);
 
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
+  --font-sans: var(--font-dm-sans), ui-sans-serif, system-ui, -apple-system,
     "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  --font-display: var(--font-fraunces), ui-serif, "Iowan Old Style", Georgia,
+  --font-display: var(--font-cormorant), ui-serif, "Iowan Old Style", Georgia,
     "Times New Roman", serif;
 
-  /* Bangla. Fraunces has no Bengali coverage at all, so a Bengali title set in
+  /* Bangla. Cormorant Garamond has no Bengali coverage at all, so a Bengali title set in
      `font-display` does not fall back gracefully — it falls out of the family
      entirely, usually into the platform sans. Every Bengali string on the site
      is set in this instead, and the stack behind Noto names Bangla serifs
      rather than generic ones so a machine without the webfont still lands on a
      serif rather than on Vrinda or a default sans. */
+  /* Arabic — the basmalah, the verse and any Qur'anic line, never Latin. */
+  --font-arabic: var(--font-scheherazade), "Amiri", "Traditional Arabic",
+    serif;
+
   --font-bangla: var(--font-bengali), "Kalpurush", "SolaimanLipi",
     "Shonar Bangla", ui-serif, serif;
 
@@ -567,37 +571,42 @@
     background-color: var(--surface);
     color: var(--content);
     font-family: var(--font-sans);
-    font-feature-settings: "cv05" 1, "ss01" 1;
     text-rendering: optimizeLegibility;
   }
 
-  /* Fraunces at 400 is a book weight, and at display sizes a book weight in a
+  /* Cormorant at 400 is a book weight, and at display sizes a book weight in a
      high-contrast serif goes thin and genteel. The headings are the loudest
      thing on this site and should be built like it — 600 at the top, easing
      back as the sizes come down so a small heading never looks bolded. */
   h1,
   h2 {
     font-family: var(--font-display);
-    font-weight: 600;
+    font-weight: 700;
     text-wrap: balance;
   }
 
   h3,
   h4 {
     font-family: var(--font-display);
-    font-weight: 500;
+    font-weight: 600;
     text-wrap: balance;
   }
 
-  /* One word per heading, set in italic brass. It is the site's one piece of
-     typographic emphasis and it is deliberately the only one — a second would
-     make it decoration rather than a voice. */
+  /* One word per heading, set in italic red — the founder page's own
+     emphasis. It is the site's one piece of typographic emphasis and it is
+     deliberately the only one — a second would make it decoration rather than
+     a voice. On a dark band it takes the lighter red, which is what keeps it
+     readable there. */
   h1 em,
   h2 em,
   h3 em {
     font-style: italic;
     font-weight: inherit;
-    color: var(--accent);
+    color: var(--emphasis);
+  }
+
+  .text-on-inverse em {
+    color: var(--emphasis-on-inverse);
   }
 
   p {

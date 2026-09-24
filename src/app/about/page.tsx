@@ -9,19 +9,25 @@ import { Card } from "@/components/ui/Card";
 import { FeatureImage } from "@/components/ui/FeatureImage";
 import { Figure } from "@/components/ui/Figure";
 import { ImageReveal } from "@/components/ui/ImageReveal";
-import { ArchFrame } from "@/components/ui/ArchFrame";
 import { IconChip } from "@/components/ui/IconChip";
 import { ListRow } from "@/components/ui/ListRow";
 import { cardAccent } from "@/lib/accent";
+import { emphasise } from "@/lib/emphasis";
+import { withHonorifics } from "@/lib/honorific";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import {
   aboutFeature,
   aboutPage,
   education,
+  expertise,
+  founderMessage,
   heroPanel,
   organizations,
   portrait,
+  professionalDevelopment,
+  roleLine,
+  verse,
 } from "@/content/profile";
 import { site } from "@/content/site";
 import { pageMetadata } from "@/lib/seo";
@@ -64,6 +70,22 @@ export default function AboutPage() {
 
             <div className="lg:col-span-7">
               <Reveal>
+                <p className="font-display text-2xl font-semibold leading-snug text-ink">
+                  {roleLine.join(" · ")}
+                </p>
+                <ul aria-label="Areas of expertise" className="mt-7 flex flex-wrap gap-2.5">
+                  {expertise.map((item) => (
+                    <li
+                      key={item}
+                      className="rounded-chip border border-line bg-surface-raised px-3.5 py-2 text-ui font-medium text-content"
+                    >
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </Reveal>
+
+              <Reveal className="mt-12">
                 {/* Two columns from `sm` up. Each value is a phrase, not a
                     paragraph, so one per full-width row left most of every
                     line empty and made five short facts look like a form. */}
@@ -117,8 +139,84 @@ export default function AboutPage() {
       </Section>
 
       <Section
-        tone="soft"
+        id="message"
+        tone="inverse"
         index="02"
+        indexLabel={founderMessage.eyebrow}
+        accent="gold"
+        pattern
+        aria-labelledby="about-message-heading"
+      >
+        <Container>
+          <div className="mx-auto max-w-3xl">
+            <Reveal className="text-center">
+              <p
+                lang="ar"
+                dir="rtl"
+                className="font-arabic text-4xl leading-relaxed text-accent-on-inverse sm:text-5xl"
+              >
+                {founderMessage.basmalah}
+              </p>
+              <p className="mt-3 text-eyebrow font-semibold uppercase text-on-inverse-muted">
+                {founderMessage.basmalahTranslation}
+              </p>
+              <h2
+                id="about-message-heading"
+                className="mt-12 text-display-lg text-on-inverse"
+              >
+                {emphasise(founderMessage.heading)}
+              </h2>
+            </Reveal>
+
+            <Reveal step={1}>
+              <blockquote className="mt-12 border-l-2 border-accent-on-inverse pl-6 font-display text-display-md font-semibold italic text-on-inverse sm:pl-8">
+                <p>&ldquo;{withHonorifics(founderMessage.lead)}&rdquo;</p>
+              </blockquote>
+            </Reveal>
+
+            <Reveal step={2}>
+              <div className="mt-10 flex flex-col gap-5 text-lede text-on-inverse-muted">
+                {founderMessage.body.map((paragraph) => (
+                  <p key={paragraph.slice(0, 32)}>{withHonorifics(paragraph)}</p>
+                ))}
+              </div>
+              <ul className="mt-10 flex flex-col gap-3 border-y border-line-inverse py-8 font-display text-2xl font-semibold text-on-inverse">
+                {founderMessage.refrain.map((line) => (
+                  <li key={line}>{line}</li>
+                ))}
+              </ul>
+              <p className="mt-8 font-display text-2xl font-semibold text-on-inverse">
+                {aboutPage.headline}
+              </p>
+              <p className="mt-1 text-sm italic text-on-inverse-muted">
+                {founderMessage.signoff}
+              </p>
+            </Reveal>
+
+            <Reveal step={3}>
+              <figure className="mt-16 text-center">
+                <p
+                  lang="ar"
+                  dir="rtl"
+                  className="font-arabic text-3xl leading-relaxed text-accent-on-inverse sm:text-4xl"
+                >
+                  {verse.arabic}
+                </p>
+                <blockquote className="mt-4 font-display text-xl italic text-on-inverse">
+                  <p>&ldquo;{verse.translation}&rdquo;</p>
+                </blockquote>
+                <figcaption className="mt-3 text-sm text-on-inverse-muted">
+                  — {verse.reference}. {verse.note}
+                </figcaption>
+              </figure>
+            </Reveal>
+          </div>
+        </Container>
+      </Section>
+
+      <Section
+        tone="soft"
+        index="03"
         indexLabel="Institutions"
         accent="gold"
         aria-labelledby="about-roles-heading"
@@ -199,7 +297,7 @@ export default function AboutPage() {
       {education.length > 0 ? (
         <Section
           tone="ivory"
-          index="03"
+          index="04"
           indexLabel="Education"
           accent="gold"
           separator="quiet"
@@ -209,7 +307,7 @@ export default function AboutPage() {
             <SectionHeading
               id="about-education-heading"
               title="Study."
-              lede="Qualifications as recorded on his current school profile. Years were not supplied and are not shown."
+              lede="Academic credentials and continuing professional development. Years were not supplied and are not shown."
             />
 
             <ul className="mt-14 border-t border-line lg:mt-16">
@@ -243,11 +341,35 @@ export default function AboutPage() {
                 </ListRow>
               ))}
             </ul>
+
+            {professionalDevelopment.length > 0 ? (
+              <div className="mt-16">
+                <h3 className="text-eyebrow font-semibold uppercase text-accent">
+                  Professional development
+                </h3>
+                <ul className="mt-6 grid gap-4 sm:grid-cols-2">
+                  {professionalDevelopment.map((item, i) => (
+                    <li key={item.title}>
+                      <Reveal step={i} className="h-full">
+                        <Card padding="md" hover="quiet" className="h-full">
+                          <p className="font-display text-xl font-semibold text-content">
+                            {item.title}
+                          </p>
+                          <p className="mt-2 text-sm text-content-muted">
+                            {item.issuer}
+                          </p>
+                        </Card>
+                      </Reveal>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ) : null}
           </Container>
         </Section>
       ) : null}
 
-      <ContactCta index="04" />
+      <ContactCta index="05" />
     </>
   );
 }

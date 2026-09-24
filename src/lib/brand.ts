@@ -18,7 +18,7 @@
  */
 export const brand = {
   /** --navy-950. The dark chrome, the icon ground, the OG card ground. */
-  navy: "#051529",
+  navy: "#1e2a42",
   /** --parchment-100. The light chrome. */
-  parchment: "#fbf7ef",
+  parchment: "#ffffff",
 } as const;

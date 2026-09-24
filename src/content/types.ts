@@ -70,6 +70,19 @@ export type EducationEntry = {
   note?: string;
 };
 
+/** A professional certificate, as distinct from a degree. */
+export type Certification = {
+  title: string;
+  issuer: string;
+};
+
+/** A recorded talk, interview or message, linked to where it is hosted. */
+export type VideoItem = {
+  title: string;
+  kind: string;
+  href: string;
+};
+
 export type Statistic = {
   /** Kept as a string so "15+", "2", "1,200+" all render identically. */
   value: string;

@@ -28,7 +28,9 @@ export function KeyStats({ index }: { index?: string }) {
           lede={achievementsIntro.lede}
         />
 
-        <dl className="mt-16 grid gap-x-10 gap-y-12 sm:grid-cols-2 lg:mt-20 lg:grid-cols-4">
+        <dl
+          className={`mt-16 grid gap-x-10 gap-y-12 lg:mt-20 ${statistics.length === 3 ? "sm:grid-cols-3" : "sm:grid-cols-2 lg:grid-cols-4"}`}
+        >
           {statistics.map((statistic, i) => (
             <Reveal
               key={statistic.label}

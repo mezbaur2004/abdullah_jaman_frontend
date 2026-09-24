@@ -7,6 +7,7 @@ import { BooksTeaser } from "@/components/home/BooksTeaser";
 import { ClosingStatement } from "@/components/home/ClosingStatement";
 import { ContactCta } from "@/components/home/ContactCta";
 import { Credibility } from "@/components/home/Credibility";
+import { FounderMessage } from "@/components/home/FounderMessage";
 import { Hero } from "@/components/home/Hero";
 import { KeyStats } from "@/components/home/KeyStats";
 import { LeadershipTeaser } from "@/components/home/LeadershipTeaser";
@@ -40,6 +41,7 @@ const sections: Array<{ key: string; show: boolean; render: (index: string) => R
     show: atAGlance.length > 0,
     render: (index) => <AtAGlance index={index} />,
   },
+  { key: "message", show: true, render: (index) => <FounderMessage index={index} /> },
   { key: "philosophy", show: true, render: (index) => <AboutTeaser index={index} /> },
   {
     key: "leadership",

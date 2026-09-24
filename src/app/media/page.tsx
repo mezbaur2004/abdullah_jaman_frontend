@@ -5,6 +5,7 @@ import { Container } from "@/components/layout/Container";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { Section } from "@/components/layout/Section";
 import { MediaEntry } from "@/components/media/MediaEntry";
+import { VideoCard } from "@/components/media/VideoCard";
 import { FeatureImage } from "@/components/ui/FeatureImage";
 import { PendingNote } from "@/components/ui/PendingNote";
 import { Reveal } from "@/components/ui/Reveal";
@@ -15,6 +16,7 @@ import {
   mediaItems,
   mediaSecondary,
   publications,
+  videos,
 } from "@/content/media";
 import { pageMetadata } from "@/lib/seo";
 
@@ -74,10 +76,39 @@ export default function MediaPage() {
         </Container>
       </Section>
 
-      {publications.length > 0 ? (
+      {videos.length > 0 ? (
         <Section
           tone="soft"
           index="02"
+          indexLabel="Video"
+          accent="gold"
+          separator="band"
+          aria-labelledby="video-heading"
+        >
+          <Container>
+            <SectionHeading
+              id="video-heading"
+              title="Video message and *media* appearances."
+              accent="gold"
+            />
+
+            <ul className="mt-14 grid gap-5 sm:grid-cols-2 lg:mt-16 lg:grid-cols-3 lg:gap-6">
+              {videos.map((video, i) => (
+                <li key={video.href} className={i === 0 ? "sm:col-span-2 lg:col-span-3" : undefined}>
+                  <Reveal step={i} className="h-full">
+                    <VideoCard video={video} lead={i === 0} />
+                  </Reveal>
+                </li>
+              ))}
+            </ul>
+          </Container>
+        </Section>
+      ) : null}
+
+      {publications.length > 0 ? (
+        <Section
+          tone="soft"
+          index={videos.length > 0 ? "03" : "02"}
           indexLabel="Publications"
           accent="gold"
           separator="band"
@@ -103,7 +134,9 @@ export default function MediaPage() {
         </Section>
       ) : null}
 
-      <ContactCta index={publications.length > 0 ? "03" : "02"} />
+      <ContactCta
+        index={String(2 + (videos.length > 0 ? 1 : 0) + (publications.length > 0 ? 1 : 0)).padStart(2, "0")}
+      />
     </>
   );
 }

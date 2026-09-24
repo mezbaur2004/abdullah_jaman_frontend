@@ -1,7 +1,6 @@
 import Image from "next/image";
 
 import { Container } from "./Container";
-import { ArchFrame } from "@/components/ui/ArchFrame";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Figure } from "@/components/ui/Figure";
 import { GeometricPattern } from "@/components/ui/GeometricPattern";
