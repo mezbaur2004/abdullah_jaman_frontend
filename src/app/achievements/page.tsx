@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 
 import { ContactCta } from "@/components/home/ContactCta";
 import { Container } from "@/components/layout/Container";
+import { CountUp } from "@/components/ui/CountUp";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { Section } from "@/components/layout/Section";
 import { ListRow } from "@/components/ui/ListRow";
@@ -114,7 +115,7 @@ export default function AchievementsPage() {
                   <dt className="sr-only">{statistic.label}</dt>
                   <dd>
                     <span className="block font-display text-display-xl text-content">
-                      {statistic.value}
+                      <CountUp value={statistic.value} />
                     </span>
                     <span
                       aria-hidden="true"

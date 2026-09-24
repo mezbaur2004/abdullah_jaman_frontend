@@ -544,6 +544,42 @@
      when JavaScript has not hydrated yet and never hides the hero. */
   --animate-rise: rise 0.85s var(--ease-editorial) both;
 
+  /* The hero's ambient motion: a slow bob for the floating badges, a slow
+     turn for the dashed ring, and a breathing glow behind the photograph.
+     Every use is behind `motion-safe:`, so reduced motion gets a still hero. */
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-float-late: float 7s ease-in-out 1.4s infinite;
+  --animate-spin-slow: turn 32s linear infinite;
+  --animate-glow: glow 7s ease-in-out infinite;
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-12px);
+    }
+  }
+
+  @keyframes turn {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes glow {
+    0%,
+    100% {
+      opacity: 0.55;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.9;
+      transform: scale(1.05);
+    }
+  }
+
   @keyframes rise {
     from {
       opacity: 0;

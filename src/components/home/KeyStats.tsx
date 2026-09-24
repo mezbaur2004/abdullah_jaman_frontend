@@ -1,5 +1,6 @@
 import { Container } from "@/components/layout/Container";
 import { Section } from "@/components/layout/Section";
+import { CountUp } from "@/components/ui/CountUp";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { achievementsIntro, statistics } from "@/content/achievements";
@@ -25,7 +26,7 @@ export function KeyStats({ index, strip = false }: { index?: string; strip?: boo
                   {statistic.label}
                 </dt>
                 <dd className="font-display text-display-lg leading-none text-ink">
-                  {statistic.value}
+                  <CountUp value={statistic.value} />
                 </dd>
               </div>
             ))}
@@ -64,7 +65,7 @@ export function KeyStats({ index, strip = false }: { index?: string; strip?: boo
               <dt className="sr-only">{statistic.label}</dt>
               <dd>
                 <span className="block font-display text-display-xl text-on-inverse">
-                  {statistic.value}
+                  <CountUp value={statistic.value} />
                 </span>
                 <span
                   aria-hidden="true"

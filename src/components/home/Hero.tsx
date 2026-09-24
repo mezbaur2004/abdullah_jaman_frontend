@@ -1,9 +1,12 @@
+import { Award, GraduationCap } from "lucide-react";
+
 import { Container } from "@/components/layout/Container";
 import { Button } from "@/components/ui/Button";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Figure } from "@/components/ui/Figure";
 import { GeometricPattern } from "@/components/ui/GeometricPattern";
 import { ImageReveal } from "@/components/ui/ImageReveal";
+import { statistics } from "@/content/achievements";
 import { hero, heroPhoto } from "@/content/profile";
 import { site } from "@/content/site";
 
@@ -17,6 +20,7 @@ import { site } from "@/content/site";
  */
 export function Hero() {
   const image = heroPhoto;
+  const experience = statistics.find((s) => s.label.startsWith("Years"));
 
   return (
     <section className="geo-parallax-host relative isolate overflow-hidden bg-surface-inverse pb-20 pt-14 text-on-inverse sm:pb-24 sm:pt-20 lg:pb-28 lg:pt-24">
@@ -102,18 +106,75 @@ export function Hero() {
           </div>
 
           <div className="sm:col-span-5">
+            {/* The photograph with its ambient layer: a breathing glow behind
+                it, a slow dashed ring and a dot field at two corners, and two
+                floating badges that carry real figures from the content layer.
+                All motion is `motion-safe:`, so reduced motion gets it still. */}
+            <div className="relative mx-auto max-w-md px-4 sm:max-w-none sm:px-0">
+              <span
+                aria-hidden="true"
+                className="pointer-events-none absolute -inset-6 -z-10 rounded-[3rem] bg-[radial-gradient(closest-side,color-mix(in_oklab,var(--gold)_55%,transparent),transparent)] blur-2xl motion-safe:animate-glow"
+              />
+              <span
+                aria-hidden="true"
+                className="pointer-events-none absolute -right-2 -top-8 -z-10 size-36 rounded-full border-2 border-dashed border-accent-on-inverse/35 motion-safe:animate-spin-slow sm:-right-10 sm:-top-10 sm:size-44"
+              />
+              <span
+                aria-hidden="true"
+                className="pointer-events-none absolute -bottom-6 -left-2 -z-10 size-28 bg-[radial-gradient(currentColor_1.5px,transparent_1.6px)] [background-size:14px_14px] text-accent-on-inverse/45 sm:-bottom-8 sm:-left-8"
+              />
+
               <ImageReveal>
-                {/* The photograph at its own ratio, uncropped, with the top
-                    corners curved — the shape that replaced the mihrab arch. */}
                 <Figure
                   image={image}
                   ratio={`${image.width} / ${image.height}`}
                   priority
                   frame="none"
-                  className="overflow-hidden rounded-t-3xl"
+                  className="overflow-hidden rounded-t-3xl shadow-panel"
                   sizes="(min-width: 1024px) 38vw, (min-width: 640px) 36vw, 90vw"
                 />
               </ImageReveal>
+
+              {experience ? (
+                <div
+                  className="animate-rise absolute -left-1 top-[5%] sm:top-[16%] sm:-left-8 lg:-left-12"
+                  style={{ animationDelay: "520ms" }}
+                >
+                  <div className="flex items-center gap-3 rounded-2xl border border-line bg-surface-raised/95 px-4 py-3 text-content shadow-panel backdrop-blur motion-safe:animate-float">
+                    <span className="flex size-10 items-center justify-center rounded-full bg-emphasis-solid text-white">
+                      <GraduationCap aria-hidden="true" className="size-5" strokeWidth={1.75} />
+                    </span>
+                    <span className="leading-tight">
+                      <span className="block font-display text-2xl font-bold text-ink">
+                        {experience.value}
+                      </span>
+                      <span className="block text-xs font-medium text-content-muted">
+                        Years in education
+                      </span>
+                    </span>
+                  </div>
+                </div>
+              ) : null}
+
+              <div
+                className="animate-rise absolute -right-1 bottom-[12%] sm:-right-6 lg:-right-10"
+                style={{ animationDelay: "680ms" }}
+              >
+                <div className="flex items-center gap-3 rounded-2xl border border-line bg-surface-raised/95 px-4 py-3 text-content shadow-panel backdrop-blur motion-safe:animate-float-late">
+                  <span className="flex size-10 items-center justify-center rounded-full bg-ink text-white">
+                    <Award aria-hidden="true" className="size-5" strokeWidth={1.75} />
+                  </span>
+                  <span className="leading-tight">
+                    <span className="block font-display text-lg font-bold text-content">
+                      Cambridge Scholar
+                    </span>
+                    <span className="block text-xs font-medium text-content-muted">
+                      University of Cambridge, UK
+                    </span>
+                  </span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </Container>
