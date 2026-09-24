@@ -103,12 +103,11 @@ export function Hero() {
 
           <div className="sm:col-span-5">
               <ImageReveal>
-                {/* Square, with the top corners curved and the bottom left
-                    square — the simple shape that replaced the mihrab arch
-                    here, once the arch itself was removed. */}
+                {/* The photograph at its own ratio, uncropped, with the top
+                    corners curved — the shape that replaced the mihrab arch. */}
                 <Figure
                   image={image}
-                  ratio="1 / 1"
+                  ratio={`${image.width} / ${image.height}`}
                   priority
                   frame="none"
                   className="overflow-hidden rounded-t-3xl"

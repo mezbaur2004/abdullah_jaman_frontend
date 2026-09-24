@@ -194,7 +194,6 @@ export default function LeadershipPage() {
               <FeatureImage
                 image={leadershipSecondary}
                 caption="Addressing a room."
-                ratio="4 / 5"
               />
             </div>
           </div>

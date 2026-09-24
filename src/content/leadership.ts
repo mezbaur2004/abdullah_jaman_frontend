@@ -75,10 +75,10 @@ export const leadershipTeaser = {
  * is named, because none is readable from the picture.
  */
 export const leadershipSecondary: ImageAsset = {
-  src: "/images/gallery-address.jpg",
-  alt: "Abdullah Jaman speaking into a handheld microphone.",
-  width: 865,
-  height: 1320,
+  src: "/images/speaking-mic.jpg",
+  alt: "Abdullah Jaman speaking into a microphone.",
+  width: 1101,
+  height: 1600,
 };
 
 /**

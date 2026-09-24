@@ -34,16 +34,15 @@ export const portrait: ImageAsset | null = {
 };
 
 /**
- * VERIFIED — supplied by the owner, for the homepage hero specifically.
- *
- * A square original, shown whole rather than cropped: the hero's frame is
- * already 1:1, so nothing is cut to fit it.
+ * VERIFIED — supplied by the owner, for the homepage hero and the second
+ * photograph on the leadership page. Shown whole at its own 1101:1600 ratio,
+ * so nothing is cut to fit.
  */
 export const heroPhoto: ImageAsset = {
-  src: "/images/hero-photo.jpg",
+  src: "/images/speaking-mic.jpg",
   alt: "Abdullah Jaman speaking into a microphone.",
-  width: 1320,
-  height: 1320,
+  width: 1101,
+  height: 1600,
 };
 
 /**
