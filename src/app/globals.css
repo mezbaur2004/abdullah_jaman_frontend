@@ -549,6 +549,7 @@
      Every use is behind `motion-safe:`, so reduced motion gets a still hero. */
   --animate-float: float 6s ease-in-out infinite;
   --animate-float-late: float 7s ease-in-out 1.4s infinite;
+  --animate-float-mid: float 6.5s ease-in-out 0.7s infinite;
   --animate-spin-slow: turn 32s linear infinite;
   --animate-glow: glow 7s ease-in-out infinite;
 
