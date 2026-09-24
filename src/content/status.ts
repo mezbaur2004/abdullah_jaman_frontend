@@ -52,9 +52,9 @@ export const openQuestions: OpenQuestion[] = [
   },
   {
     subject: "University of Cambridge",
-    known: "An association with the University of Cambridge is confirmed.",
-    missing:
-      "Degree, subject, programme type and dates. The About page therefore names the institution and nothing else.",
+    known:
+      "Postgraduate Advanced Certificate in Educational Studies (Assessment), listed on his founder page as a PGCert in Educational Assessment.",
+    missing: "Dates. None are shown.",
   },
   {
     subject: "Earlier career",
@@ -80,9 +80,9 @@ export const openQuestions: OpenQuestion[] = [
   {
     subject: "A quotation",
     known:
-      "The closing section of the homepage carries a statement of his educational position.",
+      "His message, from his founder page, is now on the homepage and the About page as a quotation in his own words. The homepage closing section still carries a composed statement of his position, not typeset as a quotation.",
     missing:
-      "Anything he has actually said, on the record, in a verified form. The statement is therefore composed from the documented philosophy and deliberately not typeset as a quotation — no quote marks, no attribution. Replace it the moment a real quotation exists.",
+      "Nothing for the message. The closing statement can be replaced with a line from it, or another on-record quotation, if the owner prefers.",
   },
   {
     subject: "LinkedIn activity",
@@ -99,7 +99,8 @@ export const openQuestions: OpenQuestion[] = [
 export const resolvedDecisions: ResolvedDecision[] = [
   {
     subject: "Pedago Academy",
-    decision: "Not mentioned anywhere on the site.",
+    decision:
+      "Not mentioned anywhere on the site. Reconfirmed when his founder page was supplied as the final source: its message, credentials, press and videos are used, with every Pedago Academy reference left out.",
     rationale:
       "Confirmed by the owner as a sister concern of Wheaton and Guidance that is still in development and has not launched. An unlaunched venture does not belong in a public profile, and the earlier brief describing a Managing Director role there is superseded.",
   },

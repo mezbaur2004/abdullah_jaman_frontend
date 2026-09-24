@@ -1,4 +1,5 @@
 import type {
+  Certification,
   EducationEntry,
   GlanceItem,
   ImageAsset,
@@ -151,26 +152,102 @@ export const education: EducationEntry[] = [
     institution: "University of Dhaka",
     qualification: "BSS (Hons.)",
     field: "Sociology",
+    note: "Social Sciences & Human Behaviour",
   },
   {
-    institution: "Al-Madinah International Islamic University, Malaysia",
+    institution: "Al-Madinah International University, Malaysia",
     qualification: "M.A.",
-    field: "Aqidah",
+    field: "Islamic Aqidah",
+    note: "Islamic Theology & Creed",
   },
   {
     institution: "Institute of Education and Research, University of Dhaka",
     qualification: "M.Ed.",
+    field: "Pre-Primary & Primary Education",
+    note: "Early Childhood & Primary Pedagogy",
   },
   {
-    institution: "United Kingdom",
-    qualification: "Child Psychology, Level 7",
-  },
-  {
-    institution: "University of Cambridge",
+    institution: "University of Cambridge, UK",
     qualification:
       "Postgraduate Advanced Certificate in Educational Studies (Assessment)",
+    note: "PGCert in Educational Assessment — Assessment Design & Academic Evaluation",
   },
 ];
+
+/**
+ * VERIFIED — from his founder page, supplied by the owner as the final source.
+ *
+ * Certificates rather than degrees, so they are kept out of the ledger above.
+ * The Level 7 psychology entry used to sit in that ledger as "Child
+ * Psychology, Level 7, United Kingdom"; the source names it and its provider
+ * precisely, so it is recorded here in those words.
+ */
+export const professionalDevelopment: Certification[] = [
+  { title: "120-Hour TESOL Certificate", issuer: "World TESOL Academy" },
+  {
+    title: "Positive Psychology Coach Certification",
+    issuer: "CMA — Coaching & Mentoring Academy",
+  },
+  { title: "Psychology Level 7", issuer: "One Education, UK" },
+  { title: "Psychology & Psychiatry Level 5", issuer: "South London College" },
+];
+
+/** VERIFIED — the role line and areas of expertise from his founder page. */
+export const roleLine = [
+  "Curriculum Expert",
+  "Author",
+  "Administrator",
+  "Cambridge Scholar",
+  "Value-based School Curriculum Designer",
+  "Multiple Institutions Founder",
+] as const;
+
+export const expertise = [
+  "Curriculum Design",
+  "International Frameworks",
+  "Assessment Science",
+  "Islamic Education",
+  "Digital Schooling",
+  "Teacher Training",
+  "School Administration",
+] as const;
+
+/**
+ * VERIFIED — his own words, from the message on his founder page.
+ *
+ * This is the quotation the site did not have, and it is set as one. The
+ * source message is written for an academy that this site does not name (see
+ * status.ts), so the sentences about that academy are left out whole. Nothing
+ * that remains is reworded, except that "Here, we believe" opens as "We
+ * believe", since the "here" it pointed to is one of the omitted sentences.
+ */
+export const founderMessage = {
+  eyebrow: "Message",
+  heading: "A message from Abdullah *Jaman*.",
+  basmalah: "بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ",
+  basmalahTranslation: "In the Name of Allah, the Most Merciful",
+  lead: "Education, in its truest form, is an act of ibādah — a sacred trust entrusted to humanity by Allah ﷻ. It is not merely the transfer of information, but the cultivation of hearts, minds, and character in a way that leads a learner closer to truth, responsibility, and purpose.",
+  body: [
+    "Over the past two decades, I have witnessed the beauty of learning — and also its painful distortions. I have seen education reduced to grades without wisdom, speed without depth, and success without values. I have seen children burdened with pressure, yet deprived of meaning; fluent in answers, yet unsure of purpose.",
+    "This reality compelled me to pause, reflect, and ask a fundamental question: What kind of education do our children truly deserve?",
+    "We believe that knowledge must walk hand in hand with faith, and excellence must be grounded in ethics. We believe that learning should awaken curiosity, discipline the intellect, soften the heart, and strengthen one’s relationship with Allah ﷻ.",
+  ],
+  refrain: [
+    "We do not rush learning. We honour its natural pace.",
+    "We do not fragment knowledge. We connect it with meaning.",
+    "We do not teach for examinations alone. We teach for life.",
+  ],
+  signoff: "With faith, hope, and responsibility",
+  cta: { label: "Read the full message", href: "/about#message" },
+} as const;
+
+/** The verse that closes his founder page. Scripture, cited, not a claim. */
+export const verse = {
+  arabic: "اقْرَأْ بِاسْمِ رَبِّكَ الَّذِي خَلَقَ",
+  translation: "Read in the name of your Lord who created.",
+  reference: "Surah Al-‘Alaq, 96:1",
+  note: "The First Revelation — A Command to Seek Knowledge",
+} as const;
 
 /**
  * The at-a-glance strip. Four qualities, no quantities: each value says what
@@ -254,6 +331,8 @@ export const aboutPage = {
   facts: [
     { label: "Field", value: "Education" },
     { label: "Current position", value: "Founder & Principal" },
+    { label: "Specialism", value: "Curriculum Design & Islamic Education" },
+    { label: "Experience", value: "20+ years in education" },
     {
       label: "Institutions",
       value: "Wheaton International School, Guidance International School",
@@ -262,7 +341,7 @@ export const aboutPage = {
     {
       label: "Studied at",
       value:
-        "University of Dhaka · Al-Madinah International Islamic University · University of Cambridge",
+        "University of Dhaka · Al-Madinah International University · University of Cambridge",
     },
   ],
 } as const;

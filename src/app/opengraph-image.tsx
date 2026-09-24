@@ -32,7 +32,7 @@ export default async function OpenGraphImage() {
           flexDirection: "column",
           justifyContent: "space-between",
           backgroundColor: brand.navy,
-          color: "#f6f1e4",
+          color: "#ffffff",
           padding: "72px 80px",
           fontFamily: "Fraunces",
         }}

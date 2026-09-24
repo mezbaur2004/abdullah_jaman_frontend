@@ -1,5 +1,4 @@
 import { Container } from "@/components/layout/Container";
-import { ArchFrame } from "@/components/ui/ArchFrame";
 import { Button } from "@/components/ui/Button";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Figure } from "@/components/ui/Figure";

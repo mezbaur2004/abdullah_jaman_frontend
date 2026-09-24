@@ -104,7 +104,7 @@ export default function AchievementsPage() {
           </ul>
 
           {statistics.length > 0 ? (
-            <dl className="mt-16 grid gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
+            <dl className="mt-16 grid gap-x-10 gap-y-12 sm:grid-cols-3">
               {statistics.map((statistic, i) => (
                 <Reveal
                   key={statistic.label}
