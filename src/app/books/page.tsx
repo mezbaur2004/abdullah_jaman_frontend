@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-import { BookSetNote } from "@/components/books/BookSetNote";
+import { BookSetNotes } from "@/components/books/BookSetNote";
 import { BookTitleCard } from "@/components/books/BookTitleCard";
 import { ContactCta } from "@/components/home/ContactCta";
 import { Container } from "@/components/layout/Container";
@@ -11,13 +11,28 @@ import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { authorNote, booksIntro } from "@/content/books";
 import { booksFeature } from "@/content/profile";
-import { books } from "@/data/books";
+import { bookSeries, books } from "@/data/books";
 import { pageMetadata } from "@/lib/seo";
+
+/** "A, B and C" — for the titles named in metadata and the section lede. */
+function listNames(names: string[]) {
+  return names.length <= 1
+    ? (names[0] ?? "")
+    : `${names.slice(0, -1).join(", ")} and ${names[names.length - 1]}`;
+}
+
+const standalone = books.filter((book) => !book.seriesId).map((book) => book.titleEn);
+const workNames = listNames([...bookSeries.map((series) => series.titleEn), ...standalone]);
+const publishers = [...new Set(books.map((book) => book.publisherEn))];
+const years = books.map((book) => book.year);
+const yearSpan =
+  Math.min(...years) === Math.max(...years)
+    ? String(years[0])
+    : `${Math.min(...years)}–${Math.max(...years)}`;
 
 export const metadata: Metadata = pageMetadata({
   title: "Books",
-  description:
-    "Abdullah Jaman is the author of Arabi Shikkha Obhijatra, a two-volume Arabic course for Bengali-speaking readers, and writes and supervises Islamic Studies and Arabic learning materials for school classrooms in Dhaka.",
+  description: `Abdullah Jaman is the author of ${workNames}, and writes and supervises Islamic Studies and Arabic learning materials for school classrooms in Dhaka.`,
   path: "/books",
 });
 
@@ -29,9 +44,8 @@ export const metadata: Metadata = pageMetadata({
  * than elsewhere. A bibliography is a different kind of object from a CV, and
  * the page should feel like one.
  *
- * It used to lead with an apology for having no titles on it. That is gone:
- * two volumes are published, they are on the page, and the "nothing is listed
- * until it is confirmed" note has been deleted rather than left dormant.
+ * Every count, name and year on it is derived from src/lib/data/books.json,
+ * so adding a title there is the whole of adding it here.
  */
 export default function BooksPage() {
   return (
@@ -95,10 +109,12 @@ export default function BooksPage() {
           <SectionHeading
             id="titles-heading"
             title="Published *titles*."
-            lede="A two-volume Arabic course, published by Manuver in 2024."
+            lede={`${books.length === 1 ? "One title" : `${books.length} titles`}, published by ${listNames(publishers)}${books.length ? ` in ${yearSpan}` : ""}.`}
           />
 
-          <ul className="mt-14 grid gap-6 sm:grid-cols-2 lg:mt-16 lg:gap-8">
+          <ul
+            className={`mt-14 grid gap-6 sm:grid-cols-2 lg:mt-16 lg:gap-8 ${books.length > 2 ? "lg:grid-cols-3" : ""}`}
+          >
             {books.map((book, i) => (
               <li key={book.slug}>
                 <Reveal step={i} className="h-full">
@@ -109,7 +125,7 @@ export default function BooksPage() {
           </ul>
 
           <Reveal step={1}>
-            <BookSetNote className="mt-12 max-w-xl" />
+            <BookSetNotes className="mt-12 max-w-xl" />
           </Reveal>
         </Container>
       </Section>

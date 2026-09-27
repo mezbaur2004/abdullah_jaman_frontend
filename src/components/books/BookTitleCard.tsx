@@ -29,11 +29,13 @@ export function BookTitleCard({ book, size = "default", className }: BookTitleCa
   const compact = size === "compact";
 
   const meta = [
-    `Volume ${book.volume}`,
+    book.volume ? `Volume ${book.volume}` : null,
     String(book.year),
     book.format,
     `${book.pages} pages`,
-  ].join(" · ");
+  ]
+    .filter(Boolean)
+    .join(" · ");
 
   return (
     <Card

@@ -9,14 +9,12 @@ import { Card } from "@/components/ui/Card";
 import { FeatureImage } from "@/components/ui/FeatureImage";
 import { GeometricPattern } from "@/components/ui/GeometricPattern";
 import { IconChip } from "@/components/ui/IconChip";
-import { PendingNote } from "@/components/ui/PendingNote";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import {
   initiatives,
   leadershipFeature,
   leadershipIntro,
-  leadershipPending,
   leadershipPhilosophy,
   leadershipSecondary,
   roles,
@@ -149,11 +147,6 @@ export default function LeadershipPage() {
             ))}
           </ol>
 
-          {leadershipPending ? (
-            <Reveal step={roles.length}>
-              <PendingNote className="mt-12">{leadershipPending}</PendingNote>
-            </Reveal>
-          ) : null}
         </Container>
       </Section>
 

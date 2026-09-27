@@ -1,3 +1,4 @@
+import mediaData from "@/lib/data/media.json";
 import type { ImageAsset, MediaItem, VideoItem } from "./types";
 
 /**
@@ -40,68 +41,13 @@ export const mediaIntro = {
   lede: "Interviews, features and talks — where his thinking on education, assessment and Islamic learning materials has been set out in public rather than in a prospectus.",
 } as const;
 
-export const mediaItems: MediaItem[] = [
-  {
-    title:
-      "In conversation with Abdullah Jaman, Founder and Principal of WIS and GIS",
-    outlet: "The Daily Star",
-    type: "Interview",
-    href: "https://www.thedailystar.net/campus/news/conversation-abdullah-jaman-founder-and-principal-wis-and-gis-4075876",
-  },
-  /* VERIFIED — the four national features listed on his founder page, with
-     the labels it gives them. */
-  {
-    title: "Education Feature",
-    outlet: "Daily Amar Desh",
-    type: "Feature",
-    href: "https://www.dailyamardesh.com/education/amdaoo5mt9ms",
-  },
-  {
-    title: "Education Insight",
-    outlet: "Prothom Alo",
-    type: "Feature",
-    href: "https://www.prothomalo.com/education/i28zqo6rub",
-  },
-  {
-    title: "Campus Education Feature",
-    outlet: "Prothom Alo — Campus",
-    type: "Feature",
-    href: "https://www.prothomalo.com/education/campus/lrl6dob7ha",
-  },
-  {
-    title: "Higher Education Commentary",
-    outlet: "Prothom Alo — Higher Ed",
-    type: "Opinion",
-    href: "https://www.prothomalo.com/education/higher-education/4xcuxq4jt3",
-  },
-];
+export const mediaItems: MediaItem[] = mediaData.press as MediaItem[];
 
 /**
  * VERIFIED — the videos linked from his founder page. The first is the
  * featured personal message; the page lists it twice, so it appears once here.
  */
-export const videos: VideoItem[] = [
-  {
-    title: "A personal message from Abdullah Jaman",
-    kind: "Video message",
-    href: "https://youtu.be/blaOWF3bmNo",
-  },
-  {
-    title: "Education & Islamic Values",
-    kind: "Media appearance",
-    href: "https://youtu.be/lvYgrihZ4CM",
-  },
-  {
-    title: "Curriculum & Learning Design",
-    kind: "Interview",
-    href: "https://youtu.be/4Piv1ux8yNc",
-  },
-  {
-    title: "Values-Based School Talk",
-    kind: "Panel discussion",
-    href: "https://youtu.be/TUvtAHvva7c",
-  },
-];
+export const videos: VideoItem[] = mediaData.videos;
 
-/** TO COLLECT — articles, books, research, reports and other published work. */
-export const publications: MediaItem[] = [];
+/** Articles, research, reports and other published writing. Renders only when it has entries. */
+export const publications: MediaItem[] = mediaData.publications as MediaItem[];

@@ -42,15 +42,12 @@ const STAGGER = 0.07;
 export function ImageReveal({ children, className, step = 0 }: ImageRevealProps) {
   const reduced = useReducedMotion();
 
-  if (reduced) {
-    return (
-      <div data-reveal="" className={className}>
-        {children}
-      </div>
-    );
-  }
-
-  const delay = Math.min(Math.max(step, 0), 5) * STAGGER;
+  // The same two elements for everyone. Swapping to a plain <div> when reduced
+  // motion is detected broke hydration: the server cannot know the setting, so
+  // it rendered the motion tree and the client then rendered a different one.
+  // Reduced motion now keeps the tree and makes the transition instant.
+  const delay = reduced ? 0 : Math.min(Math.max(step, 0), 5) * STAGGER;
+  const instant = { duration: 0 };
 
   return (
     <motion.div
@@ -59,7 +56,7 @@ export function ImageReveal({ children, className, step = 0 }: ImageRevealProps)
       initial={{ opacity: 0, clipPath: "inset(0% 0% 14% 0%)" }}
       whileInView={{ opacity: 1, clipPath: "inset(0% 0% 0% 0%)" }}
       viewport={{ once: true, amount: 0.18, margin: "0px 0px -6% 0px" }}
-      transition={{ duration: 0.8, ease: EDITORIAL, delay }}
+      transition={reduced ? instant : { duration: 0.8, ease: EDITORIAL, delay }}
     >
       <motion.div
         initial={{ scale: 1.045 }}
@@ -68,7 +65,7 @@ export function ImageReveal({ children, className, step = 0 }: ImageRevealProps)
         // Longer than the frame, so the picture is still settling after the
         // frame has finished opening. Equal durations read as one object
         // moving; unequal ones read as depth.
-        transition={{ duration: 1.15, ease: EDITORIAL, delay }}
+        transition={reduced ? instant : { duration: 1.15, ease: EDITORIAL, delay }}
       >
         {children}
       </motion.div>

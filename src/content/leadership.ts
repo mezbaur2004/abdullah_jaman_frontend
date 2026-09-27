@@ -1,3 +1,4 @@
+import leadershipData from "@/lib/data/leadership.json";
 import type { ImageAsset, Initiative, Role } from "./types";
 
 /**
@@ -9,28 +10,7 @@ import type { ImageAsset, Initiative, Role } from "./types";
  * so it is recorded in status.ts as an open question rather than shown here.
  */
 
-export const roles: Role[] = [
-  {
-    slug: "wheaton-international-school",
-    organization: "Wheaton International School",
-    title: "Founder & Principal",
-    location: "Dhaka, Bangladesh",
-    href: "https://wheaton.edu.bd",
-    current: true,
-  },
-  {
-    slug: "guidance-international-school",
-    organization: "Guidance International School",
-    title: "Founder & Principal",
-    location: "Dhaka, Bangladesh",
-    /* VERIFIED — supplied by the owner, same as the entry in `organizations`.
-       It was missing here alone, so the leadership page linked one school out
-       and left the other as plain text: two equal posts, one of which looked
-       like the lesser. */
-    href: "https://guidance.edu.bd/",
-    current: true,
-  },
-];
+export const roles: Role[] = leadershipData.roles;
 
 /**
  * VERIFIED — supplied by the owner. "Annual sports" is readable from the
@@ -101,16 +81,6 @@ export const leadershipIntro = {
   lede: "The institutions he leads, how they are run, and the thinking underneath — academic standards, teacher development, and the place of faith and character in a modern school.",
 } as const;
 
-/**
- * TO COLLECT — programmes, projects and institutional initiatives. Empty, so
- * the initiatives section does not render on either the homepage or the
- * experience page.
- */
-export const initiatives: Initiative[] = [];
+/** Programmes, projects and institutional initiatives. Renders only when it has entries. */
+export const initiatives: Initiative[] = leadershipData.initiatives as Initiative[];
 
-/**
- * Shown on the experience page while the detailed history is outstanding.
- * Delete this once `roles` carries real dates and responsibilities.
- */
-export const leadershipPending =
-  "This page shows current roles only. Earlier positions, dates, responsibilities and milestones are being compiled and will be published here once confirmed.";

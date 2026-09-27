@@ -1,28 +1,37 @@
 import { Price } from "./Price";
 import { InlineLink } from "@/components/ui/InlineLink";
-import { bookRetailer, bookSet } from "@/data/books";
+import { booksInSeries, seriesWithSets, type BookSeries } from "@/data/books";
 import { cn } from "@/lib/cn";
 
 /**
- * The set, said quietly and said once per page.
+ * A set, said quietly and said once per page.
  *
- * It is a way of buying the same two volumes, not a third title, so it gets a
- * line of prose and never a card. Anything more — a cover, a heading, a place
- * in the grid — and a reader counts three books on a shelf that holds two.
+ * It is a way of buying volumes already listed, not another title, so it gets
+ * a line of prose and never a card. Anything more — a cover, a heading, a
+ * place in the grid — and a reader counts one more book than there is.
  *
- * The figure is the printed list price for the pair, like every other price
- * on the site. The retailer's discount is not shown here and should not be:
- * it moves, and a stale percentage tells a visitor the page was last touched
- * a year ago.
+ * The figure is the printed list price for the set, like every other price on
+ * the site. The retailer's discount is not shown here and should not be.
+ *
+ * The wording follows the data: "Both volumes" for a pair, "All N volumes"
+ * otherwise, and the series is named once more than one series has a set.
  */
 export function BookSetNote({
+  series,
   tone = "base",
   className,
 }: {
+  series: BookSeries;
   tone?: "base" | "inverse";
   className?: string;
 }) {
+  const set = series.set;
+  if (!set) return null;
+
   const inverse = tone === "inverse";
+  const count = booksInSeries(series.id).length;
+  const volumes = count === 2 ? "Both volumes" : `All ${count} volumes`;
+  const named = seriesWithSets.length > 1 ? ` of ${series.titleEn}` : "";
 
   return (
     <p
@@ -32,11 +41,30 @@ export function BookSetNote({
         className,
       )}
     >
-      Both volumes are also sold together as a set, at{" "}
-      <Price amount={bookSet.listPrice} currency={bookSet.currency} />.{" "}
-      <InlineLink href={bookSet.purchaseUrl} tone={tone}>
-        View the set at {bookRetailer}
+      {volumes}
+      {named} are also sold together as a set, at{" "}
+      <Price amount={set.listPrice} currency={set.currency} />.{" "}
+      <InlineLink href={set.purchaseUrl} tone={tone}>
+        View the set at {set.retailer}
       </InlineLink>
     </p>
+  );
+}
+
+/** One set note per series that has a set, for pages listing every title. */
+export function BookSetNotes({
+  tone = "base",
+  className,
+}: {
+  tone?: "base" | "inverse";
+  className?: string;
+}) {
+  if (seriesWithSets.length === 0) return null;
+  return (
+    <div className={cn("flex flex-col gap-3", className)}>
+      {seriesWithSets.map((series) => (
+        <BookSetNote key={series.id} series={series} tone={tone} />
+      ))}
+    </div>
   );
 }

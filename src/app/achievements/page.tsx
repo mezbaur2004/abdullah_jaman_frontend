@@ -6,12 +6,10 @@ import { CountUp } from "@/components/ui/CountUp";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { Section } from "@/components/layout/Section";
 import { ListRow } from "@/components/ui/ListRow";
-import { PendingNote } from "@/components/ui/PendingNote";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import {
   achievementsIntro,
-  achievementsPending,
   awards,
   milestones,
   statistics,
@@ -129,11 +127,6 @@ export default function AchievementsPage() {
             </dl>
           ) : null}
 
-          {achievementsPending ? (
-            <Reveal step={organizations.length}>
-              <PendingNote className="mt-14">{achievementsPending}</PendingNote>
-            </Reveal>
-          ) : null}
         </Container>
       </Section>
 
