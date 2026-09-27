@@ -4,7 +4,6 @@ import { Figure } from "@/components/ui/Figure";
 import { ImageReveal } from "@/components/ui/ImageReveal";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionLink } from "@/components/ui/SectionLink";
-import { BookSetNotes } from "@/components/books/BookSetNote";
 import { BookTitleCard } from "@/components/books/BookTitleCard";
 import { booksIntro } from "@/content/books";
 import { booksFeature } from "@/content/profile";
@@ -65,10 +64,6 @@ export function BooksTeaser({ index }: { index?: string }) {
                 </li>
               ))}
             </ul>
-
-            <Reveal step={2}>
-              <BookSetNotes className="mt-8 max-w-lg" />
-            </Reveal>
           </div>
 
           <div className="lg:col-span-6 lg:pt-3">

@@ -29,13 +29,10 @@ export function BookTitleCard({ book, size = "default", className }: BookTitleCa
   const compact = size === "compact";
 
   const meta = [
-    book.volume ? `Volume ${book.volume}` : null,
     String(book.year),
     book.format,
     `${book.pages} pages`,
-  ]
-    .filter(Boolean)
-    .join(" · ");
+  ].join(" · ");
 
   return (
     <Card
@@ -57,7 +54,7 @@ export function BookTitleCard({ book, size = "default", className }: BookTitleCa
         }
       />
 
-      <div className={compact ? "mt-6" : "mt-8"}>
+      <div className={cn("flex flex-1 flex-col", compact ? "mt-6" : "mt-8")}>
         <h3
           className={cn(
             "font-bangla leading-snug text-on-inverse",
@@ -83,7 +80,9 @@ export function BookTitleCard({ book, size = "default", className }: BookTitleCa
           {book.titleEn}
         </p>
 
-        <div className="mt-6 flex items-end justify-between gap-5">
+        {/* Pinned to the bottom so the row lines up across a grid of titles
+            whose names run to different lengths. */}
+        <div className="mt-auto flex items-end justify-between gap-5 pt-6">
           <p className="text-eyebrow font-semibold uppercase text-accent-on-inverse">
             {meta}
           </p>
