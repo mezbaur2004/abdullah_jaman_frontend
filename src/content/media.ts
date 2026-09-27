@@ -12,16 +12,16 @@ import type { ImageAsset, MediaItem, VideoItem } from "./types";
 /**
  * VERIFIED — supplied by the owner.
  *
- * The alt text names him and describes the setting, and stops there. The other
- * person is not identified because no name was supplied, and the programme is
+ * The alt text names him and describes the setting, and stops there. No one in
+ * the audience is identified because no names were supplied, and the event is
  * not named because none is readable from the frame. An unsourced caption on a
  * media page is exactly the kind of claim this site does not make.
  */
 export const mediaFeature: ImageAsset = {
-  src: "/images/feature-interview.jpg",
-  alt: "Abdullah Jaman in conversation with an interviewer, the two seated in armchairs on a darkened studio set.",
+  src: "/images/landscape.webp",
+  alt: "Abdullah Jaman seated at the front of an audience at an indoor event.",
   width: 1600,
-  height: 730,
+  height: 1066,
 };
 
 /**
@@ -29,7 +29,7 @@ export const mediaFeature: ImageAsset = {
  * lower down so the page does not open and close on the same picture.
  */
 export const mediaSecondary: ImageAsset = {
-  src: "/images/gallery-podium.jpg",
+  src: "/images/gallery-podium.webp",
   alt: "Abdullah Jaman speaking at a flower-decorated podium on a darkened stage.",
   width: 704,
   height: 714,
