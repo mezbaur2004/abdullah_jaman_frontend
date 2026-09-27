@@ -66,9 +66,16 @@
       "titleEn": "The World of Angels",
       "series": "imaner-alo",
       "volume": 2,
+      "publisherBn": "ম্যানুভার",
+      "publisherEn": "Manuver",
+      "subjectBn": "ঈমানের আলো",
+      "subjectEn": "Imaner Alo",
       "pages": 128,
+      "format": "Hardcover",
       "year": 2025,
       "published": "December 2025",
+      "listPrice": 300,
+      "currency": "BDT",
       "coverImage": "/images/books/the-world-of-angels.webp",
       "description": "An introduction to the angels in the light of the Qur'an and authentic hadith: their creation from light, their form, their power and their duties, among them Jibrail, Mikail, Israfil and the Angel of Death. Written in plain language, for a reader whose faith it means to strengthen."
     }
