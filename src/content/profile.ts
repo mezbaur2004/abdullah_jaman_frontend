@@ -18,8 +18,8 @@ import { site } from "./site";
 /**
  * VERIFIED — supplied by the owner.
  *
- * Cropped to 4:5 from a square original so the hero and the About page can
- * share one file without either needing its own crop. The alt text names him
+ * The speaking frame, cropped square on the About page with the crop weighted
+ * to his face. The alt text names him
  * and stops there: it is a photograph of a person, not a claim about a role,
  * and a caption that editorialises is a claim the image cannot support.
  *
@@ -27,10 +27,11 @@ import { site } from "./site";
  * both fall back to the decorative plate below.
  */
 export const portrait: ImageAsset | null = {
-  src: "/images/portrait.jpg",
+  src: "/images/speaking-mic.webp",
   alt: "Abdullah Jaman",
-  width: 1000,
-  height: 1250,
+  width: 1101,
+  height: 1600,
+  position: "50% 22%",
 };
 
 /**
@@ -39,7 +40,7 @@ export const portrait: ImageAsset | null = {
  * so nothing is cut to fit.
  */
 export const heroPhoto: ImageAsset = {
-  src: "/images/speaking-mic.jpg",
+  src: "/images/speaking-mic.webp",
   alt: "Abdullah Jaman speaking into a microphone.",
   width: 1101,
   height: 1600,
@@ -52,7 +53,7 @@ export const heroPhoto: ImageAsset = {
  * that clearing `portrait` never leaves a hole in the layout.
  */
 export const heroPanel: ImageAsset = {
-  src: "/images/panel-hero.jpg",
+  src: "/images/panel-hero.webp",
   alt: "",
   width: 1200,
   height: 1500,
@@ -64,14 +65,14 @@ export const heroPanel: ImageAsset = {
  * an award.
  */
 export const booksFeature: ImageAsset = {
-  src: "/images/gallery-office.jpg",
+  src: "/images/gallery-office.webp",
   alt: "Abdullah Jaman seated at a desk in front of shelves of school books.",
-  width: 824,
-  height: 620,
+  width: 6720,
+  height: 4480,
 };
 
 export const aboutFeature: ImageAsset = {
-  src: "/images/feature-reception.jpg",
+  src: "/images/feature-reception.webp",
   alt: "Abdullah Jaman seated in conversation with two guests at a reception.",
   width: 1600,
   height: 1066,

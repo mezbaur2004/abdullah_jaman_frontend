@@ -18,7 +18,7 @@ export const roles: Role[] = leadershipData.roles;
  * beyond that is claimed, and no one else in the photograph is identified.
  */
 export const leadershipFeature: ImageAsset = {
-  src: "/images/feature-sports-day.jpg",
+  src: "/images/feature-sports-day.webp",
   alt: "Abdullah Jaman placing a medal around a student's neck at a school annual sports day, with staff and other students alongside.",
   width: 1600,
   height: 1066,
@@ -31,10 +31,10 @@ export const leadershipTeaser = {
   body: "The institutions he leads in Dhaka, and the ordinary work of keeping them good — curriculum, teachers, assessment, the culture a child actually experiences between the timetable and the gate.",
   cta: { label: "Leadership & experience", href: "/leadership" },
   image: {
-    src: "/images/gallery-teaching.jpg",
+    src: "/images/gallery-teaching.webp",
     alt: "Abdullah Jaman writing on an interactive whiteboard during a teacher training session, beside a diagram of Bloom's taxonomy and the stages of a lesson plan.",
-    width: 1600,
-    height: 1066,
+    width: 6720,
+    height: 4480,
     // Weighted right of centre. At the frame's left edge a band of red curtain
     // was cropped into a hard vertical block that read as a rendering fault
     // rather than as part of the room.
@@ -55,7 +55,7 @@ export const leadershipTeaser = {
  * is named, because none is readable from the picture.
  */
 export const leadershipSecondary: ImageAsset = {
-  src: "/images/speaking-mic.jpg",
+  src: "/images/speaking-mic.webp",
   alt: "Abdullah Jaman speaking into a microphone.",
   width: 1101,
   height: 1600,
