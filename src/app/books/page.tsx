@@ -118,7 +118,7 @@ export default function BooksPage() {
           </ul>
 
           <Reveal step={1}>
-            <BookSetNotes className="mt-12 max-w-xl" />
+            <BookSetNotes image className="mt-12 max-w-2xl" />
           </Reveal>
         </Container>
       </Section>

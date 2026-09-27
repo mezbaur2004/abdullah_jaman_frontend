@@ -12,6 +12,11 @@
         "retailer": "Nafaah",
         "purchaseUrl": "https://www.nafaah.com/product/%e0%a6%86%e0%a6%b0%e0%a6%ac%e0%a6%bf-%e0%a6%b6%e0%a6%bf%e0%a6%95%e0%a7%8d%e0%a6%b7%e0%a6%be-%e0%a6%85%e0%a6%ad%e0%a6%bf%e0%a6%af%e0%a6%be%e0%a6%a4%e0%a7%8d%e0%a6%b0%e0%a6%be-%e0%a6%a6%e0%a7%81/"
       }
+    },
+    {
+      "id": "imaner-alo",
+      "titleBn": "ঈমানের আলো",
+      "titleEn": "Imaner Alo"
     }
   ],
   "books": [
@@ -54,6 +59,18 @@
       "coverImage": "/images/books/arabi-shikkha-obhijatra-2.webp",
       "retailer": "Nafaah",
       "purchaseUrl": "https://www.nafaah.com/product/%e0%a6%86%e0%a6%b0%e0%a6%ac%e0%a6%bf-%e0%a6%b6%e0%a6%bf%e0%a6%95%e0%a7%8d%e0%a6%b7%e0%a6%be-%e0%a6%85%e0%a6%ad%e0%a6%bf%e0%a6%af%e0%a6%be%e0%a6%a4%e0%a7%8d%e0%a6%b0%e0%a6%be-%e0%a7%a8%e0%a6%af/"
+    },
+    {
+      "slug": "the-world-of-angels",
+      "titleBn": "ফেরেশতাদের পরিচয়",
+      "titleEn": "The World of Angels",
+      "series": "imaner-alo",
+      "volume": 2,
+      "pages": 128,
+      "year": 2025,
+      "published": "December 2025",
+      "coverImage": "/images/books/the-world-of-angels.webp",
+      "description": "An introduction to the angels in the light of the Qur'an and authentic hadith: their creation from light, their form, their power and their duties, among them Jibrail, Mikail, Israfil and the Angel of Death. Written in plain language, for a reader whose faith it means to strengthen."
     }
   ]
 }

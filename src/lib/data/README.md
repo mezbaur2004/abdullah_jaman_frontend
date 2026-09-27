@@ -21,10 +21,15 @@ build. No component needs to change.
   its `volume` number. A standalone title leaves both out.
 - **Description:** a title without its own `description` uses its series'
   description.
+- **Optional details:** `publisherEn`/`Bn`, `subjectEn`/`Bn`, `format`,
+  `edition`, `listPrice`/`currency`, `retailer`/`purchaseUrl` and `published`
+  (e.g. "December 2025") are shown only when present. Leave a field out rather
+  than guess it.
 - **Cover image:** `coverImage` is a path under `/public`. Until that file
   exists, the site draws a cover from the title instead.
 - **Set:** a series `set` is shown as one line of text under the list, never
-  as a card of its own.
+  as a card of its own. Its `coverImage`, once the file exists, sits beside
+  that line on the Books page.
 
 Sections whose list is empty hide themselves. Leave an array as `[]` rather
 than adding placeholder entries.

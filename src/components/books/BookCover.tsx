@@ -44,7 +44,7 @@ export function BookCover({
       className={cn(
         // The gold edge and the drop shadow are the whole treatment: a cover is
         // already a designed object and does not want a second frame around it.
-        "relative aspect-[2/3] overflow-hidden rounded-figure border border-line-accent bg-surface-raised shadow-panel",
+        "relative aspect-[3/4] overflow-hidden rounded-figure border border-line-accent bg-surface-raised shadow-panel",
         className,
       )}
     >
