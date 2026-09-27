@@ -69,7 +69,7 @@ export function BookCover({
           )}
         >
           <p className="text-eyebrow font-semibold uppercase text-accent">
-            {book.seriesEn}
+            {book.seriesEn ?? book.subjectEn}
           </p>
           {/* Centred in what is left rather than pinned between the two other
               lines: on a tall plate `justify-between` parked the title in the
@@ -88,7 +88,7 @@ export function BookCover({
               large ? "text-base" : "text-sm",
             )}
           >
-            Volume {book.volume} · {book.year}
+            {book.volume ? `Volume ${book.volume} · ${book.year}` : book.year}
           </p>
         </div>
       )}

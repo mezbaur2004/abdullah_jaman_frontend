@@ -1,3 +1,4 @@
+import achievementsData from "@/lib/data/achievements.json";
 import type { Award, Statistic } from "./types";
 
 /**
@@ -29,25 +30,14 @@ export const achievementsIntro = {
  * the no-counting rule in site.ts; the owner has since asked for it to be
  * shown, which overrides that rule for this one figure.
  */
-export const statistics: Statistic[] = [
-  { value: "20+", label: "Years experience", detail: "In education" },
-  { value: "4", label: "Degrees & certificates" },
-  { value: "5+", label: "Institutions founded" },
-  { value: "10+", label: "Media appearances" },
-];
+export const statistics: Statistic[] = achievementsData.statistics;
 
-/** TO COLLECT — award name, awarding organization, year, category, evidence. */
-export const awards: Award[] = [];
+/** Awards: title, issuer, year and an optional description. */
+export const awards: Award[] = achievementsData.awards as Award[];
 
-/** TO COLLECT — dated institutional milestones. */
+/** Dated institutional milestones. Each section renders only when it has entries. */
 export const milestones: Array<{
   year: string;
   title: string;
   description: string;
-}> = [];
-
-/**
- * Shown while the sections above are empty. Delete once they are populated.
- */
-export const achievementsPending =
-  "Awards, recognition and institutional milestones are being compiled. Only confirmed entries will be published here.";
+}> = achievementsData.milestones;

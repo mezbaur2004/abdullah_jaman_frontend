@@ -1,3 +1,4 @@
+import profileData from "@/lib/data/profile.json";
 import type { NavItem } from "./types";
 
 /**
@@ -36,17 +37,16 @@ export const site = {
   tagline:
     "Educationist — Wheaton International School & Guidance International School",
 
-  /** TO COLLECT — placeholder domain. Canonical URLs, Open Graph, the sitemap
-   *  and robots.txt all derive from this, so it must be set before launch. */
+  /** Canonical URLs, Open Graph, the sitemap and robots.txt all derive from
+   *  this. */
   url: "https://abdullahjaman.com",
   locale: "en_US",
 
   /** VERIFIED. */
   location: "Dhaka, Bangladesh",
 
-  /** TO COLLECT — a professional address has not been supplied. Empty on
-   *  purpose: every email link on the site disappears while it is blank,
-   *  rather than pointing somewhere wrong. */
+  /** Direct contact details. Every email, phone and WhatsApp link on the
+   *  site renders only when its value is set, so a blank one simply hides. */
   email: "",
   phone: "",
   whatsapp: "",
@@ -72,25 +72,23 @@ export const footerNav: NavItem[] = [
 ];
 
 /**
- * TO COLLECT — no verified personal profile URLs. The LinkedIn profile is
- * known to exist but its canonical URL was not supplied, so nothing is linked.
+ * Personal profile links (LinkedIn and the like). Rendered in the footer and
+ * structured data only when the list has entries.
  */
 export const socialLinks: NavItem[] = [];
 
 /**
- * VERIFIED — both institutional sites, the Guidance address supplied by the
- * owner. They double as the only working contact route until a professional
- * email address is supplied.
+ * The institutions' own websites, derived from `organizations` in
+ * src/lib/data/profile.json so a new institution with an `href` appears in the
+ * footer and on the contact page with no code change. They double as the
+ * contact route while no direct email is set.
  */
-export const institutionLinks: NavItem[] = [
-  {
-    label: "Wheaton International School",
-    href: "https://wheaton.edu.bd",
+export const institutionLinks: NavItem[] = (
+  profileData.organizations as Array<{ name: string; href?: string }>
+)
+  .filter((organization) => organization.href)
+  .map((organization) => ({
+    label: organization.name,
+    href: organization.href as string,
     description: "Official school website",
-  },
-  {
-    label: "Guidance International School",
-    href: "https://guidance.edu.bd/",
-    description: "Official school website",
-  },
-];
+  }));

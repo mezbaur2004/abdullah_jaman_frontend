@@ -7,7 +7,6 @@ import { Section } from "@/components/layout/Section";
 import { MediaEntry } from "@/components/media/MediaEntry";
 import { VideoCard } from "@/components/media/VideoCard";
 import { FeatureImage } from "@/components/ui/FeatureImage";
-import { PendingNote } from "@/components/ui/PendingNote";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import {
@@ -26,9 +25,6 @@ export const metadata: Metadata = pageMetadata({
     "Press coverage and interviews featuring Abdullah Jaman, Founder and Principal of Wheaton International School and Guidance International School.",
   path: "/media",
 });
-
-const pending =
-  "Further interviews, features, talks and published writing will be listed here as they are confirmed.";
 
 export default function MediaPage() {
   return (
@@ -66,11 +62,6 @@ export default function MediaPage() {
                 image={mediaSecondary}
                 caption="Speaking at a school event."
               />
-            </div>
-            <div className="lg:col-span-7">
-              <Reveal step={1}>
-                <PendingNote>{pending}</PendingNote>
-              </Reveal>
             </div>
           </div>
         </Container>

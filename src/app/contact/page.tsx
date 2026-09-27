@@ -7,9 +7,8 @@ import { PageHeader } from "@/components/layout/PageHeader";
 import { Section } from "@/components/layout/Section";
 import { Button } from "@/components/ui/Button";
 import { Panel } from "@/components/ui/Panel";
-import { PendingNote } from "@/components/ui/PendingNote";
 import { Reveal } from "@/components/ui/Reveal";
-import { contactChannels, contactIntro, contactPending } from "@/content/contact";
+import { contactChannels, contactIntro } from "@/content/contact";
 import { institutionLinks, site, socialLinks } from "@/content/site";
 import { pageMetadata } from "@/lib/seo";
 
@@ -157,11 +156,8 @@ export default function ContactPage() {
                     </div>
                   ) : (
                     <>
-                      <PendingNote className="mt-9">
-                        {contactPending}
-                      </PendingNote>
                       {institutionLinks.length > 0 ? (
-                        <div className="mt-8 flex flex-col items-start gap-4 sm:flex-row sm:flex-wrap sm:items-center">
+                        <div className="mt-9 flex flex-col items-start gap-4 sm:flex-row sm:flex-wrap sm:items-center">
                           {institutionLinks.map((institution, i) => (
                             <Button
                               key={institution.href}

@@ -9,6 +9,16 @@ import { achievementsIntro, statistics } from "@/content/achievements";
  * Renders nothing until verified figures exist. Measurable results are still
  * being collected, and a statistics band is the last place to approximate.
  */
+/** Column counts for the strip, as literal classes so Tailwind can see them. */
+const stripColumns: Record<number, string> = {
+  1: "sm:grid-cols-1",
+  2: "sm:grid-cols-2",
+  3: "sm:grid-cols-3",
+  4: "sm:grid-cols-4",
+  5: "sm:grid-cols-5",
+  6: "sm:grid-cols-3 lg:grid-cols-6",
+};
+
 export function KeyStats({ index, strip = false }: { index?: string; strip?: boolean }) {
   if (statistics.length === 0) return null;
 
@@ -19,7 +29,7 @@ export function KeyStats({ index, strip = false }: { index?: string; strip?: boo
     return (
       <section aria-label="At a glance" className="relative border-b border-line bg-surface-raised">
         <Container>
-          <dl className="grid grid-cols-2 gap-y-6 py-8 sm:grid-cols-4 sm:divide-x sm:divide-line sm:py-10">
+          <dl className={`grid grid-cols-2 gap-y-6 py-8 sm:divide-x sm:divide-line sm:py-10 ${stripColumns[Math.min(statistics.length, 6)]}`}>
             {statistics.map((statistic) => (
               <div key={statistic.label} className="flex flex-col px-3 text-center sm:px-6">
                 <dt className="order-2 mt-2 text-xs font-semibold uppercase tracking-[0.12em] text-content-subtle sm:text-eyebrow">

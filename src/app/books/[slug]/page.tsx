@@ -15,7 +15,7 @@ import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { authorNote } from "@/content/books";
 import { site } from "@/content/site";
-import { bookRetailer, books, getBook, siblingBook } from "@/data/books";
+import { booksInSeries, books, getBook, getSeries, relatedBooks } from "@/data/books";
 import { coverExists } from "@/lib/book-cover";
 import { pageMetadata } from "@/lib/seo";
 
@@ -86,7 +86,27 @@ export default async function BookPage({ params }: PageProps<"/books/[slug]">) {
   const book = getBook(slug);
   if (!book) notFound();
 
-  const sibling = siblingBook(book.slug);
+  const series = getSeries(book.seriesId);
+  const { sameSeries, others } = relatedBooks(book.slug);
+  const seriesCount = series ? booksInSeries(series.id).length : 0;
+  // The foot of the page: the rest of the series if there is one, otherwise
+  // the other titles. Worded from the data, so a third volume or a standalone
+  // title reads correctly without touching this file.
+  const related = sameSeries.length > 0 ? sameSeries : others;
+  const relatedCopy =
+    sameSeries.length === 1
+      ? {
+          label: "The other volume",
+          title: "The other *volume*.",
+          lede: `The series runs to ${seriesCount === 2 ? "two" : seriesCount}, and they are written to be read in order.`,
+        }
+      : sameSeries.length > 1
+        ? {
+            label: "The series",
+            title: "More from the *series*.",
+            lede: `${series?.titleEn} runs to ${seriesCount} volumes, written to be read in order.`,
+          }
+        : { label: "More titles", title: "More *titles*.", lede: undefined };
 
   /**
    * schema.org Book, built from the supplied fields and nothing else. No
@@ -170,7 +190,7 @@ export default async function BookPage({ params }: PageProps<"/books/[slug]">) {
 
             <div className="lg:col-span-7">
               <div className="animate-rise">
-                <Eyebrow tone="inverse">{book.seriesEn}</Eyebrow>
+                <Eyebrow tone="inverse">{book.seriesEn ?? book.subjectEn}</Eyebrow>
               </div>
 
               <h1
@@ -223,9 +243,11 @@ export default async function BookPage({ params }: PageProps<"/books/[slug]">) {
                 style={{ animationDelay: "240ms" }}
               >
                 <Button href={book.purchaseUrl} variant="primary" size="lg">
-                  Available at {bookRetailer}
+                  Available at {book.retailer}
                 </Button>
-                <BookSetNote tone="inverse" className="mt-7 max-w-md" />
+                {series ? (
+                  <BookSetNote series={series} tone="inverse" className="mt-7 max-w-md" />
+                ) : null}
               </div>
             </div>
           </div>
@@ -245,7 +267,11 @@ export default async function BookPage({ params }: PageProps<"/books/[slug]">) {
             <div className="lg:col-span-5">
               <SectionHeading
                 id="book-about-heading"
-                title={`Volume ${book.volume} of *${book.seriesEn}*.`}
+                title={
+                  book.volume && book.seriesEn
+                    ? `Volume ${book.volume} of *${book.seriesEn}*.`
+                    : "About the *book*."
+                }
                 accent="gold"
                 size="feature"
               />
@@ -269,26 +295,40 @@ export default async function BookPage({ params }: PageProps<"/books/[slug]">) {
         </Container>
       </Section>
 
-      {sibling ? (
+      {related.length > 0 ? (
         <Section
           index="02"
-          indexLabel="The other volume"
+          indexLabel={relatedCopy.label}
           accent="gold"
           separator="band"
-          aria-labelledby="book-sibling-heading"
+          aria-labelledby="book-related-heading"
         >
           <Container>
             <SectionHeading
-              id="book-sibling-heading"
-              title="The other *volume*."
-              lede="The series runs to two, and they are written to be read in order."
+              id="book-related-heading"
+              title={relatedCopy.title}
+              lede={relatedCopy.lede}
             />
-            <Reveal className="mt-14 block max-w-lg lg:mt-16">
-              <BookTitleCard book={sibling} />
-            </Reveal>
-            <Reveal step={1}>
-              <BookSetNote className="mt-10 max-w-lg" />
-            </Reveal>
+            {related.length === 1 ? (
+              <Reveal className="mt-14 block max-w-lg lg:mt-16">
+                <BookTitleCard book={related[0]} />
+              </Reveal>
+            ) : (
+              <ul className="mt-14 grid gap-6 sm:grid-cols-2 lg:mt-16 lg:grid-cols-3 lg:gap-8">
+                {related.map((entry, i) => (
+                  <li key={entry.slug}>
+                    <Reveal step={i} className="h-full">
+                      <BookTitleCard book={entry} />
+                    </Reveal>
+                  </li>
+                ))}
+              </ul>
+            )}
+            {series && sameSeries.length > 0 ? (
+              <Reveal step={1}>
+                <BookSetNote series={series} className="mt-10 max-w-lg" />
+              </Reveal>
+            ) : null}
           </Container>
         </Section>
       ) : null}

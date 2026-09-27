@@ -1,0 +1,16 @@
+{
+  "channels": [
+    {
+      "label": "Speaking & events",
+      "description": "Invitations to speak, take part in panels, or contribute to education events."
+    },
+    {
+      "label": "Institutional enquiries",
+      "description": "Enquiries relating to Wheaton International School or Guidance International School."
+    },
+    {
+      "label": "Media & press",
+      "description": "Interview requests and press enquiries."
+    }
+  ]
+}

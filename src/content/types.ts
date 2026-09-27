@@ -51,16 +51,6 @@ export type Organization = {
   href?: string;
 };
 
-/** Icon keys for the at-a-glance cards, mapped to components in the UI. */
-export type GlanceIcon = "focus" | "role" | "location" | "education";
-
-export type GlanceItem = {
-  icon: GlanceIcon;
-  label: string;
-  value: string;
-  detail: string;
-};
-
 export type EducationEntry = {
   institution: string;
   /** Left undefined until a real qualification is confirmed. */

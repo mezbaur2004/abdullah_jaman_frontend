@@ -1,0 +1,21 @@
+{
+  "roles": [
+    {
+      "slug": "wheaton-international-school",
+      "organization": "Wheaton International School",
+      "title": "Founder & Principal",
+      "location": "Dhaka, Bangladesh",
+      "href": "https://wheaton.edu.bd",
+      "current": true
+    },
+    {
+      "slug": "guidance-international-school",
+      "organization": "Guidance International School",
+      "title": "Founder & Principal",
+      "location": "Dhaka, Bangladesh",
+      "href": "https://guidance.edu.bd/",
+      "current": true
+    }
+  ],
+  "initiatives": []
+}

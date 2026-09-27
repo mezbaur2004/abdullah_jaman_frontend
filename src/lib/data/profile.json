@@ -1,0 +1,79 @@
+{
+  "organizations": [
+    {
+      "name": "Wheaton International School",
+      "shortName": "WIS",
+      "role": "Founder & Principal",
+      "location": "Dhaka, Bangladesh",
+      "href": "https://wheaton.edu.bd"
+    },
+    {
+      "name": "Guidance International School",
+      "shortName": "GIS",
+      "role": "Founder & Principal",
+      "location": "Dhaka, Bangladesh",
+      "href": "https://guidance.edu.bd/"
+    }
+  ],
+  "education": [
+    {
+      "institution": "University of Dhaka",
+      "qualification": "BSS (Hons.)",
+      "field": "Sociology",
+      "note": "Social Sciences & Human Behaviour"
+    },
+    {
+      "institution": "Al-Madinah International University, Malaysia",
+      "qualification": "M.A.",
+      "field": "Islamic Aqidah",
+      "note": "Islamic Theology & Creed"
+    },
+    {
+      "institution": "Institute of Education and Research, University of Dhaka",
+      "qualification": "M.Ed.",
+      "field": "Pre-Primary & Primary Education",
+      "note": "Early Childhood & Primary Pedagogy"
+    },
+    {
+      "institution": "University of Cambridge, UK",
+      "qualification": "Postgraduate Advanced Certificate in Educational Studies (Assessment)",
+      "note": "PGCert in Educational Assessment — Assessment Design & Academic Evaluation"
+    }
+  ],
+  "professionalDevelopment": [
+    {
+      "title": "120-Hour TESOL Certificate",
+      "issuer": "World TESOL Academy"
+    },
+    {
+      "title": "Positive Psychology Coach Certification",
+      "issuer": "CMA — Coaching & Mentoring Academy"
+    },
+    {
+      "title": "Psychology Level 7",
+      "issuer": "One Education, UK"
+    },
+    {
+      "title": "Psychology & Psychiatry Level 5",
+      "issuer": "South London College"
+    }
+  ],
+  "roleLine": [
+    "Curriculum Expert",
+    "Author",
+    "Administrator",
+    "Cambridge Scholar",
+    "Value-based School Curriculum Designer",
+    "Multiple Institutions Founder"
+  ],
+  "expertise": [
+    "Curriculum Design",
+    "International Frameworks",
+    "Assessment Science",
+    "Islamic Education",
+    "Digital Schooling",
+    "Teacher Training",
+    "School Administration"
+  ],
+  "biography": []
+}

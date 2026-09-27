@@ -1,7 +1,7 @@
+import profileData from "@/lib/data/profile.json";
 import type {
   Certification,
   EducationEntry,
-  GlanceItem,
   ImageAsset,
   Organization,
 } from "./types";
@@ -116,23 +116,7 @@ export const hero = {
  * deliberately not carried here: nothing in the UI can render a number that
  * the content layer does not hold.
  */
-export const organizations: Organization[] = [
-  {
-    name: "Wheaton International School",
-    shortName: "WIS",
-    role: "Founder & Principal",
-    location: "Dhaka, Bangladesh",
-    href: "https://wheaton.edu.bd",
-  },
-  {
-    name: "Guidance International School",
-    shortName: "GIS",
-    role: "Founder & Principal",
-    location: "Dhaka, Bangladesh",
-    /* VERIFIED — supplied by the owner. */
-    href: "https://guidance.edu.bd/",
-  },
-];
+export const organizations: Organization[] = profileData.organizations as Organization[];
 
 /**
  * VERIFIED — supplied by the owner from his current Wheaton profile.
@@ -146,32 +130,7 @@ export const organizations: Organization[] = [
  * Still absent, and still not guessed: the years. None were supplied, so none
  * are shown.
  */
-export const education: EducationEntry[] = [
-  {
-    institution: "University of Dhaka",
-    qualification: "BSS (Hons.)",
-    field: "Sociology",
-    note: "Social Sciences & Human Behaviour",
-  },
-  {
-    institution: "Al-Madinah International University, Malaysia",
-    qualification: "M.A.",
-    field: "Islamic Aqidah",
-    note: "Islamic Theology & Creed",
-  },
-  {
-    institution: "Institute of Education and Research, University of Dhaka",
-    qualification: "M.Ed.",
-    field: "Pre-Primary & Primary Education",
-    note: "Early Childhood & Primary Pedagogy",
-  },
-  {
-    institution: "University of Cambridge, UK",
-    qualification:
-      "Postgraduate Advanced Certificate in Educational Studies (Assessment)",
-    note: "PGCert in Educational Assessment — Assessment Design & Academic Evaluation",
-  },
-];
+export const education: EducationEntry[] = profileData.education as EducationEntry[];
 
 /**
  * VERIFIED — from his founder page, supplied by the owner as the final source.
@@ -181,35 +140,12 @@ export const education: EducationEntry[] = [
  * Psychology, Level 7, United Kingdom"; the source names it and its provider
  * precisely, so it is recorded here in those words.
  */
-export const professionalDevelopment: Certification[] = [
-  { title: "120-Hour TESOL Certificate", issuer: "World TESOL Academy" },
-  {
-    title: "Positive Psychology Coach Certification",
-    issuer: "CMA — Coaching & Mentoring Academy",
-  },
-  { title: "Psychology Level 7", issuer: "One Education, UK" },
-  { title: "Psychology & Psychiatry Level 5", issuer: "South London College" },
-];
+export const professionalDevelopment: Certification[] = profileData.professionalDevelopment;
 
 /** VERIFIED — the role line and areas of expertise from his founder page. */
-export const roleLine = [
-  "Curriculum Expert",
-  "Author",
-  "Administrator",
-  "Cambridge Scholar",
-  "Value-based School Curriculum Designer",
-  "Multiple Institutions Founder",
-] as const;
+export const roleLine = profileData.roleLine;
 
-export const expertise = [
-  "Curriculum Design",
-  "International Frameworks",
-  "Assessment Science",
-  "Islamic Education",
-  "Digital Schooling",
-  "Teacher Training",
-  "School Administration",
-] as const;
+export const expertise = profileData.expertise;
 
 /**
  * VERIFIED — his own words, from the message on his founder page.
@@ -247,37 +183,6 @@ export const verse = {
   reference: "Surah Al-‘Alaq, 96:1",
   note: "The First Revelation — A Command to Seek Knowledge",
 } as const;
-
-/**
- * The at-a-glance strip. Four qualities, no quantities: each value says what
- * kind of thing he does rather than how much of it there is.
- */
-export const atAGlance: GlanceItem[] = [
-  {
-    icon: "focus",
-    label: "Field",
-    value: "Education",
-    detail: "Curriculum, teaching and school leadership",
-  },
-  {
-    icon: "role",
-    label: "Role",
-    value: "Principal",
-    detail: "Academic and institutional leadership",
-  },
-  {
-    icon: "location",
-    label: "Based in",
-    value: "Dhaka",
-    detail: "Bangladesh",
-  },
-  {
-    icon: "education",
-    label: "Studied",
-    value: "Dhaka · Cambridge",
-    detail: "Sociology, Aqidah, Education and Assessment",
-  },
-];
 
 /**
  * The philosophy teaser.
@@ -318,11 +223,11 @@ export const aboutPage = {
   headline: "Abdullah Jaman",
   lede: site.description,
   /**
-   * TO COLLECT — short bio, long bio, personal story, career journey and
-   * leadership philosophy. Add entries here and the About page renders them
-   * in order; while the array is empty the page shows only verified facts.
+   * Biography sections, from `biography` in src/lib/data/profile.json. Each
+   * entry is a heading and its paragraphs; the About page renders them in
+   * order, and renders nothing while the list is empty.
    */
-  sections: [] as Array<{ heading: string; body: string[] }>,
+  sections: profileData.biography as Array<{ heading: string; body: string[] }>,
   /**
    * "Current" is doing real work in the first label. Earlier positions have
    * not been collected, so a bare "Position" would read as the whole career.

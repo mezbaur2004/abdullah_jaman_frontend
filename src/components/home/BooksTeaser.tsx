@@ -4,7 +4,7 @@ import { Figure } from "@/components/ui/Figure";
 import { ImageReveal } from "@/components/ui/ImageReveal";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionLink } from "@/components/ui/SectionLink";
-import { BookSetNote } from "@/components/books/BookSetNote";
+import { BookSetNotes } from "@/components/books/BookSetNote";
 import { BookTitleCard } from "@/components/books/BookTitleCard";
 import { booksIntro } from "@/content/books";
 import { booksFeature } from "@/content/profile";
@@ -17,8 +17,9 @@ import { emphasise } from "@/lib/emphasis";
  *
  * The section used to be the argument and a photograph, because the
  * bibliography was outstanding and inventing a title to fill the space was
- * never on the table. Two volumes are published, so the covers are here, each
- * card a door to the title's own page. A homepage that describes someone's
+ * never on the table. The published titles are here now — the first four from
+ * src/lib/data/books.json, each card a door to the title's own page, with the
+ * rest one click away on /books. A homepage that describes someone's
  * writing without showing any of it is a homepage asking to be taken on trust.
  *
  * The office photograph still opens the books page, so a reader following the
@@ -56,7 +57,7 @@ export function BooksTeaser({ index }: { index?: string }) {
             {/* The published titles, beneath the argument and beside the
                 photograph. Each card is the whole target, cover included. */}
             <ul className="mt-12 grid gap-5 sm:max-w-lg sm:grid-cols-2 lg:max-w-none">
-              {books.map((book, i) => (
+              {books.slice(0, 4).map((book, i) => (
                 <li key={book.slug}>
                   <Reveal step={i + 1} className="h-full">
                     <BookTitleCard book={book} size="compact" />
@@ -66,7 +67,7 @@ export function BooksTeaser({ index }: { index?: string }) {
             </ul>
 
             <Reveal step={2}>
-              <BookSetNote className="mt-8 max-w-lg" />
+              <BookSetNotes className="mt-8 max-w-lg" />
             </Reveal>
           </div>
 
