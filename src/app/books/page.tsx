@@ -14,7 +14,7 @@ import { booksFeature } from "@/content/profile";
 import { bookSeries, books } from "@/data/books";
 import { pageMetadata } from "@/lib/seo";
 
-/** "A, B and C" — for the titles named in metadata and the section lede. */
+/** "A, B and C" — for the titles named in the page metadata. */
 function listNames(names: string[]) {
   return names.length <= 1
     ? (names[0] ?? "")
@@ -23,12 +23,6 @@ function listNames(names: string[]) {
 
 const standalone = books.filter((book) => !book.seriesId).map((book) => book.titleEn);
 const workNames = listNames([...bookSeries.map((series) => series.titleEn), ...standalone]);
-const publishers = [...new Set(books.map((book) => book.publisherEn))];
-const years = books.map((book) => book.year);
-const yearSpan =
-  Math.min(...years) === Math.max(...years)
-    ? String(years[0])
-    : `${Math.min(...years)}–${Math.max(...years)}`;
 
 export const metadata: Metadata = pageMetadata({
   title: "Books",
@@ -109,7 +103,6 @@ export default function BooksPage() {
           <SectionHeading
             id="titles-heading"
             title="Published *titles*."
-            lede={`${books.length === 1 ? "One title" : `${books.length} titles`}, published by ${listNames(publishers)}${books.length ? ` in ${yearSpan}` : ""}.`}
           />
 
           <ul
