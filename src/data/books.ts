@@ -29,7 +29,8 @@ import data from "@/lib/data/books.json";
  *
  * Optional fields are optional in the UI too: a standalone title needs no
  * `series` or `volume`, and a title without its own `description` uses its
- * series' description.
+ * series' description. Publisher, subject, format, edition, price and retailer
+ * are shown only when supplied; leave them out rather than guess.
  */
 type SeriesRecord = {
   id: string;
@@ -52,20 +53,22 @@ type BookRecord = {
   titleEn: string;
   series?: string;
   volume?: number;
-  publisherBn: string;
-  publisherEn: string;
-  subjectBn: string;
-  subjectEn: string;
+  publisherBn?: string;
+  publisherEn?: string;
+  subjectBn?: string;
+  subjectEn?: string;
   pages: number;
-  format: string;
-  edition: string;
+  format?: string;
+  edition?: string;
   year: number;
-  listPrice: number;
-  currency: string;
+  /** As printed, e.g. "December 2025". Falls back to `year`. */
+  published?: string;
+  listPrice?: number;
+  currency?: string;
   /** Path under /public. Never a remote URL. */
   coverImage: string;
-  retailer: string;
-  purchaseUrl: string;
+  retailer?: string;
+  purchaseUrl?: string;
   description?: string;
 };
 

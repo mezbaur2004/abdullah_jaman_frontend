@@ -121,7 +121,9 @@ export default async function BookPage({ params }: PageProps<"/books/[slug]">) {
     alternateName: book.titleEn,
     url: `${site.url}/books/${book.slug}`,
     author: { "@type": "Person", name: site.name },
-    publisher: { "@type": "Organization", name: book.publisherEn },
+    ...(book.publisherEn
+      ? { publisher: { "@type": "Organization", name: book.publisherEn } }
+      : {}),
     numberOfPages: book.pages,
     ...(book.format === "Hardcover"
       ? { bookFormat: "https://schema.org/Hardcover" }
@@ -211,40 +213,54 @@ export default async function BookPage({ params }: PageProps<"/books/[slug]">) {
                 className="animate-rise mt-11 grid gap-x-10 gap-y-6 sm:grid-cols-2"
                 style={{ animationDelay: "180ms" }}
               >
-                <Spec label="Publisher">
-                  {book.publisherEn}
-                  <span className="font-bangla text-on-inverse-muted">
-                    {" "}
-                    · {book.publisherBn}
-                  </span>
-                </Spec>
-                <Spec label="Subject">
-                  {book.subjectEn}
-                  <span className="font-bangla text-on-inverse-muted">
-                    {" "}
-                    · {book.subjectBn}
-                  </span>
-                </Spec>
+                {book.publisherEn ? (
+                  <Spec label="Publisher">
+                    {book.publisherEn}
+                    {book.publisherBn ? (
+                      <span className="font-bangla text-on-inverse-muted">
+                        {" "}
+                        · {book.publisherBn}
+                      </span>
+                    ) : null}
+                  </Spec>
+                ) : null}
+                {book.subjectEn ? (
+                  <Spec label="Subject">
+                    {book.subjectEn}
+                    {book.subjectBn ? (
+                      <span className="font-bangla text-on-inverse-muted">
+                        {" "}
+                        · {book.subjectBn}
+                      </span>
+                    ) : null}
+                  </Spec>
+                ) : null}
                 <Spec label="Pages">{book.pages}</Spec>
-                <Spec label="Format">{book.format}</Spec>
-                <Spec label="Edition">{book.edition}</Spec>
-                <Spec label="Year">{book.year}</Spec>
+                {book.format ? <Spec label="Format">{book.format}</Spec> : null}
+                {book.edition ? <Spec label="Edition">{book.edition}</Spec> : null}
+                <Spec label={book.published ? "Published" : "Year"}>
+                  {book.published ?? book.year}
+                </Spec>
                 {/* The printed list price, and only ever that. The retailer
                     discounts; a discounted figure or a percentage off is a
                     number that is wrong within the month and visibly dates the
                     page. */}
-                <Spec label="List price">
-                  <Price amount={book.listPrice} currency={book.currency} />
-                </Spec>
+                {book.listPrice && book.currency ? (
+                  <Spec label="List price">
+                    <Price amount={book.listPrice} currency={book.currency} />
+                  </Spec>
+                ) : null}
               </dl>
 
               <div
                 className="animate-rise mt-12"
                 style={{ animationDelay: "240ms" }}
               >
-                <Button href={book.purchaseUrl} variant="primary" size="lg">
-                  Available at {book.retailer}
-                </Button>
+                {book.purchaseUrl && book.retailer ? (
+                  <Button href={book.purchaseUrl} variant="primary" size="lg">
+                    Available at {book.retailer}
+                  </Button>
+                ) : null}
                 {series ? (
                   <BookSetNote series={series} tone="inverse" className="mt-7 max-w-md" />
                 ) : null}
