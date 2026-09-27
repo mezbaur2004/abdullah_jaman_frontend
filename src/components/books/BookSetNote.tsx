@@ -1,6 +1,6 @@
 import { Price } from "./Price";
 import { InlineLink } from "@/components/ui/InlineLink";
-import { booksInSeries, seriesWithSets, type BookSeries } from "@/data/books";
+import { seriesWithSets, type BookSeries } from "@/data/books";
 import { cn } from "@/lib/cn";
 
 /**
@@ -13,8 +13,8 @@ import { cn } from "@/lib/cn";
  * The figure is the printed list price for the set, like every other price on
  * the site. The retailer's discount is not shown here and should not be.
  *
- * The wording follows the data: "Both volumes" for a pair, "All N volumes"
- * otherwise, and the series is named once more than one series has a set.
+ * The wording names the series and never counts its volumes, so it stays true
+ * as volumes are added.
  */
 export function BookSetNote({
   series,
@@ -29,9 +29,6 @@ export function BookSetNote({
   if (!set) return null;
 
   const inverse = tone === "inverse";
-  const count = booksInSeries(series.id).length;
-  const volumes = count === 2 ? "Both volumes" : `All ${count} volumes`;
-  const named = seriesWithSets.length > 1 ? ` of ${series.titleEn}` : "";
 
   return (
     <p
@@ -41,8 +38,7 @@ export function BookSetNote({
         className,
       )}
     >
-      {volumes}
-      {named} are also sold together as a set, at{" "}
+      {series.titleEn} is also sold as a complete set, at{" "}
       <Price amount={set.listPrice} currency={set.currency} />.{" "}
       <InlineLink href={set.purchaseUrl} tone={tone}>
         View the set at {set.retailer}
