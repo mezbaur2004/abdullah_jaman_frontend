@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import { BookCover } from "@/components/books/BookCover";
-import { BookSetNote } from "@/components/books/BookSetNote";
 import { BookTitleCard } from "@/components/books/BookTitleCard";
 import { Price } from "@/components/books/Price";
 import { Container } from "@/components/layout/Container";
@@ -15,7 +14,7 @@ import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { authorNote } from "@/content/books";
 import { site } from "@/content/site";
-import { booksInSeries, books, getBook, getSeries, relatedBooks } from "@/data/books";
+import { books, getBook, relatedBooks } from "@/data/books";
 import { coverExists } from "@/lib/book-cover";
 import { pageMetadata } from "@/lib/seo";
 
@@ -86,27 +85,7 @@ export default async function BookPage({ params }: PageProps<"/books/[slug]">) {
   const book = getBook(slug);
   if (!book) notFound();
 
-  const series = getSeries(book.seriesId);
-  const { sameSeries, others } = relatedBooks(book.slug);
-  const seriesCount = series ? booksInSeries(series.id).length : 0;
-  // The foot of the page: the rest of the series if there is one, otherwise
-  // the other titles. Worded from the data, so a third volume or a standalone
-  // title reads correctly without touching this file.
-  const related = sameSeries.length > 0 ? sameSeries : others;
-  const relatedCopy =
-    sameSeries.length === 1
-      ? {
-          label: "The other volume",
-          title: "The other *volume*.",
-          lede: `The series runs to ${seriesCount === 2 ? "two" : seriesCount}, and they are written to be read in order.`,
-        }
-      : sameSeries.length > 1
-        ? {
-            label: "The series",
-            title: "More from the *series*.",
-            lede: `${series?.titleEn} runs to ${seriesCount} volumes, written to be read in order.`,
-          }
-        : { label: "More titles", title: "More *titles*.", lede: undefined };
+  const related = relatedBooks(book.slug);
 
   /**
    * schema.org Book, built from the supplied fields and nothing else. No
@@ -121,9 +100,7 @@ export default async function BookPage({ params }: PageProps<"/books/[slug]">) {
     alternateName: book.titleEn,
     url: `${site.url}/books/${book.slug}`,
     author: { "@type": "Person", name: site.name },
-    ...(book.publisherEn
-      ? { publisher: { "@type": "Organization", name: book.publisherEn } }
-      : {}),
+    publisher: { "@type": "Organization", name: book.publisherEn },
     numberOfPages: book.pages,
     ...(book.format === "Hardcover"
       ? { bookFormat: "https://schema.org/Hardcover" }
@@ -192,7 +169,7 @@ export default async function BookPage({ params }: PageProps<"/books/[slug]">) {
 
             <div className="lg:col-span-7">
               <div className="animate-rise">
-                <Eyebrow tone="inverse">{book.seriesEn ?? book.subjectEn}</Eyebrow>
+                <Eyebrow tone="inverse">{book.subjectEn}</Eyebrow>
               </div>
 
               <h1
@@ -213,43 +190,31 @@ export default async function BookPage({ params }: PageProps<"/books/[slug]">) {
                 className="animate-rise mt-11 grid gap-x-10 gap-y-6 sm:grid-cols-2"
                 style={{ animationDelay: "180ms" }}
               >
-                {book.publisherEn ? (
-                  <Spec label="Publisher">
-                    {book.publisherEn}
-                    {book.publisherBn ? (
-                      <span className="font-bangla text-on-inverse-muted">
-                        {" "}
-                        · {book.publisherBn}
-                      </span>
-                    ) : null}
-                  </Spec>
-                ) : null}
-                {book.subjectEn ? (
-                  <Spec label="Subject">
-                    {book.subjectEn}
-                    {book.subjectBn ? (
-                      <span className="font-bangla text-on-inverse-muted">
-                        {" "}
-                        · {book.subjectBn}
-                      </span>
-                    ) : null}
-                  </Spec>
-                ) : null}
-                <Spec label="Pages">{book.pages}</Spec>
-                {book.format ? <Spec label="Format">{book.format}</Spec> : null}
-                {book.edition ? <Spec label="Edition">{book.edition}</Spec> : null}
-                <Spec label={book.published ? "Published" : "Year"}>
-                  {book.published ?? book.year}
+                <Spec label="Publisher">
+                  {book.publisherEn}
+                  <span className="font-bangla text-on-inverse-muted">
+                    {" "}
+                    · {book.publisherBn}
+                  </span>
                 </Spec>
+                <Spec label="Subject">
+                  {book.subjectEn}
+                  <span className="font-bangla text-on-inverse-muted">
+                    {" "}
+                    · {book.subjectBn}
+                  </span>
+                </Spec>
+                <Spec label="Pages">{book.pages}</Spec>
+                <Spec label="Format">{book.format}</Spec>
+                <Spec label="Edition">{book.edition}</Spec>
+                <Spec label="Year">{book.year}</Spec>
                 {/* The printed list price, and only ever that. The retailer
                     discounts; a discounted figure or a percentage off is a
                     number that is wrong within the month and visibly dates the
                     page. */}
-                {book.listPrice && book.currency ? (
-                  <Spec label="List price">
-                    <Price amount={book.listPrice} currency={book.currency} />
-                  </Spec>
-                ) : null}
+                <Spec label="List price">
+                  <Price amount={book.listPrice} currency={book.currency} />
+                </Spec>
               </dl>
 
               <div
@@ -260,9 +225,6 @@ export default async function BookPage({ params }: PageProps<"/books/[slug]">) {
                   <Button href={book.purchaseUrl} variant="primary" size="lg">
                     Available at {book.retailer}
                   </Button>
-                ) : null}
-                {series ? (
-                  <BookSetNote series={series} tone="inverse" className="mt-7 max-w-md" />
                 ) : null}
               </div>
             </div>
@@ -283,11 +245,7 @@ export default async function BookPage({ params }: PageProps<"/books/[slug]">) {
             <div className="lg:col-span-5">
               <SectionHeading
                 id="book-about-heading"
-                title={
-                  book.volume && book.seriesEn
-                    ? `Volume ${book.volume} of *${book.seriesEn}*.`
-                    : "About the *book*."
-                }
+                title="About the *book*."
                 accent="gold"
                 size="feature"
               />
@@ -314,7 +272,7 @@ export default async function BookPage({ params }: PageProps<"/books/[slug]">) {
       {related.length > 0 ? (
         <Section
           index="02"
-          indexLabel={relatedCopy.label}
+          indexLabel="More titles"
           accent="gold"
           separator="band"
           aria-labelledby="book-related-heading"
@@ -322,8 +280,7 @@ export default async function BookPage({ params }: PageProps<"/books/[slug]">) {
           <Container>
             <SectionHeading
               id="book-related-heading"
-              title={relatedCopy.title}
-              lede={relatedCopy.lede}
+              title="More *titles*."
             />
             {related.length === 1 ? (
               <Reveal className="mt-14 block max-w-lg lg:mt-16">
@@ -340,11 +297,6 @@ export default async function BookPage({ params }: PageProps<"/books/[slug]">) {
                 ))}
               </ul>
             )}
-            {series && sameSeries.length > 0 ? (
-              <Reveal step={1}>
-                <BookSetNote series={series} className="mt-10 max-w-lg" />
-              </Reveal>
-            ) : null}
           </Container>
         </Section>
       ) : null}

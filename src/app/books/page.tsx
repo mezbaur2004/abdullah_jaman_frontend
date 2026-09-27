@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 
-import { BookSetNotes } from "@/components/books/BookSetNote";
 import { BookTitleCard } from "@/components/books/BookTitleCard";
 import { ContactCta } from "@/components/home/ContactCta";
 import { Container } from "@/components/layout/Container";
@@ -11,22 +10,12 @@ import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { authorNote, booksIntro } from "@/content/books";
 import { booksFeature } from "@/content/profile";
-import { bookSeries, books } from "@/data/books";
+import { books } from "@/data/books";
 import { pageMetadata } from "@/lib/seo";
-
-/** "A, B and C" — for the titles named in the page metadata. */
-function listNames(names: string[]) {
-  return names.length <= 1
-    ? (names[0] ?? "")
-    : `${names.slice(0, -1).join(", ")} and ${names[names.length - 1]}`;
-}
-
-const standalone = books.filter((book) => !book.seriesId).map((book) => book.titleEn);
-const workNames = listNames([...bookSeries.map((series) => series.titleEn), ...standalone]);
 
 export const metadata: Metadata = pageMetadata({
   title: "Books",
-  description: `Abdullah Jaman is the author of ${workNames}, and writes and supervises Islamic Studies and Arabic learning materials for school classrooms in Dhaka.`,
+  description: "Books by Abdullah Jaman, who writes and supervises Islamic Studies and Arabic learning materials for school classrooms in Dhaka.",
   path: "/books",
 });
 
@@ -116,10 +105,6 @@ export default function BooksPage() {
               </li>
             ))}
           </ul>
-
-          <Reveal step={1}>
-            <BookSetNotes image className="mt-12 max-w-2xl" />
-          </Reveal>
         </Container>
       </Section>
 
