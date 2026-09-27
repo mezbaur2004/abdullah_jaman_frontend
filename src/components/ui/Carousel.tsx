@@ -105,8 +105,8 @@ export function Carousel({
       </div>
 
       {stops > 1 ? (
-        <div className="mt-6 flex items-center justify-between gap-6">
-          <div className="flex items-center gap-2">
+        <div className="mt-6 flex items-center justify-between gap-4">
+          <div className="flex min-w-0 flex-wrap items-center gap-x-1.5">
             {Array.from({ length: stops }, (_, i) => (
               <button
                 key={i}
