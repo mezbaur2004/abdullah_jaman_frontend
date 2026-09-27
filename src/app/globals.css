@@ -1126,3 +1126,11 @@
     }
   }
 }
+
+/* Theme changes crossfade (see ThemeSelector). Slower than the browser's
+   default so the switch reads as a fade rather than a flash. */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 450ms;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}

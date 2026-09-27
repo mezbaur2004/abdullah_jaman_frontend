@@ -1,15 +1,15 @@
 import { Container } from "@/components/layout/Container";
 import { Section } from "@/components/layout/Section";
-import { MediaSlider } from "@/components/home/MediaSlider";
 import { PressCard } from "@/components/media/PressCard";
 import { VideoCard } from "@/components/media/VideoCard";
+import { Carousel } from "@/components/ui/Carousel";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { SectionLink } from "@/components/ui/SectionLink";
 import { mediaIntro, mediaItems, videos } from "@/content/media";
 
 /**
- * Videos and press in one row, as a slider. Videos lead, alternating with the
+ * Videos and press, two at a time in the same slider as the books. Videos lead, alternating with the
  * press so neither kind reads as an appendix to the other.
  */
 export function MediaHighlights({ index }: { index?: string }) {
@@ -36,7 +36,9 @@ export function MediaHighlights({ index }: { index?: string }) {
         />
 
         <Reveal className="mt-12 block lg:mt-14">
-          <MediaSlider label="Videos and press features">{slides}</MediaSlider>
+          <Carousel label="Videos and press features" itemLabel="feature" perView={2}>
+            {slides}
+          </Carousel>
         </Reveal>
 
         <Reveal className="mt-10 block">

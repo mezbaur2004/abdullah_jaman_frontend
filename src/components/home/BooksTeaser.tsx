@@ -4,11 +4,11 @@ import { ArrowRight } from "lucide-react";
 import { Container } from "@/components/layout/Container";
 import { Section } from "@/components/layout/Section";
 import { Card } from "@/components/ui/Card";
+import { Carousel } from "@/components/ui/Carousel";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionLink } from "@/components/ui/SectionLink";
 import { BookCover } from "@/components/books/BookCover";
 import { Price } from "@/components/books/Price";
-import { BookSlider } from "@/components/home/BookSlider";
 import { booksIntro } from "@/content/books";
 import { books, type Book } from "@/data/books";
 import { emphasise } from "@/lib/emphasis";
@@ -46,11 +46,11 @@ export function BooksTeaser({ index }: { index?: string }) {
           </div>
 
           <Reveal step={1} className="min-w-0 lg:col-span-7">
-            <BookSlider label="Books by Abdullah Jaman">
+            <Carousel label="Books by Abdullah Jaman" itemLabel="book">
               {books.map((book, i) => (
                 <BookSlide key={book.slug} book={book} priority={i === 0} />
               ))}
-            </BookSlider>
+            </Carousel>
           </Reveal>
         </div>
       </Container>

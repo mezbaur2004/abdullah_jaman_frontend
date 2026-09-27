@@ -44,6 +44,20 @@ function getServerSnapshot(): Theme {
   return "system";
 }
 
+/**
+ * Switches through a View Transition where the browser has one, so the page
+ * crossfades between themes instead of snapping. Skipped for reduced motion,
+ * and anywhere the API is missing the change simply happens at once.
+ */
+function changeTheme(next: Theme) {
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (!reduce && typeof document.startViewTransition === "function") {
+    document.startViewTransition(() => applyTheme(next));
+  } else {
+    applyTheme(next);
+  }
+}
+
 function applyTheme(next: Theme) {
   const root = document.documentElement;
 
@@ -97,7 +111,10 @@ export function ThemeSelector({ className }: { className?: string }) {
         // page's one navigation action and read as a second control of equal
         // weight; a preference nobody changes twice should not compete with
         // the button that is the point of the header.
-        "relative inline-flex items-center rounded-control p-[3px] transition-colors hover:bg-surface-soft",
+        //
+        // Quieter again: it rests at reduced opacity with no fill and comes up
+        // to full only when a pointer or focus is on it.
+        "relative inline-flex items-center rounded-full p-[3px] opacity-60 transition-opacity duration-300 hover:opacity-100 focus-within:opacity-100",
         className,
       )}
     >
@@ -105,7 +122,7 @@ export function ThemeSelector({ className }: { className?: string }) {
           marker must not be reachable or readable on its own. */}
       <span
         aria-hidden="true"
-        className="absolute inset-y-[3px] left-[3px] w-[calc((100%-6px)/3)] rounded-chip bg-accent-soft transition-transform"
+        className="absolute inset-y-[3px] left-[3px] w-[calc((100%-6px)/3)] rounded-full bg-surface-soft ring-1 ring-line transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]"
         style={{ transform: `translateX(${activeIndex * 100}%)` }}
       />
 
@@ -122,9 +139,9 @@ export function ThemeSelector({ className }: { className?: string }) {
             // The icon alone is not a name, so the button carries one.
             aria-label={`${label} — ${hint.toLowerCase()}`}
             title={`${label} — ${hint.toLowerCase()}`}
-            onClick={() => applyTheme(option)}
+            onClick={() => changeTheme(option)}
             className={cn(
-              "relative z-10 inline-flex size-7 items-center justify-center rounded-chip transition-colors sm:size-8",
+              "relative z-10 inline-flex size-7 items-center justify-center rounded-full transition-colors duration-300 sm:size-8",
               // The tap target, extended vertically only.
               //
               // The visible segment is 28px, and it has to stay 28px: at 320px
@@ -134,10 +151,10 @@ export function ThemeSelector({ className }: { className?: string }) {
               // grows to 46px tall and keeps its width — which also means the
               // three areas cannot overlap and steal each other's taps.
               "after:absolute after:inset-x-0 after:-inset-y-[9px] after:content-['']",
-              active ? "text-accent" : "text-content-subtle hover:text-accent",
+              active ? "text-content" : "text-content-subtle hover:text-content",
             )}
           >
-            <Icon aria-hidden="true" strokeWidth={1.5} className="size-4" />
+            <Icon aria-hidden="true" strokeWidth={1.5} className="size-3.5" />
           </button>
         );
       })}
