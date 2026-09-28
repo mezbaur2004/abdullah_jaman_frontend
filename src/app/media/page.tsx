@@ -45,7 +45,7 @@ export default function MediaPage() {
           />
 
           {mediaItems.length > 0 ? (
-            <ul className="mt-14 grid gap-5 lg:mt-16">
+            <ul className="mt-10 grid gap-5 lg:mt-12">
               {mediaItems.map((item, i) => (
                 <li key={item.title}>
                   <Reveal step={i}>
@@ -56,7 +56,7 @@ export default function MediaPage() {
             </ul>
           ) : null}
 
-          <div className="mt-14 grid gap-10 lg:mt-16 lg:grid-cols-12 lg:items-start lg:gap-16">
+          <div className="mt-10 grid gap-10 lg:mt-12 lg:grid-cols-12 lg:items-start lg:gap-12">
             <div className="lg:col-span-5">
               <FeatureImage
                 image={mediaSecondary}
@@ -83,7 +83,7 @@ export default function MediaPage() {
               accent="gold"
             />
 
-            <ul className="mt-14 grid gap-5 sm:grid-cols-2 lg:mt-16 lg:grid-cols-3 lg:gap-6">
+            <ul className="mt-10 grid gap-5 sm:grid-cols-2 lg:mt-12 lg:grid-cols-3 lg:gap-6">
               {videos.map((video, i) => (
                 <li key={video.href} className={i === 0 ? "sm:col-span-2 lg:col-span-3" : undefined}>
                   <Reveal step={i} className="h-full">
@@ -112,7 +112,7 @@ export default function MediaPage() {
               accent="gold"
             />
 
-            <ul className="mt-14 grid gap-5 lg:mt-16">
+            <ul className="mt-10 grid gap-5 lg:mt-12">
               {publications.map((item, i) => (
                 <li key={item.title}>
                   <Reveal step={i}>

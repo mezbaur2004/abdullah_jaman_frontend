@@ -24,7 +24,7 @@ export function Hero() {
   const experience = statistics.find((s) => s.label.startsWith("Years"));
 
   return (
-    <section className="geo-parallax-host relative isolate overflow-hidden bg-surface-inverse pb-20 pt-14 text-on-inverse sm:pb-24 sm:pt-20 lg:pb-28 lg:pt-24">
+    <section className="geo-parallax-host relative isolate overflow-hidden bg-surface-inverse pb-16 pt-10 text-on-inverse sm:pb-20 sm:pt-14 lg:pb-20 lg:pt-16">
       <span
         aria-hidden="true"
         className="section-veil-inverse pointer-events-none absolute inset-0 -z-10"
@@ -42,7 +42,7 @@ export function Hero() {
       />
 
       <Container>
-        <div className="grid items-center gap-12 sm:grid-cols-12 sm:gap-10 lg:gap-16">
+        <div className="grid items-center gap-12 sm:grid-cols-12 sm:gap-10 lg:gap-12">
           <div className="sm:col-span-7 lg:pr-8">
             <div className="animate-rise">
               <Eyebrow tone="inverse">{hero.eyebrow}</Eyebrow>

@@ -27,8 +27,8 @@ export function SiteFooter() {
       />
       <GeometricPattern intensity="soft" fade="radial" className="-z-10" />
 
-      <Container className="py-16 lg:py-20">
-        <div className="flex flex-col gap-14 lg:flex-row lg:justify-between lg:gap-20">
+      <Container className="py-12 lg:py-14">
+        <div className="flex flex-col gap-10 lg:flex-row lg:justify-between lg:gap-14">
           <div className="max-w-md">
             <p className="font-display text-display-lg">{site.name}</p>
             <span
@@ -105,7 +105,7 @@ export function SiteFooter() {
           </div>
         </div>
 
-        <div className="mt-16 flex flex-col gap-3 border-t border-line-inverse pt-8 text-xs text-on-inverse-muted sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-10 flex flex-col gap-3 border-t border-line-inverse pt-8 text-xs text-on-inverse-muted sm:flex-row sm:items-center sm:justify-between">
           <p>
             &copy; {year} {site.name}. All rights reserved.
           </p>

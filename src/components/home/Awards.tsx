@@ -25,7 +25,7 @@ export function Awards({ index }: { index?: string }) {
           accent="red"
         />
 
-        <ul className="mt-14 border-t border-line lg:mt-16">
+        <ul className="mt-10 border-t border-line lg:mt-12">
           {awards.map((award, i) => (
             <ListRow key={award.title}>
               <Reveal step={i}>
@@ -52,7 +52,7 @@ export function Awards({ index }: { index?: string }) {
           ))}
         </ul>
 
-        <Reveal className="mt-14 block lg:mt-16">
+        <Reveal className="mt-10 block lg:mt-12">
           <SectionLink href="/achievements">All achievements</SectionLink>
         </Reveal>
       </Container>

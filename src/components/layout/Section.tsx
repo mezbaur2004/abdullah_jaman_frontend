@@ -76,19 +76,19 @@ const tones: Record<Tone, string> = {
  */
 const spacings = {
   tight: {
-    plain: "py-14 sm:py-16 lg:py-20",
-    marker: "pt-12 sm:pt-14 lg:pt-16",
-    indexed: "pb-14 pt-5 sm:pb-16 sm:pt-6 lg:pb-20",
+    plain: "py-10 sm:py-12 lg:py-14",
+    marker: "pt-10 sm:pt-12 lg:pt-12",
+    indexed: "pb-10 pt-4 sm:pb-12 sm:pt-5 lg:pb-14",
   },
   default: {
-    plain: "py-20 sm:py-28 lg:py-32",
-    marker: "pt-16 sm:pt-20 lg:pt-24",
-    indexed: "pb-20 pt-5 sm:pb-28 sm:pt-6 lg:pb-32 lg:pt-7",
+    plain: "py-14 sm:py-16 lg:py-20",
+    marker: "pt-12 sm:pt-14 lg:pt-16",
+    indexed: "pb-14 pt-4 sm:pb-16 sm:pt-5 lg:pb-20 lg:pt-6",
   },
   loose: {
-    plain: "py-24 sm:py-32 lg:py-40",
-    marker: "pt-16 sm:pt-24 lg:pt-28",
-    indexed: "pb-24 pt-5 sm:pb-32 sm:pt-6 lg:pb-40 lg:pt-7",
+    plain: "py-16 sm:py-20 lg:py-24",
+    marker: "pt-12 sm:pt-16 lg:pt-16",
+    indexed: "pb-16 pt-4 sm:pb-20 sm:pt-5 lg:pb-24 lg:pt-6",
   },
 } as const;
 

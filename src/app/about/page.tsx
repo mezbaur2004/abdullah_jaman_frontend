@@ -52,7 +52,7 @@ export default function AboutPage() {
 
       <Section divider={false} index="01" indexLabel="Profile">
         <Container>
-          <div className="grid gap-14 lg:grid-cols-12 lg:gap-20">
+          <div className="grid gap-10 lg:grid-cols-12 lg:gap-14">
             <div className="lg:col-span-5">
               {/* The same shape the hero gives its portrait: square, with the
                   top corners curved and the bottom left square. */}
@@ -85,7 +85,7 @@ export default function AboutPage() {
                 </ul>
               </Reveal>
 
-              <Reveal className="mt-12">
+              <Reveal className="mt-10">
                 {/* Two columns from `sm` up. Each value is a phrase, not a
                     paragraph, so one per full-width row left most of every
                     line empty and made five short facts look like a form. */}
@@ -105,7 +105,7 @@ export default function AboutPage() {
 
               {/* Populated from the content layer once a biography exists. */}
               {aboutPage.sections.length > 0 ? (
-                <div className="mt-14 flex flex-col gap-14">
+                <div className="mt-10 flex flex-col gap-10">
                   {aboutPage.sections.map((section) => (
                     <Reveal key={section.heading}>
                       <article>
@@ -130,7 +130,7 @@ export default function AboutPage() {
                 image={aboutFeature}
                 caption="With guests at a reception."
                 ratio="16 / 8"
-                className="mt-12"
+                className="mt-10"
               />
             </div>
           </div>
@@ -162,14 +162,14 @@ export default function AboutPage() {
               </p>
               <h2
                 id="about-message-heading"
-                className="mt-12 text-display-lg text-on-inverse"
+                className="mt-10 text-display-lg text-on-inverse"
               >
                 {emphasise(founderMessage.heading)}
               </h2>
             </Reveal>
 
             <Reveal step={1}>
-              <blockquote className="mt-12 border-l-2 border-accent-on-inverse pl-6 font-display text-display-md font-semibold italic text-on-inverse sm:pl-8">
+              <blockquote className="mt-10 border-l-2 border-accent-on-inverse pl-6 font-display text-display-md font-semibold italic text-on-inverse sm:pl-8">
                 <p>&ldquo;{withHonorifics(founderMessage.lead)}&rdquo;</p>
               </blockquote>
             </Reveal>
@@ -194,7 +194,7 @@ export default function AboutPage() {
             </Reveal>
 
             <Reveal step={3}>
-              <figure className="mt-16 text-center">
+              <figure className="mt-10 text-center">
                 <p
                   lang="ar"
                   dir="rtl"
@@ -229,7 +229,7 @@ export default function AboutPage() {
             accent="gold"
           />
 
-          <ul className="mt-14 grid gap-5 lg:mt-16 lg:grid-cols-2 lg:gap-6">
+          <ul className="mt-10 grid gap-5 lg:mt-12 lg:grid-cols-2 lg:gap-6">
             {organizations.map((organization, i) => (
               <li key={organization.name}>
                 <Reveal step={i} className="h-full">
@@ -310,7 +310,7 @@ export default function AboutPage() {
               lede="Academic credentials and continuing professional development. Years were not supplied and are not shown."
             />
 
-            <ul className="mt-14 border-t border-line lg:mt-16">
+            <ul className="mt-10 border-t border-line lg:mt-12">
               {education.map((entry) => (
                 <ListRow key={entry.institution}>
                   <Reveal>
@@ -343,7 +343,7 @@ export default function AboutPage() {
             </ul>
 
             {professionalDevelopment.length > 0 ? (
-              <div className="mt-16">
+              <div className="mt-10">
                 <h3 className="text-eyebrow font-semibold uppercase text-accent">
                   Professional development
                 </h3>

@@ -24,7 +24,7 @@ export function ClosingStatement({ index }: { index?: string }) {
       index={index}
       indexLabel="Closing"
       accent="gold"
-      spacing="loose"
+      spacing="default"
       pattern
       aria-labelledby="closing-heading"
     >
@@ -43,9 +43,9 @@ export function ClosingStatement({ index }: { index?: string }) {
             {closingStatement.eyebrow}
           </h2>
 
-          <GeometricStar className="size-20 text-accent-on-inverse sm:size-24" />
+          <GeometricStar className="size-14 text-accent-on-inverse sm:size-16" />
 
-          <p className="mt-10 font-display text-display-xl leading-[1.14] text-on-inverse">
+          <p className="mt-7 font-display text-display-lg leading-[1.18] text-on-inverse">
             {closingStatement.text}
           </p>
         </Reveal>

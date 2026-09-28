@@ -30,7 +30,7 @@ export function BooksTeaser({ index }: { index?: string }) {
       aria-labelledby="books-teaser-heading"
     >
       <Container>
-        <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-16">
+        <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-12">
           <div className="lg:col-span-5">
             <Reveal>
               <h2 id="books-teaser-heading" className="text-display-xl text-content">

@@ -40,7 +40,7 @@ export function Credibility({ index }: { index?: string }) {
           accent="gold"
         />
 
-        <ul className="mt-14 grid gap-5 lg:mt-16 lg:grid-cols-2 lg:gap-6">
+        <ul className="mt-10 grid gap-5 lg:mt-12 lg:grid-cols-2 lg:gap-6">
           {organizations.map((organization, i) => (
             <li key={organization.name}>
               <Reveal step={i} className="h-full">

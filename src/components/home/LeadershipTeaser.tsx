@@ -40,7 +40,7 @@ export function LeadershipTeaser({ index }: { index?: string }) {
             anchor lies over everything in its positioning ancestor. That is
             why Achievements sits outside it rather than in it. */}
         <div className="group/block relative">
-          <div className="grid gap-14 lg:grid-cols-12 lg:items-center lg:gap-8">
+          <div className="grid gap-10 lg:grid-cols-12 lg:items-center lg:gap-8">
             <div className="lg:col-span-5">
               <SectionHeading
                 id="leadership-teaser-heading"
@@ -81,7 +81,7 @@ export function LeadershipTeaser({ index }: { index?: string }) {
             href={leadershipTeaser.cta.href}
             tone="inverse"
             stretch
-            className="mt-14 lg:mt-16"
+            className="mt-10 lg:mt-12"
           >
             {leadershipTeaser.cta.label}
           </SectionLink>

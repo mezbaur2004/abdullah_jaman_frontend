@@ -30,7 +30,7 @@ export function ContactCta({ index }: { index?: string }) {
     >
       <Container>
         <Reveal>
-          <div className="grid gap-10 lg:grid-cols-12 lg:items-end lg:gap-16">
+          <div className="grid gap-10 lg:grid-cols-12 lg:items-end lg:gap-12">
             {/* The emphasised word stays full navy here and leans on the
                 italic alone. Brass is the accent everywhere else on the site;
                 on a brass ground there is nothing to change to, and dropping

@@ -146,7 +146,7 @@ export default async function BookPage({ params }: PageProps<"/books/[slug]">) {
             </ol>
           </nav>
 
-          <div className="mt-12 grid gap-12 lg:mt-16 lg:grid-cols-12 lg:gap-16">
+          <div className="mt-10 grid gap-12 lg:mt-12 lg:grid-cols-12 lg:gap-12">
             {/* The cover, with the site's thin gold outline set down and to the
                 right of it. Not the arch: a mihrab mask over a book cover cuts
                 the top corners off the title, and a cover is a designed object
@@ -218,7 +218,7 @@ export default async function BookPage({ params }: PageProps<"/books/[slug]">) {
               </dl>
 
               <div
-                className="animate-rise mt-12"
+                className="animate-rise mt-10"
                 style={{ animationDelay: "240ms" }}
               >
                 {book.purchaseUrl && book.retailer ? (
@@ -241,7 +241,7 @@ export default async function BookPage({ params }: PageProps<"/books/[slug]">) {
         aria-labelledby="book-about-heading"
       >
         <Container>
-          <div className="grid gap-12 lg:grid-cols-12 lg:gap-20">
+          <div className="grid gap-12 lg:grid-cols-12 lg:gap-14">
             <div className="lg:col-span-5">
               <SectionHeading
                 id="book-about-heading"
@@ -283,11 +283,11 @@ export default async function BookPage({ params }: PageProps<"/books/[slug]">) {
               title="More *titles*."
             />
             {related.length === 1 ? (
-              <Reveal className="mt-14 block max-w-lg lg:mt-16">
+              <Reveal className="mt-10 block max-w-lg lg:mt-12">
                 <BookTitleCard book={related[0]} />
               </Reveal>
             ) : (
-              <ul className="mt-14 grid gap-6 sm:grid-cols-2 lg:mt-16 lg:grid-cols-3 lg:gap-8">
+              <ul className="mt-10 grid gap-6 sm:grid-cols-2 lg:mt-12 lg:grid-cols-3 lg:gap-8">
                 {related.map((entry, i) => (
                   <li key={entry.slug}>
                     <Reveal step={i} className="h-full">

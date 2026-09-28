@@ -35,7 +35,7 @@ export function MediaHighlights({ index }: { index?: string }) {
           title={mediaIntro.headline}
         />
 
-        <Reveal className="mt-12 block lg:mt-14">
+        <Reveal className="mt-10 block lg:mt-14">
           <Carousel label="Videos and press features" itemLabel="feature" perView={2}>
             {slides}
           </Carousel>
