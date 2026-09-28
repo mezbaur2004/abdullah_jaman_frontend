@@ -45,7 +45,7 @@ export function PagePager() {
     <nav aria-label="Next page" className="relative bg-surface">
       {/* The lattice, the same course every section boundary opens with. */}
       <SectionSeparator variant="band" />
-      <Container className="py-14 lg:py-16">
+      <Container className="py-8 lg:py-10">
         <SectionLink href={next.href}>{next.label}</SectionLink>
       </Container>
     </nav>

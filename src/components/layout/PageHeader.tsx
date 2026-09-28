@@ -100,7 +100,7 @@ export function PageHeader({
           aria-hidden="true"
           className="scrim-page pointer-events-none absolute inset-0 -z-10"
         />
-        <Container className="relative pb-20 pt-20 sm:pb-24 sm:pt-28 lg:pb-28 lg:pt-32">
+        <Container className="relative pb-14 pt-14 sm:pb-16 sm:pt-20 lg:pb-20 lg:pt-24">
           <div className="max-w-3xl">{heading}</div>
         </Container>
       </div>
@@ -115,8 +115,8 @@ export function PageHeader({
           className="section-veil pointer-events-none absolute inset-0 -z-10"
         />
         <GeometricPattern fade="radial" parallax className="-z-10" />
-        <Container className="relative pb-16 pt-14 sm:pb-20 sm:pt-20 lg:pb-24 lg:pt-28">
-          <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-16">
+        <Container className="relative pb-12 pt-10 sm:pb-14 sm:pt-14 lg:pb-16 lg:pt-20">
+          <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-12">
             <div className="lg:col-span-7">{heading}</div>
             <div className="lg:col-span-5">
               <div className="mx-auto w-full max-w-xs lg:max-w-none">
@@ -153,7 +153,7 @@ export function PageHeader({
           className="-z-10"
         />
       ) : null}
-      <Container className="relative pb-16 pt-14 sm:pb-20 sm:pt-20 lg:pb-24 lg:pt-28">
+      <Container className="relative pb-12 pt-10 sm:pb-14 sm:pt-14 lg:pb-16 lg:pt-20">
         {variant === "ornament" ? (
           <div className="animate-rise mb-9">
             <GeometricStar className="size-20 text-accent-on-inverse sm:size-28" />

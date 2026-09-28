@@ -164,7 +164,7 @@ export default function LeadershipPage() {
         <Container className="relative">
           <GeometricPattern className="-top-14 h-64" fade />
 
-          <div className="relative grid gap-14 lg:grid-cols-12 lg:gap-20">
+          <div className="relative grid gap-10 lg:grid-cols-12 lg:gap-14">
             <div className="lg:col-span-6">
               <SectionHeading
                 id="leadership-philosophy-heading"
@@ -209,7 +209,7 @@ export default function LeadershipPage() {
               accent="red"
             />
 
-            <ul className="mt-14 grid gap-px border-t border-line lg:mt-16 lg:grid-cols-2">
+            <ul className="mt-10 grid gap-px border-t border-line lg:mt-12 lg:grid-cols-2">
               {initiatives.map((initiative, i) => (
                 <li
                   key={initiative.slug}

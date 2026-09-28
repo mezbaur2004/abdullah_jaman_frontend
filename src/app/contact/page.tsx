@@ -33,7 +33,7 @@ export default function ContactPage() {
 
       <Section tone="soft" divider={false} index="01" indexLabel="Enquiries">
         <Container>
-          <div className="grid gap-16 lg:grid-cols-12 lg:gap-20">
+          <div className="grid gap-16 lg:grid-cols-12 lg:gap-14">
             <div className="lg:col-span-7">
               <Reveal>
                 <h2 className="font-display text-display-md text-content">

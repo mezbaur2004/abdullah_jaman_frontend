@@ -55,7 +55,7 @@ export default function BooksPage() {
         <Container className="relative">
           <GeometricPattern className="-top-16 h-72" fade />
 
-          <div className="relative grid gap-12 lg:grid-cols-12 lg:gap-20">
+          <div className="relative grid gap-12 lg:grid-cols-12 lg:gap-14">
             <div className="lg:col-span-5">
               <SectionHeading
                 id="author-note-heading"
@@ -95,7 +95,7 @@ export default function BooksPage() {
           />
 
           <ul
-            className={`mt-14 grid gap-6 sm:grid-cols-2 lg:mt-16 lg:gap-8 ${books.length > 2 ? "lg:grid-cols-3" : ""}`}
+            className={`mt-10 grid gap-6 sm:grid-cols-2 lg:mt-12 lg:gap-8 ${books.length > 2 ? "lg:grid-cols-3" : ""}`}
           >
             {books.map((book, i) => (
               <li key={book.slug}>

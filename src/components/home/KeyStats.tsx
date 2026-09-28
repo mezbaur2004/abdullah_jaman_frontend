@@ -64,7 +64,7 @@ export function KeyStats({ index, strip = false }: { index?: string; strip?: boo
         />
 
         <dl
-          className={`mt-16 grid gap-x-10 gap-y-12 lg:mt-20 ${statistics.length === 3 ? "sm:grid-cols-3" : "sm:grid-cols-2 lg:grid-cols-4"}`}
+          className={`mt-10 grid gap-x-10 gap-y-10 lg:mt-12 ${statistics.length === 3 ? "sm:grid-cols-3" : "sm:grid-cols-2 lg:grid-cols-4"}`}
         >
           {statistics.map((statistic, i) => (
             <Reveal

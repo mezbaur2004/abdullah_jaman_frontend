@@ -57,7 +57,7 @@ export function SectionHeading({
     <div
       className={cn(
         "flex flex-col gap-8",
-        !!aside && "lg:flex-row lg:items-end lg:justify-between lg:gap-16",
+        !!aside && "lg:flex-row lg:items-end lg:justify-between lg:gap-12",
         className,
       )}
     >

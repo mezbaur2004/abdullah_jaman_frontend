@@ -41,7 +41,7 @@ export function FounderMessage({ index }: { index?: string }) {
             {founderMessage.basmalahTranslation}
           </p>
 
-          <figure className="mt-12">
+          <figure className="mt-10">
             <blockquote className="font-display text-display-md font-semibold italic text-on-inverse">
               <p>&ldquo;{withHonorifics(founderMessage.lead)}&rdquo;</p>
             </blockquote>
@@ -50,7 +50,7 @@ export function FounderMessage({ index }: { index?: string }) {
             </figcaption>
           </figure>
 
-          <div className="mt-12 w-full sm:w-auto">
+          <div className="mt-10 w-full sm:w-auto">
             <SectionLink href={founderMessage.cta.href} tone="inverse">
               {founderMessage.cta.label}
             </SectionLink>

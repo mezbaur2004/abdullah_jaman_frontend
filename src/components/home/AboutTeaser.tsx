@@ -26,7 +26,7 @@ export function AboutTeaser({ index }: { index?: string }) {
         {/* Heading and argument side by side. The "In brief" facts panel that
             used to sit here repeated the hero and the institutions above it,
             so it now lives only on the About page. */}
-        <div className="relative grid gap-10 lg:grid-cols-12 lg:gap-16">
+        <div className="relative grid gap-10 lg:grid-cols-12 lg:gap-12">
           <div className="lg:col-span-6">
             <Reveal>
               <h2

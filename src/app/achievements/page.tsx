@@ -57,7 +57,7 @@ export default function AchievementsPage() {
               so they are a ruled row: monogram, name, role, and the link out.
               Same facts, a quarter of the height, and no reader will think
               they have pressed back. */}
-          <ul className="mt-14 border-t border-line lg:mt-16">
+          <ul className="mt-10 border-t border-line lg:mt-12">
             {organizations.map((organization, i) => (
               <li key={organization.name} className="group/row relative border-b border-line">
                 <Reveal step={i}>
@@ -103,7 +103,7 @@ export default function AchievementsPage() {
           </ul>
 
           {statistics.length > 0 ? (
-            <dl className="mt-16 grid gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
+            <dl className="mt-10 grid gap-x-10 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
               {statistics.map((statistic, i) => (
                 <Reveal
                   key={statistic.label}
@@ -145,7 +145,7 @@ export default function AchievementsPage() {
               accent="red"
             />
 
-            <ul className="mt-14 border-t border-line lg:mt-16">
+            <ul className="mt-10 border-t border-line lg:mt-12">
               {awards.map((award, i) => (
                 <ListRow key={award.title}>
                   <Reveal step={i}>
@@ -189,7 +189,7 @@ export default function AchievementsPage() {
               title="Institutional milestones."
             />
 
-            <ol className="mt-14 lg:mt-16">
+            <ol className="mt-10 lg:mt-12">
               {milestones.map((milestone, i) => (
                 <li key={milestone.year} className="group/row">
                   <Reveal step={i}>
