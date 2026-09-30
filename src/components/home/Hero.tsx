@@ -42,8 +42,12 @@ export function Hero() {
       />
 
       <Container>
-        <div className="grid items-center gap-12 sm:grid-cols-12 sm:gap-10 lg:gap-12">
-          <div className="sm:col-span-7 lg:pr-8">
+        {/* Three grid items, not two columns. On phones they stack as name and
+            title, then the photograph, then the rest, so his face is on the
+            first screen. From `sm` up the text halves share the left column
+            and the photograph spans both rows on the right, exactly as before. */}
+        <div className="grid gap-10 sm:grid-cols-12 sm:grid-rows-[auto_auto] sm:gap-x-10 sm:gap-y-0 lg:gap-x-12">
+          <div className="sm:col-span-7 sm:self-end lg:pr-8">
             <div className="animate-rise">
               <Eyebrow tone="inverse">{hero.eyebrow}</Eyebrow>
             </div>
@@ -61,9 +65,11 @@ export function Hero() {
             >
               {hero.headline}
             </p>
+          </div>
 
+          <div className="order-3 sm:order-none sm:col-span-7 sm:col-start-1 sm:row-start-2 sm:self-start lg:pr-8">
             <p
-              className="animate-rise mt-7 max-w-xl text-lede text-on-inverse-muted"
+              className="animate-rise max-w-xl text-lede text-on-inverse-muted sm:mt-7"
               style={{ animationDelay: "240ms" }}
             >
               {hero.lede}
@@ -106,14 +112,14 @@ export function Hero() {
             </p>
           </div>
 
-          <div className="sm:col-span-5">
+          <div className="order-2 sm:order-none sm:col-span-5 sm:col-start-8 sm:row-span-2 sm:row-start-1 sm:self-center">
             {/* The photograph as a card: all four corners rounded, red corner
                 brackets at two corners, his name set into the navy foot, and
                 three floating badges with verified facts from his founder
                 page. On phones the middle badge is dropped and "20+" moves to
                 the top right, as in the mobile reference. All motion is
                 `motion-safe:`, so reduced motion gets it still. */}
-            <div className="relative mx-auto max-w-md px-3 sm:max-w-none sm:px-0">
+            <div className="relative mx-auto max-w-[18rem] px-3 sm:max-w-none sm:px-0">
               <span
                 aria-hidden="true"
                 className="pointer-events-none absolute -inset-6 -z-10 rounded-[3rem] bg-[radial-gradient(closest-side,color-mix(in_oklab,var(--gold)_55%,transparent),transparent)] blur-2xl motion-safe:animate-glow"
